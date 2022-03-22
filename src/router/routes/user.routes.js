@@ -15,7 +15,7 @@ export default [
         component: signupPage
     },
     {
-        path: '/:username',
+        path: '/user/:username',
         name: 'user-profile',
         component: userProfile
     },
