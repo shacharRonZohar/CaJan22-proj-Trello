@@ -10,8 +10,39 @@ const router = createRouter({
       component: homePage
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/board',
+      name: 'board-app',
+      component: boardApp
+    },
+    {
+      path: '/board/:boardId',
+      name: 'board-details',
+      component: boardDetails,
+      children: [{
+        path: '/task/:taskId',
+        name: 'task-details',
+        component: taskDetails
+      }]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: loginPage
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: signupPage
+    },
+    {
+      path: '/:username',
+      name: 'user-profile',
+      component: userProfile
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: dashboardPage
     }
   ]
 })
