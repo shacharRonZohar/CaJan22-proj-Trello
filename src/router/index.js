@@ -1,8 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import homePage from '../pages/home-page.vue'
-
+import boardRoutes from './routes/board.routes'
+import userRoutes from './routes/user.routes'
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
@@ -10,40 +11,12 @@ const router = createRouter({
       component: homePage
     },
     {
-      path: '/board',
-      name: 'board-app',
-      component: boardApp
-    },
-    {
-      path: '/board/:boardId',
-      name: 'board-details',
-      component: boardDetails,
-      children: [{
-        path: '/task/:taskId',
-        name: 'task-details',
-        component: taskDetails
-      }]
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: loginPage
-    },
-    {
-      path: '/signup',
-      name: 'signup',
-      component: signupPage
-    },
-    {
-      path: '/:username',
-      name: 'user-profile',
-      component: userProfile
-    },
-    {
       path: '/dashboard',
       name: 'dashboard',
       component: dashboardPage
-    }
+    },
+    ...boardRoutes,
+    ...userRoutes,
   ]
 })
 
