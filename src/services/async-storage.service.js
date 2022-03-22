@@ -1,3 +1,5 @@
+import { utilService } from '../services/util.service.js'
+
 export const storageService = {
     query,
     get,
@@ -8,63 +10,55 @@ export const storageService = {
 }
 
 function query(entityType) {
-    const entities = JSON.parse(localStorage.getItem(entityType)) || []
-    return Promise.resolve(entities)
+    return Promise.resolve(JSON.parse(localStorage.getItem(entityType)) || [])
 }
 
-function get(entityType, entityId) {
-    return query(entityType)
-        .then(entities => entities.find(entity => entity._id === entityId))
+async function get(entityType, entityId) {
+    const entities = await query(entityType)
+    return new Promise((resolve, reject) => {
+        const entity = entities.find(entity => entity._id === entityId)
+        if (entity) return resolve(entity)
+        reject(`Unkown Entity ${entityType} with Id: ${entityId}`)
+    })
 }
 
-function post(entityType, newEntity) {
-    newEntity._id = _makeId()
-    return query(entityType)
-        .then(entities => {
-            entities.push(newEntity)
-            _save(entityType, entities)
-            return newEntity
-        })
+async function post(entityType, newEntity) {
+    newEntity._id = utilService.makeExtId()
+    const entities = await query(entityType)
+    entities.push(newEntity)
+    _save(entityType, entities)
+    return Promise.resolve(newEntity)
 }
 
-function postMany(entityType, newEntities) {
-    return query(entityType)
-        .then(entities => {
-            entities.push(...newEntities)
-            _save(entityType, entities)
-            return entities
-        })
+async function postMany(entityType, newEntities) {
+    const entities = await query(entityType)
+    entities.push(...newEntities)
+    _save(entityType, entities)
+    Promise.resolve(entities)
 }
 
-function put(entityType, updatedEntity) {
-    return query(entityType)
-        .then(entities => {
-            const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
-            entities.splice(idx, 1, updatedEntity)
-            _save(entityType, entities)
-            return updatedEntity
-        })
+async function put(entityType, updatedEntity) {
+    const entities = await query(entityType)
+    return new Promise((resolve, reject) => {
+        const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
+        if (idx === -1) reject(`Unkown Entity ${entityType} with Id: ${entityId}`)
+        entities.splice(idx, 1, updatedEntity)
+        _save(entityType, entities)
+        resolve(updatedEntity)
+    })
 }
 
-function remove(entityType, entityId) {
-    return query(entityType)
-        .then(entities => {
-            const idx = entities.findIndex(entity => entity._id === entityId)
-            if (idx === -1) Promise.reject(`Unkown Entity ${entityType} with Id: ${entityId}`)
-            entities.splice(idx, 1)
-            _save(entityType, entities)
-        })
+async function remove(entityType, entityId) {
+    const entities = await query(entityType)
+    return new Promise((reject, resolve) => {
+        const idx = entities.findIndex(entity => entity._id === entityId)
+        if (idx === -1) reject(`Unkown Entity ${entityType} with Id: ${entityId}`)
+        entities.splice(idx, 1)
+        _save(entityType, entities)
+        resolve('Removed succesfully')
+    })
 }
 
 function _save(entityType, entities) {
     localStorage.setItem(entityType, JSON.stringify(entities))
-}
-
-function _makeId(length = 8) {
-    let text = ""
-    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-    for (let i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length))
-    }
-    return text
 }
