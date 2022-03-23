@@ -3,9 +3,20 @@ import boardModule from './modules/board.module.js'
 
 const store = createStore({
     strict: true,
-    state: {},
-    getters: {},
-    mutations: {},
+    state: {
+        isReady: false
+    },
+    getters: {
+        isReady({ isReady }) {
+            return isReady
+        }
+    },
+    mutations: {
+        setIsReady(state, { isReady }) {
+            state.isReady = isReady
+        }
+
+    },
     actions: {},
     modules: {
         boardModule
