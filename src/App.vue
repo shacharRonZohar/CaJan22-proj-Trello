@@ -1,15 +1,15 @@
 
 <template class="main-layout">
-  <app-header />
+  <header-container />
   <router-view v-if="isReady" />
   <span v-else>Loading...</span>
 </template>
 
 <script>
-import appHeader from './cmps/app-header.vue'
+import headerContainer from './cmps/header-container.vue'
 export default {
   components: {
-    appHeader
+    headerContainer
   },
   created() {
     this.$store.dispatch('loadBoards')
