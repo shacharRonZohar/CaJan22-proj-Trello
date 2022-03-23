@@ -3,8 +3,8 @@
         <div class="logo">Twello</div>
         <nav class="main-nav-container">
             <ul>
-                <router-link class="login-link">login</router-link>
-                <router-link class="create-board">create</router-link>
+                <!-- <router-link class="login-link">login</router-link>
+                <router-link class="create-board">create</router-link>-->
             </ul>
         </nav>
     </header>
