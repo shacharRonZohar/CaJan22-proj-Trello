@@ -10,7 +10,10 @@
 export default {
     // props: [''],
     components: {},
-    created() { },
+    created() {
+         const { id } = this.$route.params;
+        //   const board = ''
+     },
     data() {
         return {}
     },
