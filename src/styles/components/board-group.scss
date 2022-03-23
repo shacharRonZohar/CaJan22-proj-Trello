@@ -4,6 +4,7 @@
     border-radius: 3px;
     background-color: $clr3;
     width: 272px;
+    
     h1{
         padding-inline: 8px;
         padding-block: 15px;
@@ -23,6 +24,23 @@
         &:hover{
            background-color: rgba(9,30,66,.0784313725490196);
            cursor: pointer;
+        }
+    }
+
+    .add-card-container form textarea{
+        overflow: hidden;
+        padding: 6px 8px 2px;
+        position: relative;
+        border-radius: 3px;
+        background-color: $clr2;
+        box-shadow: 0 1px 0 #091e4240;
+        margin-bottom: 8px;
+        width: 100%;
+        height: 54px;
+        border: none;
+
+        &:focus{
+            outline: none;
         }
     }
 }

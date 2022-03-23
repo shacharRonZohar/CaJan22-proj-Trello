@@ -23,7 +23,7 @@ export default {
                 return currBoard._id === savedBoard._id
             })
             if (idx !== -1) state.boards.splice(idx, 1, savedBoard)
-            else state.boards.unshift(savedBoard)
+            else state.boards.unshift(savedBoard)         
         },
         setBoard(state, { boardId }) {
             const board = state.boards.find(currBoard => currBoard._id === boardId)
@@ -62,11 +62,12 @@ export default {
             })
             return JSON.parse(JSON.stringify(task))
         },
-        async saveTask({ state, dispatch }, { taskToSave, groupId, activity }) {
+        async saveTask({ state, dispatch, commit }, { taskToSave, groupId, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = boardService.saveTask(board, taskToSave, activity, groupId)            
-                dispatch({ type: 'saveBoard', boardToSave })
+                await dispatch({ type: 'saveBoard', boardToSave })
+                commit({type: 'setBoard', boardId: boardToSave._id})
             } catch (err) {
                 console.log(err)
             }
