@@ -5,7 +5,7 @@
     <header class="task-details-header">
       <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
       <!-- <img class="btn close" src="../assets/icons/close.svg" /> -->
-      <button class="btn close"></button>
+      <button @click="onCloseDetails" class="btn close"></button>
     </header>
     <!-- <p class="description">Description</p> -->
   </section>
@@ -39,6 +39,11 @@ export default {
       await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)) })
       // this.task = await this.$store.dispatch({ type: 'getTaskById', taskId: this.task.id })
       console.log(this.task)
+    },
+    onCloseDetails() {
+      const currRoute = this.$route.fullPath
+      const route = currRoute.substring(0, currRoute.indexOf('task'))
+      this.$router.push(route)
     }
   },
   computed: {
