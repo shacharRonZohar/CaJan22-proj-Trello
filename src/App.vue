@@ -1,12 +1,12 @@
 
-<template>
+<template class="main-layout">
   <app-header />
   <router-view />
   <pre>{{ boards }}</pre>
 </template>
 
 <script>
-import appHeader from './components/app-header.vue'
+import appHeader from './cmps/app-header.vue'
 export default {
   components: {
     appHeader

@@ -1,6 +1,6 @@
 import boardApp from '../../pages/board-app.vue'
 import boardDetails from '../../pages/board-details.vue'
-import taskDetails from '../../components/task-details.vue'
+import taskDetails from '../../cmps/task-details.vue'
 
 export default [
     {
