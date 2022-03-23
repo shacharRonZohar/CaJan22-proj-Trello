@@ -3,10 +3,12 @@
     <!-- <div class="clickable-background"></div> -->
     <!-- @input.stop -->
     <header class="task-details-header">
+      <!-- <div class="title-container"> -->
+      <div class="icon"></div>
       <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
-      <!-- <img class="btn close" src="../assets/icons/close.svg" /> -->
-      <button @click="onCloseDetails" class="btn close"></button>
     </header>
+    <main class="main-details"></main>
+    <button @click="onCloseDetails" class="btn close icon"></button>
     <!-- <p class="description">Description</p> -->
   </section>
 </template>
