@@ -31,7 +31,7 @@ props: {
      },
     methods: {
         saveTask(){
-            this.$emit('savetask', {groupId: this.group.id, task: {title: 'baba'}})
+            this.$emit('saveTask', {groupId: this.group.id, task: {title: 'baba'}})
         }
     },
     computed: {
