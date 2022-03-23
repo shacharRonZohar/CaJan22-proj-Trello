@@ -8,6 +8,7 @@
     min-height: 1041px;
     margin: 0 auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     transform: translateX(-50%);
@@ -16,12 +17,16 @@
     .title {
         // height: min-content;
     }
-    .clickable-background {
-        z-index: 3;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        cursor: pointer;
-    }
+    // .clickable-background {
+    //     z-index: 3;
+    //     height: 100vh;
+    //     // position: fixed;
+    //     top: 0;
+    //     left: 0;
+    //     position: fixed;
+    //     background-color: black;
+    //     width: 100vw;
+    //     // transform: translate(10%, 10%);
+    //     cursor: pointer;
+    // }
 }
