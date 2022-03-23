@@ -3,15 +3,15 @@ import { boardService } from '../../services/board.service.js'
 export default {
     state: {
         boards: [],
-        board: {}
+        board: {},
     },
     getters: {
         boards({ boards }) {
-            return boards
+            return JSON.parse(JSON.stringify(boards))
         },
         board({ board }) {
-            return board
-        }
+            return JSON.parse(JSON.stringify(board))
+        },
     },
     mutations: {
         setBoards(state, { boards }) {
@@ -53,6 +53,14 @@ export default {
             } catch (err) {
                 console.log(err)
             }
+        },
+        getTaskById({ state }, { taskId }) {
+            let task = {}
+            state.board.groups.find(group => {
+                const currTask = group.tasks.find(task => task.id === taskId)
+                if (currTask) return task = currTask
+            })
+            return JSON.parse(JSON.stringify(task))
         }
     },
 }
