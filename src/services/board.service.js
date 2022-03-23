@@ -2,7 +2,11 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service'
 
 export const boardService = {
-    query
+    query,
+    getById,
+    save,
+    remove,
+    postMany
 }
 
 const BOARDS_KEY = 'boards_db'
@@ -10,13 +14,40 @@ const BOARDS_KEY = 'boards_db'
 function query() {
     return storageService.query(BOARDS_KEY)
 }
-_createBoards()
+
+function getById(boardId) {
+    return storageService.get(BOARDS_KEY, boardId)
+}
+
+function save(board) {
+    return board._id ? _update(board) : _add(board)
+}
+
+function postMany(boards) {
+    return storageService.postMany(BOARDS_KEY, boards)
+}
+
+function remove(boardId) {
+    return storageService.remove(BOARDS_KEY, boardId)
+}
+
+function _update(board) {
+    return storageService.put(BOARDS_KEY, board)
+}
+
+function _add(board) {
+    return storageService.post(BOARDS_KEY, board)
+}
+
+
+//     postMany
+// _createBoards()
 
 function _createBoards() {
     let boards = utilService.load(BOARDS_KEY)
     if (!boards || !boards.length) {
         boards = [{
-            '_id': utilService.makeId('b'),
+            '_id': utilService.makeExtId(),
             'title': 'Trello dev proj',
             'createdAt': Date.now(),
             'createdBy': {},
