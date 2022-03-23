@@ -1,7 +1,8 @@
 
 <template class="main-layout">
   <app-header />
-  <router-view />
+  <router-view v-if="isReady" />
+  <span v-else>Loading...</span>
   <pre>{{ boards }}</pre>
 </template>
 
@@ -17,6 +18,9 @@ export default {
   computed: {
     boards() {
       return this.$store.getters.boards
+    },
+    isReady() {
+      return this.$store.getters.isReady
     }
   }
 }

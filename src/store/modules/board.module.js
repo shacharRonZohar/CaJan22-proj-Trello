@@ -36,8 +36,12 @@ export default {
     actions: {
         async loadBoards({ commit }) {
             try {
+                commit({ type: 'setIsReady', isReady: false })
+                // setTimeout(async () => {
                 const boards = await boardService.query()
                 commit({ type: 'setBoards', boards })
+                commit({ type: 'setIsReady', isReady: true })
+                // }, 3000)
             } catch (err) {
                 console.log(err)
             }
