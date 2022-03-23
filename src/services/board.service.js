@@ -35,14 +35,21 @@ function remove(boardId) {
 }
 
 function saveTask(board, taskToSave, activity, groupId) {
-
     if (groupId) {
         taskToSave.id = utilService.makeId('t')
         taskToSave.createdAt = Date.now()
         const group = board.groups.find(group => group.id === groupId)
         group.tasks.push(taskToSave)
-        return board
+    } else {
+        console.log('Im here updating!')
+        let idx = -1
+        const group = board.groups.find(group => {
+            idx = group.tasks.findIndex(task => task.id === taskToSave.id)
+            return idx !== -1
+        })
+        group.tasks.splice(idx, 1, taskToSave)
     }
+    return board
 
 }
 

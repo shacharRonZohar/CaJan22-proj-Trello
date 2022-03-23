@@ -65,7 +65,7 @@ export default {
         async saveTask({ state, dispatch }, { taskToSave, groupId, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
-                const boardToSave = boardService.saveTask(board, taskToSave, activity, groupId)            
+                const boardToSave = boardService.saveTask(board, taskToSave, activity, groupId)
                 dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
