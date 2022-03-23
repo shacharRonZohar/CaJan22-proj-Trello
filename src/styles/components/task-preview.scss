@@ -1,0 +1,17 @@
+.task-preview {
+    overflow: hidden;
+    padding: 6px 8px 2px;
+    position: relative;
+    z-index: 10;
+    border-radius: 3px;
+    background-color: $clr2;
+    box-shadow: 0 1px 0 #091e4240;
+    cursor: pointer;
+    margin-bottom: 8px;
+    h2 {
+        color: $clr4;
+        font-size: em(14px);
+        font-weight: 400;
+        line-height: 20px;
+    }
+}

@@ -1,22 +1,19 @@
 <template>
-  <section v-if="group" class="board-group">
-      {{group.title}}
-      <ul>
-          <li v-for="task in group.tasks" :key="task.id">
-
-          </li>
-      </ul>
+  <section v-if="task" class="task-preview">
+        <h2>{{task.title}}</h2>
   </section>
 </template>
 
 <script>
 export default {
 props: {
-    group: {
+    task: {
         type: Object
     }  
-},
-    components: {},
+    },
+    components: {
+
+    },
         data() {
             return {
             

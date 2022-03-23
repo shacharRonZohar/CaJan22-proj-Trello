@@ -2,7 +2,7 @@
     <section class="board-details">
         <ul class="flex clean-list">
             <li v-for="group in board.groups" :key="group.id">
-                <board-group :group="group"></board-group>
+                <board-group :group="group" @saveTask="saveTask"></board-group>
             </li>
         </ul>
         <router-view />
@@ -23,7 +23,16 @@ export default {
     created() {
 
      },
-    methods: {},
+    methods: {
+        saveTask({groupId, task}){
+            this.$store.dispatch({
+                type: 'saveTask',
+                taskToSave: task,
+                groupId,
+                activity: 'Add a new card'
+            })
+        }
+    },
     computed: {
         boardId(){
             return this.$route.params.boardId
