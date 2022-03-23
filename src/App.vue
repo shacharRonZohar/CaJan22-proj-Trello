@@ -3,7 +3,6 @@
   <app-header />
   <router-view v-if="isReady" />
   <span v-else>Loading...</span>
-  <pre>{{ boards }}</pre>
 </template>
 
 <script>
