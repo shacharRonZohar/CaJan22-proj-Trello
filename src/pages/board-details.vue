@@ -1,5 +1,6 @@
 <template>
     <section class="board-details">
+        <board-header/>
         <ul class="flex clean-list">
             <li v-for="group in board.groups" :key="group.id">
                 <board-group :group="group" @saveTask="saveTask"></board-group>
@@ -10,10 +11,12 @@
 </template>
 
 <script>
-import boardGroup from "../cmps/board-group.vue";
+import boardGroup from '../cmps/board-group.vue';
+import boardHeader from '../cmps/board-header.vue';
 export default {
     components: {
-        boardGroup
+        boardGroup,
+        boardHeader
     },
         data() {
             return {
