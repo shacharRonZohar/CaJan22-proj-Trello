@@ -6,7 +6,6 @@ export const boardService = {
     getById,
     save,
     remove,
-    postMany
 }
 
 const BOARDS_KEY = 'boards_db'
@@ -41,6 +40,7 @@ function saveTask(board, taskToSave, activity, groupId) {
         group.tasks.push(taskToSave)
         return board
     }
+
 }
 
 function _update(board) {
