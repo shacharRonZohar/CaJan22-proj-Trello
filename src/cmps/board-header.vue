@@ -1,8 +1,7 @@
 <template>
     <header>
-        <div class="logo">
-            Twello
-            for second header
+        <div>
+            bottom header
         </div>
         <nav></nav>
     </header>
