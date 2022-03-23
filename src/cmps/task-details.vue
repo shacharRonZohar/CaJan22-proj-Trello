@@ -1,5 +1,5 @@
 <template>
-  <section v-if="task" class="task-details">
+  <section v-if="task" class="task-details-container">
     <!-- <div class="clickable-background"></div> -->
     <h2 @blur="onSaveTitle" class="title" contenteditable>{{ task.title }}</h2>
   </section>
