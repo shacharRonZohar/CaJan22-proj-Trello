@@ -2,7 +2,7 @@
     <header>
         <div class="logo">
             Twello
-            for upper header
+            for second header
         </div>
         <nav></nav>
     </header>
