@@ -16,23 +16,23 @@ export default {
             }
         },
     created() {
-        //  const { boardId } = this.$route.params;
-        //  this.$store.commit({type: 'setBoard', boardId })
-        //  this.board = this.$store.getters.board
-        //  console.log(this.board);
+
      },
     methods: {},
-    computed: {},
+    computed: {
+        boardId(){
+            return this.$route.params.boardId
+        }
+    },
     unmounted() {},
     watch:{
-        'this.$route.params.boardId':{
+        boardId: {
             handler(){
                 const { boardId } = this.$route.params;
                 this.$store.commit({type: 'setBoard', boardId })
                 this.board = this.$store.getters.board
-                console.log(this.board);
             },
-            immediate: true
+            immediate: true,
         }
     }
 }

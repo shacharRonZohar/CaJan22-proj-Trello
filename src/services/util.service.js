@@ -17,7 +17,7 @@ function makeId(startSymb = '', length = 13) {
     return text
 }
 
-function makeExtId(length) {
+function makeExtId(length=13) {
     let text = ''
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     for (let i = 0; i < length; i++) {
