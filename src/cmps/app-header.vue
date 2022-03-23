@@ -3,8 +3,14 @@
         <div class="logo">Twello |</div>
 
         <div class="board-main-nav">
+            <button>Board</button>
+            <div class="board-list">
+                <span>Boards</span>
+                <button>x</button>
+            </div>
             <button>Starred</button>
             <button>Create</button>
+
             <input 
             v-model="searchTxt"
             type="text" 
