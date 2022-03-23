@@ -44,14 +44,39 @@
         // flex-direction: column;
         justify-content: space-between;
         width: 100%;
+        height: 116px;
     }
     .btn.close {
-        border: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 50%;
-        height: 32px;
+        // color: #42526e;
+        background-color: inherit;
+        height: 40px;
         margin: 4px;
+        overflow: hidden;
+        border: none;
+        padding: 4px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: background-color 85ms, color 85ms;
+        width: 40px;
+        z-index: 2;
+    }
+    .btn.close::before {
+        content: "";
+        display: block;
+        text-align: center;
+        height: 17px;
+        width: 17px;
         background-image: url(../assets/icons/close.svg);
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: cover;
+    }
+    .btn.close:hover {
+        background-color: $clr11;
     }
 }

@@ -3,10 +3,16 @@
 //     color: $clr3;
 // }
 
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
+*::before,
+*::after {
+    margin: 0;
+}
 // html {
 
 // }
