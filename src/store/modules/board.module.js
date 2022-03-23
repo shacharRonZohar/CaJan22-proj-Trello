@@ -37,6 +37,7 @@ export default {
         async loadBoards({ commit }) {
             try {
                 commit({ type: 'setIsReady', isReady: false })
+                // The timeout is for testing
                 // setTimeout(async () => {
                 const boards = await boardService.query()
                 commit({ type: 'setBoards', boards })
