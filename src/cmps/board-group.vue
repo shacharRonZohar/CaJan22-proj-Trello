@@ -6,10 +6,10 @@
         <task-preview :task="task" />
       </li>
     </ul>
-    <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-card-btn"> + Add a card </button>
+    <button v-if="!addBtnClicked" @click="openAddForm" class="add-card-btn"> + Add a card </button>
     <div v-else class="add-card-container">
         <form @submit.prevent="saveTask">
-            <textarea v-model="task.title" resize:none placeholder="Enter a title for this card..."></textarea>
+            <textarea ref="taskTitle" v-model="task.title" resize:none placeholder="Enter a title for this card..."></textarea>
             <button>Add card</button>
             <span @click="addBtnClicked = !addBtnClicked">X</span>
         </form>
@@ -37,7 +37,12 @@ export default {
     };
   },
   created() {},
+//   mounted() {},
   methods: {
+    openAddForm(){
+        this.addBtnClicked = !this.addBtnClicked
+        this.$refs.taskTitle.focus();
+  },
     async saveTask() {
         await this.$emit("saveTask", {
         groupId: this.group.id,
@@ -48,7 +53,6 @@ export default {
     },
   },
   computed: {},
-  unmounted() {},
 };
 </script>
 
