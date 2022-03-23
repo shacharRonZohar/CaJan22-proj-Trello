@@ -26,8 +26,6 @@ export default {
             else state.boards.unshift(savedBoard)
         },
         setBoard(state, { boardId }) {
-            console.log(boardId)
-            console.log(state.boards)
             const board = state.boards.find(currBoard => currBoard._id === boardId)
             if (!board) return console.log('Couldnt find board')
             state.board = board

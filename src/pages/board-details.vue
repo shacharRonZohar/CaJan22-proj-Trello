@@ -10,12 +10,30 @@
 export default {
     // props: [''],
     components: {},
-    created() { },
-    data() {
-        return {}
-    },
+        data() {
+            return {
+                board: null
+            }
+        },
+    created() {
+        //  const { boardId } = this.$route.params;
+        //  this.$store.commit({type: 'setBoard', boardId })
+        //  this.board = this.$store.getters.board
+        //  console.log(this.board);
+     },
     methods: {},
     computed: {},
-    unmounted() { },
+    unmounted() {},
+    watch:{
+        'this.$route.params.boardId':{
+            handler(){
+                const { boardId } = this.$route.params;
+                this.$store.commit({type: 'setBoard', boardId })
+                this.board = this.$store.getters.board
+                console.log(this.board);
+            },
+            immediate: true
+        }
+    }
 }
 </script>
