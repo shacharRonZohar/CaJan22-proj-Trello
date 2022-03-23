@@ -1,11 +1,12 @@
 <template>
   <section v-if="group" class="board-group">
-      {{group.title}}
-      <ul class="flex">
+      <h1>{{group.title}}</h1>
+      <ul class="clean-list">
           <li v-for="task in group.tasks" :key="task.id">
-              {{task.title}}
+              <h2>{{task.title}}</h2>
           </li>
       </ul>
+      <button class="add-card-btn">Add card</button>
   </section>
 </template>
 

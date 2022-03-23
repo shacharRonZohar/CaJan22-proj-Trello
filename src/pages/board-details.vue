@@ -1,11 +1,10 @@
 <template>
-    <section class="toy-details">
-        <ul>
+    <section class="board-details">
+        <ul class="flex clean-list">
             <li v-for="group in board.groups" :key="group.id">
                 <board-group :group="group"></board-group>
             </li>
         </ul>
-        <pre>{{board}}</pre>
         <router-view />
     </section>
 </template>
