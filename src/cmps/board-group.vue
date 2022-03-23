@@ -7,11 +7,11 @@
       </li>
     </ul>
     <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-card-btn"> + Add a card </button>
-    <div class="add-card-container">
+    <div v-else class="add-card-container">
         <form @submit.prevent="saveTask">
-            <textarea resize:none placeholder="Enter a title for this card..."></textarea>
+            <textarea v-model="task.title" resize:none placeholder="Enter a title for this card..."></textarea>
             <button>Add card</button>
-            <span>X</span>
+            <span @click="addBtnClicked = !addBtnClicked">X</span>
         </form>
     </div>
   </section>
@@ -30,16 +30,21 @@ export default {
   },
   data() {
     return {
-        addBtnClicked: false
+        addBtnClicked: false,
+        task: {
+            title: ''
+        }
     };
   },
   created() {},
   methods: {
-    saveTask() {
-      this.$emit("saveTask", {
+    async saveTask() {
+        await this.$emit("saveTask", {
         groupId: this.group.id,
-        task: { title: "baba" },
+        task: { title: this.task.title },
       });
+      this.task.title = ''
+      this.addBtnClicked = !this.addBtnClicked   
     },
   },
   computed: {},
