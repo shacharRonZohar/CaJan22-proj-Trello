@@ -39,10 +39,6 @@ function _add(board) {
     return storageService.post(BOARDS_KEY, board)
 }
 
-
-//     postMany
-// _createBoards()
-
 function _createBoards() {
     let boards = utilService.load(BOARDS_KEY)
     if (!boards || !boards.length) {

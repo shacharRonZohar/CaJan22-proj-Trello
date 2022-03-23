@@ -1,5 +1,5 @@
 
-<template>
+<template class="main-layout">
   <app-header />
   <router-view />
   <pre>{{ boards }}</pre>
