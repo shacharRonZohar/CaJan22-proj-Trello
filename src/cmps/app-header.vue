@@ -1,17 +1,30 @@
 <template>
-    <header class="main-header app-header">
-        <div class="logo">Twello</div>
+    <header class="main-header app-header flex">
+        <div class="logo">Twello |</div>
 
-        <nav>
-            <div class="board-main-nav">
-                <ul>
-                    <li>Starred</li>
-                    <li>Create</li>
-                    <li>Search</li>
-                    <li>Profile</li>
-                </ul>
-            </div>
-        </nav>
-
+        <div class="board-main-nav">
+            <button>Starred</button>
+            <button>Create</button>
+            <input 
+            v-model="searchTxt"
+            type="text" 
+            placeholder="Search" />
+            <span>Profile</span>
+        </div>
     </header>
 </template>
+
+<script>
+export default {
+    components: {},
+    created() { },
+    data() {
+        return {
+            searchTxt: '',
+        }
+    },
+    methods: {},
+    computed: {},
+    unmounted() { },
+}
+</script>

@@ -6,6 +6,8 @@ export const boardService = {
     getById,
     save,
     remove,
+    postMany,
+    saveTask
 }
 
 const BOARDS_KEY = 'boards_db'
@@ -33,6 +35,7 @@ function remove(boardId) {
 }
 
 function saveTask(board, taskToSave, activity, groupId) {
+
     if (groupId) {
         taskToSave.id = utilService.makeId('t')
         taskToSave.createdAt = Date.now()
