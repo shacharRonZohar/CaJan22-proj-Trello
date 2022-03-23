@@ -21,6 +21,11 @@
         font-size: rem(20px);
         max-width: 100%;
         align-self: flex-start;
+        // flex-grow: 1;
+        font-weight: 600;
+    }
+    .description {
+        // flex-grow: 3;
     }
     // .clickable-background {
     //     z-index: 3;
@@ -34,4 +39,19 @@
     //     // transform: translate(10%, 10%);
     //     cursor: pointer;
     // }
+    .task-details-header {
+        display: flex;
+        // flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .btn.close {
+        border: none;
+        border-radius: 50%;
+        height: 32px;
+        margin: 4px;
+        background-image: url(../assets/icons/close.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
 }

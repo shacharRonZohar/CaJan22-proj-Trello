@@ -1,7 +1,13 @@
 <template>
   <section v-if="task" class="task-details-container">
     <!-- <div class="clickable-background"></div> -->
-    <h2 @blur="onSaveTitle" class="title" contenteditable>{{ task.title }}</h2>
+    <!-- @input.stop -->
+    <header class="task-details-header">
+      <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
+      <!-- <img class="btn close" src="../assets/icons/close.svg" /> -->
+      <button class="btn close"></button>
+    </header>
+    <!-- <p class="description">Description</p> -->
   </section>
 </template>
 
