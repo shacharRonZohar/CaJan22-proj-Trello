@@ -1,15 +1,21 @@
 <template>
-    <section>
-        This is board details
+    <section class="toy-details">
+        <ul>
+            <li v-for="group in board.groups" :key="group.id">
+                <board-group :group="group"></board-group>
+            </li>
+        </ul>
+        <pre>{{board}}</pre>
         <router-view />
     </section>
 </template>
 
 <script>
-
+import boardGroup from "../cmps/board-group.vue";
 export default {
-    // props: [''],
-    components: {},
+    components: {
+        boardGroup
+    },
         data() {
             return {
                 board: null

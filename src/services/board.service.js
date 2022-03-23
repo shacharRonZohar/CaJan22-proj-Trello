@@ -67,6 +67,21 @@ function _createBoards() {
                         }
                     ],
                     'style': {}
+                },
+                {
+                    'id': utilService.makeId('g'),
+                    'title': 'Group 2',
+                    'tasks': [
+                        {
+                            'id': utilService.makeId('t'),
+                            'title': 'Replace logo'
+                        },
+                        {
+                            'id': utilService.makeId('t'),
+                            'title': 'Add Samples'
+                        }
+                    ],
+                    'style': {}
                 }
             ]
         },
