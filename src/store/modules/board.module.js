@@ -61,6 +61,16 @@ export default {
                 if (currTask) return task = currTask
             })
             return JSON.parse(JSON.stringify(task))
+        },
+        async saveTask({ state, dispatch }, { taskToSave, groupId, activity }) {
+            try {
+                const oldBoard = JSON.parse(JSON.stringify(state.board))
+                const newBoard = boardService.saveTask(oldBoard, taskToSave, groupId, activity)
+                dispatch({ type: 'saveBoard', newBoard })
+            } catch (err) {
+                console.log(err)
+            }
         }
+
     },
 }

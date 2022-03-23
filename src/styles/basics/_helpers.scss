@@ -5,6 +5,14 @@
 .inline-flex {
     display: inline-flex;
 }
+.flex.space-between {
+    justify-content: space-between;
+}
+.flex.align-center {
+    align-items: center;
+}
+
+
 
 // List 
 .clean-list {

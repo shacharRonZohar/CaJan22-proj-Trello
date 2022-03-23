@@ -33,6 +33,16 @@ function remove(boardId) {
     return storageService.remove(BOARDS_KEY, boardId)
 }
 
+function saveTask(board, taskToSave, activity, groupId) {
+    if (groupId) {
+        taskToSave.id = utilService.makeId('t')
+        taskToSave.createdAt = Date.now()
+        const group = board.groups.find(group => group.id === groupId)
+        group.tasks.push(taskToSave)
+        return board
+    }
+}
+
 function _update(board) {
     return storageService.put(BOARDS_KEY, board)
 }
