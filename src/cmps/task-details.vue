@@ -1,6 +1,6 @@
 <template>
   <section v-if="task" class="task-details">
-    <textarea v-model="task.title" class="title" autoResizeEnabled="true"></textarea>
+    <h2 @blur="onSaveTitle" class="title" contenteditable>{{ task.title }}</h2>
     <!-- <title>{{ task?.title }}</title> -->
   </section>
 </template>
@@ -23,15 +23,16 @@ export default {
         } catch (err) {
           console.log(err)
         }
-        // groups.find(group => {
-        //   const currTask = group.tasks.find(task => task.id === taskId)
-        //   if (currTask) return task = currTask
-        // }, {})
       },
       immediate: true
     }
   },
-  methods: {},
+  methods: {
+    onSaveTitle(ev) {
+      this.task.title = ev.target.innerText
+      // this.$store.dispatch({type: 'saveBoard'})
+    }
+  },
   computed: {
     taskId() {
       return this.$route.params.taskId
