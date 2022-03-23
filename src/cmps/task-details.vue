@@ -1,5 +1,5 @@
 <template>
-  <section v-if="task" class="task-details">
+  <section v-if="task" class="task-details-container">
     <!-- <div class="clickable-background"></div> -->
     <h2 @blur="onSaveTitle" class="title" contenteditable>{{ task.title }}</h2>
   </section>
@@ -28,9 +28,11 @@ export default {
     }
   },
   methods: {
-    onSaveTitle(ev) {
+    async onSaveTitle(ev) {
       this.task.title = ev.target.innerText
-      // this.$store.dispatch({type: 'saveBoard'})
+      await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)) })
+      // this.task = await this.$store.dispatch({ type: 'getTaskById', taskId: this.task.id })
+      console.log(this.task)
     }
   },
   computed: {
