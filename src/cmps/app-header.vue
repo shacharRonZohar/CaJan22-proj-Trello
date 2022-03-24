@@ -1,19 +1,22 @@
 <template>
-    <header class="main-header app-header flex">
-        <div class="logo">Twello |</div>
+    <header class="main-header app-header flex align-center">
+        <div class="logo">Twello</div>
 
-        <div class="board-main-nav">
-            <button>Board</button>
-            <button>Starred</button>
+        <div class="board-main-nav flex space-between">
+            <div class="actions">
+                <button class="btn">Board</button>
+                <button class="btn">Starred</button>
+
+                <button class="btn">Create</button>
+            </div>
             <board-list v-if="isShown"></board-list>
-
-            <button>Create</button>
-
-            <input 
-            v-model="searchTxt"
-            type="text" 
-            placeholder="Search" />
-            <span>Profile</span>
+            <div>
+                <input 
+                v-model="searchTxt"
+                type="text" 
+                placeholder="Search" />
+                <span>Profile</span>
+            </div>
         </div>
     </header>
 </template>

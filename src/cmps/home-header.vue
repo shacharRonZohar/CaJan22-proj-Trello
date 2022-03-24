@@ -12,7 +12,7 @@
                     </li>
                     <li>
                         <button class="signup-btn">
-                            <router-link to="/signup" class="signup-board">Sing up</router-link>
+                            <router-link to="/signup" class="signup-board">Sign up</router-link>
                         </button>
                     </li>
                 </ul>
