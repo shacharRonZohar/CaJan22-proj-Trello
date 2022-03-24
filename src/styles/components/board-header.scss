@@ -1,0 +1,8 @@
+.board-header {
+    height: 45px;
+    .board-nav {
+        >* {
+            margin-inline-end: 5px;
+        }
+    }
+}
