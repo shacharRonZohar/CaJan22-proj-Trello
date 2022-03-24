@@ -52,9 +52,7 @@ export default {
     groupId: String
   },
   components: {},
-  created() {
-    console.log(this.groupId)
-  },
+  created() { },
   data() {
     return {
       task: null
