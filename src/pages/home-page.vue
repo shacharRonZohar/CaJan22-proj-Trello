@@ -1,8 +1,8 @@
 <template>
     <section class="home-page">
         <div class="hero">
-            <h1>Trello helps teams move work forward.</h1>
-            <p>
+            <h1 class="hero-title">Twello helps teams move work forward.</h1>
+            <p class="hero-p">
                 Collaborate, manage projects,
                 and reach new productivity peaks.
                 From high rises to the home office,
@@ -10,6 +10,7 @@
                 unique—accomplish it all with Trello.
             </p>
             <button @click="logAsGuest">Try live demo</button>
+            <img src="../assets/imgs/hero.png" alt="">
         </div>
     </section>
 </template>
@@ -22,7 +23,11 @@ export default {
     data() {
         return {}
     },
-    methods: {},
+    methods: {
+        logAsGuest() {
+            console.log('Loggin as guest');
+        }
+    },
     computed: {},
     unmounted() { },
 }
