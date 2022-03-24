@@ -36,29 +36,28 @@ function remove(boardId) {
 }
 
 function saveTask(board, taskToSave, activity, groupId) {
-    if (groupId) {
+    const group = board.groups.find(group => group.id === groupId)
+    if (!taskToSave.id) {
         taskToSave.id = utilService.makeId('t')
         taskToSave.createdAt = Date.now()
-        const group = board.groups.find(group => group.id === groupId)
         group.tasks.push(taskToSave)
     } else {
         console.log('Im here updating!')
-        let idx = -1
-        const group = board.groups.find(group => {
-            idx = group.tasks.findIndex(task => task.id === taskToSave.id)
-            return idx !== -1
-        })
+        const idx = group.tasks.findIndex(task => task.id === taskToSave.id)
+        if (idx === -1) return Promise.reject('Couldnt find task to edit')
         group.tasks.splice(idx, 1, taskToSave)
     }
-    return board
+
+    return Promise.resolve(board)
+
 }
 
-function saveGroup(board, groupToSave, acyivity){
+function saveGroup(board, groupToSave, acyivity) {
     groupToSave.id = utilService.makeId('g')
     // groupToSave.createdAt = Date.now()
     groupToSave.tasks = []
     board.groups.push(groupToSave)
-    return board;
+    return board
 }
 
 function _update(board) {
@@ -73,7 +72,8 @@ function _createBoards() {
     let boards = utilService.load(BOARDS_KEY)
     if (!boards || !boards.length) {
         boards = [{
-            '_id': utilService.makeExtId(),
+            // '_id': utilService.makeExtId(),
+            '_id': 'sVCnqmVGSwPUC',
             'title': 'Trello dev proj',
             'createdAt': Date.now(),
             'createdBy': {},

@@ -39,7 +39,33 @@
           </div>
         </div>
       </section>
-      <aside class="actions"></aside>
+      <aside class="actions">
+        <h3>Add to card</h3>
+        <div class="members btn">
+          <div class="icon"></div>
+          <button class="btn">Members</button>
+        </div>
+        <div class="lables btn">
+          <div class="icon"></div>
+          <button class="btn lables">Lables</button>
+        </div>
+        <div class="checklist btn">
+          <div class="icon"></div>
+          <button class="btn checklist">Checklist</button>
+        </div>
+        <div class="dates btn">
+          <div class="icon"></div>
+          <button class="btn dates">Dates</button>
+        </div>
+        <div class="attachment btn">
+          <div class="icon"></div>
+          <button class="btn attachment">Attachment</button>
+        </div>
+        <div class="cover btn">
+          <div class="icon"></div>
+          <button class="btn cover">Cover</button>
+        </div>
+      </aside>
     </main>
     <button @click="onCloseDetails" class="btn close icon"></button>
     <!-- <p class="description">Description</p> -->
@@ -52,9 +78,7 @@ export default {
     groupId: String
   },
   components: {},
-  created() {
-    console.log(this.groupId)
-  },
+  created() { },
   data() {
     return {
       task: null
@@ -64,8 +88,9 @@ export default {
     taskId: {
       async handler() {
         try {
+          if (!this.$route.params?.taskId) return
           const taskId = this.$route.params.taskId
-          this.task = await this.$store.dispatch({ type: 'getTaskById', taskId })
+          this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId })
         } catch (err) {
           console.log(err)
         }
@@ -76,13 +101,13 @@ export default {
   methods: {
     async onSaveTitle(ev) {
       this.task.title = ev.target.innerText
-      await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)) })
+      await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)), groupId: this.groupId })
       // this.task = await this.$store.dispatch({ type: 'getTaskById', taskId: this.task.id })
       console.log(this.task)
     },
     onCloseDetails() {
       const currRoute = this.$route.fullPath
-      const route = currRoute.substring(0, currRoute.indexOf('task'))
+      const route = currRoute.substring(0, currRoute.indexOf('/task'))
       this.$router.push(route)
     }
   },

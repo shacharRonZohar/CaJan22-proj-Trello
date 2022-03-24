@@ -23,7 +23,7 @@ export default {
                 return currBoard._id === savedBoard._id
             })
             if (idx !== -1) state.boards.splice(idx, 1, savedBoard)
-            else state.boards.unshift(savedBoard)         
+            else state.boards.unshift(savedBoard)
         },
         setBoard(state, { boardId }) {
             const board = state.boards.find(currBoard => currBoard._id === boardId)
@@ -54,20 +54,19 @@ export default {
                 console.log(err)
             }
         },
-        getTaskById({ state }, { taskId }) {
-            let task = {}
-            state.board.groups.find(group => {
-                const currTask = group.tasks.find(task => task.id === taskId)
-                if (currTask) return task = currTask
-            })
-            return JSON.parse(JSON.stringify(task))
+        getTaskById({ state }, { taskId, groupId }) {
+            const group = state.board.groups.find(group => group.id === groupId)
+            let task = group.tasks.find(task => task.id === taskId)
+            task = JSON.parse(JSON.stringify(task))
+            task.groupId = groupId
+            return task
         },
         async saveTask({ state, dispatch, commit }, { taskToSave, groupId, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
-                const boardToSave = boardService.saveTask(board, taskToSave, activity, groupId)            
+                const boardToSave = await boardService.saveTask(board, taskToSave, activity, groupId)
                 await dispatch({ type: 'saveBoard', boardToSave })
-                commit({type: 'setBoard', boardId: boardToSave._id})
+                commit({ type: 'setBoard', boardId: boardToSave._id })
             } catch (err) {
                 console.log(err)
             }
@@ -76,9 +75,9 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = boardService.saveGroup(board, groupToSave)
-                console.log(boardToSave);           
+                console.log(boardToSave)
                 await dispatch({ type: 'saveBoard', boardToSave })
-                commit({type: 'setBoard', boardId: boardToSave._id})
+                commit({ type: 'setBoard', boardId: boardToSave._id })
             } catch (err) {
                 console.log(err)
             }
