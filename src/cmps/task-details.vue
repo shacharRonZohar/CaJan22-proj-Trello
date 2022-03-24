@@ -29,7 +29,22 @@
             <div class="icon"></div>
             <h3>Description</h3>
           </div>
-          <div class="desc task-layout">Add a more detailed description...</div>
+
+          <div
+            @click.stop="toggleDescEdit"
+            v-if="!descEditOpen"
+            class="desc task-layout"
+          >{{ descTxt }}</div>
+          <form class="desc-edit-form" v-else @submit.prevent="onSaveDesc">
+            <textarea
+              class="desc-edit"
+              v-model="newDesc"
+              resize:none
+              placeholder="Add a more detailed description..."
+            ></textarea>
+            <button class="save-new-list-btn">Save</button>
+            <!-- <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span> -->
+          </form>
           <!-- <button class="btn edit">Edit</button> -->
         </div>
         <div class="activities-container">
@@ -84,7 +99,9 @@ export default {
   created() { },
   data() {
     return {
-      task: null
+      task: null,
+      descEditOpen: false,
+      newDesc: ''
     }
   },
   watch: {
@@ -108,15 +125,27 @@ export default {
       // this.task = await this.$store.dispatch({ type: 'getTaskById', taskId: this.task.id })
       console.log(this.task)
     },
+    async onSaveDesc() {
+      this.task.desc = this.newDesc
+      await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)), groupId: this.groupId })
+      this.toggleDescEdit()
+    },
     onCloseDetails() {
       const currRoute = this.$route.fullPath
       const route = currRoute.substring(0, currRoute.indexOf('/task'))
       this.$router.push(route)
+    },
+    toggleDescEdit() {
+      this.newDesc = this.task.desc
+      this.descEditOpen = !this.descEditOpen
     }
   },
   computed: {
     taskId() {
       return this.$route.params.taskId
+    },
+    descTxt() {
+      return 'desc' in this.task && this.task.desc ? this.task.desc : 'Add a more detailed description...'
     }
   },
   unmounted() { },
