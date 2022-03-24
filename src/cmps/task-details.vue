@@ -62,6 +62,7 @@ export default {
     taskId: {
       async handler() {
         try {
+          if (!this.$route.params?.taskId) return
           const taskId = this.$route.params.taskId
           this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId })
         } catch (err) {
@@ -80,7 +81,7 @@ export default {
     },
     onCloseDetails() {
       const currRoute = this.$route.fullPath
-      const route = currRoute.substring(0, currRoute.indexOf('task'))
+      const route = currRoute.substring(0, currRoute.indexOf('/task'))
       this.$router.push(route)
     }
   },

@@ -72,7 +72,8 @@ function _createBoards() {
     let boards = utilService.load(BOARDS_KEY)
     if (!boards || !boards.length) {
         boards = [{
-            '_id': utilService.makeExtId(),
+            // '_id': utilService.makeExtId(),
+            '_id': 'sVCnqmVGSwPUC',
             'title': 'Trello dev proj',
             'createdAt': Date.now(),
             'createdBy': {},
