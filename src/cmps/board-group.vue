@@ -1,9 +1,14 @@
 <template>
   <section v-if="group" class="board-group">
+    <div class="group-header">
     <h1>{{ group.title }}</h1>
+    <button class="group-menu">
+    <a class="dots-icon" />
+    </button>
+    </div>
     <ul class="clean-list">
       <li v-for="task in group.tasks" :key="task.id">
-        <task-preview :task="task" />
+        <task-preview @openTaskDetails="openTaskDetails" :task="task" />
       </li>
     </ul>
     <button v-if="!addBtnClicked" @click="openAddForm" class="add-card-btn"> + Add a card </button>
@@ -54,6 +59,9 @@ export default {
       this.task.title = ''
       this.addBtnClicked = !this.addBtnClicked   
     },
+    openTaskDetails(){
+      this.$emit('openTaskDetails',this.group.id)
+    }
   },
   computed: {},
 };
