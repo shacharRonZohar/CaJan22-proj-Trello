@@ -65,6 +65,7 @@ export default {
             task.groupId = groupId
             return task
         },
+        // Almost (maybe all of these?) can be one dynamic function, see doc for a bit more details
         async saveTask({ state, dispatch, commit }, { taskToSave, groupId, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
