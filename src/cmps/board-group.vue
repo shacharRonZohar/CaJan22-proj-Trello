@@ -35,7 +35,7 @@ export default {
         addBtnClicked: false,
         task: {
             title: ''
-        }
+        },
     };
   },
   created() {},

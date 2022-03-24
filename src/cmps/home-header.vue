@@ -6,14 +6,17 @@
             <div class="home-nav">
                 <ul class="clean-list flex">
                     <li>
-                        <router-link to="/login" class="login-link">Log in</router-link> |  
+                        <button class="login-btn">
+                            <router-link to="/login" class="login-link">Log in</router-link>
+                        </button>
                     </li>
                     <li>
-                        | <router-link to="/signup" class="signup-board">Sing up</router-link>
+                        <button class="signup-btn">
+                            <router-link to="/signup" class="signup-board">Sing up</router-link>
+                        </button>
                     </li>
                 </ul>
             </div>
         </nav>
-
     </header>
 </template>
