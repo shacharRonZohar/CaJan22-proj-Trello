@@ -33,7 +33,7 @@ export default {
         removeGroup(state, { groupId }) {
             const idx = state.board.groups.findIndex(group => group.id === groupId)
             state.board.groups.splice(idx, 1)
-         },
+        },
     },
     actions: {
         async loadBoards({ commit }) {
@@ -89,6 +89,17 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = boardService.removeGroup(board, groupId, activity)
+                await dispatch({ type: 'saveBoard', boardToSave })
+                commit({ type: 'setBoard', boardId: boardToSave._id })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async archiveTask({ state, dispatch, commit }, { taskId, groupId, activity }) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = await boardService.archiveTask(board, taskId, groupId, activity)
+                console.log(boardToSave)
                 await dispatch({ type: 'saveBoard', boardToSave })
                 commit({ type: 'setBoard', boardId: boardToSave._id })
             } catch (err) {

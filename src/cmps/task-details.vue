@@ -78,13 +78,21 @@
         </div>
         <div @click="toggleActionPopup" class="attachment btn">
           <!-- Gonna be a dynamic component -->
-          <div v-if="actionPopupOpen" class="action-popup">This is an action popup</div>
           <div class="icon"></div>
           <button class="attachment">Attachment</button>
         </div>
         <div class="cover btn">
           <div class="icon"></div>
           <button class="cover">Cover</button>
+        </div>
+        <div @click="onArchive" class="archive btn">
+          <div v-if="actionPopupOpen" class="action-popup">
+            Are you sure?
+            <button @click="onArchive" class="confirm">Yes</button>
+            <button class="deny">No</button>
+          </div>
+          <div class="icon"></div>
+          <button class="archive">Archive</button>
         </div>
       </aside>
     </main>
@@ -123,6 +131,10 @@ export default {
     }
   },
   methods: {
+    onArchive() {
+      this.$store.dispatch({ type: 'archiveTask', taskId: this.task.id, groupId: this.groupId })
+      this.onCloseDetails()
+    },
     async onSaveTitle(ev) {
       this.task.title = ev.target.innerText
       await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)), groupId: this.groupId })
