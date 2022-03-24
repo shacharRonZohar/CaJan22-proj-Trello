@@ -54,6 +54,7 @@ export default {
             try {
                 const savedBoard = await boardService.save(boardToSave)
                 commit({ type: 'saveBoard', savedBoard })
+                commit({ type: 'setBoard', boardId: boardToSave._id })
             } catch (err) {
                 console.log(err)
             }
@@ -71,7 +72,6 @@ export default {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.saveTask(board, taskToSave, activity, groupId)
                 await dispatch({ type: 'saveBoard', boardToSave })
-                commit({ type: 'setBoard', boardId: boardToSave._id })
             } catch (err) {
                 console.log(err)
             }
@@ -81,7 +81,6 @@ export default {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = boardService.saveGroup(board, groupToSave)
                 await dispatch({ type: 'saveBoard', boardToSave })
-                commit({ type: 'setBoard', boardId: boardToSave._id })
             } catch (err) {
                 console.log(err)
             }
@@ -91,7 +90,6 @@ export default {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = boardService.removeGroup(board, groupId, activity)
                 await dispatch({ type: 'saveBoard', boardToSave })
-                commit({ type: 'setBoard', boardId: boardToSave._id })
             } catch (err) {
                 console.log(err)
             }
@@ -101,7 +99,6 @@ export default {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.archiveTask(board, taskId, groupId, activity)
                 await dispatch({ type: 'saveBoard', boardToSave })
-                commit({ type: 'setBoard', boardId: boardToSave._id })
             } catch (err) {
                 console.log(err)
             }
@@ -111,7 +108,15 @@ export default {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.saveAttachment(board, taskId, groupId, payload, activity)
                 await dispatch({ type: 'saveBoard', boardToSave })
-                commit({ type: 'setBoard', boardId: boardToSave._id })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async saveGroupDrop({ state, dispatch, commit }, { fromIdx, toIdx }) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = await boardService.saveGroupDrop(board, fromIdx, toIdx)
+                await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
             }

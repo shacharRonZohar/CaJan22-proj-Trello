@@ -1,59 +1,80 @@
 <template>
-  <section v-if="board" class="board-details" :style="{backgroundImage: `url(${img})`}">
-    <board-header :board="board"/>
+  <section v-if="board" class="board-details" :style="{ backgroundImage: `url(${img})` }">
+    <board-header :board="board" />
     <main class="main-board">
-    <ul class="flex clean-list">
-      <li v-for="group in board.groups" :key="group.id">
-        <board-group class="draggable-item" :group="group" @editGroup="saveGroup" @saveTask="saveTask" @openTaskDetails="openTaskDetails" @removeGroup="removeGroup" />
-      </li>
-      <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-group-btn"><span>+</span> Add another list</button>
-       <div v-else class="add-group-container">
-        <form @submit.prevent="addGroup">
-            <textarea v-focus v-model="group.title" resize:none placeholder="Enter list title..."/>
+      <Container @drop="onDrop" orientation="horizontal" class="flex clean-list">
+        <!-- :get-child-payload="() => group.id" -->
+        <Draggable v-for="group in board.groups" :key="group.id">
+          <board-group
+            class="draggable-item"
+            :group="group"
+            @editGroup="saveGroup"
+            @saveTask="saveTask"
+            @openTaskDetails="openTaskDetails"
+            @removeGroup="removeGroup"
+          />
+        </Draggable>
+        <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-group-btn">
+          <span>+</span> Add another list
+        </button>
+        <div v-else class="add-group-container">
+          <form @submit.prevent="addGroup">
+            <textarea v-focus v-model="group.title" resize:none placeholder="Enter list title..." />
             <button class="save-new-list-btn">Add list</button>
             <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span>
-        </form>
-    </div>
-    </ul>
-    <router-view :groupId="currOpenTaskGroupId" />
+          </form>
+        </div>
+      </Container>
+      <router-view :groupId="currOpenTaskGroupId" />
     </main>
   </section>
 </template>
 
 <script>
-import boardGroup from "../cmps/board-group.vue";
-import boardHeader from "../cmps/board-header.vue";
+import boardGroup from '../cmps/board-group.vue'
+import boardHeader from '../cmps/board-header.vue'
+import { Container, Draggable } from 'vue3-smooth-dnd'
+
 export default {
   components: {
     boardGroup,
     boardHeader,
+    Container,
+    Draggable
   },
   data() {
     return {
       addBtnClicked: false,
       group: {
-          title: ''
+        title: ''
       },
       currOpenTaskGroupId: null
-    };
+    }
   },
   created() {
   },
   methods: {
+    async onDrop({ removedIndex, addedIndex }) {
+      this.$store.dispatch({ type: 'saveGroupDrop', fromIdx: removedIndex, toIdx: addedIndex })
+      // const group = board.groups.splice(ev.removedIndex, 1)[0]
+      // board.groups.splice(ev.addedIndex, 0, group)
+      // await this.$store.dispatch({ type: 'saveBoard', boardToSave: board })
+      // this.$store.commit({ type: 'setBoard', boardId: board._id })
+    },
     async saveTask({ groupId, task }) {
       await this.$store.dispatch({
         type: "saveTask",
         taskToSave: task,
         groupId,
         activity: "Add a new card",
-      });
+      })
     },
     async addGroup() {
       await this.$store.dispatch({
         type: "saveGroup",
-        groupToSave: {title: this.group.title},
+        groupToSave: { title: this.group.title },
         activity: "Add a new group",
-      });
+      })
       this.group.title = ''
       this.addBtnClicked = !this.addBtnClicked
     },
@@ -62,41 +83,41 @@ export default {
         type: "saveGroup",
         groupToSave,
         activity: "edit a group",
-      });
+      })
     },
-    openTaskDetails(groupId){
+    openTaskDetails(groupId) {
       this.currOpenTaskGroupId = groupId
     },
-    async removeGroup(groupId){
-       if (confirm("Sure to delete?")) {
-         await this.$store.dispatch({ 
-           type: "removeGroup", 
-           groupId,
-           activity: "Remove group"
-         });
+    async removeGroup(groupId) {
+      if (confirm("Sure to delete?")) {
+        await this.$store.dispatch({
+          type: "removeGroup",
+          groupId,
+          activity: "Remove group"
+        })
       } else return
     }
   },
   computed: {
     boardId() {
-      return this.$route.params.boardId;
+      return this.$route.params.boardId
     },
-    board(){
-      return this.$store.getters.board;
+    board() {
+      return this.$store.getters.board
     },
     img() {
       return new URL(`${this.board.style.imgUrl}`, import.meta.url).href
     }
   },
-  unmounted() {},
+  unmounted() { },
   watch: {
     boardId: {
       handler() {
-        const { boardId } = this.$route.params;
-        this.$store.commit({ type: "setBoard", boardId });
+        const { boardId } = this.$route.params
+        this.$store.commit({ type: "setBoard", boardId })
       },
       immediate: true,
     },
   },
-};
+}
 </script>

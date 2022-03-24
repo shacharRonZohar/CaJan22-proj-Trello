@@ -11,7 +11,8 @@ export const boardService = {
     saveGroup,
     removeGroup,
     archiveTask,
-    saveAttachment
+    saveAttachment,
+    saveGroupDrop
 }
 
 const BOARDS_KEY = 'boards_db'
@@ -45,8 +46,6 @@ function removeGroup(board, groupId, activity) {
     return board
 }
 
-
-
 function saveTask(board, taskToSave, activity, groupId) {
     const group = board.groups.find(group => group.id === groupId)
     if (!taskToSave.id) {
@@ -59,7 +58,6 @@ function saveTask(board, taskToSave, activity, groupId) {
         if (idx === -1) return Promise.reject('Couldnt find task to edit')
         group.tasks.splice(idx, 1, taskToSave)
     }
-
     return Promise.resolve(board)
 }
 
@@ -85,6 +83,11 @@ function saveGroup(board, groupToSave, acyivity) {
     return board
 }
 
+function saveGroupDrop(board, fromIdx, toIdx) {
+    const group = board.groups.splice(fromIdx, 1)[0]
+    board.groups.splice(toIdx, 0, group)
+    return Promise.resolve(board)
+}
 function saveAttachment(board, taskId, groupId, payload, activity) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
