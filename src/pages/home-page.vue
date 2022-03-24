@@ -10,6 +10,7 @@
                 unique—accomplish it all with Trello.
             </p>
             <button @click="logAsGuest">Try live demo</button>
+            <img src="../assets/imgs/hero.png" alt="">
         </div>
     </section>
 </template>
@@ -22,7 +23,11 @@ export default {
     data() {
         return {}
     },
-    methods: {},
+    methods: {
+        logAsGuest() {
+            console.log('Loggin as guest');
+        }
+    },
     computed: {},
     unmounted() { },
 }

@@ -4,11 +4,9 @@
 
         <div class="board-main-nav">
             <button>Board</button>
-            <div class="board-list">
-                <span>Boards</span>
-                <button>x</button>
-            </div>
             <button>Starred</button>
+            <board-list v-if="isShown"></board-list>
+
             <button>Create</button>
 
             <input 
@@ -21,15 +19,24 @@
 </template>
 
 <script>
+import boardList from './board-list.vue'
+
 export default {
-    components: {},
+    components: {
+        boardList
+    },
     created() { },
     data() {
         return {
             searchTxt: '',
+            isShown: false
         }
     },
-    methods: {},
+    methods: {
+        openList(listType) {
+
+        }
+    },
     computed: {},
     unmounted() { },
 }
