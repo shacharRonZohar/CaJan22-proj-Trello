@@ -1,6 +1,6 @@
 
 <template class="main-layout">
-  <header-container />
+  <header-container/>
   <router-view v-if="isReady" />
   <span v-else>Loading...</span>
 </template>
