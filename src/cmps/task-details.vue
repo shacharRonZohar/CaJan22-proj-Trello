@@ -63,7 +63,7 @@ export default {
       async handler() {
         try {
           const taskId = this.$route.params.taskId
-          this.task = await this.$store.dispatch({ type: 'getTaskById', taskId })
+          this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId })
         } catch (err) {
           console.log(err)
         }
@@ -74,7 +74,7 @@ export default {
   methods: {
     async onSaveTitle(ev) {
       this.task.title = ev.target.innerText
-      await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)) })
+      await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)), groupId: this.groupId })
       // this.task = await this.$store.dispatch({ type: 'getTaskById', taskId: this.task.id })
       console.log(this.task)
     },

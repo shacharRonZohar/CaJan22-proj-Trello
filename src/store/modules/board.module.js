@@ -56,7 +56,7 @@ export default {
         },
         getTaskById({ state }, { taskId, groupId }) {
             const group = state.board.groups.find(group => group.id === groupId)
-            const task = group.find(task => task.id === taskId)
+            let task = group.tasks.find(task => task.id === taskId)
             task = JSON.parse(JSON.stringify(task))
             task.groupId = groupId
             return task
@@ -64,7 +64,7 @@ export default {
         async saveTask({ state, dispatch, commit }, { taskToSave, groupId, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
-                const boardToSave = boardService.saveTask(board, taskToSave, activity, groupId)
+                const boardToSave = await boardService.saveTask(board, taskToSave, activity, groupId)
                 await dispatch({ type: 'saveBoard', boardToSave })
                 commit({ type: 'setBoard', boardId: boardToSave._id })
             } catch (err) {
