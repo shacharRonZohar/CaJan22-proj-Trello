@@ -1,5 +1,5 @@
 <template>
-  <section v-if="task" class="task-preview">
+  <section v-if="task" class="task-preview" @click="openTaskDetails">
         <h2>{{task.title}}</h2>
   </section>
 </template>
@@ -22,7 +22,12 @@ props: {
     created() {
 
      },
-    methods: {},
+    methods: {
+        openTaskDetails(){
+            this.$router.push(this.$route.fullPath + '/task/' + this.task.id)
+            this.$emit('openTaskDetails')
+        }
+    },
     computed: {
         
     },

@@ -5,6 +5,42 @@
     background-color: $clr3;
     width: 272px;
 
+    .group-header{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .group-menu{
+        width: 30px;
+        height: 30px;
+        line-height: 20px;
+        // padding: 6px;
+        margin-top: 10px;
+        border-radius: 3px;
+        border: none;
+        font-size: em(16px);
+
+        .dots-icon{
+            font-family: 'trellicons';
+            display: flex;
+            justify-content: center;
+            align-content: center;
+    
+            &::before{
+                content: "\e952";
+            }
+    
+        }
+
+        &:hover{
+            background-color: #091e4214;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+    }
+    
+
     h1 {
         padding-inline: 8px;
         padding-top: 15px;

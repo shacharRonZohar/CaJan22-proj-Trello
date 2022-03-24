@@ -78,7 +78,7 @@ function _createBoards() {
             'createdAt': Date.now(),
             'createdBy': {},
             'style': {
-                'imgUrl': '../imgs/boardBackground/1.jpg'
+                'imgUrl': '../assets/imgs/boardBackground/1.jpg'
             },
             'labels': [],
             'members': [],
