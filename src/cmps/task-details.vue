@@ -39,7 +39,33 @@
           </div>
         </div>
       </section>
-      <aside class="actions"></aside>
+      <aside class="actions">
+        <h3>Add to card</h3>
+        <div class="members btn">
+          <div class="icon"></div>
+          <button class="btn">Members</button>
+        </div>
+        <div class="lables btn">
+          <div class="icon"></div>
+          <button class="btn lables">Lables</button>
+        </div>
+        <div class="checklist btn">
+          <div class="icon"></div>
+          <button class="btn checklist">Checklist</button>
+        </div>
+        <div class="dates btn">
+          <div class="icon"></div>
+          <button class="btn dates">Dates</button>
+        </div>
+        <div class="attachment btn">
+          <div class="icon"></div>
+          <button class="btn attachment">Attachment</button>
+        </div>
+        <div class="cover btn">
+          <div class="icon"></div>
+          <button class="btn cover">Cover</button>
+        </div>
+      </aside>
     </main>
     <button @click="onCloseDetails" class="btn close icon"></button>
     <!-- <p class="description">Description</p> -->
