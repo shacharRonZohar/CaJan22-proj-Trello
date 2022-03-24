@@ -6,6 +6,7 @@
         <!-- :get-child-payload="() => group.id" -->
         <Draggable v-for="group in board.groups" :key="group.id">
           <board-group
+            @saveTaskDrop="saveTaskDrop"
             class="draggable-item"
             :group="group"
             @editGroup="saveGroup"
@@ -54,6 +55,32 @@ export default {
   created() {
   },
   methods: {
+    async saveTaskDrop({ ev, groupId }) {
+      if (ev.removedIndex !== null && ev.addedIndex !== null) {
+        const board = JSON.parse(JSON.stringify(this.board))
+        console.log('Ive been here once')
+        let group = board.groups.find(group => group.id === groupId)
+        const task = group.tasks.splice(ev.removedIndex, 1)[0]
+        group.tasks.splice(ev.addedIndex, 0, task)
+        console.log(group)
+        this.$store.dispatch({ type: 'saveBoard', boardToSave: board })
+      }
+      else if (ev.removedIndex !== null) {
+        const board = JSON.parse(JSON.stringify(this.board))
+        const group = board.groups.find(group => group.id === groupId)
+        ev.payload = group.tasks.splice(ev.removedIndex, 1)[0]
+        await this.$store.dispatch({ type: 'saveBoard', boardToSave: board })
+      }
+      else if (ev.addedIndex !== null) {
+        setTimeout(() => {
+          const board = JSON.parse(JSON.stringify(this.board))
+          const group = board.groups.find(group => group.id === groupId)
+          group.tasks.splice(ev.addedIndex, 0, ev.payload)
+          this.$store.dispatch({ type: 'saveBoard', boardToSave: board })
+        }, 1)
+      }
+
+    },
     async onDrop({ removedIndex, addedIndex }) {
       this.$store.dispatch({ type: 'saveGroupDrop', fromIdx: removedIndex, toIdx: addedIndex })
       // const group = board.groups.splice(ev.removedIndex, 1)[0]

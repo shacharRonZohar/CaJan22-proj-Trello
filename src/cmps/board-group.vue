@@ -6,11 +6,18 @@
         <a class="dots-icon" />
       </button>
     </div>
-    <ul class="clean-list group-list">
-      <li v-for="task in group.tasks" :key="task.id">
+    <!-- <Container :group-name="'group1'"></Container> -->
+    <Container
+      :get-child-payload="(ev) => getTaskPayload(ev)"
+      :group-name="'group'"
+      @drop="onDrop"
+      orientation="vertical"
+      class="clean-list group-list"
+    >
+      <Draggable v-for="task in group.tasks" :key="task.id">
         <task-preview @openTaskDetails="openTaskDetails" :task="task" />
-      </li>
-    </ul>
+      </Draggable>
+    </Container>
     <button v-if="!addBtnClicked" @click="openAddForm" class="add-card-btn">+ Add a card</button>
     <div v-else class="add-card-container">
       <form @submit.prevent="saveTask">
@@ -32,6 +39,7 @@
 
 <script>
 import taskPreview from "./task-preview.vue"
+import { Container, Draggable } from 'vue3-smooth-dnd'
 export default {
   props: {
     group: {
@@ -40,6 +48,8 @@ export default {
   },
   components: {
     taskPreview,
+    Container,
+    Draggable
   },
   data() {
     return {
@@ -52,6 +62,12 @@ export default {
   created() { },
   //   mounted() {},
   methods: {
+    getTaskPayload(index) {
+      return this.group.tasks[index]
+    },
+    onDrop(ev) {
+      this.$emit('saveTaskDrop', { ev, groupId: this.group.id })
+    },
     async onSaveTitle(ev) {
       if (!ev.target.innerText) return
       this.group.title = ev.target.innerText
