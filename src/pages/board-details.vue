@@ -59,7 +59,7 @@ export default {
       this.addBtnClicked = !this.addBtnClicked
     },
     openTaskDetails(groupId){
-      this.currOpenTaskGroupId = groupdId
+      this.currOpenTaskGroupId = groupId
     }
   },
   computed: {
