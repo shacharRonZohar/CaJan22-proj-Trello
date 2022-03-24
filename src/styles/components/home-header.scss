@@ -1,3 +1,36 @@
 .home-header {
-    background-color: red;
+    height: 68px;
+    .logo {
+        font-size: x-large;
+    }
+
+    .home-nav {
+        a {
+            text-decoration: none;
+            font-size: 17.5px;
+            line-height: 26.25px;
+        }
+        button{
+            padding: 0.4em;
+            border: none;
+        }
+
+        .login-btn {
+            background-color: inherit;
+            font-weight: 500;
+            a {
+                color: $clr13
+            }
+        }
+        
+        .signup-btn {
+            background-color: $clr13;
+            font-weight: 600;
+            border-radius: 5px;
+            margin-inline-start: 10px;
+            a {
+                color: $clr2;
+            }
+        }
+    }
 }

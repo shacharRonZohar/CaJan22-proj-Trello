@@ -1,8 +1,8 @@
 <template>
     <section class="home-page">
         <div class="hero">
-            <h1>Trello helps teams move work forward.</h1>
-            <p>
+            <h1 class="hero-title">Twello helps teams move work forward.</h1>
+            <p class="hero-p">
                 Collaborate, manage projects,
                 and reach new productivity peaks.
                 From high rises to the home office,
