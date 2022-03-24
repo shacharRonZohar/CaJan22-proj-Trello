@@ -1,6 +1,9 @@
 <template>
   <section v-if="task" class="task-preview" @click="openTaskDetails">
         <h2>{{task.title}}</h2>
+        <div class="actions-container">
+            <a v-if="task.desc" class="description-icon" title="This card has a description"/>
+        </div>
   </section>
 </template>
 

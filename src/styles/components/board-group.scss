@@ -1,54 +1,60 @@
 .board-group {
-
-    padding: 0px 10px 15px;
+    padding: 10px 8px;
     margin-inline: 5px;
     border-radius: 3px;
     background-color: $clr3;
     width: 272px;
-
-    .group-header{
+    
+    .group-header {
         display: flex;
         justify-content: space-between;
     }
+    
+    .group-list{
+        margin-top: 8px;
+    }
 
-    .group-menu{
+    .group-menu {
         width: 30px;
         height: 30px;
         line-height: 20px;
-        // padding: 6px;
-        margin-top: 10px;
         border-radius: 3px;
         border: none;
         font-size: em(16px);
 
-        .dots-icon{
-            font-family: 'trellicons';
+        .dots-icon {
+            font-family: "trellicons";
             display: flex;
             justify-content: center;
             align-content: center;
-    
-            &::before{
+
+            &::before {
                 content: "\e952";
             }
-    
         }
 
-        &:hover{
+        &:hover {
             background-color: #091e4214;
             border-radius: 3px;
             cursor: pointer;
         }
-
     }
-    
 
     h1 {
-        padding-inline: 8px;
-        padding-top: 15px;
+        padding: 4px 5px 4px 8px;
+        overflow: hidden;
         font-size: em(16px);
         font-weight: 600;
-        line-height: 20px;
         color: $clr4;
+
+        &:focus {
+            background-color: $clr2;
+            color: $clr4;
+            box-shadow: inset 0 0 0 2px $clr8;
+            outline: none;
+            border-radius: 3px;
+            width: 90%;
+        }
     }
     .add-card-btn {
         color: #5e6c84;
@@ -80,7 +86,6 @@
         &:focus {
             outline: none;
         }
-
     }
 
     .save-new-card-btn {
@@ -92,21 +97,20 @@
         line-height: 20px;
         padding: 6px 12px;
 
-        &:hover{
+        &:hover {
             background-color: $clr9;
             cursor: pointer;
         }
     }
-
 }
 
-.close-add-btn{
+.close-add-btn {
     margin-left: 15px;
     font-size: em(20px);
     font-weight: 500;
-    opacity: .7;
+    opacity: 0.7;
 
-    &:hover{
+    &:hover {
         opacity: 1;
         cursor: pointer;
     }

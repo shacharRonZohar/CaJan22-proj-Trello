@@ -6,7 +6,7 @@
     <a class="dots-icon" />
     </button>
     </div>
-    <ul class="clean-list">
+    <ul class="clean-list group-list">
       <li v-for="task in group.tasks" :key="task.id">
         <task-preview @openTaskDetails="openTaskDetails" :task="task" />
       </li>
