@@ -5,7 +5,10 @@
     <header class="task-details-header">
       <!-- <div class="title-container"> -->
       <div class="icon"></div>
-      <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
+      <div class="title-container">
+        <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
+        <small class="group-txt">in list: Test</small>
+      </div>
     </header>
     <main class="main-details"></main>
     <button @click="onCloseDetails" class="btn close icon"></button>
