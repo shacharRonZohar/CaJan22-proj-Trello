@@ -1,7 +1,7 @@
 <template>
-  <section v-if="group" class="board-group">
+  <section v-if="group" class="board-group">    
     <div class="group-header">
-    <h1>{{ group.title }}</h1>
+    <h1 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ group.title }}</h1>
     <button class="group-menu" @click="removeGroup">
     <a class="dots-icon" />
     </button>
@@ -46,11 +46,18 @@ export default {
   created() {},
 //   mounted() {},
   methods: {
+    async onSaveTitle(ev) {
+      this.group.title = ev.target.innerText
+      this.$emit("editGroup", this.group)
+      // await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)), groupId: this.groupId })
+      // this.task = await this.$store.dispatch({ type: 'getTaskById', taskId: this.task.id })
+      console.log(this.group)
+    },
     openAddForm(){
         this.addBtnClicked = !this.addBtnClicked
         console.log(this.$refs);
         this.$refs.taskTitle.focus();
-  },
+    },
     async saveTask() {
         await this.$emit("saveTask", {
         groupId: this.group.id,

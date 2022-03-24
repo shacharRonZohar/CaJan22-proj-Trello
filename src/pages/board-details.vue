@@ -3,11 +3,11 @@
     <board-header :board="board"/>
     <ul class="flex clean-list">
       <li v-for="group in board.groups" :key="group.id">
-        <board-group :group="group" @saveTask="saveTask" @openTaskDetails="openTaskDetails" @removeGroup="removeGroup"></board-group>
+        <board-group class="draggable-item" :group="group" @editGroup="saveGroup" @saveTask="saveTask" @openTaskDetails="openTaskDetails" @removeGroup="removeGroup" />
       </li>
       <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-group-btn"><span>+</span> Add another list</button>
        <div v-else class="add-group-container">
-        <form @submit.prevent="saveGroup">
+        <form @submit.prevent="addGroup">
             <textarea v-model="group.title" resize:none placeholder="Enter list title..."/>
             <button class="save-new-list-btn">Add list</button>
             <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span>
@@ -48,15 +48,23 @@ export default {
       });
       this.board = this.$store.getters.board;
     },
-    async saveGroup() {
+    async addGroup() {
       await this.$store.dispatch({
         type: "saveGroup",
         groupToSave: {title: this.group.title},
-        activity: "Add a new card",
+        activity: "Add a new group",
       });
       this.board = this.$store.getters.board;
       this.group.title = ''
       this.addBtnClicked = !this.addBtnClicked
+    },
+    async saveGroup(groupToSave) {
+      await this.$store.dispatch({
+        type: "saveGroup",
+        groupToSave,
+        activity: "edit a group",
+      });
+      this.board = this.$store.getters.board;
     },
     openTaskDetails(groupId){
       this.currOpenTaskGroupId = groupId

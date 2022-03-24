@@ -62,10 +62,16 @@ function saveTask(board, taskToSave, activity, groupId) {
 }
 
 function saveGroup(board, groupToSave, acyivity) {
-    groupToSave.id = utilService.makeId('g')
-    // groupToSave.createdAt = Date.now()
-    groupToSave.tasks = []
-    board.groups.push(groupToSave)
+    if (!groupToSave.id){
+        groupToSave.id = utilService.makeId('g')
+        // groupToSave.createdAt = Date.now()
+        groupToSave.tasks = []
+        board.groups.push(groupToSave)
+    } else {
+        const idx = board.groups.findIndex(group => group.id === groupToSave.id)
+        if (idx === -1) return Promise.reject('Couldnt find group to edit')
+        board.groups.splice(idx, 1, groupToSave)
+    }
     return board
 }
 
