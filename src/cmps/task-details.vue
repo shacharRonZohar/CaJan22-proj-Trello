@@ -59,6 +59,7 @@
       </section>
       <aside class="actions">
         <h3>Add to card</h3>
+        <!-- All btns gonna be dynamic components -->
         <div class="members btn">
           <div class="icon"></div>
           <button class="members">Members</button>
@@ -75,7 +76,9 @@
           <div class="icon"></div>
           <button class="dates">Dates</button>
         </div>
-        <div class="attachment btn">
+        <div @click="toggleActionPopup" class="attachment btn">
+          <!-- Gonna be a dynamic component -->
+          <div v-if="actionPopupOpen" class="action-popup">This is an action popup</div>
           <div class="icon"></div>
           <button class="attachment">Attachment</button>
         </div>
@@ -101,6 +104,7 @@ export default {
     return {
       task: null,
       descEditOpen: false,
+      actionPopupOpen: false,
       newDesc: ''
     }
   },
@@ -138,6 +142,10 @@ export default {
     toggleDescEdit() {
       this.newDesc = this.task.desc
       this.descEditOpen = !this.descEditOpen
+    },
+    toggleActionPopup() {
+      console.log(this.actionPopupOpen)
+      this.actionPopupOpen = !this.actionPopupOpen
     }
   },
   computed: {
