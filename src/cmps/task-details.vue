@@ -60,10 +60,8 @@
       <aside class="actions">
         <h3>Add to card</h3>
         <!-- All btns gonna be dynamic components -->
-        <div class="members btn">
-          <div class="icon"></div>
-          <button class="members">Members</button>
-        </div>
+        <component @onAction="onAction" v-for="cmp in actionCmps" :is="cmp"></component>
+        <!-- 
         <div class="lables btn">
           <div class="icon"></div>
           <button class="lables">Lables</button>
@@ -77,7 +75,7 @@
           <button class="dates">Dates</button>
         </div>
         <div @click="toggleActionPopup" class="attachment btn">
-          <!-- Gonna be a dynamic component -->
+           Gonna be a dynamic component 
           <div class="icon"></div>
           <button class="attachment">Attachment</button>
         </div>
@@ -85,7 +83,7 @@
           <div class="icon"></div>
           <button class="cover">Cover</button>
         </div>
-        <div @click="onArchive" class="archive btn">
+        <div @click="toggleActionPopup" class="archive btn">
           <div v-if="actionPopupOpen" class="action-popup">
             Are you sure?
             <button @click="onArchive" class="confirm">Yes</button>
@@ -93,7 +91,7 @@
           </div>
           <div class="icon"></div>
           <button class="archive">Archive</button>
-        </div>
+        </div>-->
       </aside>
     </main>
     <button @click="onCloseDetails" class="btn close icon"></button>
@@ -102,18 +100,26 @@
 </template>
 
 <script>
+import archiveAction from './archive-action.vue'
+import membersAction from './members-action.vue'
+
 export default {
   props: {
     groupId: String
   },
-  components: {},
+  components: {
+    archiveAction,
+    membersAction
+  },
   created() { },
   data() {
     return {
       task: null,
       descEditOpen: false,
       actionPopupOpen: false,
-      newDesc: ''
+      newDesc: '',
+      actionCmps: ['members-action', 'archive-action']
+      // actionCmps: ['archive-action']
     }
   },
   watch: {
@@ -131,14 +137,14 @@ export default {
     }
   },
   methods: {
-    onArchive() {
-      this.$store.dispatch({ type: 'archiveTask', taskId: this.task.id, groupId: this.groupId })
-      this.onCloseDetails()
+    onAction(cbName) {
+      console.log(cbName)
+      this.$store.dispatch({ type: cbName, taskId: this.task.id, groupId: this.groupId })
+      if (cbName === 'archiveTask') this.onCloseDetails()
     },
     async onSaveTitle(ev) {
       this.task.title = ev.target.innerText
       await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)), groupId: this.groupId })
-      // this.task = await this.$store.dispatch({ type: 'getTaskById', taskId: this.task.id })
       console.log(this.task)
     },
     async onSaveDesc() {
@@ -155,10 +161,6 @@ export default {
       this.newDesc = this.task.desc
       this.descEditOpen = !this.descEditOpen
     },
-    toggleActionPopup() {
-      console.log(this.actionPopupOpen)
-      this.actionPopupOpen = !this.actionPopupOpen
-    }
   },
   computed: {
     taskId() {
