@@ -1,7 +1,15 @@
 <template>
   <section v-if="task" class="task-details-container">
     <!-- <div class="clickable-background"></div> -->
-    <h2 @blur="onSaveTitle" class="title" contenteditable>{{ task.title }}</h2>
+    <!-- @input.stop -->
+    <header class="task-details-header">
+      <!-- <div class="title-container"> -->
+      <div class="icon"></div>
+      <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
+    </header>
+    <main class="main-details"></main>
+    <button @click="onCloseDetails" class="btn close icon"></button>
+    <!-- <p class="description">Description</p> -->
   </section>
 </template>
 
@@ -33,6 +41,11 @@ export default {
       await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)) })
       // this.task = await this.$store.dispatch({ type: 'getTaskById', taskId: this.task.id })
       console.log(this.task)
+    },
+    onCloseDetails() {
+      const currRoute = this.$route.fullPath
+      const route = currRoute.substring(0, currRoute.indexOf('task'))
+      this.$router.push(route)
     }
   },
   computed: {

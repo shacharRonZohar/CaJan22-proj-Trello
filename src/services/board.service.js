@@ -7,7 +7,8 @@ export const boardService = {
     save,
     remove,
     postMany,
-    saveTask
+    saveTask,
+    saveGroup
 }
 
 const BOARDS_KEY = 'boards_db'
@@ -50,7 +51,14 @@ function saveTask(board, taskToSave, activity, groupId) {
         group.tasks.splice(idx, 1, taskToSave)
     }
     return board
+}
 
+function saveGroup(board, groupToSave, acyivity){
+    groupToSave.id = utilService.makeId('g')
+    // groupToSave.createdAt = Date.now()
+    groupToSave.tasks = []
+    board.groups.push(groupToSave)
+    return board;
 }
 
 function _update(board) {
