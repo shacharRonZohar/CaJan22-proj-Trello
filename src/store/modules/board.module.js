@@ -29,7 +29,11 @@ export default {
             const board = state.boards.find(currBoard => currBoard._id === boardId)
             if (!board) return console.log('Couldnt find board')
             state.board = board
-        }
+        },
+        removeGroup(state, { groupId }) {
+            const idx = state.board.groups.findIndex(group => group.id === groupId)
+            state.board.groups.splice(idx, 1)
+         },
     },
     actions: {
         async loadBoards({ commit }) {
@@ -75,13 +79,21 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = boardService.saveGroup(board, groupToSave)
-                console.log(boardToSave)
+                await dispatch({ type: 'saveBoard', boardToSave })
+                commit({ type: 'setBoard', boardId: boardToSave._id })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async removeGroup({ state, dispatch, commit }, { groupId, activity }) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = boardService.removeGroup(board, groupId, activity)
                 await dispatch({ type: 'saveBoard', boardToSave })
                 commit({ type: 'setBoard', boardId: boardToSave._id })
             } catch (err) {
                 console.log(err)
             }
         }
-
     },
 }

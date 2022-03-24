@@ -2,7 +2,7 @@
   <section v-if="group" class="board-group">
     <div class="group-header">
     <h1>{{ group.title }}</h1>
-    <button class="group-menu">
+    <button class="group-menu" @click="removeGroup">
     <a class="dots-icon" />
     </button>
     </div>
@@ -61,6 +61,9 @@ export default {
     },
     openTaskDetails(){
       this.$emit('openTaskDetails',this.group.id)
+    },
+    removeGroup(){
+      this.$emit('removeGroup', this.group.id)
     }
   },
   computed: {},

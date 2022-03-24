@@ -1,9 +1,9 @@
 <template>
   <section v-if="board" class="board-details" :style="{backgroundImage: `url(${img})`}">
-    <board-header />
+    <board-header :board="board"/>
     <ul class="flex clean-list">
       <li v-for="group in board.groups" :key="group.id">
-        <board-group :group="group" @saveTask="saveTask" @openTaskDetails="openTaskDetails"></board-group>
+        <board-group :group="group" @saveTask="saveTask" @openTaskDetails="openTaskDetails" @removeGroup="removeGroup"></board-group>
       </li>
       <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-group-btn"><span>+</span> Add another list</button>
        <div v-else class="add-group-container">
@@ -60,6 +60,16 @@ export default {
     },
     openTaskDetails(groupId){
       this.currOpenTaskGroupId = groupId
+    },
+    async removeGroup(groupId){
+       if (confirm("Sure to delete?")) {
+         await this.$store.dispatch({ 
+           type: "removeGroup", 
+           groupId,
+           activity: "Remove group"
+         });
+         this.board = this.$store.getters.board;
+      } else return
     }
   },
   computed: {
