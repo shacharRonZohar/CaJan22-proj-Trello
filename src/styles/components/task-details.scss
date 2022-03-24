@@ -53,9 +53,14 @@
                 margin-top: 4px;
                 // padding-left: 8px;
                 font-weight: 600;
+                line-height: 24px;
             }
             .group-txt {
                 // padding-left: 8px;
+                cursor: default;
+                display: inline-block;
+                margin: 4px 8px 4px 2px;
+                height: 30px;
             }
 
             // margin: 4px 0 0;
@@ -80,27 +85,86 @@
         }
         .icon::before {
             content: "\e912";
-            // margin-top: 11px;
             width: 25px;
             height: 25px;
-            // background-image: url(../assets/icons/title-icon.png);
-        }
-        .group-txt {
-            cursor: default;
-            display: inline-block;
-            margin: 4px 8px 4px 2px;
-            color: $clr13;
         }
     }
 
     .main-details {
+        flex-grow: 1;
         display: grid;
-        grid-template-columns: 32px 512px;
-        .icon.icon-desc::before {
-            background-image: url(../assets/icons/desc-icon.png);
+        // display: grid;
+        grid-template-columns: 576px 1fr;
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            > * {
+                display: flex;
+                gap: 10px;
+                flex-direction: column;
+                > * {
+                    display: flex;
+                    gap: 6px;
+                }
+                &:not(:first-child) {
+                    margin-top: 30px;
+                }
+            }
+            .members-container {
+                .members {
+                    // display: flex;
+                    .member {
+                        height: 32px;
+                        width: 32px;
+                        border-radius: 50%;
+                        background-color: red;
+                        margin-right: 5px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        &.add::before {
+                            content: "\e901";
+                        }
+                    }
+                }
+            }
+            .desc-container {
+                .icon::before {
+                    content: "\e922";
+                }
+                .desc {
+                    background-color: #eaecf0;
+                    min-height: 56px;
+                    padding: 8px 12px;
+                    &:hover {
+                        cursor: pointer;
+                        background-color: $clr11;
+                    }
+                }
+                // .edit {
+                //     padding: 47px 31px;
+                // }
+            }
+            .activities-container {
+                .icon::before {
+                    content: "\e900";
+                }
+                .activities-header {
+                    justify-content: space-between;
+                    div {
+                        display: flex;
+                        // flex-direction: column;
+                        gap: 6px;
+                    }
+                }
+                .btn.show {
+                    // height: 100%;
+                    // align-self: flex-end;
+                }
+            }
         }
-        .description {
-            grid-column: 2;
+        .task-layout {
+            margin-left: 38px;
         }
     }
 
@@ -119,11 +183,6 @@
         height: 32px;
     }
 
-    .icon:not(.close)::before {
-        height: 25px;
-        width: 25px;
-    }
-
     .icon::before {
         content: "";
         display: block;
@@ -137,6 +196,8 @@
         // background-image: url(../assets/icons/close.svg);
         background-repeat: no-repeat;
         background-size: contain;
+        height: 20px;
+        width: 20px;
     }
 
     .btn.close {
@@ -151,19 +212,20 @@
         position: absolute;
         right: 0;
         top: 0;
-        transition: background-color 85ms, color 85ms;
         width: 40px;
         z-index: 2;
     }
 
     .btn.close::before {
-        height: 20px;
-        width: 20px;
         content: "\e91c";
         // background-image: url(../assets/icons/close.svg);
     }
-
-    .btn.close:hover {
+    .btn {
+        padding: 6px 12px;
+        transition: background-color 85ms, color 85ms;
+    }
+    .btn:hover {
+        cursor: pointer;
         background-color: $clr11;
     }
 }
