@@ -1,6 +1,7 @@
 <template>
   <section v-if="board" class="board-details" :style="{backgroundImage: `url(${img})`}">
     <board-header :board="board"/>
+    <main class="main-board">
     <ul class="flex clean-list">
       <li v-for="group in board.groups" :key="group.id">
         <board-group class="draggable-item" :group="group" @editGroup="saveGroup" @saveTask="saveTask" @openTaskDetails="openTaskDetails" @removeGroup="removeGroup" />
@@ -8,13 +9,14 @@
       <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-group-btn"><span>+</span> Add another list</button>
        <div v-else class="add-group-container">
         <form @submit.prevent="addGroup">
-            <textarea v-model="group.title" resize:none placeholder="Enter list title..."/>
+            <textarea v-focus v-model="group.title" resize:none placeholder="Enter list title..."/>
             <button class="save-new-list-btn">Add list</button>
             <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span>
         </form>
     </div>
     </ul>
     <router-view :groupId="currOpenTaskGroupId" />
+    </main>
   </section>
 </template>
 
@@ -28,7 +30,6 @@ export default {
   },
   data() {
     return {
-      board: null,
       addBtnClicked: false,
       group: {
           title: ''
@@ -46,7 +47,6 @@ export default {
         groupId,
         activity: "Add a new card",
       });
-      this.board = this.$store.getters.board;
     },
     async addGroup() {
       await this.$store.dispatch({
@@ -54,7 +54,6 @@ export default {
         groupToSave: {title: this.group.title},
         activity: "Add a new group",
       });
-      this.board = this.$store.getters.board;
       this.group.title = ''
       this.addBtnClicked = !this.addBtnClicked
     },
@@ -64,7 +63,6 @@ export default {
         groupToSave,
         activity: "edit a group",
       });
-      this.board = this.$store.getters.board;
     },
     openTaskDetails(groupId){
       this.currOpenTaskGroupId = groupId
@@ -76,13 +74,15 @@ export default {
            groupId,
            activity: "Remove group"
          });
-         this.board = this.$store.getters.board;
       } else return
     }
   },
   computed: {
     boardId() {
       return this.$route.params.boardId;
+    },
+    board(){
+      return this.$store.getters.board;
     },
     img() {
       return new URL(`${this.board.style.imgUrl}`, import.meta.url).href
@@ -94,7 +94,6 @@ export default {
       handler() {
         const { boardId } = this.$route.params;
         this.$store.commit({ type: "setBoard", boardId });
-        this.board = this.$store.getters.board;
       },
       immediate: true,
     },

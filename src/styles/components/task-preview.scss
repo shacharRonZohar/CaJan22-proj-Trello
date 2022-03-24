@@ -15,6 +15,16 @@
         line-height: 20px;
         margin: 0 0 4px;
     }
+
+    .description-icon {
+        font-family: "trellicons";
+        display: flex;
+        margin: 0 4px 4px 0;
+
+        &::before {
+            content: "\e922";
+        }
+    }
     
     &:hover{
         background-color: #f4f5f7;
