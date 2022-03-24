@@ -5,6 +5,14 @@
       <li v-for="group in board.groups" :key="group.id">
         <board-group :group="group" @saveTask="saveTask"></board-group>
       </li>
+      <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-group-btn"><span>+</span> Add another list</button>
+       <div v-else class="add-group-container">
+        <form @submit.prevent="saveGroup">
+            <textarea v-model="group.title" resize:none placeholder="Enter list title..."/>
+            <button class="save-new-list-btn">Add list</button>
+            <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span>
+        </form>
+    </div>
     </ul>
     <router-view />
   </section>
@@ -21,6 +29,10 @@ export default {
   data() {
     return {
       board: null,
+      addBtnClicked: false,
+      group: {
+          title: ''
+      }
     };
   },
   created() {},
@@ -33,6 +45,16 @@ export default {
         activity: "Add a new card",
       });
       this.board = this.$store.getters.board;
+    },
+    async saveGroup() {
+      await this.$store.dispatch({
+        type: "saveGroup",
+        groupToSave: {title: this.group.title},
+        activity: "Add a new card",
+      });
+      this.board = this.$store.getters.board;
+      this.group.title = ''
+      this.addBtnClicked = !this.addBtnClicked
     },
   },
   computed: {

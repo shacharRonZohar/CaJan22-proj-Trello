@@ -71,6 +71,17 @@ export default {
             } catch (err) {
                 console.log(err)
             }
+        },
+        async saveGroup({ state, dispatch, commit }, { groupToSave, activity }) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = boardService.saveGroup(board, groupToSave)
+                console.log(boardToSave);           
+                await dispatch({ type: 'saveBoard', boardToSave })
+                commit({type: 'setBoard', boardId: boardToSave._id})
+            } catch (err) {
+                console.log(err)
+            }
         }
 
     },

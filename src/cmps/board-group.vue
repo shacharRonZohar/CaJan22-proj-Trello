@@ -9,9 +9,11 @@
     <button v-if="!addBtnClicked" @click="openAddForm" class="add-card-btn"> + Add a card </button>
     <div v-else class="add-card-container">
         <form @submit.prevent="saveTask">
-            <textarea ref="taskTitle" v-model="task.title" resize:none placeholder="Enter a title for this card..."></textarea>
-            <button>Add card</button>
-            <span @click="addBtnClicked = !addBtnClicked">X</span>
+            <textarea ref="taskTitle" v-model="task.title" resize:none placeholder="Enter a title for this card..."/>
+            <div>
+            <button class="save-new-card-btn">Add card</button>
+            <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span>
+            </div>
         </form>
     </div>
   </section>
@@ -41,6 +43,7 @@ export default {
   methods: {
     openAddForm(){
         this.addBtnClicked = !this.addBtnClicked
+        console.log(this.$refs);
         this.$refs.taskTitle.focus();
   },
     async saveTask() {
