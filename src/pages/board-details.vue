@@ -77,7 +77,7 @@ export default {
           const group = board.groups.find(group => group.id === groupId)
           group.tasks.splice(ev.addedIndex, 0, ev.payload)
           this.$store.dispatch({ type: 'saveBoard', boardToSave: board })
-        }, 10)
+        }, 1)
       }
 
     },
