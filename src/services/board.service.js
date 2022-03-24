@@ -9,7 +9,8 @@ export const boardService = {
     postMany,
     saveTask,
     saveGroup,
-    removeGroup
+    removeGroup,
+    archiveTask
 }
 
 const BOARDS_KEY = 'boards_db'
@@ -38,7 +39,7 @@ function remove(boardId) {
 
 function removeGroup(board, groupId, activity) {
     const idx = board.groups.findIndex(group => group.id === groupId)
-    if (idx === -1) console.log('group not found');
+    if (idx === -1) console.log('group not found')
     board.groups.splice(idx, 1)
     return board
 }
@@ -61,8 +62,15 @@ function saveTask(board, taskToSave, activity, groupId) {
     return Promise.resolve(board)
 }
 
+function archiveTask(board, taskId, groupId, activity) {
+    const group = board.groups.find(group => group.id === groupId)
+    const taskIdx = group.tasks.findIndex(task => task.id === taskId)
+    group.tasks.splice(taskIdx, 1)
+    // console.log(board)
+    return Promise.resolve(board)
+}
 function saveGroup(board, groupToSave, acyivity) {
-    if (!groupToSave.id){
+    if (!groupToSave.id) {
         groupToSave.id = utilService.makeId('g')
         // groupToSave.createdAt = Date.now()
         groupToSave.tasks = []
