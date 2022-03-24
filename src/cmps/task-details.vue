@@ -7,13 +7,16 @@
       <div class="icon"></div>
       <div class="title-container">
         <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
-        <small class="group-txt">in list: Test</small>
+        <small class="group-txt">
+          in list:
+          <span>Frontend</span>
+        </small>
       </div>
     </header>
     <main class="main-details">
       <section class="main-content">
         <div class="members-container task-layout">
-          Members:
+          <span>Members:</span>
           <div class="members">
             <div class="member">A</div>
             <div class="member">CB</div>
@@ -43,27 +46,27 @@
         <h3>Add to card</h3>
         <div class="members btn">
           <div class="icon"></div>
-          <button class="btn">Members</button>
+          <button class="members">Members</button>
         </div>
         <div class="lables btn">
           <div class="icon"></div>
-          <button class="btn lables">Lables</button>
+          <button class="lables">Lables</button>
         </div>
         <div class="checklist btn">
           <div class="icon"></div>
-          <button class="btn checklist">Checklist</button>
+          <button class="checklist">Checklist</button>
         </div>
         <div class="dates btn">
           <div class="icon"></div>
-          <button class="btn dates">Dates</button>
+          <button class="dates">Dates</button>
         </div>
         <div class="attachment btn">
           <div class="icon"></div>
-          <button class="btn attachment">Attachment</button>
+          <button class="attachment">Attachment</button>
         </div>
         <div class="cover btn">
           <div class="icon"></div>
-          <button class="btn cover">Cover</button>
+          <button class="cover">Cover</button>
         </div>
       </aside>
     </main>
