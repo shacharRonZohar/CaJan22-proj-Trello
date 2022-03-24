@@ -7,7 +7,7 @@ import './styles/styles.scss'
 
 
 createApp(app)
-.use(store)
-.use(router)
-.mount('#app')
-.directive('focus', focusDirective)
+    .use(store)
+    .use(router)
+    .directive('focus', focusDirective)
+    .mount('#app')
