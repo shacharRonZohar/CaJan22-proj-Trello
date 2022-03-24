@@ -77,7 +77,9 @@ function _createBoards() {
             'title': 'Trello dev proj',
             'createdAt': Date.now(),
             'createdBy': {},
-            'style': {},
+            'style': {
+                'imgUrl': '../imgs/boardBackground/1.jpg'
+            },
             'labels': [],
             'members': [],
             'groups': [

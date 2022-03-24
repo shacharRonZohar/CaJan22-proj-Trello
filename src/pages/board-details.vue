@@ -1,5 +1,5 @@
 <template>
-  <section class="board-details">
+  <section v-if="board" class="board-details" :style="{backgroundImage: `url('../imgs/boardBackground/1.jpg')`}">
     <board-header />
     <ul class="flex clean-list">
       <li v-for="group in board.groups" :key="group.id">
@@ -32,10 +32,13 @@ export default {
       addBtnClicked: false,
       group: {
           title: ''
-      }
+      },
+      // image: {backgroundImage: `url(${this.board.style.imgUrl})`}
     };
   },
-  created() {},
+  created() {
+    console.log(this.image);
+  },
   methods: {
     async saveTask({ groupId, task }) {
       await this.$store.dispatch({
@@ -61,6 +64,10 @@ export default {
     boardId() {
       return this.$route.params.boardId;
     },
+    image() {
+      // return  {'background-image': `url("./imgs/boardBackground/1.jpg")`}
+      // return {backgroundImage: `url("${this.board.style.imgUrl}")`}
+    }
   },
   unmounted() {},
   watch: {
