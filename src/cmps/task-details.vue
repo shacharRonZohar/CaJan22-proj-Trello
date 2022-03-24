@@ -10,7 +10,37 @@
         <small class="group-txt">in list: Test</small>
       </div>
     </header>
-    <main class="main-details"></main>
+    <main class="main-details">
+      <section class="main-content">
+        <div class="members-container task-layout">
+          Members:
+          <div class="members">
+            <div class="member">A</div>
+            <div class="member">CB</div>
+            <div class="member">SZ</div>
+            <div class="member add icon"></div>
+          </div>
+        </div>
+        <div class="desc-container">
+          <div class="desc-header">
+            <div class="icon"></div>
+            <h3>Description</h3>
+          </div>
+          <div class="desc task-layout">Add a more detailed description...</div>
+          <!-- <button class="btn edit">Edit</button> -->
+        </div>
+        <div class="activities-container">
+          <div class="activities-header">
+            <div>
+              <div class="icon"></div>
+              <h3>Activity</h3>
+            </div>
+            <button class="btn show">Show details</button>
+          </div>
+        </div>
+      </section>
+      <aside class="actions"></aside>
+    </main>
     <button @click="onCloseDetails" class="btn close icon"></button>
     <!-- <p class="description">Description</p> -->
   </section>
@@ -18,6 +48,9 @@
 
 <script>
 export default {
+  props: {
+    groupId: String
+  },
   components: {},
   created() { },
   data() {
