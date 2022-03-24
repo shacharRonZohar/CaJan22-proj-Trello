@@ -57,6 +57,7 @@
           </div>
         </div>
       </section>
+      <img v-if="task.attachments" :src="task.attachments[0].url" alt />
       <aside class="actions">
         <h3>Add to card</h3>
         <!-- All btns gonna be dynamic components -->
@@ -102,6 +103,7 @@
 <script>
 import archiveAction from './archive-action.vue'
 import membersAction from './members-action.vue'
+import attachmentAction from './attachment-action.vue'
 
 export default {
   props: {
@@ -109,7 +111,8 @@ export default {
   },
   components: {
     archiveAction,
-    membersAction
+    membersAction,
+    attachmentAction
   },
   created() { },
   data() {
@@ -118,7 +121,7 @@ export default {
       descEditOpen: false,
       actionPopupOpen: false,
       newDesc: '',
-      actionCmps: ['members-action', 'archive-action']
+      actionCmps: ['members-action', 'archive-action', 'attachment-action']
       // actionCmps: ['archive-action']
     }
   },
@@ -137,10 +140,14 @@ export default {
     }
   },
   methods: {
-    onAction(cbName) {
+    async onAction({ cbName, payload = null }) {
       console.log(cbName)
-      this.$store.dispatch({ type: cbName, taskId: this.task.id, groupId: this.groupId })
-      if (cbName === 'archiveTask') this.onCloseDetails()
+      this.$store.dispatch({ type: cbName, taskId: this.task.id, groupId: this.groupId, payload })
+      if (cbName === 'archiveTask') return this.onCloseDetails()
+      if (cbName === 'uploadAttachment') {
+        const taskId = this.$route.params.taskId
+        this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId })
+      }
     },
     async onSaveTitle(ev) {
       this.task.title = ev.target.innerText

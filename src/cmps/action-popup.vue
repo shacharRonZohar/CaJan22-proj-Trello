@@ -1,6 +1,7 @@
 <template>
     <section class="action-popup">
         <slot name="header"></slot>
+        <hr />
         <slot name="body"></slot>
     </section>
 </template>

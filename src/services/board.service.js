@@ -10,7 +10,8 @@ export const boardService = {
     saveTask,
     saveGroup,
     removeGroup,
-    archiveTask
+    archiveTask,
+    saveAttachment
 }
 
 const BOARDS_KEY = 'boards_db'
@@ -69,6 +70,7 @@ function archiveTask(board, taskId, groupId, activity) {
     // console.log(board)
     return Promise.resolve(board)
 }
+
 function saveGroup(board, groupToSave, acyivity) {
     if (!groupToSave.id) {
         groupToSave.id = utilService.makeId('g')
@@ -83,6 +85,12 @@ function saveGroup(board, groupToSave, acyivity) {
     return board
 }
 
+function saveAttachment(board, taskId, groupId, payload, activity) {
+    const group = board.groups.find(group => group.id === groupId)
+    const task = group.tasks.find(task => task.id === taskId)
+    'attachments' in task ? task.attachments.unshift({ url: payload }) : task.attachments = [{ url: payload }]
+    return Promise.resolve(board)
+}
 function _update(board) {
     return storageService.put(BOARDS_KEY, board)
 }
