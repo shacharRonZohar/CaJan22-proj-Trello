@@ -1,7 +1,7 @@
 .app-header {
     // width: 100%;
     &.trans-header {
-        background-color: darken( $inheritClr, 10% )
+        background-color: rgba(0, 0, 0, 0.2)
     }
     height: 45px;
     background-color: $clr9;

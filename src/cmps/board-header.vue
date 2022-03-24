@@ -1,21 +1,21 @@
 <template>
     <header class="board-header flex space-between align-center">
         <div class="board-nav flex">
-            <button class="open-sidenav"> > </button>
-            <button>Board</button>
-            <span class="board-name" contenteditable>{{board.title}}</span>
-            <button>Star opt</button>
-            <div>
-                <span>| A </span>
-                <span>| CB |</span>
-                <span> SZ |</span>
+            <div class="open-sidenav"> > </div>
+            <button class="board-btn btn">Board</button>
+            <div class="board-name flex" contenteditable>{{board.title}}</div>
+            <button class="star-btn btn">Star opt</button>
+            <div class="invited-users flex">
+                <div>A</div>
+                <div>CB</div>
+                <div>SZ</div>
             </div>
-            <button class="invite-btn">+ Invite</button>
+            <button class="invite-btn btn">+ Invite</button>
         </div>
 
-        <div>
-            <button>Filter</button>
-            <button>Show menu</button>
+        <div class="board-action">
+            <button class="filter-btn btn">Filter</button>
+            <button class="right-nav-btn btn">Show menu</button>
         </div>
     </header>
 </template>
