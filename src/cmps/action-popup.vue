@@ -1,5 +1,5 @@
 <template>
-    <section class="action-popup">
+    <section v-close class="action-popup">
         <slot name="header"></slot>
         <hr />
         <slot name="body"></slot>

@@ -1,4 +1,4 @@
-<template>
+<template >
   <section v-if="task" class="task-details-container">
     <!-- <div class="clickable-background"></div> -->
     <!-- @input.stop -->
@@ -6,7 +6,13 @@
       <!-- <div class="title-container"> -->
       <div class="icon"></div>
       <div class="title-container">
-        <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
+        <h2
+          v-focus
+          @blur="onSaveTitle"
+          class="title"
+          contenteditable
+          spellcheck="false"
+        >{{ task.title }}</h2>
         <div class="group-txt">
           in list:
           <span>Frontend</span>
@@ -35,6 +41,7 @@
           </div>
           <form class="description-edit-form task-layout" v-else @submit.prevent="onSaveDesc">
             <textarea
+              v-focus
               class="description-edit"
               v-model="newDesc"
               placeholder="Add a more detailed description..."
@@ -196,7 +203,7 @@ export default {
     },
     async onSaveTitle(ev) {
       this.task.title = ev.target.innerText
-      await this.saveTask(taskToSave)
+      await this.saveTask(this.task)
     },
     async onSaveDesc() {
       this.task.description = this.newDesc
