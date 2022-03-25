@@ -74,7 +74,7 @@ export default {
       if (!ev.target.innerText) return
       this.group.title = ev.target.innerText
       console.log()
-      this.$emit("editGroup", this.group)
+      this.$emit('editGroup', this.group)
       // await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)), groupId: this.groupId })
       // this.task = await this.$store.dispatch({ type: 'getTaskById', taskId: this.task.id })
       console.log(this.group)
@@ -84,7 +84,7 @@ export default {
       console.log(this.$refs)
     },
     async saveTask() {
-      await this.$emit("saveTask", {
+      await this.$emit('saveTask', {
         groupId: this.group.id,
         task: { title: this.task.title },
       })

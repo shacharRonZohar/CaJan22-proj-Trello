@@ -20,7 +20,7 @@
 
         <div class="board-action">
             <button class="filter-btn btn">Filter</button>
-            <button class="right-nav-btn btn">Show menu</button>
+            <button @click="onOpenMenu" class="right-nav-btn btn">Show menu</button>
         </div>
     </header>
 </template>
@@ -30,9 +30,15 @@ export default {
     props: {
         board: Object
     },
+    emits: ['openMenu'],
     created() {
         console.log(this.board);
     },
+    methods: {
+        onOpenMenu() {
+            this.$emit('openMenu')
+        }
+    }
 
 }
 

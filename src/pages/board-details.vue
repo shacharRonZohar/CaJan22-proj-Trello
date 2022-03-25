@@ -1,6 +1,6 @@
 <template>
   <section v-if="board" class="board-details" :style="{ backgroundImage: `url(${img})` }">
-    <board-header :board="board" />
+    <board-header @openMenu="openMenu" :board="board" />
     <main class="main-board">
       <Container @drop="onDrop" orientation="horizontal" class="flex clean-list">
         <!-- :get-child-payload="() => group.id" -->
@@ -27,7 +27,7 @@
         </div>
       </Container>
       <router-view :groupId="currOpenTaskGroupId" />
-      <right-nav></right-nav>
+      <right-nav v-if="showMenuClicked"></right-nav>
     </main>
   </section>
 </template>
@@ -52,7 +52,8 @@ export default {
       group: {
         title: ''
       },
-      currOpenTaskGroupId: null
+      currOpenTaskGroupId: null,
+      showMenuClicked: false
     }
   },
   created() {
@@ -112,6 +113,9 @@ export default {
           activity: "Remove group"
         })
       } else return
+    },
+    openMenu() {
+      this.showMenuClicked = !this.showMenuClicked
     }
   },
   computed: {
