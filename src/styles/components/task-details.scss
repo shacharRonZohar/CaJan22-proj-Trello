@@ -1,12 +1,5 @@
 .task-details-container {
-    // box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.75);
-    // margin: 0 auto;
-    // flex-direction: column;
-    // justify-content: flex-start;
-    // align-items: center;
-    // color: $clr7;
-    // display: grid;
-    // grid-template: min-content repeat();
+    @import url("./task-details-header.scss");
     display: flex;
     flex-direction: column;
     background-color: $clr5;
@@ -15,85 +8,10 @@
     left: 50%;
     width: 768px;
     min-height: 1041px;
-    // grid-template: repeat(10, 1fr) / repeat(10, 1fr);
     transform: translateX(-50%);
     border-radius: 2px;
     z-index: 2;
     padding: 0 8px 8px 16px;
-
-    .description {
-        // flex-grow: 3;
-    }
-    // .clickable-background {
-    //     z-index: 3;
-    //     height: 100vh;
-    //     // position: fixed;
-    //     top: 0;
-    //     left: 0;
-    //     position: fixed;
-    //     background-color: black;
-    //     width: 100vw;
-    //     // transform: translate(10%, 10%);
-    //     cursor: pointer;
-    // }
-    .task-details-header {
-        // margin: 12px 40px 8px 56px;
-        display: flex;
-        align-items: center;
-        align-items: flex-start;
-        grid-gap: 6px;
-        gap: 8px;
-        padding-top: 12px;
-        word-break: break-all;
-        // width: 84%;
-        .title-container {
-            flex-grow: 1;
-            .title {
-                width: calc(100% - 100px);
-                margin-top: 8px;
-                // padding-left: 8px;
-                font-weight: 600;
-                line-height: 24px;
-            }
-            .group-txt {
-                font-size: 1em;
-                // padding-left: 8px;
-                cursor: default;
-                display: inline-block;
-                margin: 4px 8px 4px 2px;
-                height: 30px;
-                span {
-                    text-decoration: underline;
-                }
-            }
-
-            // margin: 4px 0 0;
-            // padding: 8px 0 0;
-            // border-radius: 3px;
-            // height: 32px;
-            // line-height: 24px;
-            // margin: -4px -8px;
-            // min-height: 24px;
-            // // Txt color not affecting for some reason
-            // color: $clr12;
-            // // font-size: rem(20px);
-            // max-width: 100%;
-            // // align-self: flex-start;
-            // // flex-grow: 1;
-            // font-weight: 600;
-            // padding: 4px 8px;
-        }
-        .icon {
-            @include trello-icon($content: "\e912");
-            margin-top: 3px;
-            font-size: 24px;
-        }
-        // .icon::before {
-        //     content: "\e912";
-        //     width: 25px;
-        //     height: 25px;
-        // }
-    }
 
     .main-details {
         flex-grow: 1;

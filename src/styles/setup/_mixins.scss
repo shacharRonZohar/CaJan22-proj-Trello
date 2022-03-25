@@ -138,6 +138,7 @@
   font-family: "trellicons";
   font-size: 1rem;
   &-sm {
+    font-family: "trellicons";
     height: 20px;
     width: 20px;
   }
@@ -147,6 +148,7 @@
     content: $content;
   }
   &-lg {
+    font-family: "trellicons";
     height: 32px;
     width: 32px;
   }
