@@ -1,0 +1,29 @@
+.home-page {
+    border: 3px solid red;
+    .hero {
+        border: 3px solid green;
+        .action-call {
+            border: 3px solid black;
+            .hero-title {
+                border: 3px solid purple;
+                font-family: ibmplexmedium;
+                font-size: xxx-large;
+                font-weight: bold;
+        
+            }
+            .hero-p {
+                border: 3px solid blue;
+                
+            }
+            
+            .live-demo-btn {
+                
+            }
+        }
+    }
+    
+    .hero-img {
+        border: 3px solid orangered;
+
+    }
+}

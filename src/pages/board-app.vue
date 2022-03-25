@@ -16,9 +16,7 @@
         <div class="board-list flex">
             <ul class="clean-list" v-for="board in boards" :key="board._id">
                 <li>
-                    <!-- <div :style="{ backgroundImage: `url(${img})` }"> -->
-                    <pre>{{board}}</pre>
-                    <!-- </div> -->
+                    <board-list :board="board" />
                 </li>
             </ul>
         </div>
@@ -26,20 +24,22 @@
 </template>
 
 <script>
+import boardList from "../cmps/board-list.vue"
 export default {
-    components: {},
+    components: {
+        boardList
+    },
     created() {},
     data() {
-        return {}
+        return {
+
+        }
     },
     methods: {},
     computed: {
         boards(){
             return this.$store.getters.boards
         },
-         img() {
-            return new URL(`${this.board.style.imgUrl}`, import.meta.url).href
-    }
     },
     unmounted() { },
 }
