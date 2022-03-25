@@ -59,7 +59,7 @@
             <div class="img-container">
               <img :src="attachment.url" alt />
             </div>
-            <small @click="onRemoveAttachment(attachment.id)">Delete</small>
+            <small class="btn" @click="onRemoveAttachment(attachment.id)">Delete</small>
           </div>
         </div>
         <div class="activities-container">
@@ -152,7 +152,8 @@ export default {
         try {
           if (!this.$route.params?.taskId) return
           const taskId = this.$route.params.taskId
-          this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId })
+          if (this.groupdId !== 0 && !this.groupId) var groupId = await this.$store.dispatch({ type: 'getGroupByTask', taskId })
+          this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId || groupId })
         } catch (err) {
           console.log(err)
         }
@@ -161,14 +162,15 @@ export default {
     }
   },
   methods: {
-    saveTask(taskToSave) {
+    async saveTask(taskToSave) {
       taskToSave = JSON.parse(JSON.stringify(taskToSave))
-      return this.$store.dispatch({ type: 'saveTask', taskToSave, groupId: this.groupId })
+      if (this.groupdId !== 0 && !this.groupId) var groupId = await this.$store.dispatch({ type: 'getGroupByTask', taskId })
+      return this.$store.dispatch({ type: 'saveTask', taskToSave, groupId: this.groupId || groupId })
     },
     async onRemoveAttachment(attachmentId) {
       const idx = this.task.attachments.findIndex(attachment => attachment.id === attachmentId)
-      this.task.attachemnts.splice(idx, 1)
-      this.saveTask(taskToSave)
+      this.task.attachments.splice(idx, 1)
+      this.saveTask(this.task)
     },
     async onAction({ cbName, payload = null }) {
       await this.$store.dispatch({ type: cbName, taskId: this.task.id, groupId: this.groupId, payload })

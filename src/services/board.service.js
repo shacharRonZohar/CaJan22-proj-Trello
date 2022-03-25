@@ -97,10 +97,10 @@ function saveAttachment(board, taskId, groupId, payload, activity) {
     return Promise.resolve(board)
 }
 
-function _getAttachment({ url }) {
+function _getAttachment(payload) {
     return {
         id: utilService.makeId('a'),
-        url,
+        url: payload,
         name: '',
         createdAt: Date.now
     }
