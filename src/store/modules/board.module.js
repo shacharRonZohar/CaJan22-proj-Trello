@@ -122,9 +122,6 @@ export default {
             }
         },
         async getGroupByTask({ state }, { taskId }) {
-            console.log(state.board.groups.find(group => {
-                return group.tasks.find(task => task.id === taskId)
-            }).id)
             return state.board.groups.find(group => {
                 return group.tasks.find(task => task.id === taskId)
             }).id

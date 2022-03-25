@@ -59,6 +59,7 @@
             <div class="img-container">
               <img :src="attachment.url" alt />
             </div>
+            <span class="name">{{ attachment.name }}</span>
             <small class="btn" @click="onRemoveAttachment(attachment.id)">Delete</small>
           </div>
         </div>
@@ -142,6 +143,7 @@ export default {
       descEditOpen: false,
       actionPopupOpen: false,
       newDesc: '',
+      localGroupId: null,
       actionCmps: ['members-action', 'label-action', 'checklist-action', , 'dates-action', 'location-action', 'attachment-action', 'archive-action']
       // actionCmps: ['archive-action']
     }
@@ -152,8 +154,8 @@ export default {
         try {
           if (!this.$route.params?.taskId) return
           const taskId = this.$route.params.taskId
-          if (this.groupdId !== 0 && !this.groupId) var groupId = await this.$store.dispatch({ type: 'getGroupByTask', taskId })
-          this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId || groupId })
+          if (this.groupdId !== 0 && !this.groupId) this.localGroupId = await this.$store.dispatch({ type: 'getGroupByTask', taskId })
+          this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId || this.localGroupId })
         } catch (err) {
           console.log(err)
         }
@@ -164,21 +166,21 @@ export default {
   methods: {
     async saveTask(taskToSave) {
       taskToSave = JSON.parse(JSON.stringify(taskToSave))
-      if (this.groupdId !== 0 && !this.groupId) var groupId = await this.$store.dispatch({ type: 'getGroupByTask', taskId })
-      return this.$store.dispatch({ type: 'saveTask', taskToSave, groupId: this.groupId || groupId })
+      return this.$store.dispatch({ type: 'saveTask', taskToSave, groupId: this.groupId || this.localGroupId })
     },
     async onRemoveAttachment(attachmentId) {
       const idx = this.task.attachments.findIndex(attachment => attachment.id === attachmentId)
       this.task.attachments.splice(idx, 1)
+      console.log(this.task)
       this.saveTask(this.task)
     },
     async onAction({ cbName, payload = null }) {
-      await this.$store.dispatch({ type: cbName, taskId: this.task.id, groupId: this.groupId, payload })
+      await this.$store.dispatch({ type: cbName, taskId: this.task.id, groupId: this.groupId || this.localGroupId, payload })
       // Temporary
       if (cbName === 'archiveTask') return this.onCloseDetails()
       if (cbName === 'uploadAttachment') {
         const taskId = this.$route.params.taskId
-        this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId })
+        this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId || this.localGroupId })
       }
     },
     async onSaveTitle(ev) {

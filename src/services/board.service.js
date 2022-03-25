@@ -90,18 +90,27 @@ function saveGroupDrop(board, fromIdx, toIdx) {
 }
 
 function saveAttachment(board, taskId, groupId, payload, activity) {
+    console.log(groupId)
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
     const attachment = _getAttachment(payload)
     'attachments' in task ? task.attachments.unshift(attachment) : task.attachments = [attachment]
+    console.log(task)
     return Promise.resolve(board)
 }
 
 function _getAttachment(payload) {
+    const nameStartIdx = payload.lastIndexOf('/') + 1
+    const nameEndIdx = payload.lastIndexOf('_')
+    const extension = payload.substring(/\.(png|jpg|gif|bmp|jpeg|PNG|JPG|GIF|BMP|JPEG)/.exec(payload).index)
+    // const nameEndIdx =
+
+    const name = payload.substring(nameStartIdx)
     return {
         id: utilService.makeId('a'),
         url: payload,
-        name: '',
+        name: payload.substring(nameStartIdx, nameEndIdx) + extension,
+        // name: payload.substring(nameStartIdx, nameEndIdx),
         createdAt: Date.now
     }
 }
