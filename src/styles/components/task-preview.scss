@@ -10,20 +10,33 @@
 
     h2 {
         color: $clr4;
-        font-size: em(14px);
+        font-size: 14px;
         font-weight: 400;
         line-height: 20px;
         margin: 0 0 4px;
     }
 
     .description-icon {
-        font-family: "trellicons";
-        display: flex;
+        @include trello-icon($content: "\e922");
         margin: 0 4px 4px 0;
+        padding: 2px;
+        width: 24px;
+        height: 24px;
+    }
+    
+    .attachments-icon {
+        @include trello-icon($content: "\e908");
+        margin: 0 0px 4px 0;
+        padding: 2px;
+        width: 20px;
+        height: 24px;
+    }
 
-        &::before {
-            content: "\e922";
-        }
+    .attach-num{
+        font-size: 12px;
+        padding: 0 4px 0 2px;
+        vertical-align: top;
+        color: $clr15
     }
     
     &:hover{

@@ -151,11 +151,13 @@ function _createBoards() {
             ]
         },
         {
-            '_id': utilService.makeExtId(),
+            '_id': '3g5Mc4uwKz1TQ',
             'title': 'Trello dev proj',
             'createdAt': Date.now(),
             'createdBy': {},
-            'style': {},
+            'style': {
+                'imgUrl': '../assets/imgs/boardBackground/2.jpg'
+            },
             'labels': [],
             'members': [],
             'groups': [

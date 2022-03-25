@@ -1,9 +1,27 @@
 .board-details {
     background-repeat: no-repeat;
+    background-size: cover;
+    height: calc(100vh - 45px);
     
     .main-board {
+        height: calc(100vh - 100px);
         overflow-x: auto;
-        height: calc(100vh - 90px);
+        padding: 10px 4px 0px 4px;
+
+        &::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: hsla(0,0%,100%,.35);
+        }
+        
+        &::-webkit-scrollbar-track {
+            border-radius: 5px;
+            margin: 0 5px;
+            background-color: rgba(0,0,0,.15);
+        }
     }
     
     .add-group-btn{
@@ -18,7 +36,7 @@
         line-height: 20px;
 
         span{
-            font-size: em(26px);
+            font-size: 22px;
         }
         
         &:hover{

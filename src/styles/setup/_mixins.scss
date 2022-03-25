@@ -126,3 +126,22 @@
     font-variation-settings: "wght" 200;
   }
 }
+
+.description-icon {
+  font-family: "trellicons";
+  display: flex;
+  margin: 0 4px 4px 0;
+
+  &::before {
+      content: "\e922";
+  }
+}
+
+@mixin trello-icon($content: "") {
+  font-family: "trellicons";
+  
+  &::before {
+    content: $content;
+}
+
+}

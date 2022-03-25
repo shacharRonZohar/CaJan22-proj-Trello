@@ -1,8 +1,10 @@
 <template>
   <section v-if="task" class="task-preview" @click="openTaskDetails">
         <h2>{{task.title}}</h2>
-        <div class="actions-container">
+        <div class="actions-container flex">
             <a v-if="task.desc" class="description-icon" title="This card has a description"/>
+            <a v-if="task.attachments" class="attachments-icon" title="attachments"/>
+            <span class="w">{{attachNum}}</span>
         </div>
   </section>
 </template>
@@ -32,7 +34,9 @@ props: {
         }
     },
     computed: {
-        
+       attachNum(){
+           return this.task.attachments?.length
+       } 
     },
     unmounted() {},
 
