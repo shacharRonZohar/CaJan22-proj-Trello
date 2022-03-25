@@ -84,14 +84,15 @@
             // padding: 4px 8px;
         }
         .icon {
+            @include trello-icon($content: "\e912");
             margin-top: 3px;
             font-size: 24px;
         }
-        .icon::before {
-            content: "\e912";
-            width: 25px;
-            height: 25px;
-        }
+        // .icon::before {
+        //     content: "\e912";
+        //     width: 25px;
+        //     height: 25px;
+        // }
     }
 
     .main-details {
@@ -235,8 +236,8 @@
 
     .icon {
         color: inherit;
-        font-size: 20px;
-        font-family: trellicons;
+        // font-size: 20px;
+        // font-family: trellicons;
         position: relative;
         // display: flex;
         // justify-content: center;

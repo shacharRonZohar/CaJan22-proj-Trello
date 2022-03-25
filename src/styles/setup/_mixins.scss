@@ -107,22 +107,19 @@
 // Type
 
 @mixin type($type: bold) {
-  // type options: 
-  // 1.bold 
-  // 2.boldCondensed 
+  // type options:
+  // 1.bold
+  // 2.boldCondensed
   // 3.condensed
   @if $type == bold {
     font-variation-settings: "wght" 430;
-  } 
-  @else if $type == boldCondensed {
+  } @else if $type == boldCondensed {
     font-variation-settings: "wght" 430, "wdth" 80;
     letter-spacing: em(6.72px);
-  } 
-  @else if $type == condensed {
+  } @else if $type == condensed {
     font-variation-settings: "wdth" 80;
     letter-spacing: em(6.72px);
-  }
-  @else if $type == light {
+  } @else if $type == light {
     font-variation-settings: "wght" 200;
   }
 }
@@ -133,15 +130,32 @@
   margin: 0 4px 4px 0;
 
   &::before {
-      content: "\e922";
+    content: "\e922";
   }
 }
 
 @mixin trello-icon($content: "") {
   font-family: "trellicons";
-  
-  &::before {
+  font-size: 1rem;
+  &-sm {
+    height: 20px;
+    width: 20px;
+  }
+  &-sm::before {
+    height: 16px;
+    width: 16px;
     content: $content;
-}
-
+  }
+  &-lg {
+    height: 32px;
+    width: 32px;
+  }
+  &-lg::before {
+    height: 25px;
+    width: 24px;
+    content: $content;
+  }
+  // &::before {
+  //   content: $content;
+  // }
 }
