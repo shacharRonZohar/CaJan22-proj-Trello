@@ -30,19 +30,19 @@
             <div class="icon"></div>
             <h3>Description</h3>
           </div>
-          <div
-            @click.stop="toggleDescEdit"
-            v-if="!descEditOpen"
-            class="description task-layout"
-          >{{ descTxt }}</div>
-          <form class="description-edit-form" v-else @submit.prevent="onSaveDesc">
+          <div @click.stop="toggleDescEdit" v-if="!descEditOpen" class="description task-layout">
+            <span>{{ descTxt }}</span>
+          </div>
+          <form class="description-edit-form task-layout" v-else @submit.prevent="onSaveDesc">
             <textarea
               class="description-edit"
               v-model="newDesc"
-              resize:none
               placeholder="Add a more detailed description..."
             ></textarea>
-            <button class="save-new-list-btn">Save</button>
+            <div>
+              <button class="save-new-list-btn">Save</button>
+              <button @click.stop="toggleDescEdit" class="icon close"></button>
+            </div>
             <!-- <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span> -->
           </form>
           <!-- <button class="btn edit">Edit</button> -->
@@ -76,7 +76,13 @@
       </section>
       <aside class="actions">
         <h3>Add to card</h3>
-        <component @onAction="onAction" v-for="cmp in actionCmps" :is="cmp"></component>
+        <component
+          @togglePopup="setPopupMode"
+          @onAction="onAction"
+          v-for="cmp in actionCmps"
+          :is="cmp"
+          :class="open"
+        ></component>
         <!-- 
         <div class="lables btn">
           <div class="icon"></div>
@@ -142,10 +148,11 @@ export default {
     return {
       task: null,
       descEditOpen: false,
-      actionPopupOpen: false,
+      isActionPopupOpen: false,
       newDesc: '',
       localGroupId: null,
       groupName: '',
+      isActionPopupOpen: false,
       actionCmps: ['members-action', 'label-action', 'checklist-action', , 'dates-action', 'location-action', 'attachment-action', 'archive-action']
       // actionCmps: ['archive-action']
     }
@@ -193,8 +200,11 @@ export default {
     },
     async onSaveDesc() {
       this.task.description = this.newDesc
-      await this.saveTask(taskToSave)
+      await this.saveTask(this.task)
       this.toggleDescEdit()
+    },
+    onCloseDesc() {
+
     },
     onCloseDetails() {
       const currRoute = this.$route.fullPath
@@ -205,6 +215,10 @@ export default {
       this.newDesc = this.task.description
       this.descEditOpen = !this.descEditOpen
     },
+    setPopupMode(isOpen) {
+      console.log(isOpen)
+      this.isActionPopupOpen = isOpen
+    }
   },
   computed: {
     taskId() {
@@ -212,6 +226,9 @@ export default {
     },
     descTxt() {
       return 'description' in this.task && this.task.description ? this.task.description : 'Add a more detailed description...'
+    },
+    open() {
+      return { 'open': this.isActionPopupOpen }
     }
   },
   unmounted() { },

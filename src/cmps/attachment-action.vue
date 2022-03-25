@@ -1,5 +1,5 @@
 <template >
-    <div @click="toggleActionPopup" class="attach btn">
+    <div @click.stop="toggleActionPopup" class="attach btn">
         <action-popup v-if="actionPopupOpen">
             <template #header>
                 <span>Attach from...</span>
@@ -8,7 +8,7 @@
                 <button class="computer">Computer</button>
                 <input type="file" @change="onUploadImg" />
                 <!-- <button @click="onAttach" class="confirm">Yes</button> -->
-                <button class="deny">No</button>
+                <button @click.stop="toggleActionPopup" class="deny">No</button>
             </template>
         </action-popup>
         <div class="icon"></div>
@@ -22,7 +22,7 @@ import { imgService } from '../services/imgService.js'
 
 export default {
     // props: [''],
-    emits: ['onAction'],
+    emits: ['onAction', 'togglePopup'],
     components: {
         actionPopup
     },
@@ -39,9 +39,10 @@ export default {
         },
         toggleActionPopup() {
             this.actionPopupOpen = !this.actionPopupOpen
+            this.$emit('togglePopup', this.actionPopupOpen)
         }
     },
-    computed: {},
+
     unmounted() { },
 }
 </script>
