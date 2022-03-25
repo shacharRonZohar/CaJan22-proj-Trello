@@ -1,7 +1,7 @@
 <template>
     <section class="home-page main-layout">
         <div class="hero flex">
-            <div class="action-call">
+            <div class="action-call flex">
                 <h1 class="hero-title">Twello helps teams move work forward.</h1>
                 <p class="hero-p">
                     Collaborate, manage projects,
@@ -12,8 +12,8 @@
                 </p>
                 <button class="live-demo-btn btn" @click="logAsGuest">Try live demo</button>
             </div>
-            <div>
-            <img class="hero-img" src="../assets/imgs/hero.png" alt="">
+            <div class="hero-img-container">
+                <img class="hero-img" src="../assets/imgs/hero.png" alt="">
             </div>
         </div>
     </section>
