@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import boardList from "../cmps/board-list.vue"
 export default {
     components: {
         boardList
