@@ -4,7 +4,7 @@
     <!-- @input.stop -->
     <header class="task-details-header">
       <!-- <div class="title-container"> -->
-      <div class="icon"></div>
+      <div class="icon-lg"></div>
       <div class="title-container">
         <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
         <small class="group-txt">

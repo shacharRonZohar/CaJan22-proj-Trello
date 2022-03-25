@@ -110,7 +110,6 @@ function _getAttachment(payload) {
         id: utilService.makeId('a'),
         url: payload,
         name,
-        // name: payload.substring(nameStartIdx, nameEndIdx),
         createdAt: Date.now
     }
 }
