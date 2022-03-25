@@ -134,27 +134,21 @@
   }
 }
 
-@mixin trello-icon($content: "") {
+@mixin trello-icon($content: "", $type: sm) {
   font-family: "trellicons";
-  font-size: 1rem;
-  &-sm {
-    height: 20px;
-    width: 20px;
+  
+  @if $type == sm {
+    font-size: 1rem;
   }
-  &-sm::before {
-    height: 16px;
-    width: 16px;
-    content: $content;
+
+  @else if $type == lg {
+    font-size: 1.5rem;
   }
-  &-lg {
-    height: 32px;
-    width: 32px;
+
+  &::before {
+  content: $content;
   }
-  &-lg::before {
-    height: 25px;
-    width: 24px;
-    content: $content;
-  }
+
   // &::before {
   //   content: $content;
   // }
