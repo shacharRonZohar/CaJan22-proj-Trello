@@ -1,0 +1,50 @@
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    > * {
+        font-size: 12px;
+        display: flex;
+        padding: 6px 12px;
+        position: relative;
+    }
+    h3 {
+        padding-top: 3px;
+    }
+    .members {
+        .icon {
+            @include trello-icon($content: "\e946", $type: sm);
+        }
+    }
+    .archive {
+        .icon {
+            @include trello-icon($content: "\e907", $type: sm);
+        }
+    }
+    .attach {
+        .icon {
+            @include trello-icon($content: "\e908", $type: sm);
+        }
+    }
+    .label {
+        .icon {
+            @include trello-icon($content: "\e93f", $type: sm);
+        }
+    }
+    .checklist {
+        .icon {
+            @include trello-icon($content: "\e91a", $type: sm);
+        }
+    }
+    .dates {
+        .icon {
+            @include trello-icon($content: "\e91b", $type: sm);
+        }
+    }
+    .location {
+        .icons {
+            @include trello-icon($content: "\e944", $type: sm);
+        }
+    }
+    @import "./action-popup.scss";
+}

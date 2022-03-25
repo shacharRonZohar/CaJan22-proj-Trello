@@ -1,0 +1,18 @@
+.description-container {
+    .icon {
+        @include trello-icon($content: "\e922", $type: lg);
+        content: "";
+    }
+    .description {
+        background-color: #eaecf0;
+        min-height: 56px;
+        padding: 8px 12px;
+        &:hover {
+            cursor: pointer;
+            background-color: $clr11;
+        }
+    }
+    // .edit {
+    //     padding: 47px 31px;
+    // }
+}

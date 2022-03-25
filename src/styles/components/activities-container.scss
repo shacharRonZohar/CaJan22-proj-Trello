@@ -1,0 +1,12 @@
+.activities-container {
+    .icon {
+        @include trello-icon($content: "\e900", $type: lg);
+    }
+    .activities-header {
+        justify-content: space-between;
+        div {
+            display: flex;
+            gap: 6px;
+        }
+    }
+}

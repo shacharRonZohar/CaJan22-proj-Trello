@@ -5,12 +5,14 @@
         margin-top: 8px;
         font-weight: 600;
         line-height: 24px;
+        font-size: 20px;
     }
     .group-txt {
         font-size: 1em;
         cursor: default;
         display: inline-block;
-        margin: 4px 8px 4px 2px;
+        // margin: 4px 8px 4px 2px;
+        margin-left: 2px;
         height: 30px;
         span {
             text-decoration: underline;
