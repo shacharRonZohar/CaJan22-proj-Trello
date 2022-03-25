@@ -1,17 +1,27 @@
 .board-header {
     height: 45px;
+    button {
+        background-color: #ffffff3d;
+        &:hover {
+            background-color: #ffffff52;
+        }
+    }
     .board-nav {
         >* {
             margin-inline-end: 5px;
             cursor: pointer;
         }
         .open-sidenav {
+            background-color: #ffffff3d;
             margin-left: 10px;
-            border: 1px solid black;
+            border: 1px solid gray;
             width: 25px;
             height: 25px;
             border-radius: 50%;
             text-align: center;
+            &:hover {
+                background-color: #ffffff52;
+            }
         }
         .board-name {
             align-items: center;
@@ -25,7 +35,7 @@
                 display: flex;
                 width: 30px;
                 height: 30px;
-                border: 1px solid black;
+                border: 1px solid gray;
                 border-radius: 50%;
                 justify-content: center;
                 align-items: center;
@@ -37,6 +47,8 @@
     .board-action {
         >* {
             margin-inline-start: 5px;
+            cursor: pointer;
+
         }
         .right-nav-btn {
             margin-right: 10px;
