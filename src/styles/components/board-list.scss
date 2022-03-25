@@ -2,7 +2,7 @@
     flex-grow: 1;
 
     .board-list-title-icon{
-        @include trello-icon($content: "\e946");
+        @include trello-icon($content: "\e946", $type:lg);
     }
 
     span{
