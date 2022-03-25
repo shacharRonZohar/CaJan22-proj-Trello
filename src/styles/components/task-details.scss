@@ -9,7 +9,7 @@
     min-height: 1041px;
     transform: translateX(-50%);
     border-radius: 2px;
-    z-index: 2;
+    z-index: 1;
     padding: 0 8px 8px 16px;
 
     @import "./task-details-header.scss";
@@ -32,7 +32,7 @@
         right: 0;
         top: 0;
         width: 40px;
-        z-index: 2;
+        // z-index: 2;
         @include trello-icon($content: "\e91c", $type: lg);
     }
 

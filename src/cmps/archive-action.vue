@@ -1,6 +1,6 @@
 <template >
     <div @click="toggleActionPopup" class="archive btn">
-        <action-popup v-if="actionPopupOpen">
+        <action-popup @click.stop v-if="actionPopupOpen">
             <template #header>
                 <span>Are you sure?</span>
             </template>
@@ -11,6 +11,7 @@
         </action-popup>
         <div class="icon"></div>
         <button class="archive">Archive</button>
+        <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
     </div>
 </template>
 

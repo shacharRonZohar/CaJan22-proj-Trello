@@ -4,6 +4,22 @@ export const focusDirective = {
   },
 }
 
+export const closeOnBlur = {
+  bind: function (el, { expression }, { context }) {
+    el.clickOutside = ({ clientX, clientY }) => {
+      var { left, top, width, height } = el.getBoundingCLientRect()
+      if (!(clientX > left && clientX < left + width && clientY > top && clientY < top + height)) {
+        context[expression]()
+      }
+    }
+    setTimeout(() => {
+      document.addEventListener('click', el.clickOutside)
+    }, 0)
+  },
+  unbind: (el) => {
+    document.removeEventListener('click', el.clickOutside)
+  }
+}
 // export const rainbowDirective = {
 //   mounted(el) {
 //     el.onkeyup = () => {
