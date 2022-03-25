@@ -12,7 +12,8 @@ export const boardService = {
     removeGroup,
     archiveTask,
     saveAttachment,
-    saveGroupDrop
+    saveGroupDrop,
+    saveCover
 }
 
 const BOARDS_KEY = 'boards_db'
@@ -90,7 +91,6 @@ function saveGroupDrop(board, fromIdx, toIdx) {
 }
 
 function saveAttachment(board, taskId, groupId, payload, activity) {
-    console.log(groupId)
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
     const attachment = _getAttachment(payload)
@@ -99,6 +99,23 @@ function saveAttachment(board, taskId, groupId, payload, activity) {
     return Promise.resolve(board)
 }
 
+function saveCover(board, taskId, groupId, payload, activity) {
+    let cover = {
+        backgroundColor: payload.thing
+    }
+    if (payload.type !== 'color') {
+        cover = {
+            backgroundImage: `url(${payload.thing})`
+        }
+    }
+    // const cover = {
+    //     background: `${payload.thing} no-repeat center`
+    // }
+    const group = board.groups.find(group => group.id === groupId)
+    const task = group.tasks.find(task => task.id === taskId)
+    task.cover = cover
+    return Promise.resolve(board)
+}
 function _getAttachment(payload) {
     const nameStartIdx = payload.lastIndexOf('/') + 1
     const nameEndIdx = payload.lastIndexOf('_')

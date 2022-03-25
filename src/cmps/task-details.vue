@@ -1,6 +1,7 @@
 <template >
   <section v-if="task" class="task-details-container">
     <!-- @input.stop -->
+    <div v-if="task.cover" :style="task.cover" class="cover"></div>
     <header class="task-details-header">
       <!-- <div class="title-container"> -->
       <div class="icon"></div>
@@ -67,6 +68,7 @@
               <img :src="attachment.url" alt />
             </div>
             <span class="name">{{ attachment.name }}</span>
+            <small class="btn" @click="onMakeCover(attachment.url)">Make cover</small>
             <small class="btn" @click="onRemoveAttachment(attachment.id)">Delete</small>
           </div>
         </div>
@@ -135,6 +137,7 @@ import labelAction from './lables-action.vue'
 import checklistAction from './checklist-action.vue'
 import datesAction from './dates-action.vue'
 import locationAction from './location-action.vue'
+import coverAction from './cover-action.vue'
 
 export default {
   props: {
@@ -147,6 +150,7 @@ export default {
     labelAction,
     checklistAction,
     datesAction,
+    coverAction,
     locationAction
   },
   created() { },
@@ -159,7 +163,7 @@ export default {
       localGroupId: null,
       groupName: '',
       isActionPopupOpen: false,
-      actionCmps: ['members-action', 'label-action', 'checklist-action', , 'dates-action', 'location-action', 'attachment-action', 'archive-action']
+      actionCmps: ['members-action', 'label-action', 'checklist-action', , 'dates-action', 'location-action', 'attachment-action', 'cover-action', 'archive-action']
       // actionCmps: ['archive-action']
     }
   },
@@ -194,11 +198,8 @@ export default {
     async onAction({ cbName, payload = null }) {
       await this.$store.dispatch({ type: cbName, taskId: this.task.id, groupId: this.groupId || this.localGroupId, payload })
       // Temporary
-      if (cbName === 'archiveTask') return this.onCloseDetails()
-      if (cbName === 'uploadAttachment') {
-        const taskId = this.$route.params.taskId
-        this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId || this.localGroupId })
-      }
+      const taskId = this.$route.params.taskId
+      this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId || this.localGroupId })
     },
     async onSaveTitle(ev) {
       this.task.title = ev.target.innerText
@@ -209,8 +210,8 @@ export default {
       await this.saveTask(this.task)
       this.toggleDescEdit()
     },
-    onCloseDesc() {
-
+    onMakeCover(url) {
+      this.onAction({ cbName: 'chooseCover', payload: { type: 'img', thing: url } })
     },
     onCloseDetails() {
       const currRoute = this.$route.fullPath

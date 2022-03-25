@@ -125,6 +125,15 @@ export default {
             return state.board.groups.find(group => {
                 return group.tasks.find(task => task.id === taskId)
             })
+        },
+        async chooseCover({ state, dispatch }, { taskId, groupId, payload, activity }) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = await boardService.saveCover(board, taskId, groupId, payload, activity)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
         }
     },
 }

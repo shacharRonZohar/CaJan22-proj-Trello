@@ -62,4 +62,12 @@
     .open {
         pointer-events: none;
     }
+    .cover {
+        height: 116px;
+        width: 103.2%;
+        transform: translate(-16px);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
 }
