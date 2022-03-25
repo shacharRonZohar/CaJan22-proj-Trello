@@ -95,6 +95,7 @@ function saveAttachment(board, taskId, groupId, payload, activity) {
     'attachments' in task ? task.attachments.unshift({ url: payload }) : task.attachments = [{ url: payload }]
     return Promise.resolve(board)
 }
+
 function _update(board) {
     return storageService.put(BOARDS_KEY, board)
 }
