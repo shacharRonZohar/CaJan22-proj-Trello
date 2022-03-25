@@ -1,5 +1,7 @@
 import axios from 'axios'
 import {createApi} from "unsplash-js"
+import { getAverageColor } from 'fast-average-color-node'
+
 
 const api = createApi({
     // Don't forget to set your access token here!

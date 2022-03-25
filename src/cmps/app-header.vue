@@ -32,21 +32,33 @@ export default {
     components: {
         headerBoardList
     },
-    created() { },
+    created() {
+        // this.printAverageColor()
+    },
     data() {
         return {
             searchTxt: '',
-            isShown: false
+            isShown: false,
         }
     },
     methods: {
         openList(listType) {
 
-        }
+        },
+        // async printAverageColor() {
+        //     const color = await getAverageColor();
+        //     console.log(color);
+        // }
     },
     computed: {
         headerBgc() {
             return { 'trans-header': /board\//g.test(this.$route.fullPath) }
+        },
+        boards() {
+            return this.$store.getters.boards
+        },
+        currBoard() {
+            return this.$store.getters.board
         }
     },
     unmounted() { },
