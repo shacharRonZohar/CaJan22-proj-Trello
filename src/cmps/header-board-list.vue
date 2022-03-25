@@ -1,5 +1,5 @@
 <template>
-    <div class="board-list">
+    <div class="header-board-list">
         <span>Boards</span>
         <button>x</button>
         <ul>
