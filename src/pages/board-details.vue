@@ -27,6 +27,7 @@
         </div>
       </Container>
       <router-view :groupId="currOpenTaskGroupId" />
+      <right-nav></right-nav>
     </main>
   </section>
 </template>
@@ -34,12 +35,14 @@
 <script>
 import boardGroup from '../cmps/board-group.vue'
 import boardHeader from '../cmps/board-header.vue'
+import rightNav from '../cmps/right-side-nav.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 
 export default {
   components: {
     boardGroup,
     boardHeader,
+    rightNav,
     Container,
     Draggable
   },

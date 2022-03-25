@@ -9,17 +9,20 @@ const api = createApi({
 })
 
 export const imgService = {
-    uploadImgFromComp
+    uploadImgFromComp,
+    queryPhotos
 }
 
-api.search
-    .getPhotos({ query: 'cat', orientation: "landscape" })
+function queryPhotos(requeste = 'cat') {
+    return api.search
+    .getPhotos({ query: requeste, orientation: "landscape" })
     .then(result => {
-        // console.log(result);
+        return result.response
     })
     .catch(() => {
         console.log("something went wrong!")
     })
+}
 
 
 async function uploadImgFromComp(ev) {
