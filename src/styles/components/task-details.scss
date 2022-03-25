@@ -169,6 +169,11 @@
                     // align-self: flex-end;
                 }
             }
+            .attachments-container {
+                .icon::before {
+                    content: "\e908";
+                }
+            }
         }
         .task-layout {
             margin-left: 38px;
@@ -189,6 +194,16 @@
             .members {
                 .icon::before {
                     content: "\e946";
+                }
+            }
+            .archive {
+                .icon::before {
+                    content: "\e907";
+                }
+            }
+            .attach {
+                .icon::before {
+                    content: "\e908";
                 }
             }
         }
