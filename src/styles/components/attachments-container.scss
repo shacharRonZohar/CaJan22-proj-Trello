@@ -1,0 +1,10 @@
+.attachments-container {
+    .icon {
+        @include trello-icon($content: "\e908", $type: lg);
+    }
+
+    .attachment-thumbnail {
+        display: flex;
+        justify-content: space-between;
+    }
+}

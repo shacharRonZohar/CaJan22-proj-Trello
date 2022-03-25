@@ -1,0 +1,19 @@
+.members-container {
+    .members {
+        font-size: rem(12px);
+        .member {
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+            margin-right: -3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &.add {
+                @include trello-icon($content: "\e901", $type: lg);
+            }
+        }
+    }
+}

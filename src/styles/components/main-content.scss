@@ -1,0 +1,22 @@
+.main-content {
+    display: flex;
+    flex-direction: column;
+    // font-size: 0.9rem;
+    margin-top: 13px;
+    > * {
+        display: flex;
+        gap: 4px;
+        flex-direction: column;
+        > * {
+            display: flex;
+            gap: 8px;
+        }
+        &:not(:first-child) {
+            margin-top: 29px;
+        }
+    }
+    @import "./members-container.scss";
+    @import "./description-container.scss";
+    @import "./activities-container.scss";
+    @import "./attachments-container.scss";
+}

@@ -1,0 +1,11 @@
+.main-details {
+    flex-grow: 1;
+    display: grid;
+    gap: 17px;
+    grid-template-columns: 539px 1fr;
+    @import "./main-content.scss";
+    @import "./task-actions.scss";
+    .task-layout {
+        margin-left: 38px;
+    }
+}

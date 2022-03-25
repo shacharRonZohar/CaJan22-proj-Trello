@@ -136,17 +136,15 @@
 
 @mixin trello-icon($content: "", $type: sm) {
   font-family: "trellicons";
-  
+
   @if $type == sm {
     font-size: 1rem;
-  }
-
-  @else if $type == lg {
+  } @else if $type == lg {
     font-size: 1.5rem;
   }
 
   &::before {
-  content: $content;
+    content: $content;
   }
 
   // &::before {

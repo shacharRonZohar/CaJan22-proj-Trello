@@ -4,13 +4,14 @@
     <!-- @input.stop -->
     <header class="task-details-header">
       <!-- <div class="title-container"> -->
-      <div class="icon-lg"></div>
+      <div class="icon"></div>
       <div class="title-container">
         <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
-        <small class="group-txt">
+        <div class="group-txt">
           in list:
           <span>Frontend</span>
-        </small>
+          <!-- <span>{{ groupName }}</span> -->
+        </div>
       </div>
     </header>
     <main class="main-details">
@@ -24,19 +25,19 @@
             <div class="member add icon"></div>
           </div>
         </div>
-        <div class="desc-container">
-          <div class="desc-header">
+        <div class="description-container">
+          <div class="description-header">
             <div class="icon"></div>
             <h3>Description</h3>
           </div>
           <div
             @click.stop="toggleDescEdit"
             v-if="!descEditOpen"
-            class="desc task-layout"
+            class="description task-layout"
           >{{ descTxt }}</div>
-          <form class="desc-edit-form" v-else @submit.prevent="onSaveDesc">
+          <form class="description-edit-form" v-else @submit.prevent="onSaveDesc">
             <textarea
-              class="desc-edit"
+              class="description-edit"
               v-model="newDesc"
               resize:none
               placeholder="Add a more detailed description..."
@@ -144,6 +145,7 @@ export default {
       actionPopupOpen: false,
       newDesc: '',
       localGroupId: null,
+      groupName: '',
       actionCmps: ['members-action', 'label-action', 'checklist-action', , 'dates-action', 'location-action', 'attachment-action', 'archive-action']
       // actionCmps: ['archive-action']
     }
@@ -154,7 +156,9 @@ export default {
         try {
           if (!this.$route.params?.taskId) return
           const taskId = this.$route.params.taskId
-          if (this.groupdId !== 0 && !this.groupId) this.localGroupId = await this.$store.dispatch({ type: 'getGroupByTask', taskId })
+          const group = await this.$store.dispatch({ type: 'getGroupByTask', taskId })
+          this.localGroupId = group.id
+          this.groupName = group.title
           this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId || this.localGroupId })
         } catch (err) {
           console.log(err)
@@ -188,7 +192,7 @@ export default {
       await this.saveTask(taskToSave)
     },
     async onSaveDesc() {
-      this.task.desc = this.newDesc
+      this.task.description = this.newDesc
       await this.saveTask(taskToSave)
       this.toggleDescEdit()
     },
@@ -198,7 +202,7 @@ export default {
       this.$router.push(route)
     },
     toggleDescEdit() {
-      this.newDesc = this.task.desc
+      this.newDesc = this.task.description
       this.descEditOpen = !this.descEditOpen
     },
   },
@@ -207,7 +211,7 @@ export default {
       return this.$route.params.taskId
     },
     descTxt() {
-      return 'desc' in this.task && this.task.desc ? this.task.desc : 'Add a more detailed description...'
+      return 'description' in this.task && this.task.description ? this.task.description : 'Add a more detailed description...'
     }
   },
   unmounted() { },
