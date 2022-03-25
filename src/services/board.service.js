@@ -88,6 +88,7 @@ function saveGroupDrop(board, fromIdx, toIdx) {
     board.groups.splice(toIdx, 0, group)
     return Promise.resolve(board)
 }
+
 function saveAttachment(board, taskId, groupId, payload, activity) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
