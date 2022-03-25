@@ -29,7 +29,6 @@
             <div class="icon"></div>
             <h3>Description</h3>
           </div>
-
           <div
             @click.stop="toggleDescEdit"
             v-if="!descEditOpen"
@@ -47,6 +46,17 @@
           </form>
           <!-- <button class="btn edit">Edit</button> -->
         </div>
+        <div v-if="task.attachments && task.attachments.length" class="attachments-container">
+          <div class="attachments-header">
+            <div class="icon"></div>
+            <h3>Attachments</h3>
+          </div>
+          <div class="attachment-thumbnail task-layout" v-for="attachment in task.attachments">
+            <div class="img-container">
+              <img :src="attachment.url" alt />
+            </div>
+          </div>
+        </div>
         <div class="activities-container">
           <div class="activities-header">
             <div>
@@ -57,10 +67,8 @@
           </div>
         </div>
       </section>
-      <img v-if="task.attachments" :src="task.attachments[0].url" alt />
       <aside class="actions">
         <h3>Add to card</h3>
-        <!-- All btns gonna be dynamic components -->
         <component @onAction="onAction" v-for="cmp in actionCmps" :is="cmp"></component>
         <!-- 
         <div class="lables btn">
@@ -104,6 +112,10 @@
 import archiveAction from './archive-action.vue'
 import membersAction from './members-action.vue'
 import attachmentAction from './attachment-action.vue'
+import labelAction from './lables-action.vue'
+import checklistAction from './checklist-action.vue'
+import datesAction from './dates-action.vue'
+import locationAction from './location-action.vue'
 
 export default {
   props: {
@@ -112,7 +124,11 @@ export default {
   components: {
     archiveAction,
     membersAction,
-    attachmentAction
+    attachmentAction,
+    labelAction,
+    checklistAction,
+    datesAction,
+    locationAction
   },
   created() { },
   data() {
@@ -121,7 +137,7 @@ export default {
       descEditOpen: false,
       actionPopupOpen: false,
       newDesc: '',
-      actionCmps: ['members-action', 'archive-action', 'attachment-action']
+      actionCmps: ['members-action', 'label-action', 'checklist-action', , 'dates-action', 'location-action', 'attachment-action', 'archive-action']
       // actionCmps: ['archive-action']
     }
   },
