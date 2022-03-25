@@ -105,11 +105,11 @@ function _getAttachment(payload) {
     const extension = payload.substring(/\.(png|jpg|gif|bmp|jpeg|PNG|JPG|GIF|BMP|JPEG)/.exec(payload).index)
     // const nameEndIdx =
 
-    const name = payload.substring(nameStartIdx)
+    const name = payload.substring(nameStartIdx, nameEndIdx) + extension
     return {
         id: utilService.makeId('a'),
         url: payload,
-        name: payload.substring(nameStartIdx, nameEndIdx) + extension,
+        name,
         // name: payload.substring(nameStartIdx, nameEndIdx),
         createdAt: Date.now
     }
