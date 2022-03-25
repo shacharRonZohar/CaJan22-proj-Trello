@@ -16,7 +16,7 @@
     </header>
     <main class="main-details">
       <section class="main-content">
-        <div class="members-container task-layout">
+        <!-- <div class="members-container task-layout">
           <span>Members:</span>
           <div class="members">
             <div class="member">A</div>
@@ -24,7 +24,7 @@
             <div class="member">SZ</div>
             <div class="member add icon"></div>
           </div>
-        </div>
+        </div>-->
         <div class="description-container">
           <div class="description-header">
             <div class="icon"></div>

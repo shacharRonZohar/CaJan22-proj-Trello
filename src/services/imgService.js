@@ -1,26 +1,25 @@
 import axios from 'axios'
-import {createApi} from "unsplash-js"
-import { getAverageColor } from 'fast-average-color-node'
+import { createApi } from "unsplash-js"
 
 
 const api = createApi({
     // Don't forget to set your access token here!
     // See https://unsplash.com/developers
     accessKey: "LM4Rpq3DaqATHDr2uryLi9FbEwE5CJhRJR6qRGc5Nu0"
-});
+})
 
 export const imgService = {
     uploadImgFromComp
 }
 
 api.search
-      .getPhotos({ query: 'cat', orientation: "landscape" })
-      .then(result => {
+    .getPhotos({ query: 'cat', orientation: "landscape" })
+    .then(result => {
         // console.log(result);
-      })
-      .catch(() => {
-        console.log("something went wrong!");
-      });
+    })
+    .catch(() => {
+        console.log("something went wrong!")
+    })
 
 
 async function uploadImgFromComp(ev) {
