@@ -120,6 +120,11 @@ export default {
             } catch (err) {
                 console.log(err)
             }
+        },
+        async getGroupByTask({ state }, { taskId }) {
+            return state.board.groups.find(group => {
+                return group.tasks.find(task => task.id === taskId)
+            }).id
         }
     },
 }

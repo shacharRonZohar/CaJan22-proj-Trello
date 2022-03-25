@@ -173,6 +173,10 @@
                 .icon::before {
                     content: "\e908";
                 }
+                .attachment-thumbnail {
+                    display: flex;
+                    justify-content: space-between;
+                }
             }
         }
         .task-layout {
