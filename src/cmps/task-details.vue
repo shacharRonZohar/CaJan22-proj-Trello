@@ -51,10 +51,15 @@
             <div class="icon"></div>
             <h3>Attachments</h3>
           </div>
-          <div class="attachment-thumbnail task-layout" v-for="attachment in task.attachments">
+          <div
+            class="attachment-thumbnail task-layout"
+            v-for="attachment in task.attachments"
+            :key="attachment.id"
+          >
             <div class="img-container">
               <img :src="attachment.url" alt />
             </div>
+            <small @click="onRemoveAttachment(attachment.id)">Delete</small>
           </div>
         </div>
         <div class="activities-container">
@@ -156,9 +161,18 @@ export default {
     }
   },
   methods: {
+    saveTask(taskToSave) {
+      taskToSave = JSON.parse(JSON.stringify(taskToSave))
+      return this.$store.dispatch({ type: 'saveTask', taskToSave, groupId: this.groupId })
+    },
+    async onRemoveAttachment(attachmentId) {
+      const idx = this.task.attachments.findIndex(attachment => attachment.id === attachmentId)
+      this.task.attachemnts.splice(idx, 1)
+      this.saveTask(taskToSave)
+    },
     async onAction({ cbName, payload = null }) {
-      console.log(cbName)
-      this.$store.dispatch({ type: cbName, taskId: this.task.id, groupId: this.groupId, payload })
+      await this.$store.dispatch({ type: cbName, taskId: this.task.id, groupId: this.groupId, payload })
+      // Temporary
       if (cbName === 'archiveTask') return this.onCloseDetails()
       if (cbName === 'uploadAttachment') {
         const taskId = this.$route.params.taskId
@@ -167,12 +181,11 @@ export default {
     },
     async onSaveTitle(ev) {
       this.task.title = ev.target.innerText
-      await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)), groupId: this.groupId })
-      console.log(this.task)
+      await this.saveTask(taskToSave)
     },
     async onSaveDesc() {
       this.task.desc = this.newDesc
-      await this.$store.dispatch({ type: 'saveTask', taskToSave: JSON.parse(JSON.stringify(this.task)), groupId: this.groupId })
+      await this.saveTask(taskToSave)
       this.toggleDescEdit()
     },
     onCloseDetails() {

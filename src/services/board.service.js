@@ -92,10 +92,19 @@ function saveGroupDrop(board, fromIdx, toIdx) {
 function saveAttachment(board, taskId, groupId, payload, activity) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
-    'attachments' in task ? task.attachments.unshift({ url: payload }) : task.attachments = [{ url: payload }]
+    const attachment = _getAttachment(payload)
+    'attachments' in task ? task.attachments.unshift(attachment) : task.attachments = [attachment]
     return Promise.resolve(board)
 }
 
+function _getAttachment({ url }) {
+    return {
+        id: utilService.makeId('a'),
+        url,
+        name: '',
+        createdAt: Date.now
+    }
+}
 function _update(board) {
     return storageService.put(BOARDS_KEY, board)
 }
