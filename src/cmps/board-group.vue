@@ -8,17 +8,17 @@
     </div>
     <!-- <Container :group-name="'group1'"></Container> -->
     <div class="tasks-container">
-    <Container
-      :get-child-payload="(ev) => getTaskPayload(ev)"
-      :group-name="'group'"
-      @drop="onDrop"
-      orientation="vertical"
-      class="clean-list group-list"
-    >
-      <Draggable v-for="task in group.tasks" :key="task.id">
-        <task-preview @openTaskDetails="openTaskDetails" :task="task" />
-      </Draggable>
-    </Container>
+      <Container
+        :get-child-payload="(ev) => getTaskPayload(ev)"
+        :group-name="'group'"
+        @drop="onDrop"
+        orientation="vertical"
+        class="clean-list group-list"
+      >
+        <Draggable v-for="task in group.tasks" :key="task.id">
+          <task-preview @openTaskDetails="openTaskDetails" :task="task" />
+        </Draggable>
+      </Container>
     </div>
     <button v-if="!addBtnClicked" @click="openAddForm" class="add-card-btn">+ Add a card</button>
     <div v-else class="add-card-container">
