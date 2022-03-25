@@ -60,12 +60,14 @@ export default {
         const board = JSON.parse(JSON.stringify(this.board))
         const group = board.groups.find(group => group.id === groupId)
         group.tasks.splice(ev.removedIndex, 1)
+        this.dispatch({ type: 'saveBoard', boardToSave: board })
       }
       if (ev.addedIndex !== null) {
         setTimeout(() => {
           const board = JSON.parse(JSON.stringify(this.board))
           const group = board.groups.find(group => group.id === groupId)
           group.tasks.splice(ev.addedIndex, 0, ev.payload)
+          this.dispatch({ type: 'saveBoard', boardToSave: board })
         }, 1)
       }
     },
