@@ -206,6 +206,26 @@
                     content: "\e908";
                 }
             }
+            .label {
+                .icon::before {
+                    content: "\e93f";
+                }
+            }
+            .checklist {
+                .icon::before {
+                    content: "\e91a";
+                }
+            }
+            .dates {
+                .icon::before {
+                    content: "\e91b";
+                }
+            }
+            .location {
+                .icons::before {
+                    content: "\e944";
+                }
+            }
         }
     }
 
@@ -281,6 +301,7 @@
         background-color: white;
         height: 200px;
         width: 200px;
+        z-index: 2;
     }
     .img-container {
         height: 80px;

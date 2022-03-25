@@ -1,16 +1,16 @@
 <template >
-    <div @click="toggleActionPopup" class="archive btn">
-        <action-popup v-if="actionPopupOpen">
-            <template #header>
+    <div @click="toggleActionPopup" class="dates btn">
+        <!-- <action-popup v-if="actionPopupOpen"> -->
+        <!-- <template #header>
                 <span>Are you sure?</span>
             </template>
             <template #body>
-                <button @click="onArchive" class="confirm">Yes</button>
+                <button @click="onDates" class="confirm">Yes</button>
                 <button class="deny">No</button>
-            </template>
-        </action-popup>
+        </template>-->
+        <!-- </action-popup> -->
         <div class="icon"></div>
-        <button class="archive">Archive</button>
+        <button class="datess">Dates</button>
     </div>
 </template>
 
@@ -30,8 +30,8 @@ export default {
         }
     },
     methods: {
-        onArchive() {
-            this.$emit('onAction', { cbName: 'archiveTask' })
+        onDates() {
+            // this.$emit('onAction', 'lableTask')
         },
         toggleActionPopup() {
             this.actionPopupOpen = !this.actionPopupOpen
