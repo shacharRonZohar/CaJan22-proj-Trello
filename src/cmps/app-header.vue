@@ -9,7 +9,7 @@
 
                 <button class="btn">Create</button>
             </div>
-            <board-list v-if="isShown"></board-list>
+            <header-board-list v-if="isShown"></header-board-list>
             <div class="second-actions flex align-center">
                 <input
                     class="search-app-header"
@@ -26,11 +26,11 @@
 </template>
 
 <script>
-import boardList from './header-board-list.vue'
+import headerBoardList from './header-board-list.vue'
 
 export default {
     components: {
-        boardList
+        headerBoardList
     },
     created() { },
     data() {
