@@ -26,6 +26,7 @@ export default {
     methods: {
         logAsGuest() {
             console.log('Loggin as guest');
+            this.$router.push('/board')
         }
     },
     computed: {},
