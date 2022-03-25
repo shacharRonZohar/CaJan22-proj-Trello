@@ -1,0 +1,20 @@
+.board-preview{ 
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 3px;
+    cursor: pointer;
+    
+    div {
+     position: relative;
+     color: $clr2;
+     font-weight: 700;
+     font-size: 16px;
+     padding-left: 5px;
+    }
+
+    // span{
+    //     background-color: rgba(97, 95, 95, 0.302);
+    //     position: absolute;
+    //     border-radius: 3px;
+    // }
+}

@@ -1,0 +1,38 @@
+.board-list-side-bar{
+    width: 272px;
+    .boards-menu-icon{
+        @include trello-icon($content: "\e90b");
+        opacity: .8;
+        padding-right: 10px;
+    }
+    
+    .templates-menu-icon{
+        @include trello-icon($content: "\e96d");
+        opacity: .8;            
+        padding-right: 10px;
+    }
+    
+    .Home-menu-icon{
+        @include trello-icon($content: "\e938");
+        opacity: .8;
+        padding-right: 10px;
+    }
+    
+    li{
+        padding: 6px 8px 6px 0;
+        margin-bottom: 4px;
+        width: 245px;
+
+        &:hover{
+            cursor: pointer;
+            background-color: rgba(9, 30, 66, 0.08);
+            border-radius: 3px;
+        }
+    }
+
+    span{
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 20px;
+    }
+}

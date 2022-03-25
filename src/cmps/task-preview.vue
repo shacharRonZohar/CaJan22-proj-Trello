@@ -3,8 +3,8 @@
         <h2>{{task.title}}</h2>
         <div class="actions-container flex">
             <a v-if="task.desc" class="description-icon" title="This card has a description"/>
-            <a v-if="task.attachments" class="attachments-icon" title="attachments"/>
-            <span class="w">{{attachNum}}</span>
+            <a v-if="task.attachments?.length" class="attachments-icon" title="attachments"/>
+            <span class="attach-num">{{attachNum}}</span>
         </div>
   </section>
 </template>
