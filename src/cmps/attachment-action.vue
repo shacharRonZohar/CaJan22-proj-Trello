@@ -1,16 +1,28 @@
 <template >
     <div @click.stop="toggleActionPopup" class="attach btn">
-        <action-popup v-if="actionPopupOpen">
+        <action-popup @click.stop v-if="actionPopupOpen">
             <template #header>
-                <span>Attach from...</span>
+                <span class="header">Attach from...</span>
             </template>
             <template #body>
-                <button class="computer">Computer</button>
-                <input type="file" @change="onUploadImg" />
+                <ul class="clean-list">
+                    <li>
+                        <label @click.stop for="file" class="computer body">
+                            Computer
+                            <input
+                                id="file"
+                                type="file"
+                                @change.stop="onUploadImg"
+                                @click.stop
+                            />
+                        </label>
+                    </li>
+                </ul>
                 <!-- <button @click="onAttach" class="confirm">Yes</button> -->
-                <button @click.stop="toggleActionPopup" class="deny">No</button>
             </template>
         </action-popup>
+        <!-- <button @click.stop="toggleActionPopup" class="deny">No</button> -->
+        <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
         <div class="icon"></div>
         <button class="archive">Attachment</button>
     </div>

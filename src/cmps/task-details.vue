@@ -1,6 +1,5 @@
 <template >
   <section v-if="task" class="task-details-container">
-    <!-- <div class="clickable-background"></div> -->
     <!-- @input.stop -->
     <header class="task-details-header">
       <!-- <div class="title-container"> -->

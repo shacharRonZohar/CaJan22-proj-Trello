@@ -8,6 +8,7 @@
         <div class="icon"></div>
         <button class="members">Members</button>
     </div>
+    <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
 </template>
 
 <script>
