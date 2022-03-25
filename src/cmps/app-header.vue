@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import boardList from './board-list.vue'
+import boardList from './header-board-list.vue'
 
 export default {
     components: {
