@@ -10,7 +10,7 @@
                     the way your team works is
                     unique—accomplish it all with Trello.
                 </p>
-                <button class="live-demo-btn" @click="logAsGuest">Try live demo</button>
+                <button class="live-demo-btn btn" @click="logAsGuest">Try live demo</button>
             </div>
             <div>
             <img class="hero-img" src="../assets/imgs/hero.png" alt="">
