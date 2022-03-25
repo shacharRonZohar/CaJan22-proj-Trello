@@ -112,6 +112,10 @@
 import archiveAction from './archive-action.vue'
 import membersAction from './members-action.vue'
 import attachmentAction from './attachment-action.vue'
+import labelAction from './lables-action.vue'
+import checklistAction from './checklist-action.vue'
+import datesAction from './dates-action.vue'
+import locationAction from './location-action.vue'
 
 export default {
   props: {
@@ -120,7 +124,11 @@ export default {
   components: {
     archiveAction,
     membersAction,
-    attachmentAction
+    attachmentAction,
+    labelAction,
+    checklistAction,
+    datesAction,
+    locationAction
   },
   created() { },
   data() {
@@ -129,7 +137,7 @@ export default {
       descEditOpen: false,
       actionPopupOpen: false,
       newDesc: '',
-      actionCmps: ['members-action', 'archive-action', 'attachment-action']
+      actionCmps: ['members-action', 'label-action', 'checklist-action', , 'dates-action', 'location-action', 'attachment-action', 'archive-action']
       // actionCmps: ['archive-action']
     }
   },
