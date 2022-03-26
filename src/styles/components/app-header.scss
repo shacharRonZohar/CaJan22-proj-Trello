@@ -15,9 +15,6 @@
                 margin-inline-end: 5px;
                 background-color: inherit;
                 color: $clr2;
-                padding: 7px;
-                border-radius: 5px;
-                width: 70px;
                 cursor: pointer;
             }
             >*:hover {
@@ -25,6 +22,18 @@
             }
             &:first-child {
                 margin-left: 25px;
+            }
+
+            .expand {
+                background-image: url(../assets/icons/expandMore.svg);
+                padding-right: 5px;
+            }
+            .create-btn {
+                background-color: #014a75;
+                width: 65px;
+                &:hover {
+                    background-color: $clr14;
+                }
             }
         }
 
@@ -36,17 +45,21 @@
                 border-radius: 3px;
                 width: 250px;
                 height: 32px;
-                &::placeholder {
-                    color: $clr2;
+                .search-input {
+                    border: none;
+                    outline: none;
+                    height: 100%;
+                    width: 100%;
+                    background-color: transparent;
+                    &::placeholder {
+                        color: $clr2;
+                    }
+                    &:focus {
+                        background-color: $clr2;
+                    }
                 }
                 &:hover {
                     background-color: rgba(255, 255, 255, 0.4);
-                }
-                &:focus-visible {
-                    outline: none;
-                }
-                &:focus {
-                    background-color: $clr2;
                 }
             }
             

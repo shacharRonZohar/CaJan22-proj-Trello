@@ -4,19 +4,26 @@
 
         <div class="board-main-nav flex space-between align-center">
             <div class="actions">
-                <button class="btn">Board</button>
-                <button class="btn">Starred</button>
+                <button class="btn">
+                    <span>Board <span class="svg-icon expand"></span></span>
+                </button>
+                <button class="btn">
+                    <span>Starred <span class="svg-icon expand"></span></span>
+                </button>
 
-                <button class="btn">Create</button>
+                <button class="btn create-btn">Create</button>
             </div>
             <header-board-list v-if="isShown"></header-board-list>
+
             <div class="second-actions flex align-center">
-                <input
-                    class="search-app-header"
-                    v-model="searchTxt"
-                    type="text"
-                    placeholder="Search"
-                />
+                <div class="search-app-header">
+                    <input
+                        class="search-input"
+                        v-model="searchTxt"
+                        type="text"
+                        placeholder="Search"
+                    />
+                </div>
                 <div class="profile-app-header flex">
                     <div class="letter">P</div>
                 </div>
