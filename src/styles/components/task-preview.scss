@@ -1,12 +1,27 @@
 .task-preview {
     overflow: hidden;
-    padding: 6px 8px 2px;
     position: relative;
     border-radius: 3px;
     background-color: $clr2;
     box-shadow: 0 1px 0 #091e4240;
     cursor: pointer;
     margin-bottom: 8px;
+    
+    main{
+        padding: 6px 8px 2px;
+    }
+
+    .task-cover-color {
+        height: 32px;
+        background-color: aqua;
+    }
+
+    .task-cover-img {
+        background-size: cover;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        height: 100px;
+    }
 
     h2 {
         color: $clr4;
