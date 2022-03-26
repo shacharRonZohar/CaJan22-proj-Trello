@@ -27,7 +27,7 @@
         </div>
       </Container>
       <router-view :groupId="currOpenTaskGroupId" />
-      <right-nav :class="isOpen" v-if="showMenuClicked" @closeMenu="toggleMenu" @setBackGroundImg="setBackGroundImg"></right-nav>
+      <right-nav :class="isOpen" @closeMenu="toggleMenu" @setBackGroundImg="setBackGroundImg"></right-nav>
     </main>
   </section>
 </template>

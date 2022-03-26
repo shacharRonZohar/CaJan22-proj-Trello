@@ -1,5 +1,5 @@
 .board-list-side-bar{
-    width: 272px;
+    max-width: 272px;
 
     .boards-menu-icon{
         @include trello-icon($content: "\e90b");
