@@ -203,7 +203,6 @@ function _createBoards() {
                     "title": "All",
                     "color": "#0079bf"
                 },
-
             ],
             'members': [],
             'groups': [
@@ -249,7 +248,38 @@ function _createBoards() {
             'style': {
                 'imgUrl': '../assets/imgs/boardBackground/2.jpg'
             },
-            'labels': [],
+            'labels': [
+                {
+                    "id": "l101",
+                    "title": "Done",
+                    "color": "#61bd4f"
+                },
+                {
+                    "id": "l102",
+                    "title": "Progress",
+                    "color": "#f2d600"
+                },
+                {
+                    "id": "l103",
+                    "title": "Low priority",
+                    "color": "#ff9f1a"
+                },
+                {
+                    "id": "l104",
+                    "title": "Medium priority",
+                    "color": "#eb5a46"
+                },
+                {
+                    "id": "l105",
+                    "title": "High priority",
+                    "color": "#c377e0"
+                },
+                {
+                    "id": "l106",
+                    "title": "All",
+                    "color": "#0079bf"
+                },
+            ],
             'members': [],
             'groups': [
                 {
