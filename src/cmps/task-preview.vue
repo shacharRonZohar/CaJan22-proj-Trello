@@ -1,8 +1,14 @@
 <template>
   <section v-if="task" class="task-preview" @click="openTaskDetails">
-    <div class="task-cover-color" v-if="task.description"></div>
-    <div class="task-cover-img" v-if="task.attachments?.length" :style="{ backgroundImage: `url(${img})` }"></div>
+    <div class="task-cover-color" v-if="task.cover?.backgroundColor" :style="{backgroundColor: `${bgColor}`}"></div>
+    <div class="task-cover-img" v-if="task.cover?.backgroundImage" :style="{ backgroundImage: `${img}` }"></div>
+    <!-- v-if="task.labelIds?.length" -->
     <main>
+      <ul class="flex clean-list" v-if="task.labelIds?.length">
+       <li :title="title" @click.stop="labelClicked" v-for="label in labels" :key="label">
+          <div class="task-label" :class="labelPreview" :style="{backgroundColor: `${label.color}`}">{{label.title}}</div>
+       </li>
+      </ul>
       <h2>{{ task.title }}</h2>
       <div class="actions-container flex">
         <a
@@ -15,7 +21,7 @@
           class="attachments-icon"
           title="attachments"
         />
-        <span class="attach-num">{{ attachNum }}</span>
+        <span v-if="task.attachments?.length" class="attach-num">{{ attachNum }}</span>
       </div>
     </main>
   </section>
@@ -30,22 +36,44 @@ export default {
   },
   components: {},
   data() {
-    return {};
+    return {
+      title: 'important',
+      isLabelTitleShown: false
+    };
   },
-  created() {},
+  created() {
+  },
   methods: {
     openTaskDetails() {
       this.$router.push(this.$route.fullPath + "/task/" + this.task.id);
       this.$emit("openTaskDetails");
     },
+    labelClicked() {
+      this.isLabelTitleShown = !this.isLabelTitleShown
+      this.$emit('openLabels')
+    }
   },
   computed: {
     attachNum() {
       return this.task.attachments?.length;
     },
     img() {
-      return new URL(`../assets/imgs/boardBackground/1.jpg`, import.meta.url).href;
+      return this.task.cover.backgroundImage
     },
+    bgColor(){
+      return this.task.cover.backgroundColor
+    },
+    labelPreview(){
+      return this.isLabelTitleShown? 'show-title' : ''
+    },
+    labels(){
+      // if (!this.task.labelIds) return
+      const board = this.$store.getters.board
+      return this.task.labelIds.map(labelId => {
+        const label = board.labels.find(label => label.id === labelId)
+        return labelId = label
+      })
+    }
   },
   unmounted() {},
 };

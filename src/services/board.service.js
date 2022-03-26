@@ -168,13 +168,34 @@ function _createBoards() {
                 {
                     "id": "l101",
                     "title": "Done",
-                    "color": "green"
+                    "color": "#61bd4f"
                 },
                 {
                     "id": "l102",
                     "title": "Progress",
-                    "color": "yellow"
-                }
+                    "color": "#f2d600"
+                },
+                {
+                    "id": "l103",
+                    "title": "Low priority",
+                    "color": "#ff9f1a"
+                },
+                {
+                    "id": "l104",
+                    "title": "Medium priority",
+                    "color": "#eb5a46"
+                },
+                {
+                    "id": "l105",
+                    "title": "High priority",
+                    "color": "#c377e0"
+                },
+                {
+                    "id": "l106",
+                    "title": "All",
+                    "color": "#0079bf"
+                },
+
             ],
             'members': [],
             'groups': [
@@ -185,7 +206,7 @@ function _createBoards() {
                         {
                             'id': utilService.makeId('t'),
                             'title': 'Replace logo',
-                            labels: ['l101', 'l102']
+                            'labelIds': ['l101', 'l102']
                         },
                         {
                             'id': utilService.makeId('t'),
@@ -200,11 +221,13 @@ function _createBoards() {
                     'tasks': [
                         {
                             'id': utilService.makeId('t'),
-                            'title': 'Replace logo'
+                            'title': 'Replace logo',
+                            "labelIds": ["l103", "l104"]
                         },
                         {
                             'id': utilService.makeId('t'),
-                            'title': 'Add Samples'
+                            'title': 'Add Samples',
+                            "labelIds": ["l103"]
                         }
                     ],
                     'style': {}
@@ -232,7 +255,8 @@ function _createBoards() {
                         },
                         {
                             'id': utilService.makeId('t'),
-                            'title': 'Add Samples'
+                            'title': 'Add Samples',
+                            "labelIds": ["l103", "l104"]
                         }
                     ],
                     'style': {}

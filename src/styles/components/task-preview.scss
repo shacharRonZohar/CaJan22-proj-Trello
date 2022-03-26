@@ -6,21 +6,52 @@
     box-shadow: 0 1px 0 #091e4240;
     cursor: pointer;
     margin-bottom: 8px;
-    
-    main{
+
+    main {
         padding: 6px 8px 2px;
     }
 
     .task-cover-color {
         height: 32px;
-        background-color: aqua;
+        // background-color: aqua;
     }
 
     .task-cover-img {
         background-size: cover;
         background-position: 50%;
         background-repeat: no-repeat;
-        height: 100px;
+        height: 200px;
+    }
+
+    ul {
+        &:hover {
+            filter: brightness(85%);
+        }
+    }
+
+    .task-label {
+        float: left;
+        font-size: 12px;
+        font-weight: 700;
+        height: 8px;
+        line-height: 100px;
+        margin: 0 4px 4px 0;
+        max-width: 40px;
+        min-width: 40px;
+        padding: 0;
+        // text-shadow: none;
+        width: auto;
+        border-radius: 4px;
+        color: #fff;
+        display: block;
+
+      
+
+        &.show-title{
+            max-width: 300px;
+            height: 20px;
+            // animation: label_text_apper .45s ease-out;
+        }
     }
 
     h2 {
@@ -38,7 +69,7 @@
         width: 24px;
         height: 24px;
     }
-    
+
     .attachments-icon {
         @include trello-icon($content: "\e908");
         margin: 0 0px 4px 0;
@@ -47,14 +78,82 @@
         height: 24px;
     }
 
-    .attach-num{
+    .attach-num {
         font-size: 12px;
         padding: 0 4px 0 2px;
         vertical-align: top;
-        color: $clr15
+        color: $clr15;
     }
-    
-    &:hover{
+
+    &:hover {
         background-color: #f4f5f7;
+    }
+}
+
+@keyframes label_text_appear {
+    0% {
+        color: #0000;
+        height: 8px;
+        width: 40px;
+    }
+    25% {
+        height: 8px;
+        padding-right: 10px;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+    45% {
+        height: 8px;
+        padding-right: 9px;
+    }
+    53% {
+        height: 8px;
+        padding-right: 8px;
+    }
+    75% {
+        color: #0000;
+        height: 16px;
+    }
+}
+
+@keyframes label_text_appear_color_blind_before {
+    0% {
+        width: 100%;
+    }
+    53% {
+        width: 100%;
+    }
+    70% {
+        width: 16px;
+    }
+}
+
+@keyframes label_text_disappear {
+    0% {
+        height: 16px;
+        line-height: 16px;
+        padding: 0 8px;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+    33% {
+        color: #0000;
+        height: 16px;
+        line-height: 16px;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+    66% {
+        color: #0000;
+        height: 8px;
+        line-height: 100px;
+        padding: 0 8px;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+    to {
+        color: #0000;
+        padding: 0;
+        width: 40px;
     }
 }
