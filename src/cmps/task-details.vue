@@ -6,13 +6,7 @@
       <!-- <div class="title-container"> -->
       <div class="icon"></div>
       <div class="title-container">
-        <h2
-          v-focus
-          @blur="onSaveTitle"
-          class="title"
-          contenteditable
-          spellcheck="false"
-        >{{ task.title }}</h2>
+        <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
         <div class="group-txt">
           in list:
           <span>{{ groupName }}</span>
@@ -204,7 +198,7 @@ export default {
       this.saveTask(this.task)
     },
     async onAction({ cbName, payload = null }) {
-      await this.$store.dispatch({ type: cbName, taskId: this.task.id, groupId: this.groupId || this.localGroupId, payload })
+      await this.$store.dispatch({ type: cbName, taskId: this.task.id, groupId: this.localGroupId, payload })
       // Temporary
       const taskId = this.$route.params.taskId
       this.task = await this.$store.dispatch({ type: 'getTaskById', taskId, groupId: this.groupId || this.localGroupId })

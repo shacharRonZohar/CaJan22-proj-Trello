@@ -152,12 +152,23 @@ export default {
         },
         async toggleLabel({ state, dispatch }, { taskId, groupId, payload, activity }) {
             try {
+                console.log(taskId, groupId, payload)
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.toggleLabel(board, taskId, groupId, payload, activity)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
             }
-        }
+        },
+        async saveNewLabel({ state, dispatch }, { taskId, groupId, payload, activity }) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const savedPayload = await boardService.saveNewLabel(board, payload, activity)
+                await dispatch({ type: 'saveBoard', boardToSave: savedPayload.boardToSave })
+                await dispatch({ type: 'toggleLabel', taskId, groupId, payload: savedPayload.id })
+            } catch (err) {
+                console.log(err)
+            }
+        },
     },
 }
