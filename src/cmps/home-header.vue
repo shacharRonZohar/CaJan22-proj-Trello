@@ -1,6 +1,9 @@
 <template>
     <header class="main-header home-header flex space-between align-center">
-        <div class="logo">Twello</div>
+        <div class="logo flex align-center">
+            <span class="logo-icon"></span> 
+            <span class="logo-txt">Twello</span>
+        </div>
 
         <nav>
             <div class="home-nav">
