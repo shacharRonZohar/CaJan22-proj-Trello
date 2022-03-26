@@ -29,9 +29,9 @@ export default {
             searchTxt: ''
         }
     },
-    created() {
-        // imgService.queryPhotos()
-        //     .then(res => this.results = res.results)
+    async created() {
+        // const res = await imgService.queryPhotos()
+        // this.results = res.results
     },
     methods: {
         async searchPhotos() {

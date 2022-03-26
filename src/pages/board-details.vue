@@ -87,6 +87,7 @@ export default {
       })
     },
     async addGroup() {
+      if (this.group.title.trim() === '') return
       await this.$store.dispatch({
         type: "saveGroup",
         groupToSave: { title: this.group.title },

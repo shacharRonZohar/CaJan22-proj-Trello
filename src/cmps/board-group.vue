@@ -7,7 +7,7 @@
       </button>
     </div>
     <!-- <Container :group-name="'group1'"></Container> -->
-    <div class="tasks-container">
+    <div class="tasks-container" v-if="group.tasks?.length">
       <Container
         :get-child-payload="(ev) => getTaskPayload(ev)"
         :group-name="'group'"

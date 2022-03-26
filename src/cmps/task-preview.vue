@@ -6,7 +6,9 @@
     <main>
       <ul class="flex clean-list" v-if="task.labelIds?.length">
        <li :title="title" @click.stop="labelClicked" v-for="label in labels" :key="label">
-          <div class="task-label" :class="labelPreview" :style="{backgroundColor: `${label.color}`}">{{label.title}}</div>
+          <div class="task-label" :class="labelPreview" :style="{backgroundColor: `${label.color}`}">
+           <!-- {{label.title}} -->
+          </div>
        </li>
       </ul>
       <h2>{{ task.title }}</h2>
