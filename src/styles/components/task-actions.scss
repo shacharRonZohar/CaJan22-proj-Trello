@@ -31,8 +31,11 @@
 
             margin-left: 13px;
         }
-        &:hover {
+        &:hover  {
             background-color: $clr19;
+            >* {
+                background-color: inherit;
+            }
         }
     }
 
