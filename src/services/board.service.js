@@ -122,19 +122,18 @@ function saveCover(board, taskId, groupId, payload, activity) {
 function toggleLabel(board, taskId, groupId, payload, activity) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
-    if (task.labels?.length) {
-        const idx = task.labels.findIndex(label => label === payload)
-        if (idx !== -1) task.labels.splice(idx, 1)
-        else task.labels.push(payload)
+    if (task.labelIds?.length) {
+        const idx = task.labelIds.findIndex(label => label === payload)
+        if (idx !== -1) task.labelIds.splice(idx, 1)
+        else task.labelIds.push(payload)
     } else {
-        task.labels = [payload]
+        task.labelIds = [payload]
     }
     return Promise.resolve(board)
 }
 
 function saveNewLabel(board, payload, activity) {
     payload.id = utilService.makeId('l')
-    console.log(board)
     board.labels.unshift(payload)
     return Promise.resolve({ boardToSave: board, id: payload.id })
 }
