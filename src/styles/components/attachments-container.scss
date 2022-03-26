@@ -3,6 +3,47 @@
         @include trello-icon($content: "\e908", $type: lg);
     }
 
+    .attachment-details {
+        .name {
+            font-weight: 700;
+        }
+        .attachment-name-icon {
+            @include trello-icon($content: "\e92c");
+        }
+    }
+
+    .attachment-actions {
+        .attacment-delete {
+            text-decoration: underline;
+            color: #5e6c84;
+            font-size: 14px;
+            
+            &:hover{
+                cursor: pointer;
+                color: #3c4555;
+            }
+        }
+
+        .attacment-make-cover{
+            margin-top: 5px;
+            text-decoration: underline;
+            color: #5e6c84;
+            font-size: 14px;
+            &:hover{
+                cursor: pointer;
+                color: #3c4555;
+            }
+        }
+
+        .make-cover-icon{
+            display: inline-block;
+            @include trello-icon($content: "\e914");
+            color: #42526e;
+            margin-right: 5px;
+        }
+    
+    }
+
     .attachment-thumbnail {
         display: flex;
         // justify-content: space-between;

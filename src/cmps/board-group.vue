@@ -9,6 +9,7 @@
     <!-- <Container :group-name="'group1'"></Container> -->
     <div class="tasks-container" v-if="group.tasks?.length">
       <Container
+        drag-class="on-dragging"
         :get-child-payload="(ev) => getTaskPayload(ev)"
         :group-name="'group'"
         @drop="onDrop"
@@ -103,4 +104,7 @@ export default {
 </script>
 
 <style>
+.on-dragging {
+  transform: rotate(5deg);
+}
 </style>
