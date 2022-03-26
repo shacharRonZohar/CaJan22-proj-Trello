@@ -1,6 +1,7 @@
 <template >
-  <div @click.stop="onCloseDetails" class="clickable-background">
-    <section @click.stop v-if="task" class="task-details-container">
+  <div class="task-details-container">
+    <section @click.stop v-if="task" class="task-details">
+      <div @click.stop="onCloseDetails" class="clickable-background"></div>
       <!-- @input.stop -->
       <div v-if="task.cover" :style="task.cover" class="cover"></div>
       <header class="task-details-header">
