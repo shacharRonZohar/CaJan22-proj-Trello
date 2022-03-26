@@ -15,7 +15,7 @@
         >{{ task.title }}</h2>
         <div class="group-txt">
           in list:
-          <span>Frontend</span>
+          <span>{{ groupName }}</span>
           <!-- <span>{{ groupName }}</span> -->
         </div>
       </div>
@@ -31,6 +31,13 @@
             <div class="member add icon"></div>
           </div>
         </div>-->
+        <ul v-if="task.labels?.length" class="labels-container">
+          <li
+            class="label"
+            v-for="label in task.labels"
+            :style="{ backgroundColor: getLabelById(label).color }"
+          >{{ getLabelById(label).title }}</li>
+        </ul>
         <div class="description-container">
           <div class="description-header">
             <div class="icon"></div>
@@ -192,7 +199,7 @@ export default {
     async onRemoveAttachment(attachmentId) {
       const idx = this.task.attachments.findIndex(attachment => attachment.id === attachmentId)
       this.task.attachments.splice(idx, 1)
-      console.log(this.task)
+      if (this.task.cover) delete this.task.cover
       this.saveTask(this.task)
     },
     async onAction({ cbName, payload = null }) {
@@ -225,6 +232,9 @@ export default {
     setPopupMode(isOpen) {
       console.log(isOpen)
       this.isActionPopupOpen = isOpen
+    },
+    getLabelById(id) {
+      return this.$store.getters.labelById(id)
     }
   },
   computed: {

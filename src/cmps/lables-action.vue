@@ -1,14 +1,20 @@
 <template >
     <div @click="toggleActionPopup" class="label btn">
-        <!-- <action-popup v-if="actionPopupOpen"> -->
-        <!-- <template #header>
-                <span>Are you sure?</span>
+        <action-popup @click.stop v-if="actionPopupOpen">
+            <template #header>
+                <span>Labels</span>
             </template>
             <template #body>
-                <button @click="onLabel" class="confirm">Yes</button>
-                <button class="deny">No</button>
-        </template>-->
-        <!-- </action-popup> -->
+                <ul class="clean-list">
+                    <li
+                        @click="onLabel(label.id)"
+                        class="label"
+                        v-for="label in labels"
+                        :style="{ backgroundColor: label.color }"
+                    >{{ label.title }}</li>
+                </ul>
+            </template>-->
+        </action-popup>
         <div class="icon"></div>
         <button class="labels">Label</button>
     </div>
@@ -30,14 +36,18 @@ export default {
         }
     },
     methods: {
-        onLabel() {
-            // this.$emit('onAction', 'lableTask')
+        onLabel(labelId) {
+            this.$emit('onAction', { cbName: 'toggleLabel', payload: labelId })
         },
         toggleActionPopup() {
             this.actionPopupOpen = !this.actionPopupOpen
         }
     },
-    computed: {},
+    computed: {
+        labels() {
+            return this.$store.getters.labels
+        }
+    },
     unmounted() { },
 }
 </script>

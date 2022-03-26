@@ -12,6 +12,12 @@ export default {
         board({ board }) {
             return JSON.parse(JSON.stringify(board))
         },
+        labels({ board }) {
+            return JSON.parse(JSON.stringify(board.labels))
+        },
+        labelById: ({ board }) => (id) => {
+            return JSON.parse(JSON.stringify(board.labels.find(label => label.id === id)))
+        }
     },
     mutations: {
         setBoards(state, { boards }) {
@@ -112,7 +118,7 @@ export default {
                 console.log(err)
             }
         },
-        async setBackGroundImg({ state, dispatch }, { imgUrl , activity }) {
+        async setBackGroundImg({ state, dispatch }, { imgUrl, activity }) {
             try {
                 const boardToSave = JSON.parse(JSON.stringify(state.board))
                 boardToSave.style.imgUrl = imgUrl
@@ -139,6 +145,15 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.saveCover(board, taskId, groupId, payload, activity)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async toggleLabel({ state, dispatch }, { taskId, groupId, payload, activity }) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = await boardService.toggleLabel(board, taskId, groupId, payload, activity)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)

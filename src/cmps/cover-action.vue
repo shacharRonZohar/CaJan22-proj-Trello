@@ -40,6 +40,7 @@ export default {
     methods: {
         async onChooseCover(color) {
             this.$emit('onAction', { cbName: 'chooseCover', payload: { type: 'color', thing: color } })
+            this.toggleActionPopup()
         },
         toggleActionPopup() {
             this.actionPopupOpen = !this.actionPopupOpen

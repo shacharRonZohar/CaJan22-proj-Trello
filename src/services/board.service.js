@@ -13,7 +13,8 @@ export const boardService = {
     archiveTask,
     saveAttachment,
     saveGroupDrop,
-    saveCover
+    saveCover,
+    toggleLabel
 }
 
 const BOARDS_KEY = 'boards_db'
@@ -116,6 +117,19 @@ function saveCover(board, taskId, groupId, payload, activity) {
     task.cover = cover
     return Promise.resolve(board)
 }
+
+function toggleLabel(board, taskId, groupId, payload, activity) {
+    const group = board.groups.find(group => group.id === groupId)
+    const task = group.tasks.find(task => task.id === taskId)
+    if (task.labels?.length) {
+        const idx = task.labels.findIndex(label => label === payload)
+        if (idx !== -1) task.labels.splice(idx, 1)
+        else task.labels.push(payload)
+    } else {
+        task.labels = [payload]
+    }
+    return Promise.resolve(board)
+}
 function _getAttachment(payload) {
     const nameStartIdx = payload.lastIndexOf('/') + 1
     const nameEndIdx = payload.lastIndexOf('_')
@@ -150,7 +164,18 @@ function _createBoards() {
             'style': {
                 'imgUrl': '../assets/imgs/boardBackground/1.jpg'
             },
-            'labels': [],
+            'labels': [
+                {
+                    "id": "l101",
+                    "title": "Done",
+                    "color": "#61bd4f"
+                },
+                {
+                    "id": "l102",
+                    "title": "Progress",
+                    "color": "#61bd33"
+                }
+            ],
             'members': [],
             'groups': [
                 {
@@ -159,7 +184,8 @@ function _createBoards() {
                     'tasks': [
                         {
                             'id': utilService.makeId('t'),
-                            'title': 'Replace logo'
+                            'title': 'Replace logo',
+                            labels: ['l101', 'l102']
                         },
                         {
                             'id': utilService.makeId('t'),
