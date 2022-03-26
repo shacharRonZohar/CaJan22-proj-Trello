@@ -5,7 +5,7 @@
             <template v-if="!createLabelOpen" #header>
                 <span>Labels</span>
             </template>
-            <template v-if="createLabelOpen" #header>
+            <template v-else #header>
                 <span>Create label</span>
             </template>
             <template v-if="!createLabelOpen" #body>
@@ -23,7 +23,7 @@
                     <li @click="toggleCreateLabel">Add new label</li>
                 </ul>
             </template>
-            <template v-if="createLabelOpen" #body>
+            <template v-else #body>
                 <label for>
                     Name
                     <input v-model="newLabel.title" type="text" class="new-label-title" v-focus />
@@ -44,6 +44,7 @@
         </action-popup>
         <div class="icon"></div>
         <button class="labels">Label</button>
+        <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
     </div>
 </template>
 
