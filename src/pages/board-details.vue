@@ -1,6 +1,6 @@
 <template>
   <section v-if="board" class="board-details" :style="{ backgroundImage: `url(${img})` }">
-    <board-header @openMenu="openMenu" :board="board" />
+    <board-header @openMenu="toggleMenu" :board="board" />
     <main class="main-board">
       <Container @drop="onDrop" orientation="horizontal" class="flex clean-list">
         <!-- :get-child-payload="() => group.id" -->
@@ -27,7 +27,7 @@
         </div>
       </Container>
       <router-view :groupId="currOpenTaskGroupId" />
-      <right-nav v-if="showMenuClicked"></right-nav>
+      <right-nav :class="isOpen" v-if="showMenuClicked" @closeMenu="toggleMenu" @setBackGroundImg="setBackGroundImg"></right-nav>
     </main>
   </section>
 </template>
@@ -114,8 +114,15 @@ export default {
         })
       } else return
     },
-    openMenu() {
+    toggleMenu() {
       this.showMenuClicked = !this.showMenuClicked
+    },
+    async setBackGroundImg(imgUrl){
+      await this.$store.dispatch({
+        type: "setBackGroundImg",
+        imgUrl,
+        activity: "Change background image",
+      })
     }
   },
   computed: {
@@ -127,9 +134,11 @@ export default {
     },
     img() {
       return new URL(`${this.board.style.imgUrl}`, import.meta.url).href
+    },
+    isOpen(){
+      return this.showMenuClicked? 'open' : ''
     }
   },
-  unmounted() { },
   watch: {
     boardId: {
       handler() {

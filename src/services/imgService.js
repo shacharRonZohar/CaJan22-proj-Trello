@@ -13,7 +13,7 @@ export const imgService = {
     queryPhotos
 }
 
-function queryPhotos(requeste = 'forest') {
+function queryPhotos(requeste = 'nature') {
     return api.search
     .getPhotos({ query: requeste, orientation: "landscape" })
     .then(result => {
