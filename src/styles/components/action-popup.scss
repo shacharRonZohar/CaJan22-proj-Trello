@@ -13,6 +13,9 @@
     pointer-events: auto;
     text-align: center;
     padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 54vh;
     > * {
         position: relative;
     }
@@ -41,10 +44,22 @@
             background-color: #f5f6f8;
         }
     }
-    .cover-clrs {
+    .cover-clrs,
+    .clr-opts {
         > * {
             width: 50px;
             height: 50px;
+        }
+    }
+    .clr-opts {
+        color: white;
+        > * {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .icon {
+            @include trello-icon($content: "\e916", $type: sm);
         }
     }
     .label {
@@ -56,4 +71,8 @@
         padding-left: 10px;
         cursor: pointer;
     }
+    // .clr-opt {
+    //     width: 20px;
+    //     height: 20px;
+    // }
 }

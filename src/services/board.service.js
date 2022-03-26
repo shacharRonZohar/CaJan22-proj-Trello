@@ -14,7 +14,8 @@ export const boardService = {
     saveAttachment,
     saveGroupDrop,
     saveCover,
-    toggleLabel
+    toggleLabel,
+    saveNewLabel
 }
 
 const BOARDS_KEY = 'boards_db'
@@ -130,6 +131,14 @@ function toggleLabel(board, taskId, groupId, payload, activity) {
     }
     return Promise.resolve(board)
 }
+
+function saveNewLabel(board, payload, activity) {
+    payload.id = utilService.makeId('l')
+    console.log(board)
+    board.labels.unshift(payload)
+    return Promise.resolve({ boardToSave: board, id: payload.id })
+}
+
 function _getAttachment(payload) {
     const nameStartIdx = payload.lastIndexOf('/') + 1
     const nameEndIdx = payload.lastIndexOf('_')

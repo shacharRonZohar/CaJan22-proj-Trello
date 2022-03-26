@@ -1,14 +1,14 @@
 <template >
     <div @click="toggleActionPopup" class="members btn">
-        <action-popup v-if="actionPopupOpen" class="members-popup">
+        <!--<action-popup v-if="actionPopupOpen" class="members-popup">
             <template #header>
                 <span>Add members!</span>
             </template>
         </action-popup>
+        <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>-->
         <div class="icon"></div>
         <button class="members">Members</button>
     </div>
-    <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
 </template>
 
 <script>
