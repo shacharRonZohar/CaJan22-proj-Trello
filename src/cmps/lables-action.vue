@@ -7,7 +7,10 @@
                     <span v-if="!createLabelOpen">Labels</span>
                     <button v-else @click="toggleCreateLabel" class="back"></button>
                     <span v-if="createLabelOpen">Create label</span>
+<<<<<<< HEAD
                     <button class="close-action" @click="toggleActionPopup"></button>
+=======
+>>>>>>> 4d5a33304ba6e2a75fc299b7f509e98eabf58510
                 </div>
             </template>
             <template #body>
