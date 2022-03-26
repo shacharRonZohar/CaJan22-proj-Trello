@@ -217,6 +217,7 @@ function _createBoards() {
                             'labelIds': ['l101'],
                             'attachments': [{
                                 'id': utilService.makeId('a'),
+                                'createdAt': '1648319551701',
                                 'name': "logo-icon.png",
                                 'url': "http://res.cloudinary.com/twello/image/upload/v1648313534/logo-icon_wzlcpi.png"
                             }]
@@ -244,6 +245,7 @@ function _createBoards() {
                             'cover': { 'backgroundColor': "pink" },
                             'attachments': [{
                                 'id': utilService.makeId('a'),
+                                'createdAt': '1648319551701',
                                 'name': "mongo-DB.png",
                                 'url': "http://res.cloudinary.com/twello/image/upload/v1648314220/mongo-DB_gwdwux.png"
                             }]
