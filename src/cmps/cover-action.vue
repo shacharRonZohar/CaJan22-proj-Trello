@@ -1,5 +1,5 @@
 <template >
-    <div @click.stop="toggleActionPopup" class="cover btn">
+    <div @click.stop="toggleActionPopup" class="cover-action btn">
         <action-popup @click.stop v-if="actionPopupOpen">
             <template #header>
                 <span class="header">Cover</span>
@@ -16,7 +16,7 @@
         </action-popup>
         <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
         <div class="icon"></div>
-        <button class="cover">Cover</button>
+        <button class="cover-action">Cover</button>
     </div>
 </template>
 

@@ -1,8 +1,8 @@
 .actions {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-
+    // gap: 8px;
+    padding: 0 16px 8px 8px;
     > * {
         font-size: 12px;
         display: flex;
@@ -14,12 +14,24 @@
             min-width: 200vh;
             top: -200px;
             left: -200px;
-            // background-color: black;
             cursor: default;
             pointer-events: auto;
             z-index: 3;
         }
+        &:not(:first-child) {
+            margin-top: 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            height: 32px;
+            max-width: 300px;
+            transition-duration: 85ms;
+            transition-property: background-color, border-color, box-shadow;
+            transition-timing-function: ease;
+
+            margin-left: 13px;
+        }
     }
+
     h3 {
         padding-top: 3px;
     }
@@ -53,8 +65,13 @@
             @include trello-icon($content: "\e91b", $type: sm);
         }
     }
+    .cover-action {
+        .icon {
+            @include trello-icon($content: "\e914", $type: sm);
+        }
+    }
     .location {
-        .icons {
+        .icon {
             @include trello-icon($content: "\e944", $type: sm);
         }
     }

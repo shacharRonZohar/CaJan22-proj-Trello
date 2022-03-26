@@ -1,10 +1,9 @@
 .main-details {
     flex-grow: 1;
     display: grid;
-    gap: 17px;
+    gap: 9px;
     grid-template-columns: 539px 1fr;
-    margin-top: 11px;
-    margin-left: 7px;
+    margin-top: -2px;
     @import "./main-content.scss";
     @import "./task-actions.scss";
     .task-layout {
