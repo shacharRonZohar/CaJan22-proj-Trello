@@ -13,11 +13,6 @@ export default {
         loginHeader,
         appHeader
     },
-    created() { 
-    },
-    data() {
-        return {}
-    },
     methods: {},
     computed: {
         headerType() {
@@ -27,6 +22,5 @@ export default {
             else return 'app-header'
         }
     },
-    unmounted() { },
 }
 </script>
