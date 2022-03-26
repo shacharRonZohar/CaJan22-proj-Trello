@@ -13,15 +13,15 @@ export const imgService = {
     queryPhotos
 }
 
-function queryPhotos(requeste = 'nature') {
-    return api.search
-    .getPhotos({ query: requeste, orientation: "landscape" })
-    .then(result => {
-        return result.response
-    })
-    .catch(() => {
-        console.log("something went wrong!")
-    })
+async function queryPhotos(request = 'nature') {
+    try {
+        const res = await api.search.getPhotos({ query: request, orientation: "landscape" })
+        return res.response
+    } catch (err) {
+        console.log('Couldnt get photos from unsplash', err)
+        throw err
+    }
+
 }
 
 

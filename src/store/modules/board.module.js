@@ -170,5 +170,14 @@ export default {
                 console.log(err)
             }
         },
+        async removeCover({ state, dispatch }, { taskId, groupId, payload, activity }) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = await boardService.removeCover(board, taskId, groupId, activity)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+        }
     },
 }
