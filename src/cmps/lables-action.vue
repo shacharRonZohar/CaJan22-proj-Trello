@@ -93,8 +93,9 @@ export default {
             this.createLabelOpen = !this.createLabelOpen
         },
         isChosen(label) {
-            console.log(this?.chosenLabels)
-            console.log(label)
+            // console.log(this?.chosenLabels)
+            // console.log(label)
+            if (!this.chosenLabels) return false
             return this.chosenLabels.includes(label)
         }
     },
