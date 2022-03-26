@@ -107,6 +107,7 @@ export default {
       this.currOpenTaskGroupId = groupId
     },
     async removeGroup(groupId) {
+      console.log(this.board);
       if (confirm("Sure to delete?")) {
         await this.$store.dispatch({
           type: "removeGroup",
