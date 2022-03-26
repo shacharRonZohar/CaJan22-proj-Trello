@@ -209,12 +209,12 @@ function _createBoards() {
             'groups': [
                 {
                     'id': utilService.makeId('g'),
-                    'title': 'Group 1',
+                    'title': 'Frontend',
                     'tasks': [
                         {
                             'id': utilService.makeId('t'),
                             'title': 'Replace logo',
-                            'labelIds': ['l101', 'l102']
+                            'labelIds': ['l101', 'l102'],
                         },
                         {
                             'id': utilService.makeId('t'),

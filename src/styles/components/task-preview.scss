@@ -34,24 +34,20 @@
         font-size: 12px;
         font-weight: 700;
         height: 8px;
-        line-height: 100px;
         margin: 0 4px 4px 0;
         max-width: 40px;
         min-width: 40px;
         padding: 0;
-        // text-shadow: none;
+        text-shadow: none;
         width: auto;
         border-radius: 4px;
         color: #fff;
-        display: block;
 
-      
-
-        &.show-title{
-            max-width: 300px;
-            height: 20px;
-            // animation: label_text_apper .45s ease-out;
-        }
+        // &.show-title{
+        //     max-width: -moz-fit-content;
+        //     height: 16px;
+        //     animation: label_text_apper .45s ease-out;
+        // }
     }
 
     h2 {
