@@ -149,7 +149,7 @@ function _getAttachment(payload) {
         id: utilService.makeId('a'),
         url: payload,
         name,
-        createdAt: Date.now
+        createdAt: Date.now()
     }
 }
 function _update(board) {
@@ -223,8 +223,8 @@ function _createBoards() {
                         },
                         {
                             'id': utilService.makeId('t'),
-                            'title' : 'Add Libraries',
-                            'cover' : {
+                            'title': 'Add Libraries',
+                            'cover': {
                                 'backgroundImage': "url(http://res.cloudinary.com/twello/image/upload/v1648315255/Libraries_zungf8.png)"
                             },
                             'labelIds': ['l102'],
@@ -241,7 +241,7 @@ function _createBoards() {
                             'title': 'DB collections',
                             'description': "Add board and user collections",
                             'labelIds': ['l104'],
-                            'cover': {'backgroundColor': "pink"},
+                            'cover': { 'backgroundColor': "pink" },
                             'attachments': [{
                                 'id': utilService.makeId('a'),
                                 'name': "mongo-DB.png",
@@ -272,7 +272,7 @@ function _createBoards() {
                             'title': 'Planning the design',
                             'description': "Get to know the design of the Trello and understand how we would like to implement it",
                             'labelIds': ['l101'],
-                            'cover': {'backgroundImage': "url(http://res.cloudinary.com/twello/image/upload/v1648315891/design_kwnpub.jpg)"},
+                            'cover': { 'backgroundImage': "url(http://res.cloudinary.com/twello/image/upload/v1648315891/design_kwnpub.jpg)" },
                         },
                         {
                             'id': utilService.makeId('t'),
@@ -282,7 +282,7 @@ function _createBoards() {
                         {
                             'id': utilService.makeId('t'),
                             'title': 'Fix design',
-                            'cover': {'backgroundColor': "red"}
+                            'cover': { 'backgroundColor': "red" }
                         },
                     ],
                     'style': {}
@@ -300,7 +300,7 @@ function _createBoards() {
                         {
                             'id': utilService.makeId('t'),
                             'title': 'Add users',
-                            'cover': {'backgroundColor': "yellow"},
+                            'cover': { 'backgroundColor': "yellow" },
                             'description': "Add the feature in task details and preview",
                         },
                     ],

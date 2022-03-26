@@ -38,13 +38,15 @@ export default {
     data() {
         return {
             actionPopupOpen: false,
-            colors: ['yellow', 'red', 'pink']
+            colors: ['yellow', 'red', 'pink'],
+            chosenColor: ''
         }
     },
     methods: {
         async onChooseCover(color) {
             this.$emit('onAction', { cbName: 'chooseCover', payload: { type: 'color', thing: color } })
-            this.toggleActionPopup()
+            // this.toggleActionPopup()
+            this.chosenColor = color
         },
         toggleActionPopup() {
             this.actionPopupOpen = !this.actionPopupOpen
