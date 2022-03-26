@@ -8,5 +8,11 @@
             display: flex;
             gap: 6px;
         }
+        .show {
+            height: 32px;
+            &:hover {
+                background-color: $clr19;
+            }
+        }
     }
 }
