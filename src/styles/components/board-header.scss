@@ -11,6 +11,7 @@
     .board-nav {
         >* {
             margin-inline-end: 5px;
+            font-size: 0.9rem;
             cursor: pointer;
         }
         .open-sidenav {
@@ -78,7 +79,7 @@
         >* {
             margin-inline-start: 5px;
             cursor: pointer;
-
+            font-size: 0.9rem;
         }
         .filter-btn {
             .filter {
