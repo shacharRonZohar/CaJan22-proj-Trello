@@ -3,7 +3,19 @@
     background-color: $clr16;
     padding: 0 15px;
     .logo {
-        font-size: x-large;
+        gap: 10px;
+        .logo-txt {
+            font-family: ibmplexmedium;
+            font-size: xx-large;
+            font-weight: 600;
+        }
+        .logo-icon {
+            background-image: url(../assets/imgs/trello-logo-svg-vector.svg);
+            display: inline-block;
+            background-size: cover;
+            width: 25px;
+            height: 25px;
+        }
     }
 
     .home-nav {

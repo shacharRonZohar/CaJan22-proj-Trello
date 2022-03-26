@@ -1,6 +1,9 @@
 <template>
     <header :class="headerBgc" class="main-header app-header flex align-center">
-        <div class="logo">Twello</div>
+        <div @click="AppHeaderClicked" class="logo flex align-center">
+            <img class="gif-logo" src="" alt="">
+            <span class="logo-txt">Twello</span>
+        </div>
 
         <div class="board-main-nav flex space-between align-center">
             <div class="actions">
@@ -52,6 +55,9 @@ export default {
         openList(listType) {
 
         },
+        AppHeaderClicked() {
+            this.$router.push('/board')
+        }
         // async printAverageColor() {
         //     const color = await getAverageColor();
         //     console.log(color);

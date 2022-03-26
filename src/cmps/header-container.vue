@@ -14,7 +14,6 @@ export default {
         appHeader
     },
     created() { 
-        console.log(this.$route.fullPath);
     },
     data() {
         return {}

@@ -3,9 +3,18 @@
         // border: 1px solid black;
         width: min-content;
         margin: 40px auto;
-        span {
-            font-family: IBMPlex;
+        .logo-txt {
+            font-family: IBMPlexmedium;
             font-size: xxx-large;
+            font-weight: 600;
+        }
+        .logo-img {
+            background-image: url(../assets/imgs/trello-logo-svg-vector.svg);
+            display: inline-block;
+            background-size: cover;
+            width: 45px;
+            height: 45px;
+            margin-right: 15px;
         }
     }
 }
