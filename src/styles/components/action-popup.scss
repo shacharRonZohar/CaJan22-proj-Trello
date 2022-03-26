@@ -122,6 +122,15 @@
     .create {
         margin-top: 10px;
     }
+    .imgs-container {
+        display: grid;
+        grid-template-columns: repeat(2, 139px);
+        // .img-container {
+        //     img {
+        //         border-radius: 5px;
+        //     }
+        // }
+    }
     .chosen {
         border: blue 2px solid;
         /* position: absolute; */
