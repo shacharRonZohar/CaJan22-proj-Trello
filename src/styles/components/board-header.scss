@@ -1,5 +1,6 @@
 .board-header {
     height: 45px;
+    padding-left: 10px;
     button {
         background-color: #ffffff3d;
         padding-right: 10px;
@@ -80,6 +81,7 @@
             margin-inline-start: 5px;
             cursor: pointer;
             font-size: 0.9rem;
+            height: 30px;
         }
         .filter-btn {
             .filter {
