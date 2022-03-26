@@ -3,7 +3,7 @@
     <board-header @openMenu="toggleMenu" :board="board" />
     <main class="main-board">
       <Container
-        :dragClass="'drag-class'"
+        drag-class="on-dragging"
         @drop="onDrop"
         orientation="horizontal"
         class="flex clean-list"
@@ -162,7 +162,7 @@ export default {
 </script>
 
 <style>
-.drag-class {
-  background-color: red;
+.on-dragging {
+  transform: rotate(5deg);
 }
 </style>

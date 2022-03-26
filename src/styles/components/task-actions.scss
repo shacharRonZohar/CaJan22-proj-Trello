@@ -31,8 +31,11 @@
 
             margin-left: 13px;
         }
-        &:hover {
+        &:hover:not(:first-child)  {
             background-color: $clr19;
+            >*:not(.clickable-background):not(.action-popup) {
+                background-color: inherit;
+            }
         }
     }
 
@@ -41,42 +44,42 @@
     }
     .members {
         .icon {
-            @include trello-icon($content: "\e946", $type: sm);
+            @include trello-icon($content: "\e946");
         }
     }
     .archive {
         .icon {
-            @include trello-icon($content: "\e907", $type: sm);
+            @include trello-icon($content: "\e907");
         }
     }
     .attach {
         .icon {
-            @include trello-icon($content: "\e908", $type: sm);
+            @include trello-icon($content: "\e908");
         }
     }
     .label {
         .icon {
-            @include trello-icon($content: "\e93f", $type: sm);
+            @include trello-icon($content: "\e93f");
         }
     }
     .checklist {
         .icon {
-            @include trello-icon($content: "\e91a", $type: sm);
+            @include trello-icon($content: "\e91a");
         }
     }
     .dates {
         .icon {
-            @include trello-icon($content: "\e91b", $type: sm);
+            @include trello-icon($content: "\e91b");
         }
     }
     .cover-action {
         .icon {
-            @include trello-icon($content: "\e914", $type: sm);
+            @include trello-icon($content: "\e914");
         }
     }
     .location {
         .icon {
-            @include trello-icon($content: "\e944", $type: sm);
+            @include trello-icon($content: "\e944");
         }
     }
     @import "./action-popup.scss";
