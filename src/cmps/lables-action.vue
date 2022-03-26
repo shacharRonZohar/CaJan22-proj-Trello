@@ -43,7 +43,7 @@
             </template>
         </action-popup>
         <div class="icon"></div>
-        <button class="labels">Label</button>
+        <button class="labels">Labels</button>
         <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
     </div>
 </template>
