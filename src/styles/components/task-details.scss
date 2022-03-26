@@ -1,87 +1,110 @@
 .task-details-container {
-    display: flex;
-    flex-direction: column;
-    background-color: $clr5;
-    position: absolute;
-    top: 48px;
-    left: 50%;
-    width: 768px;
-    min-height: 1041px;
-    transform: translateX(-50%);
-    border-radius: 2px;
-    z-index: 1;
-    padding: 0 8px 8px 16px;
-
-    @import "./task-details-header.scss";
-    @import "./main-details.scss";
-
-    .label:not(.btn) {
-        cursor: not-allowed;
-        height: 32px;
-        margin: 5px;
-        border-radius: 3px;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .task-details {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        // vertical-align: center;
-        font-weight: 700;
-        font-size: rem(14px);
-        color: white;
-    }
-    .icon {
-        color: inherit;
-        position: relative;
-    }
-
-    .btn.close {
-        cursor: pointer;
-        border-radius: 50%;
-        background-color: inherit;
-        height: 40px;
-        margin: 4px;
-        border: none;
-        padding: 4px;
+        flex-direction: column;
+        background-color: $clr5;
         position: absolute;
-        right: 0;
         top: 0;
-        width: 40px;
-        // z-index: 2;
-        @include trello-icon($content: "\e91c", $type: md);
-    }
+        left: 50%;
+        width: 768px;
+        min-height: 92vh;
+        transform: translateX(-50%);
+        border-radius: 2px;
+        z-index: 2;
+        padding: 0 8px 8px 16px;
+        // overflow: auto;
+        .clickable-background {
+            height: 100%;
+            width: 100%;
+            // top: 20px;
+            position: fixed;
+            min-height: 200vh;
+            min-width: 200vh;
+            top: -200px;
+            left: -200px;
+            cursor: default;
+            pointer-events: auto;
+            z-index: -1;
+            overflow: auto;
+        }
+        @import "./task-details-header.scss";
+        @import "./main-details.scss";
 
-    // .btn.close::before {
-    //     content: "\e91c";
-    // background-image: url(../assets/icons/close.svg);
-    // }
-    .btn {
-        background-color: $clr11;
-        padding: 6px 12px;
-        transition: background-color 85ms, color 85ms;
-    }
-    .btn:hover {
-        cursor: pointer;
-        background-color: $clr11;
-    }
-    button {
-        border-radius: 4px;
-        cursor: pointer;
-        border: none;
-        background-color: transparent;
-    }
-    .img-container {
-        height: 80px;
-        width: 112px;
-    }
-    .open {
-        pointer-events: none;
-    }
-    .cover {
-        height: 116px;
-        width: 103.2%;
-        transform: translate(-16px);
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
+        .label:not(.btn) {
+            cursor: not-allowed;
+            height: 32px;
+            margin: 5px;
+            border-radius: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            // vertical-align: center;
+            font-weight: 700;
+            font-size: rem(14px);
+            color: white;
+        }
+        .icon {
+            color: inherit;
+            position: relative;
+        }
+
+        .btn.close {
+            cursor: pointer;
+            border-radius: 50%;
+            // background-color: inherit;
+            height: 40px;
+            margin: 4px;
+            border: none;
+            padding: 4px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 40px;
+            // z-index: 2;
+            @include trello-icon($content: "\e91c", $type: md);
+        }
+
+        // .btn.close::before {
+        //     content: "\e91c";
+        // background-image: url(../assets/icons/close.svg);
+        // }
+        .btn {
+            background-color: $clr11;
+            padding: 6px 12px;
+            transition: background-color 85ms, color 85ms;
+        }
+        .btn:hover {
+            cursor: pointer;
+            // background-color: $clr11;
+            // filter: brightness(50%);
+        }
+        button {
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+        }
+        .img-container {
+            height: 80px;
+            width: 112px;
+        }
+        .open {
+            pointer-events: none;
+        }
+        .cover {
+            height: 116px;
+            width: 103.2%;
+            transform: translate(-16px);
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
     }
 }

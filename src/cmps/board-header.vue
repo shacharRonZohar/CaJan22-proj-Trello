@@ -1,7 +1,7 @@
 <template>
     <header class="board-header flex space-between align-center">
         <div class="board-nav flex">
-            <div class="open-sidenav flex"><span class="svg-icon arrow-right"></span></div>
+            <!-- <div class="open-sidenav flex"><span class="svg-icon arrow-right"></span></div> -->
 
             <button class="board-btn btn"><span class="svg-icon board-icon"></span> Board</button>
 
@@ -33,9 +33,6 @@ export default {
         board: Object
     },
     emits: ['openMenu'],
-    created() {
-        console.log(this.board);
-    },
     methods: {
         onOpenMenu() {
             this.$emit('openMenu')

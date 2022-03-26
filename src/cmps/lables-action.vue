@@ -2,44 +2,53 @@
     <div @click="toggleActionPopup" class="label btn">
         <action-popup @click.stop v-if="actionPopupOpen">
             <!-- <template v-if="!createLabelOpen"> -->
-            <template v-if="!createLabelOpen" #header>
-                <span>Labels</span>
+            <template #header>
+                <div class="header">
+                    <span v-if="!createLabelOpen">Labels</span>
+                    <button v-else @click="toggleCreateLabel" class="back"></button>
+                    <span v-if="createLabelOpen">Create label</span>
+                    <button class="close-action" @click="toggleActionPopup"></button>
+                </div>
             </template>
-            <template v-else #header>
-                <span>Create label</span>
-            </template>
-            <template v-if="!createLabelOpen" #body>
-                <ul class="clean-list">
-                    <li
-                        @click="onLabel(label.id)"
-                        class="label"
-                        v-for="label in labels"
-                        :key="label"
-                        :style="{ backgroundColor: label.color }"
-                    >
-                        {{ label.title }}
-                        <div class="icon" v-if="isChosen(label.id)"></div>
-                    </li>
-                    <li @click="toggleCreateLabel">Add new label</li>
-                </ul>
-            </template>
-            <template v-else #body>
-                <label for>
-                    Name
-                    <input v-model="newLabel.title" type="text" class="new-label-title" v-focus />
-                </label>
-                <ul class="clean-list clr-opts">
-                    <li
-                        v-for="clr in clrOpts"
-                        :key="clr"
-                        @click="setNewLabelClr(clr)"
-                        class="clr-opt"
-                        :style="{ backgroundColor: clr }"
-                    >
-                        <div class="icon" v-if="newLabel.color === clr"></div>
-                    </li>
-                </ul>
-                <button @click="saveNewLabel" class="create">Create</button>
+            <template #body>
+                <div class="body">
+                    <ul v-if="!createLabelOpen" class="clean-list">
+                        <li
+                            @click="onLabel(label.id)"
+                            class="label"
+                            v-for="label in labels"
+                            :key="label"
+                            :style="{ backgroundColor: label.color }"
+                        >
+                            {{ label.title }}
+                            <div class="icon" v-if="isChosen(label.id)"></div>
+                        </li>
+                        <button class="btn" @click="toggleCreateLabel">Add new label</button>
+                    </ul>
+                    <div v-else class="create-label-container">
+                        <label for>
+                            Name
+                            <input
+                                v-model="newLabel.title"
+                                type="text"
+                                class="new-label-title"
+                                v-focus
+                            />
+                        </label>
+                        <ul class="clean-list clr-opts">
+                            <li
+                                v-for="clr in clrOpts"
+                                :key="clr"
+                                @click="setNewLabelClr(clr)"
+                                class="clr-opt"
+                                :style="{ backgroundColor: clr }"
+                            >
+                                <div class="icon" v-if="newLabel.color === clr"></div>
+                            </li>
+                        </ul>
+                        <button @click="saveNewLabel" class="create btn">Create</button>
+                    </div>
+                </div>
             </template>
         </action-popup>
         <div class="icon"></div>
@@ -67,7 +76,7 @@ export default {
             clrOpts: ['red', 'yellow'],
             newLabel: {
                 title: '',
-                color: ''
+                color: 'red'
             }
         }
     },

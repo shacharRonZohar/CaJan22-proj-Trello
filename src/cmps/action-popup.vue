@@ -17,7 +17,6 @@ export default {
     },
     methods: {
         onClose() {
-            console.log('click')
             this.$emit('closePopup')
         }
     },

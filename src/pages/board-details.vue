@@ -72,7 +72,7 @@ export default {
           const group = board.groups.find(group => group.id === groupId)
           group.tasks.splice(ev.addedIndex, 0, ev.payload)
           this.$store.dispatch({ type: 'saveBoard', boardToSave: board })
-        }, 1)
+        }, 0.001)
       }
     },
     async onDrop({ removedIndex, addedIndex }) {
@@ -119,7 +119,7 @@ export default {
     toggleMenu() {
       this.showMenuClicked = !this.showMenuClicked
     },
-    async setBackGroundImg(imgUrl){
+    async setBackGroundImg(imgUrl) {
       await this.$store.dispatch({
         type: "setBackGroundImg",
         imgUrl,
@@ -137,8 +137,8 @@ export default {
     img() {
       return new URL(`${this.board.style.imgUrl}`, import.meta.url).href
     },
-    isOpen(){
-      return this.showMenuClicked? 'open' : ''
+    isOpen() {
+      return this.showMenuClicked ? 'open' : ''
     }
   },
   watch: {

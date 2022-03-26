@@ -1,22 +1,24 @@
 <template >
-  <section v-if="task" class="task-details-container">
-    <!-- @input.stop -->
-    <div v-if="task.cover" :style="task.cover" class="cover"></div>
-    <header class="task-details-header">
-      <!-- <div class="title-container"> -->
-      <div class="icon"></div>
-      <div class="title-container">
-        <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
-        <div class="group-txt">
-          in list:
-          <span>{{ groupName }}</span>
-          <!-- <span>{{ groupName }}</span> -->
+  <div class="task-details-container">
+    <section @click.stop v-if="task" class="task-details">
+      <div @click.stop="onCloseDetails" class="clickable-background"></div>
+      <!-- @input.stop -->
+      <div v-if="task.cover" :style="task.cover" class="cover"></div>
+      <header class="task-details-header">
+        <!-- <div class="title-container"> -->
+        <div class="icon"></div>
+        <div class="title-container">
+          <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
+          <div class="group-txt">
+            in list:
+            <span>{{ groupName }}</span>
+            <!-- <span>{{ groupName }}</span> -->
+          </div>
         </div>
-      </div>
-    </header>
-    <main class="main-details">
-      <section class="main-content">
-        <!-- <div class="members-container task-layout">
+      </header>
+      <main class="main-details">
+        <section class="main-content">
+          <!-- <div class="members-container task-layout">
           <span>Members:</span>
           <div class="members">
             <div class="member">A</div>
@@ -24,76 +26,76 @@
             <div class="member">SZ</div>
             <div class="member add icon"></div>
           </div>
-        </div>-->
-        <ul v-if="task.labelIds?.length" class="labels-container">
-          <li
-            class="label"
-            v-for="label in task.labelIds"
-            :style="{ backgroundColor: getLabelById(label).color }"
-          >{{ getLabelById(label).title }}</li>
-        </ul>
-        <div class="description-container">
-          <div class="description-header">
-            <div class="icon"></div>
-            <h3>Description</h3>
-          </div>
-          <div @click.stop="toggleDescEdit" v-if="!descEditOpen" class="description task-layout">
-            <span>{{ descTxt }}</span>
-          </div>
-          <form class="description-edit-form task-layout" v-else @submit.prevent="onSaveDesc">
-            <textarea
-              v-focus
-              class="description-edit"
-              v-model="newDesc"
-              placeholder="Add a more detailed description..."
-            ></textarea>
-            <div>
-              <button class="save-new-list-btn">Save</button>
-              <button @click.stop="toggleDescEdit" class="icon close"></button>
-            </div>
-            <!-- <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span> -->
-          </form>
-          <!-- <button class="btn edit">Edit</button> -->
-        </div>
-        <div v-if="task.attachments && task.attachments.length" class="attachments-container">
-          <div class="attachments-header">
-            <div class="icon"></div>
-            <h3>Attachments</h3>
-          </div>
-          <div
-            class="attachment-thumbnail task-layout"
-            v-for="attachment in task.attachments"
-            :key="attachment.id"
-          >
-            <div class="img-container">
-              <img :src="attachment.url" alt />
-            </div>
-            <span class="name">{{ attachment.name }}</span>
-            <small class="btn" @click="onMakeCover(attachment.url)">Make cover</small>
-            <small class="btn" @click="onRemoveAttachment(attachment.id)">Delete</small>
-          </div>
-        </div>
-        <div class="activities-container">
-          <div class="activities-header">
-            <div>
+          </div>-->
+          <ul v-if="task.labelIds?.length" class="labels-container">
+            <li
+              class="label"
+              v-for="label in task.labelIds"
+              :style="{ backgroundColor: getLabelById(label).color }"
+            >{{ getLabelById(label).title }}</li>
+          </ul>
+          <div class="description-container">
+            <div class="description-header">
               <div class="icon"></div>
-              <h3>Activity</h3>
+              <h3>Description</h3>
             </div>
-            <button class="btn show">Show details</button>
+            <div @click.stop="toggleDescEdit" v-if="!descEditOpen" class="description task-layout">
+              <span>{{ descTxt }}</span>
+            </div>
+            <form class="description-edit-form task-layout" v-else @submit.prevent="onSaveDesc">
+              <textarea
+                v-focus
+                class="description-edit"
+                v-model="newDesc"
+                placeholder="Add a more detailed description..."
+              ></textarea>
+              <div>
+                <button class="save-new-list-btn">Save</button>
+                <button @click.stop="toggleDescEdit" class="icon close"></button>
+              </div>
+              <!-- <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span> -->
+            </form>
+            <!-- <button class="btn edit">Edit</button> -->
           </div>
-        </div>
-      </section>
-      <aside class="actions">
-        <h3>Add to card</h3>
-        <component
-          :chosenLabels="task.labelIds"
-          @togglePopup="setPopupMode"
-          @onAction="onAction"
-          v-for="cmp in actionCmps"
-          :is="cmp"
-          :class="open"
-        ></component>
-        <!-- 
+          <div v-if="task.attachments && task.attachments.length" class="attachments-container">
+            <div class="attachments-header">
+              <div class="icon"></div>
+              <h3>Attachments</h3>
+            </div>
+            <div
+              class="attachment-thumbnail task-layout"
+              v-for="attachment in task.attachments"
+              :key="attachment.id"
+            >
+              <div class="img-container">
+                <img :src="attachment.url" alt />
+              </div>
+              <span class="name">{{ attachment.name }}</span>
+              <small class="btn" @click="onMakeCover(attachment.url)">Make cover</small>
+              <small class="btn" @click="onRemoveAttachment(attachment.id)">Delete</small>
+            </div>
+          </div>
+          <div class="activities-container">
+            <div class="activities-header">
+              <div>
+                <div class="icon"></div>
+                <h3>Activity</h3>
+              </div>
+              <button class="btn show">Show details</button>
+            </div>
+          </div>
+        </section>
+        <aside class="actions">
+          <h3>Add to card</h3>
+          <component
+            :chosenLabels="task.labelIds"
+            @togglePopup="setPopupMode"
+            @onAction="onAction"
+            v-for="cmp in actionCmps"
+            :is="cmp"
+            :class="open"
+          ></component>
+          <!-- 
         <div class="lables btn">
           <div class="icon"></div>
           <button class="lables">Lables</button>
@@ -123,12 +125,13 @@
           </div>
           <div class="icon"></div>
           <button class="archive">Archive</button>
-        </div>-->
-      </aside>
-    </main>
-    <button @click="onCloseDetails" class="btn close icon"></button>
-    <!-- <p class="description">Description</p> -->
-  </section>
+          </div>-->
+        </aside>
+      </main>
+      <button @click="onCloseDetails" class="btn close icon"></button>
+      <!-- <p class="description">Description</p> -->
+    </section>
+  </div>
 </template>
 
 <script>
