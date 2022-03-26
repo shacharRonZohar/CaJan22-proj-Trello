@@ -3,7 +3,10 @@
         <action-popup @click.stop v-if="actionPopupOpen">
             <!-- <template v-if="!createLabelOpen"> -->
             <template v-if="!createLabelOpen" #header>
-                <span>Labels</span>
+                <div class="header">
+                    <span>Labels</span>
+                    <button class="close-action" @click="toggleActionPopup"></button>
+                </div>
             </template>
             <template v-else #header>
                 <span>Create label</span>

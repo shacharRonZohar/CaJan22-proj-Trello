@@ -2,7 +2,10 @@
     <div @click.stop="toggleActionPopup" class="attach btn">
         <action-popup @click.stop v-if="actionPopupOpen">
             <template #header>
-                <span class="header">Attach from...</span>
+                <div class="header">
+                    <span>Attach from...</span>
+                    <button class="close-action" @click="toggleActionPopup"></button>
+                </div>
             </template>
             <template #body>
                 <ul class="clean-list">
