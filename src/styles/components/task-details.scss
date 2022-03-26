@@ -3,15 +3,26 @@
     flex-direction: column;
     background-color: $clr5;
     position: absolute;
-    top: 48px;
+    top: 0;
     left: 50%;
     width: 768px;
-    min-height: 1041px;
+    min-height: 92vh;
     transform: translateX(-50%);
     border-radius: 2px;
     z-index: 1;
     padding: 0 8px 8px 16px;
-
+    // overflow: auto;
+    .clickable-background {
+        position: fixed;
+        min-height: 200vh;
+        min-width: 200vh;
+        top: -200px;
+        left: -200px;
+        cursor: default;
+        pointer-events: auto;
+        z-index: -1;
+        overflow: auto;
+    }
     @import "./task-details-header.scss";
     @import "./main-details.scss";
 
