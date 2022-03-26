@@ -16,6 +16,7 @@
         .open-sidenav {
             background-color: #ffffff3d;
             margin-left: 10px;
+            margin-right: 15px;
             border: 1px solid gray;
             width: 25px;
             height: 25px;
@@ -23,6 +24,18 @@
             text-align: center;
             &:hover {
                 background-color: #ffffff52;
+            }
+            .arrow-right {
+                background-image: url(../assets/icons/arrowRight.svg);
+                height: 25px;
+            }
+        }
+        .board-btn {
+            font-size: 1rem;
+            .board-icon {
+                background-image: url(../assets/icons/boardicon.svg);
+                width: 24px;
+                height: 18px;
             }
         }
         .board-name {
@@ -51,6 +64,14 @@
                 }
             }
         }
+        .star-btn {
+            @include trello-icon($content: "\e966");
+        }
+        .invite-btn {
+            .invite {
+                @include trello-icon($content: "\e951");
+            }
+        }
     }
     
     .board-action {
@@ -59,8 +80,19 @@
             cursor: pointer;
 
         }
+        .filter-btn {
+            .filter {
+                background-image: url(../assets/icons/filter.svg);
+            }
+        }
         .right-nav-btn {
             margin-right: 10px;
+            .dots {
+                margin-right: 5px;
+                position: relative;
+                top: 3px;
+                @include trello-icon($content: "\e952");
+            }
         }
     }
 }
