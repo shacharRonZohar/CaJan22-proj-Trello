@@ -44,8 +44,10 @@
         height: 100%;
     }
     .close-action {
+        position: absolute;
+        right:0;
+        top: 5px;
         @include trello-icon($content: "\e91c");
-        
     }
     .computer {
         font-size: 1.5em;
