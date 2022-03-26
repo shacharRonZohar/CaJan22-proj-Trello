@@ -2,7 +2,7 @@
 <section class="board-list-container">
   <div class="flex align">
   <a class="board-list-title-icon"></a>
-  <span>Your boards list</span>
+  <span>Your boards</span>
   </div>
   <ul class="board-list clean-list flex">
     <!-- <li v-for="board in boards" :key="board._id"> -->
