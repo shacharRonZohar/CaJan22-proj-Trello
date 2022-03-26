@@ -67,11 +67,8 @@ export default {
       return this.isLabelTitleShown? 'show-title' : ''
     },
     labels(){
-      // if (!this.task.labelIds) return
-      const board = this.$store.getters.board
       return this.task.labelIds.map(labelId => {
-        const label = board.labels.find(label => label.id === labelId)
-        return labelId = label
+        return this.$store.getters.labelById(labelId)
       })
     }
   },

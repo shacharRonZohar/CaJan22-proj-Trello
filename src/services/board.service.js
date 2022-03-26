@@ -230,13 +230,12 @@ function _createBoards() {
                     'tasks': [
                         {
                             'id': utilService.makeId('t'),
-                            'title': 'Replace logo',
-                            "labelIds": ["l103", "l104"]
+                            'title': 'Replace logo'
                         },
                         {
                             'id': utilService.makeId('t'),
                             'title': 'Add Samples',
-                            "labelIds": ["l103"]
+                            "labelIds": ["l104", "l105"]
                         }
                     ],
                     'style': {}
