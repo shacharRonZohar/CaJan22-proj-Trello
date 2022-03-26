@@ -1,6 +1,7 @@
 .board-header {
     height: 45px;
     padding-left: 10px;
+    flex-wrap: wrap;
     button {
         background-color: #ffffff3d;
         padding-right: 10px;
@@ -10,6 +11,7 @@
         }
     }
     .board-nav {
+        flex-wrap: wrap;
         >* {
             margin-inline-end: 5px;
             font-size: 0.9rem;
@@ -77,6 +79,7 @@
     }
     
     .board-action {
+        flex-wrap: wrap;
         >* {
             margin-inline-start: 5px;
             cursor: pointer;
