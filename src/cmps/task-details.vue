@@ -92,6 +92,7 @@
       <aside class="actions">
         <h3>Add to card</h3>
         <component
+          :chosenLabels="task.labels"
           @togglePopup="setPopupMode"
           @onAction="onAction"
           v-for="cmp in actionCmps"

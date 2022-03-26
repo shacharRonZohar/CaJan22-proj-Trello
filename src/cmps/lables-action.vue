@@ -11,7 +11,10 @@
                         class="label"
                         v-for="label in labels"
                         :style="{ backgroundColor: label.color }"
-                    >{{ label.title }}</li>
+                    >
+                        {{ label.title }}
+                        <div class="icon" v-if="isChosen(label.id)"></div>
+                    </li>
                 </ul>
             </template>-->
         </action-popup>
@@ -24,7 +27,9 @@
 import actionPopup from './action-popup.vue'
 
 export default {
-    // props: [''],
+    props: {
+        chosenLabels: Array
+    },
     emits: ['onAction'],
     components: {
         actionPopup
@@ -41,12 +46,18 @@ export default {
         },
         toggleActionPopup() {
             this.actionPopupOpen = !this.actionPopupOpen
+        },
+        isChosen(label) {
+            console.log(this?.chosenLabels)
+            console.log(label)
+            return this.chosenLabels.includes(label)
         }
     },
     computed: {
         labels() {
             return this.$store.getters.labels
-        }
+        },
+
     },
     unmounted() { },
 }

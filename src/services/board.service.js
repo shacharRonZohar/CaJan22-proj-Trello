@@ -168,12 +168,12 @@ function _createBoards() {
                 {
                     "id": "l101",
                     "title": "Done",
-                    "color": "#61bd4f"
+                    "color": "green"
                 },
                 {
                     "id": "l102",
                     "title": "Progress",
-                    "color": "#61bd33"
+                    "color": "yellow"
                 }
             ],
             'members': [],
