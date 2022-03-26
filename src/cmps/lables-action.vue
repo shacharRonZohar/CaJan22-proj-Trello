@@ -2,18 +2,11 @@
     <div @click="toggleActionPopup" class="label btn">
         <action-popup @click.stop v-if="actionPopupOpen">
             <!-- <template v-if="!createLabelOpen"> -->
-<<<<<<< HEAD
-            <template v-if="!createLabelOpen" #header>
-                <div class="header">
-                    <span>Labels</span>
-                    <button class="close-action" @click="toggleActionPopup"></button>
-=======
             <template #header>
                 <div class="header">
                     <span v-if="!createLabelOpen">Labels</span>
                     <button v-else @click="toggleCreateLabel" class="back"></button>
                     <span v-if="createLabelOpen">Create label</span>
->>>>>>> 5a72d43d82d324d0142f5f9238a321da0151ed10
                 </div>
             </template>
             <template #body>
