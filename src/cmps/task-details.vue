@@ -25,10 +25,10 @@
             <div class="member add icon"></div>
           </div>
         </div>-->
-        <ul v-if="task.labels?.length" class="labels-container">
+        <ul v-if="task.labelIds?.length" class="labels-container">
           <li
             class="label"
-            v-for="label in task.labels"
+            v-for="label in task.labelIds"
             :style="{ backgroundColor: getLabelById(label).color }"
           >{{ getLabelById(label).title }}</li>
         </ul>
@@ -86,7 +86,7 @@
       <aside class="actions">
         <h3>Add to card</h3>
         <component
-          :chosenLabels="task.labels"
+          :chosenLabels="task.labelIds"
           @togglePopup="setPopupMode"
           @onAction="onAction"
           v-for="cmp in actionCmps"
