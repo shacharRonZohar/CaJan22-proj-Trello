@@ -76,7 +76,7 @@ export default {
                 console.log(err)
             }
         },
-        async saveGroup({ state, dispatch, commit }, { groupToSave, activity }) {
+        async saveGroup({ state, dispatch }, { groupToSave, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = boardService.saveGroup(board, groupToSave)
@@ -107,6 +107,15 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.saveAttachment(board, taskId, groupId, payload, activity)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async setBackGroundImg({ state, dispatch }, { imgUrl , activity }) {
+            try {
+                const boardToSave = JSON.parse(JSON.stringify(state.board))
+                boardToSave.style.imgUrl = imgUrl
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
