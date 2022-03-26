@@ -1,4 +1,5 @@
 <template >
+  <!-- TODO: Need to split code into more components -->
   <div class="task-details-container">
     <section @click.stop v-if="task" class="task-details">
       <div @click.stop="onCloseDetails" class="clickable-background"></div>
@@ -70,9 +71,13 @@
               <div class="img-container">
                 <img :src="attachment.url" alt />
               </div>
-              <span class="name">{{ attachment.name }}</span>
-              <small class="btn" @click="onMakeCover(attachment.url)">Make cover</small>
-              <small class="btn" @click="onRemoveAttachment(attachment.id)">Delete</small>
+              <div class="attachment-details">
+                <span class="name">{{ attachment.name }}</span>
+                <div class="attachment-actions">
+                  <small class="btn" @click="onMakeCover(attachment.url)">Make cover</small>
+                  <small class="btn" @click="onRemoveAttachment(attachment.id)">Delete</small>
+                </div>
+              </div>
             </div>
           </div>
           <div class="activities-container">

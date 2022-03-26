@@ -5,6 +5,14 @@
 
     .attachment-thumbnail {
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
+        // > *:not(:first-child) {
+        //     align-self: center;
+        // }
+        .attachment-details {
+            display: flex;
+            flex-direction: column;
+            // .attachment-
+        }
     }
 }

@@ -2,7 +2,12 @@
   <section v-if="board" class="board-details" :style="{ backgroundImage: `url(${img})` }">
     <board-header @openMenu="toggleMenu" :board="board" />
     <main class="main-board">
-      <Container @drop="onDrop" orientation="horizontal" class="flex clean-list">
+      <Container
+        :dragClass="'drag-class'"
+        @drop="onDrop"
+        orientation="horizontal"
+        class="flex clean-list"
+      >
         <!-- :get-child-payload="() => group.id" -->
         <Draggable v-for="group in board.groups" :key="group.id">
           <board-group
@@ -138,6 +143,9 @@ export default {
     },
     isOpen() {
       return this.showMenuClicked ? 'open' : ''
+    },
+    dragClass() {
+      return {}
     }
   },
   watch: {
@@ -151,3 +159,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.drag-class {
+  background-color: red;
+}
+</style>

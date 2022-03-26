@@ -9,6 +9,7 @@
                 <button class="deny">No</button>
         </template>-->
         <!-- </action-popup> -->
+        <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
         <div class="icon"></div>
         <button class="checklists">Checklist</button>
     </div>
