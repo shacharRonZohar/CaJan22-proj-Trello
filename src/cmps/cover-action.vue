@@ -2,13 +2,17 @@
     <div @click.stop="toggleActionPopup" class="cover-action btn">
         <action-popup @click.stop v-if="actionPopupOpen">
             <template #header>
-                <span class="header">Cover</span>
+                <div class="header">
+                    <span>Cover</span>
+                    <button class="close-action" @click="toggleActionPopup"></button>
+                </div>
             </template>
             <template #body>
                 <ul class="clean-list cover-clrs">
                     <li
                         @click="onChooseCover(color)"
                         v-for="color in colors"
+                        :key="color"
                         :style="{ backgroundColor: color }"
                     ></li>
                 </ul>

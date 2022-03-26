@@ -43,6 +43,10 @@
     .body {
         height: 100%;
     }
+    .close-action {
+        @include trello-icon($content: "\e91c");
+        
+    }
     .computer {
         font-size: 1.5em;
         display: block;
@@ -101,14 +105,14 @@
             align-items: center;
         }
         .icon {
-            @include trello-icon($content: "\e916", $type: sm);
+            @include trello-icon($content: "\e916");
         }
     }
     .label {
         width: 240px;
         justify-content: space-between;
         .icon {
-            @include trello-icon($content: "\e916", $type: sm);
+            @include trello-icon($content: "\e916");
         }
         padding-left: 10px;
         cursor: pointer;
