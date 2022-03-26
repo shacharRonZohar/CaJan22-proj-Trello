@@ -45,7 +45,7 @@
     }
     .close-action {
         position: absolute;
-        right:0;
+        right: 0;
         top: 5px;
         @include trello-icon($content: "\e91c");
     }
@@ -121,6 +121,14 @@
     }
     .create {
         margin-top: 10px;
+    }
+    .chosen {
+        border: blue 2px solid;
+        /* position: absolute; */
+        border-radius: 3px;
+        width: 123%;
+        height: 129%;
+        transform: translate(-5px, -4px);
     }
     // .clr-opt {
     //     width: 20px;
