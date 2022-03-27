@@ -3,7 +3,7 @@
     height: 45px;
     background-color: $clr9;
     &.trans-header {
-        background-color: rgba(0, 0, 0, 0.2)
+        background-color: rgba(0, 0, 0, 0.27)
     }
     .logo {
         margin-left: 10px;
@@ -16,7 +16,7 @@
         }
         .gif-logo {
             content: url(../assets/imgs/moving-logo.gif);
-            height: 20px;
+            height: 18px;
         }
     }
     .board-main-nav {
@@ -27,10 +27,11 @@
                 margin-inline-end: 5px;
                 background-color: inherit;
                 color: $clr2;
+                padding: 7px;
                 cursor: pointer;
             }
             >*:hover {
-                background-color: $clr14;
+                background-color: rgba(0, 0, 0, 0.2);
             }
             &:first-child {
                 margin-left: 25px;
@@ -41,10 +42,11 @@
                 padding-right: 5px;
             }
             .create-btn {
-                // background-color: #014a75;
+                background-color: rgba(0, 0, 0, 0.2);
                 width: 65px;
+                
                 &:hover {
-                    background-color: $clr14;
+                    background-color: rgba(0, 0, 0, 0.3);
                 }
             }
         }

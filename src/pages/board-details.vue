@@ -1,7 +1,7 @@
 <template>
   <section v-if="board" class="board-details" :style="{ backgroundImage: `url(${img})` }">
     <board-header @openMenu="toggleMenu" :board="board" />
-    <main class="main-board">
+    <main class="main-board" :class="shownLabels">
       <Container
         drag-class="on-dragging"
         @drop="onDrop"
@@ -18,6 +18,7 @@
             @saveTask="saveTask"
             @openTaskDetails="openTaskDetails"
             @removeGroup="removeGroup"
+            @labelClicked="labelClicked"
           />
         </Draggable>
         <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-group-btn">
@@ -58,7 +59,8 @@ export default {
         title: ''
       },
       currOpenTaskGroupId: null,
-      showMenuClicked: false
+      showMenuClicked: false,
+      islabelClicked: false
     }
   },
   created() {
@@ -130,6 +132,9 @@ export default {
         imgUrl,
         activity: "Change background image",
       })
+    },
+    labelClicked(){
+      this.isLabelClicked = !this.isLabelClicked
     }
   },
   computed: {
@@ -147,7 +152,10 @@ export default {
     },
     dragClass() {
       return {}
-    }
+    },
+    shownLabels(){
+      return this.islabelClicked? 'show-title' : ''
+    },
   },
   watch: {
     boardId: {

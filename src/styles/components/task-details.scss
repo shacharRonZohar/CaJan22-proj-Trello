@@ -59,7 +59,7 @@
         .btn.close {
             cursor: pointer;
             border-radius: 50%;
-            // background-color: inherit;
+            background-color: #00000014;
             height: 40px;
             margin: 4px;
             border: none;
@@ -70,6 +70,9 @@
             width: 40px;
             // z-index: 2;
             @include trello-icon($content: "\e91c", $type: md);
+            &:hover {
+                background-color: #00000029;
+            }
         }
 
         // .btn.close::before {
@@ -106,5 +109,7 @@
             background-size: contain;
             background-repeat: no-repeat;
         }
+
+       
     }
 }

@@ -17,7 +17,7 @@
         class="clean-list group-list"
       >
         <Draggable v-for="task in group.tasks" :key="task.id">
-          <task-preview @openTaskDetails="openTaskDetails" :task="task" />
+          <task-preview @openTaskDetails="openTaskDetails" @labelClicked="labelClicked" :task="task" />
         </Draggable>
       </Container>
     </div>
@@ -97,6 +97,9 @@ export default {
     },
     removeGroup() {
       this.$emit('removeGroup', this.group.id)
+    },
+    labelClicked(){
+      this.$emit('labelClicked')
     }
   },
   computed: {},

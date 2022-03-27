@@ -24,15 +24,13 @@
     }
 
     ul {
+        flex-wrap: wrap;
         &:hover {
             filter: brightness(85%);
         }
     }
 
     .task-label {
-        float: left;
-        font-size: 12px;
-        font-weight: 700;
         height: 8px;
         margin: 0 4px 4px 0;
         max-width: 40px;
@@ -41,13 +39,21 @@
         text-shadow: none;
         width: auto;
         border-radius: 4px;
+        float: left;
+        font-size: 12px;
+        font-weight: 700;
         color: #fff;
+        line-height: 240px;
+        
 
-        // &.show-title{
-        //     max-width: -moz-fit-content;
-        //     height: 16px;
-        //     animation: label_text_apper .45s ease-out;
-        // }
+        &.show-title{
+            padding-right: 9px; 
+            padding-left: 2px; 
+            height: 16px;
+            max-width: 150px;
+            line-height: 15px;
+            // animation: label_text_apper .45s ease-out;
+        }
     }
 
     h2 {
@@ -95,7 +101,7 @@
     25% {
         height: 8px;
         padding-right: 10px;
-        width: -moz-fit-content;
+        // width: -moz-fit-content;
         width: fit-content;
     }
     45% {
