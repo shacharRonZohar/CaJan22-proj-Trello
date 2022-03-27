@@ -1,5 +1,5 @@
 <template >
-    <div @click="openActionPopup" class="btn action" :class="actionTxt">
+    <div @click="openActionPopup" class="btn action" :class="actionClass">
         <div class="icon"></div>
         <button>{{ actionTxt }}</button>
     </div>
@@ -19,6 +19,9 @@ export default {
     computed: {
         actionTxt() {
             return this.action.substring(0, this.action.indexOf('-'))
+        },
+        actionClass() {
+            return this.action === 'cover-action' ? this.action : this.actionTxt
         }
     },
 }

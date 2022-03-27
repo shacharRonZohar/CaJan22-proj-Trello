@@ -2,8 +2,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-top: 6px;
-    // grid-template-rows: ;
-    // gap: 8px;
     padding: 0 16px 8px 8px;
     @media (min-width: 800px) {
         display: flex;
@@ -13,44 +11,33 @@
             display: none;
         }
     }
-    > * {
-        font-size: 12px;
-        display: flex;
-        padding: 6px 12px;
-        .clickable-background {
-            background-color: none;
-            position: fixed;
+    // > * {
+    //     font-size: 12px;
+    //     display: flex;
+    //     padding: 6px 12px;
+    //     &:not(:first-child) {
+    //         margin-top: 8px;
+    //         border-radius: 3px;
+    //         cursor: pointer;
+    //         height: 32px;
+    //         max-width: 300px;
+    //         transition-duration: 85ms;
+    //         transition-property: background-color, border-color, box-shadow;
+    //         transition-timing-function: ease;
+    //         align-items: center;
+    //         margin-left: 13px;
+    //     }
+    //     &:hover:not(:first-child) {
+    //         background-color: $clr19;
+    //         > *:not(.clickable-background):not(.action-popup) {
+    //             background-color: inherit;
+    //         }
+    //     }
+    // }
 
-            min-width: 200vh;
-            top: -200px;
-            left: -200px;
-            cursor: default;
-            pointer-events: auto;
-            z-index: 3;
-        }
-        &:not(:first-child) {
-            margin-top: 8px;
-            border-radius: 3px;
-            cursor: pointer;
-            height: 32px;
-            max-width: 300px;
-            transition-duration: 85ms;
-            transition-property: background-color, border-color, box-shadow;
-            transition-timing-function: ease;
-            align-items: center;
-            margin-left: 13px;
-        }
-        &:hover:not(:first-child) {
-            background-color: $clr19;
-            > *:not(.clickable-background):not(.action-popup) {
-                background-color: inherit;
-            }
-        }
-    }
-
-    h3 {
-        padding-top: 3px;
-    }
+    // h3 {
+    //     padding-top: 3px;
+    // }
     .members {
         .icon {
             @include trello-icon($content: "\e946");

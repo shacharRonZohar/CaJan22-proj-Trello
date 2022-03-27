@@ -35,12 +35,12 @@
         font-size: rem(14px);
         height: 41px;
         width: 280px;
-        .back {
-            position: absolute;
-            left: 0;
-            top: 11px;
-            @include trello-icon($content: "\e90a", $type: sm);
-        }
+        // .back {
+        //     position: absolute;
+        //     left: 0;
+        //     top: 11px;
+        //     @include trello-icon($content: "\e90a", $type: sm);
+        // }
     }
     .body {
         height: 100%;

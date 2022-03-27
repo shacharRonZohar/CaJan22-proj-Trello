@@ -7,7 +7,6 @@
 </template>
 
 <script>
-// import actionPopup from './action-popup.vue'
 
 export default {
     emits: ['action'],
@@ -15,9 +14,6 @@ export default {
         onArchive() {
             this.$emit('action', { cbName: 'archiveTask' })
         },
-        toggleActionPopup() {
-            this.actionPopupOpen = !this.actionPopupOpen
-        }
     },
 }
 </script>
