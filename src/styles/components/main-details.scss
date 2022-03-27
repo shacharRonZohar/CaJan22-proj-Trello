@@ -2,7 +2,10 @@
     flex-grow: 1;
     display: grid;
     gap: 9px;
-    grid-template-columns: 539px 1fr;
+    grid-template-columns: 1fr;
+    @media (min-width: 800px) {
+        grid-template-columns: 539px 1fr;
+    }
     margin-top: -2px;
     @import "./main-content.scss";
     @import "./task-actions.scss";
