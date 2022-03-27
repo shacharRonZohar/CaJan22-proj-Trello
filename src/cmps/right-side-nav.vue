@@ -1,8 +1,13 @@
 <template>
     <section class="right-side-nav">
         <header class="flex space-between">
-        <h1>Photos by <span><a target="_blank" href="https://unsplash.com/">Unsplah</a></span></h1>
-        <div @click="closeMenu">X</div>
+            <h1>
+                Photos by
+                <span>
+                    <a target="_blank" href="https://unsplash.com/">Unsplah</a>
+                </span>
+            </h1>
+            <div @click="closeMenu">X</div>
         </header>
         <hr />
         <form @submit.prevent="searchPhotos">
@@ -12,7 +17,7 @@
         <ul class="clean-list flex">
             <li v-for="result in results" :key="result.id">
                 <!-- <div class="img-result"> -->
-                    <img @click="setBackGroundImg(result.urls.full)" :src="result.urls.thumb" alt="">
+                <img @click="setBackGroundImg(result.urls.full)" :src="result.urls.thumb" alt />
                 <!-- </div> -->
             </li>
         </ul>
@@ -30,21 +35,21 @@ export default {
         }
     },
     async created() {
-        // const res = await imgService.queryPhotos()
-        // this.results = res.results
+        const res = await imgService.queryPhotos()
+        this.results = res.results
     },
     methods: {
         async searchPhotos() {
             const res = await imgService.queryPhotos(this.searchTxt)
             this.results = res.results
         },
-        setBackGroundImg(imgUrl){
+        setBackGroundImg(imgUrl) {
             this.$emit('setBackGroundImg', imgUrl)
         },
-        closeMenu(){
+        closeMenu() {
             this.$emit('closeMenu')
         }
     }
-    
+
 }
 </script>
