@@ -19,6 +19,10 @@
                         <div class="chosen" v-if="isChosenColor(color)"></div>
                     </li>
                 </ul>
+                <label @click.stop for="file" class="computer body">
+                    Computer
+                    <input id="file" type="file" @change.stop="onUploadImg" @click.stop />
+                </label>
                 <span>Photos from Unsplash</span>
                 <!-- {{ unsplashPhotos }} -->
                 <ul
@@ -75,6 +79,15 @@ export default {
         onRemoveCover() {
             this.$emit('onAction', { cbName: 'removeCover' })
             this.chosenColor = ''
+        },
+        async onUploadImg(ev) {
+            const img = await imgService.uploadImgFromComp(ev)
+            const actions = [
+                { cbName: 'uploadAttachment', payload: img.url },
+                { cbName: 'chooseCover', payload: { type: 'img', style: img.url } }
+            ]
+            this.$emit('onActions', actions)
+            // this.onChooseCoverImg(img.url)
         },
         toggleActionPopup() {
             this.actionPopupOpen = !this.actionPopupOpen

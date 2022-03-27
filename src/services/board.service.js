@@ -95,6 +95,7 @@ function saveGroupDrop(board, fromIdx, toIdx) {
 }
 
 function saveAttachment(board, taskId, groupId, payload, activity) {
+    console.log(payload)
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
     const attachment = _getAttachment(payload)
