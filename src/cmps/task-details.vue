@@ -163,7 +163,6 @@ export default {
         "archive-action",
       ],
       currOpenAction: ''
-      // actionCmps: ['archive-action']
     }
   },
   watch: {
@@ -212,7 +211,6 @@ export default {
       this.saveTask(this.task)
     },
     async onAction({ cbName, payload = null }) {
-      console.log(cbName)
       await this.$store.dispatch({
         type: cbName,
         taskId: this.task.id,
@@ -220,6 +218,7 @@ export default {
         payload,
       })
       // Temporary
+      if (cbName === 'archiveTask') return this.onCloseDetails()
       const taskId = this.$route.params.taskId
       this.task = await this.$store.dispatch({
         type: "getTaskById",
