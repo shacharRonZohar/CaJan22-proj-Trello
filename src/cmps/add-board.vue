@@ -69,35 +69,4 @@ export default {
         }
     },
 }
-// TODO REMOVE STYLE
 </script>
-
-<style>
-.add-board {
-    background-color: #fff;
-    border: 1px solid black;
-    z-index: 1;
-    position: absolute;
-    top: 47px;
-    left: 277px;
-    width: 250px;
-    padding: 20px 5px;
-}
-.img-list {
-    gap: 3px;
-
-}
-img {
-    width: 55px;
-    height: 50px;
-    border-radius: 5px;
-}
-.color-list {
-    gap: 3px;
-}
-.color {
-    width: 40px;
-    height: 30px;
-    border-radius: 5px;
-}
-</style>
