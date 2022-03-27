@@ -1,26 +1,36 @@
 <template>
     <header :class="headerBgc" class="main-header app-header flex align-center">
         <div @click="AppHeaderClicked" class="logo flex align-center">
-            <img class="gif-logo" src="" alt="">
+            <img class="gif-logo" src alt />
             <span class="logo-txt">Twello</span>
         </div>
 
         <div class="board-main-nav flex space-between align-center">
             <div class="actions">
                 <button class="btn wide-s">
-                    <span>Board <span class="svg-icon expand"></span></span>
+                    <span>
+                        Board
+                        <span class="svg-icon expand"></span>
+                    </span>
                 </button>
                 <button class="btn wide-s">
-                    <span>Starred <span class="svg-icon expand"></span></span>
+                    <span>
+                        Starred
+                        <span class="svg-icon expand"></span>
+                    </span>
                 </button>
 
                 <button class="btn narrow-s">
-                    <span>More <span class="svg-icon expand"></span></span>
+                    <span>
+                        More
+                        <span class="svg-icon expand"></span>
+                    </span>
                 </button>
 
-                <button class="btn create-btn">Create</button>
+                <button @click="onToggleAddBoard" class="btn create-btn">Create</button>
             </div>
-            <header-board-list v-if="isShown"></header-board-list>
+            <add-board v-if="createClicked" @addedBoard="onToggleAddBoard"></add-board>
+            <!-- <header-board-list v-if="isShown"></header-board-list> -->
 
             <div class="second-actions flex align-center">
                 <div class="search-app-header">
@@ -44,18 +54,20 @@
 
 <script>
 import headerBoardList from './header-board-list.vue'
+import addBoard from './add-board.vue'
 
 export default {
     components: {
-        headerBoardList
+        headerBoardList,
+        addBoard
     },
     created() {
-        // this.printAverageColor()
     },
     data() {
         return {
             searchTxt: '',
             isShown: false,
+            createClicked: false
         }
     },
     methods: {
@@ -64,6 +76,9 @@ export default {
         },
         AppHeaderClicked() {
             this.$router.push('/board')
+        },
+        onToggleAddBoard() {
+            this.createClicked = !this.createClicked
         }
         // async printAverageColor() {
         //     const color = await getAverageColor();

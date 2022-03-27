@@ -1,22 +1,72 @@
-.board-list-container{
+.board-list-container {
     flex-grow: 1;
-    .board-list-title-icon{
-        @include trello-icon($content: "\e946", $type:lg);
-        opacity: .8;
+    padding-inline-start: 40px;
+    .board-list-title-icon {
+        @include trello-icon($content: "\e946", $type: lg);
+        opacity: 0.8;
     }
 
-    span{
-       font-size: 16px;
-       font-weight: 700;
-       line-height: 24px;
+    span {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
     }
 
-
-    ul{
+    .board-list {
         margin-top: 10px;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax( 150px, 1fr));
-        gap: 10px;  
-        grid-auto-rows: 100px;  
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        padding: 0 0 20px;
+
+        .add-new-board {
+            margin-right: 0;
+            margin-bottom: 8px;
+            width: 23%;
+            max-width: 200px;
+            min-width: 150px;
+            margin: 0 2% 2% 0;
+            padding: 0;
+            height: 96px;
+            transform: translate(0);
+            cursor: pointer;
+            position: relative;
+
+
+            .add-bord-container {
+                display: flex;
+                background-color: #f0f2f5;
+                color: #172b4d;
+                display: flex;
+                flex-direction: column;
+                margin-right: 0;
+                border-radius: 3px;
+                display: block;
+                line-height: 1.25rem;
+                padding: 8px;
+                position: relative;
+                height: 100%;
+                width: 100%;
+                border-radius: 4px;
+                cursor: pointer;
+
+                &:hover{
+                    background-color: #e7e9ed;
+                }
+                // transition-duration: 85ms;
+                // transition-property: background-color,border-color,box-shadow;
+                p {
+                    margin: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: #172b4d;
+                    font-weight: 400;
+                    height: 100%;
+                    line-height: 20px;
+                    // text-align: center;
+                }
+            }
+        }
     }
 }
