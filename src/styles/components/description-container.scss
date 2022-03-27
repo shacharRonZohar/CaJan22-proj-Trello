@@ -15,6 +15,9 @@
             cursor: pointer;
             background-color: $clr19;
         }
+        &.empty {
+            background-color: inherit;
+        }
     }
 
     .description-edit-form {

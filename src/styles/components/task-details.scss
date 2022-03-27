@@ -9,7 +9,7 @@
     overflow-x: hidden;
     .clickable-background {
         height: 106%;
-        background: red;
+        // background: red;
         position: absolute;
         /* top: -1px; */
         z-index: 2;
@@ -75,7 +75,8 @@
         .btn.close {
             cursor: pointer;
             border-radius: 50%;
-            background-color: #00000014;
+            // TODO: Add dynamic background color (maybe using classes)
+            // background-color: #00000014;
             height: 40px;
             margin: 4px;
             border: none;

@@ -46,7 +46,12 @@
               <div class="icon"></div>
               <h3>Description</h3>
             </div>
-            <div @click.stop="toggleDescEdit" v-if="!descEditOpen" class="description task-layout">
+            <div
+              @click.stop="toggleDescEdit"
+              v-if="!descEditOpen"
+              class="description task-layout"
+              :class="isFull"
+            >
               <span>{{ descTxt }}</span>
             </div>
             <form class="description-edit-form task-layout" v-else @submit.prevent="onSaveDesc">
@@ -291,6 +296,9 @@ export default {
       return "description" in this.task && this.task.description
         ? this.task.description
         : "Add a more detailed description..."
+    },
+    isFull() {
+      return { 'empty': this.task.description }
     },
     open() {
       return { open: this.isActionPopupOpen }
