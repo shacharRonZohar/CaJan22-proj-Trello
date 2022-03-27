@@ -60,7 +60,7 @@ export default {
       },
       currOpenTaskGroupId: null,
       showMenuClicked: false,
-      islabelClicked: false
+      isLabelClicked: false
     }
   },
   created() {
@@ -154,7 +154,7 @@ export default {
       return {}
     },
     shownLabels(){
-      return this.islabelClicked? 'show-title' : ''
+      return this.isLabelClicked? 'show-title' : 'hide-title'
     },
   },
   watch: {

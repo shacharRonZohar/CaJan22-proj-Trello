@@ -7,11 +7,15 @@
 
         <div class="board-main-nav flex space-between align-center">
             <div class="actions">
-                <button class="btn">
+                <button class="btn wide-s">
                     <span>Board <span class="svg-icon expand"></span></span>
                 </button>
-                <button class="btn">
+                <button class="btn wide-s">
                     <span>Starred <span class="svg-icon expand"></span></span>
+                </button>
+
+                <button class="btn narrow-s">
+                    <span>More <span class="svg-icon expand"></span></span>
                 </button>
 
                 <button class="btn create-btn">Create</button>
@@ -26,6 +30,9 @@
                         type="text"
                         placeholder="Search"
                     />
+                </div>
+                <div class="mini-search">
+                    <span class="search-icon svg-icon"></span>
                 </div>
                 <div class="profile-app-header flex">
                     <div class="letter">P</div>
