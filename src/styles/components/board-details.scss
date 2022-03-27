@@ -28,30 +28,33 @@
 
         &.show-title{
             .task-label {
-                // height: 8px;
-                margin: 0 4px 4px 0;
-                // max-width: 40px;
-                min-width: 40px;
-                padding: 0;
-                text-shadow: none;
-                width: auto;
-                border-radius: 4px;
-                float: left;
-                font-size: 12px;
-                font-weight: 700;
-                color: #fff;
-                line-height: 240px;
+                animation: show-labels 0.45s;
+                // margin: 0 4px 4px 0;
+                // min-width: 40px;
+                // text-shadow: none;
+                // width: auto;
+                // border-radius: 4px;
+                // float: left;
+                // font-size: 12px;
+                // font-weight: 700;
+                // color: #fff;
+                // line-height: 240px;
                 padding-right: 9px; 
                 padding-left: 2px; 
                 height: 16px;
                 max-width: 150px;
-                line-height: 15px;
-                
-        
-                // &.show-title{
-                //     // animation: label_text_apper .45s ease-out;
-                // }
+                line-height: 15px;     
             }
+
+        &.hide-title{
+            .task-label {
+            animation: hide-labels 0.45s;
+            padding: 0; 
+            height: 8px;
+            max-width: 40px;
+            line-height: 240px;
+            }
+        }
         }
     }
     
@@ -105,5 +108,58 @@
             background-color: $clr9;
             cursor: pointer;
         }
+    }
+}
+
+@keyframes show-labels {
+    0% {
+        color: #0000;
+        height: 8px;
+        width: 40px;
+    }
+    25% {
+        height: 8px;
+        padding-right: 10px;
+        max-width: 150px;
+    }
+    45% {
+        height: 8px;
+        padding-right: 9px;
+    }
+    53% {
+        height: 8px;
+        padding-right: 8px;
+    }
+    75% {
+        color: #0000;
+        height: 16px;
+        line-height: 16px;
+    }
+}
+
+@keyframes hide-labels {
+    0% {
+        height: 16px;
+        line-height: 16px;
+        padding: 0 8px;
+        max-width: 150px;
+    }
+    33% {
+        color: #0000;
+        height: 16px;
+        line-height: 16px;
+        max-width: 150px
+    }
+    66% {
+        color: #0000;
+        height: 8px;
+        line-height: 100px;
+        padding: 0 8px;
+        max-width: 150px
+    }
+    to {
+        color: #0000;
+        padding: 0;
+        width: 40px;
     }
 }

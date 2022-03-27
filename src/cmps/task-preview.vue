@@ -6,7 +6,7 @@
     <main>
       <ul class="flex clean-list" v-if="task.labelIds?.length">
        <li :title="title" @click.stop="labelClicked" v-for="label in labels" :key="label">
-          <div class="task-label" :class="labelPreview" :style="{backgroundColor: `${label.color}`}">
+          <div class="task-label" :style="{backgroundColor: `${label.color}`}">
            {{label.title}}
           </div>
        </li>
@@ -40,7 +40,6 @@ export default {
   data() {
     return {
       title: 'important',
-      isLabelTitleShown: false
     };
   },
   created() {
@@ -51,7 +50,6 @@ export default {
       this.$emit("openTaskDetails");
     },
     labelClicked() {
-      this.isLabelTitleShown = !this.isLabelTitleShown
       this.$emit('labelClicked')
     }
   },
@@ -64,9 +62,6 @@ export default {
     },
     bgColor(){
       return this.task.cover.backgroundColor
-    },
-    labelPreview(){
-      return this.isLabelTitleShown? 'show-title' : ''
     },
     labels(){
       return this.task.labelIds.map(labelId => {

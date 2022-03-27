@@ -22,6 +22,7 @@
           />
         </Draggable>
         <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-group-btn">
+          <pre>{{shownLabels}}</pre>
           <span>+</span> Add another list
         </button>
         <div v-else class="add-group-container">
@@ -60,7 +61,7 @@ export default {
       },
       currOpenTaskGroupId: null,
       showMenuClicked: false,
-      islabelClicked: false
+      isLabelClicked: false
     }
   },
   created() {
@@ -154,7 +155,7 @@ export default {
       return {}
     },
     shownLabels(){
-      return this.islabelClicked? 'show-title' : ''
+      return this.isLabelClicked? 'show-title' : 'hide-title'
     },
   },
   watch: {

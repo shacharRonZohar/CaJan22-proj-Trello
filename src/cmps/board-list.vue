@@ -4,7 +4,7 @@
   <a class="board-list-title-icon"></a>
   <span>Your boards</span>
   </div>
-  <ul class="board-list clean-list flex">
+  <ul class="board-list clean-list">
     <!-- <li v-for="board in boards" :key="board._id"> -->
       <board-preview v-for="board in boards" :key="board._id" :board="board" />
     <!-- </li> -->
