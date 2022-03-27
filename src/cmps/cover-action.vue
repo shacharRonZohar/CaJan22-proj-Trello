@@ -1,47 +1,44 @@
 <template >
     <div @click.stop="toggleActionPopup" class="cover-action btn">
+        <div class="header">
+            <span>Cover</span>
+            <button class="close-action" @click="toggleActionPopup"></button>
+        </div>
+        <div @click="onRemoveCover" v-if="chosenColor" class="remove-cover">Remove cover</div>
+        <ul class="clean-list cover-clrs">
+            <li
+                @click="onChooseCoverColor(color)"
+                v-for="color in colors"
+                :key="color"
+                :style="{ backgroundColor: color }"
+            >
+                <div class="chosen" v-if="isChosenColor(color)"></div>
+            </li>
+        </ul>
+        <label @click.stop for="file" class="computer body">
+            Computer
+            <input id="file" type="file" @change.stop="onUploadImg" @click.stop />
+        </label>
+        <span>Photos from Unsplash</span>
+        <ul class="clean-list imgs-container" v-if="unsplashPhotos && unsplashPhotos.length">
+            <li
+                @click="onChooseCoverImg(photo.urls.full)"
+                class="img-container"
+                v-for="photo in unsplashPhotos"
+            >
+                <img :src="photo.urls.thumb" alt />
+            </li>
+        </ul>
         <!-- <action-popup @click.stop v-if="actionPopupOpen">
-            <template #header>
-                <div class="header">
-                    <span>Cover</span>
-                    <button class="close-action" @click="toggleActionPopup"></button>
-                </div>
+                        <template #header>
             </template>
             <template #body>
-                <div @click="onRemoveCover" v-if="chosenColor" class="remove-cover">Remove cover</div>
-                <ul class="clean-list cover-clrs">
-                    <li
-                        @click="onChooseCoverColor(color)"
-                        v-for="color in colors"
-                        :key="color"
-                        :style="{ backgroundColor: color }"
-                    >
-                        <div class="chosen" v-if="isChosenColor(color)"></div>
-                    </li>
-                </ul>
-                <label @click.stop for="file" class="computer body">
-                    Computer
-                    <input id="file" type="file" @change.stop="onUploadImg" @click.stop />
-                </label>
-                <span>Photos from Unsplash</span>
-                <ul
-                    class="clean-list imgs-container"
-                    v-if="unsplashPhotos && unsplashPhotos.length"
-                >
-                    <li
-                        @click="onChooseCoverImg(photo.urls.full)"
-                        class="img-container"
-                        v-for="photo in unsplashPhotos"
-                    >
-                        <img :src="photo.urls.thumb" alt />
-                    </li>
-                </ul>
             </template>
         </action-popup>-->
-        <!-- {{ unsplashPhotos }} -->
+        <!-- {{ unsplashPhotos }} 
         <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
         <div class="icon"></div>
-        <button class="cover-action">Cover</button>
+        <button class="cover-action">Cover</button>-->
     </div>
 </template>
 

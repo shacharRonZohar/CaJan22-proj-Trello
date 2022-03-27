@@ -188,6 +188,7 @@ export default {
   },
   methods: {
     toggleAction(action) {
+      console.log(action)
       this.currOpenAction = this.currOpenAction ? '' : action
     },
     async saveTask(taskToSave) {
