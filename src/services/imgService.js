@@ -25,11 +25,9 @@ async function queryPhotos(request = 'nature') {
 
 }
 
-// getImgColor('http://res.cloudinary.com/twello/image/upload/v1648315891/design_kwnpub.jpg')
 async function getImgColor(img) {
     const fac = new FastAverageColor()
     const color = await fac.getColorAsync(img)
-    console.log(color.hex)
     return color.hex
 }
 
