@@ -1,7 +1,7 @@
 <template >
-    <div @click="openActionPopup" class="btn action" :class="actionClass">
+    <div @click="openActionPopup" class="btn btn-action" :class="actionClass">
         <div class="icon"></div>
-        <button>{{ actionTxt }}</button>
+        <span>{{ actionTxt }}</span>
     </div>
 </template>
 

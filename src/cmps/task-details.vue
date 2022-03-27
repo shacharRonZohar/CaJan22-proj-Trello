@@ -107,7 +107,7 @@
           </div>-->
         </section>
         <aside class="actions">
-          <h3>Add to card</h3>
+          <h3 class="actions-title">Add to card</h3>
           <div class="placeholder"></div>
           <action-btn
             @openActionPopup="toggleAction"
