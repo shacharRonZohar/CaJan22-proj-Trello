@@ -1,5 +1,6 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service'
+import { imgService } from './imgService.js'
 
 export const boardService = {
     query,
@@ -102,18 +103,17 @@ function saveAttachment(board, taskId, groupId, payload, activity) {
     return Promise.resolve(board)
 }
 
-function saveCover(board, taskId, groupId, payload, activity) {
+async function saveCover(board, taskId, groupId, payload, activity) {
     let cover = {
-        backgroundColor: payload.thing
+        backgroundColor: payload.style
     }
     if (payload.type !== 'color') {
         cover = {
-            backgroundImage: `url(${payload.thing})`
+            type: payload.type,
+            backgroundImage: `url(${payload.style})`,
+            backgroundColor: await imgService.getImgColor(payload.style)
         }
     }
-    // const cover = {
-    //     background: `${payload.thing} no-repeat center`
-    // }
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
     task.cover = cover

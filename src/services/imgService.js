@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { createApi } from "unsplash-js"
-
+import { createApi } from 'unsplash-js'
+import FastAverageColor from 'fast-average-color'
 
 const api = createApi({
     // Don't forget to set your access token here!
@@ -10,7 +10,8 @@ const api = createApi({
 
 export const imgService = {
     uploadImgFromComp,
-    queryPhotos
+    queryPhotos,
+    getImgColor
 }
 
 async function queryPhotos(request = 'nature') {
@@ -24,6 +25,13 @@ async function queryPhotos(request = 'nature') {
 
 }
 
+// getImgColor('http://res.cloudinary.com/twello/image/upload/v1648315891/design_kwnpub.jpg')
+async function getImgColor(img) {
+    const fac = new FastAverageColor()
+    const color = await fac.getColorAsync(img)
+    console.log(color.hex)
+    return color.hex
+}
 
 async function uploadImgFromComp(ev) {
     //Defining our variables

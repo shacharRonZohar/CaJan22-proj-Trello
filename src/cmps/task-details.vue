@@ -269,7 +269,7 @@ export default {
     onMakeCover(url) {
       this.onAction({
         cbName: "chooseCover",
-        payload: { type: "img", thing: url },
+        payload: { type: "img", style: url },
       })
     },
     onCloseDetails() {
@@ -289,7 +289,7 @@ export default {
       return this.$store.getters.labelById(id)
     },
     getTime(date) {
-      console.log(date)
+      // console.log(date)
       return moment(+date).fromNow()
     }
   },

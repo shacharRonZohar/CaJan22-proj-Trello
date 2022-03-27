@@ -58,19 +58,19 @@ export default {
     data() {
         return {
             actionPopupOpen: false,
-            colors: ['yellow', 'red', 'pink'],
+            colors: ['yellow', 'red', 'pink', 'orange', 'green', 'blue', 'lightblue'],
             chosenColor: '',
             unsplashPhotos: []
         }
     },
     methods: {
         onChooseCoverColor(color) {
-            this.$emit('onAction', { cbName: 'chooseCover', payload: { type: 'color', thing: color } })
+            this.$emit('onAction', { cbName: 'chooseCover', payload: { type: 'color', style: color } })
             this.chosenColor = color
         },
         onChooseCoverImg(img) {
-            this.$emit('onAction', { cbName: 'chooseCover', payload: { type: 'img', thing: img } })
-            // this.$emit('onAction', { cbName: 'uploadAttachment', payload: { type: 'img', thing: img } })
+            this.$emit('onAction', { cbName: 'chooseCover', payload: { type: 'img', style: img } })
+            // this.$emit('onAction', { cbName: 'uploadAttachment', payload: { type: 'img', style: img } })
         },
         onRemoveCover() {
             this.$emit('onAction', { cbName: 'removeCover' })
