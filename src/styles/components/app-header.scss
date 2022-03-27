@@ -49,6 +49,18 @@
                     background-color: rgba(0, 0, 0, 0.3);
                 }
             }
+            
+            .wide-s {
+                @include for-mobile-layout {
+                    display: none;
+                }
+            }
+            .narrow-s {
+                display: none;
+                @include for-mobile-layout {
+                    display: inline-block;
+                }
+            }
         }
 
         .second-actions {
@@ -74,6 +86,35 @@
                 }
                 &:hover {
                     background-color: rgba(255, 255, 255, 0.4);
+                }
+
+                @include for-mobile-layout {
+                    display: none;
+                }
+            }
+
+            .mini-search {
+                display: none;
+                background-color: rgba(0, 0, 0, 0.1);
+                width: 37px;
+                height: 37px;
+                border-radius: 3px;
+                padding: 2px;
+                cursor: pointer;
+                .search-icon {
+                    margin-top: 5px;
+                    margin-left: 5px;
+                    background-image: url(../assets/icons/searchicon.svg);
+                    height: 20px;
+                }
+                
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.2);
+                    cursor: not-allowed;
+                }
+                
+                @include for-mobile-layout {
+                    display: block;
                 }
             }
             

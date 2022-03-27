@@ -31,9 +31,9 @@
 
             margin-left: 13px;
         }
-        &:hover:not(:first-child)  {
+        &:hover:not(:first-child) {
             background-color: $clr19;
-            >*:not(.clickable-background):not(.action-popup) {
+            > *:not(.clickable-background):not(.action-popup) {
                 background-color: inherit;
             }
         }
