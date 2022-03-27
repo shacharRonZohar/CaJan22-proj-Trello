@@ -37,6 +37,9 @@ export default {
         onOpenMenu() {
             this.$emit('openMenu')
         }
+    },
+    created() {
+        console.log(this.board);
     }
 
 }

@@ -4,19 +4,23 @@
     // font-size: 0.9rem;
     .labels-container {
         flex-direction: row;
+        flex-wrap: wrap;
     }
 
     > * {
         margin-top: 13px;
         display: flex;
-        gap: 4px;
         flex-direction: column;
         > * {
             display: flex;
-            gap: 8px;
+            gap: 12px;
+        }
+        &:not(.labels-container) {
+            gap: 4px;
         }
         &:not(:first-child) {
             margin-top: 29px;
+            margin-left: 6px;
         }
     }
     @import "./members-container.scss";

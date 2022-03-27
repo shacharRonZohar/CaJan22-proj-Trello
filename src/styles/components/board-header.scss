@@ -7,7 +7,8 @@
         padding-right: 10px;
         padding-left: 10px;
         &:hover {
-            background-color: #00000029;;
+            background-color: #00000029;
+            // cursor: not-allowed;
         }
     }
     .board-nav {
@@ -79,7 +80,7 @@
     }
     
     .board-action {
-        flex-wrap: wrap;
+        // flex-wrap: wrap;
         >* {
             margin-inline-start: 5px;
             cursor: pointer;
@@ -93,6 +94,7 @@
         }
         .right-nav-btn {
             margin-right: 10px;
+            cursor: pointer;
             .dots {
                 margin-right: 5px;
                 position: relative;

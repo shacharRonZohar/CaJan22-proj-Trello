@@ -3,29 +3,34 @@
     width: 100%;
     position: fixed;
     top: 0;
+    left: 0;
     overflow-y: auto;
     overflow-x: hidden;
     .task-details {
         display: flex;
         flex-direction: column;
-        background-color: $clr5;
+        background-color: #f5f4f7;
         position: absolute;
         top: 0;
         left: 50%;
-        width: 768px;
+        width: 96.7%;
         min-height: 92vh;
-        transform: translateX(-50%);
+        transform: translateX(-51.3%);
         border-radius: 2px;
         z-index: 2;
         padding: 0 8px 8px 16px;
-        margin: 50px auto 0 auto; // margin-top: 50px;
-        // overflow: auto;
+        margin: 50px 10px 0 10px;
+        margin-top: 50px;
+        @media (min-width: 800px) {
+            width: 768px;
+            margin: 50px auto 0 auto;
+        }
         .clickable-background {
             height: 100%;
             width: 100%;
             // top: 20px;
             position: fixed;
-            min-height: 200vh;
+            // min-height: 200vh;
             min-width: 200vh;
             top: -200px;
             left: -200px;
@@ -93,6 +98,10 @@
             border-radius: 4px;
             cursor: pointer;
             border: none;
+            color: inherit;
+        }
+        button:not(.save-new-list-btn) {
+            background-color: initial;
         }
         .img-container {
             height: 80px;
@@ -109,7 +118,5 @@
             background-size: contain;
             background-repeat: no-repeat;
         }
-
-       
     }
 }

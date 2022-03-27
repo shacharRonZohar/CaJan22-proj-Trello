@@ -28,6 +28,7 @@
                 background-color: inherit;
                 color: $clr2;
                 padding: 7px;
+                // cursor: not-allowed;
                 cursor: pointer;
             }
             >*:hover {
@@ -110,7 +111,7 @@
                 
                 &:hover {
                     background-color: rgba(0, 0, 0, 0.2);
-                    cursor: not-allowed;
+                    // cursor: not-allowed;
                 }
                 
                 @include for-mobile-layout {
