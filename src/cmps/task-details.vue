@@ -3,17 +3,14 @@
   <div class="task-details-container">
     <section @click.stop v-if="task" class="task-details">
       <div @click.stop="onCloseDetails" class="clickable-background"></div>
-      <!-- @input.stop -->
       <div v-if="task.cover" :style="task.cover" class="cover"></div>
       <header class="task-details-header">
-        <!-- <div class="title-container"> -->
         <div class="icon"></div>
         <div class="title-container">
           <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
           <div class="group-txt">
             in list:
             <span>{{ groupName }}</span>
-            <!-- <span>{{ groupName }}</span> -->
           </div>
         </div>
       </header>
@@ -107,45 +104,14 @@
             :chosenLabels="task.labelIds"
             @togglePopup="setPopupMode"
             @onAction="onAction"
+            @onActions="onActions"
             v-for="cmp in actionCmps"
             :is="cmp"
             :class="open"
           ></component>
-          <!-- 
-        <div class="lables btn">
-          <div class="icon"></div>
-          <button class="lables">Lables</button>
-        </div>
-        <div class="checklist btn">
-          <div class="icon"></div>
-          <button class="checklist">Checklist</button>
-        </div>
-        <div class="dates btn">
-          <div class="icon"></div>
-          <button class="dates">Dates</button>
-        </div>
-        <div @click="toggleActionPopup" class="attachment btn">
-           Gonna be a dynamic component 
-          <div class="icon"></div>
-          <button class="attachment">Attachment</button>
-        </div>
-        <div class="cover btn">
-          <div class="icon"></div>
-          <button class="cover">Cover</button>
-        </div>
-        <div @click="toggleActionPopup" class="archive btn">
-          <div v-if="actionPopupOpen" class="action-popup">
-            Are you sure?
-            <button @click="onArchive" class="confirm">Yes</button>
-            <button class="deny">No</button>
-          </div>
-          <div class="icon"></div>
-          <button class="archive">Archive</button>
-          </div>-->
         </aside>
       </main>
       <button @click="onCloseDetails" class="btn close icon"></button>
-      <!-- <p class="description">Description</p> -->
     </section>
   </div>
 </template>
@@ -257,6 +223,27 @@ export default {
         groupId: this.groupId || this.localGroupId,
       })
     },
+    async onActions(actions) {
+      // Plaster
+      await this.$store.dispatch({
+        type: actions[0].cbName,
+        taskId: this.task.id,
+        groupId: this.localGroupId,
+        payload: actions[0].payload,
+      })
+      await this.$store.dispatch({
+        type: actions[1].cbName,
+        taskId: this.task.id,
+        groupId: this.localGroupId,
+        payload: actions[1].payload,
+      })
+      const taskId = this.$route.params.taskId
+      this.task = await this.$store.dispatch({
+        type: "getTaskById",
+        taskId,
+        groupId: this.groupId || this.localGroupId,
+      })
+    },
     async onSaveTitle(ev) {
       this.task.title = ev.target.innerText
       await this.saveTask(this.task)
@@ -269,7 +256,7 @@ export default {
     onMakeCover(url) {
       this.onAction({
         cbName: "chooseCover",
-        payload: { type: "img", thing: url },
+        payload: { type: "img", style: url },
       })
     },
     onCloseDetails() {
@@ -289,7 +276,7 @@ export default {
       return this.$store.getters.labelById(id)
     },
     getTime(date) {
-      console.log(date)
+      // console.log(date)
       return moment(+date).fromNow()
     }
   },
