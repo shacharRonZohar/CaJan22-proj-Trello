@@ -25,6 +25,34 @@
             margin: 0 5px;
             background-color: rgba(0,0,0,.15);
         }
+
+        &.show-title{
+            .task-label {
+                // height: 8px;
+                margin: 0 4px 4px 0;
+                // max-width: 40px;
+                min-width: 40px;
+                padding: 0;
+                text-shadow: none;
+                width: auto;
+                border-radius: 4px;
+                float: left;
+                font-size: 12px;
+                font-weight: 700;
+                color: #fff;
+                line-height: 240px;
+                padding-right: 9px; 
+                padding-left: 2px; 
+                height: 16px;
+                max-width: 150px;
+                line-height: 15px;
+                
+        
+                // &.show-title{
+                //     // animation: label_text_apper .45s ease-out;
+                // }
+            }
+        }
     }
     
     .add-group-btn{
