@@ -1,4 +1,5 @@
 .task-details-container {
+    @import "./action-popup.scss";
     height: 107%;
     width: 100%;
     position: absolute;
@@ -6,6 +7,16 @@
     left: 0;
     overflow-y: auto;
     overflow-x: hidden;
+    .clickable-background {
+        height: 106%;
+        background: red;
+        position: absolute;
+        /* top: -1px; */
+        z-index: 2;
+        left: 0;
+        width: 100%;
+    }
+
     .task-details {
         display: flex;
         flex-direction: column;
@@ -25,20 +36,20 @@
             width: 768px;
             margin: 50px auto 0 auto;
         }
-        .clickable-background {
-            height: 100%;
-            width: 100%;
-            // top: 20px;
-            position: fixed;
-            // min-height: 200vh;
-            min-width: 200vh;
-            top: -200px;
-            left: -200px;
-            cursor: default;
-            pointer-events: auto;
-            z-index: -1;
-            overflow: auto;
-        }
+        // .clickable-background {
+        //     height: 100%;
+        //     width: 100%;
+        //     // top: 20px;
+        //     position: fixed;
+        //     // min-height: 200vh;
+        //     min-width: 200vh;
+        //     top: -200px;
+        //     left: -200px;
+        //     cursor: default;
+        //     pointer-events: auto;
+        //     z-index: -1;
+        //     overflow: auto;
+        // }
         @import "./task-details-header.scss";
         @import "./main-details.scss";
 

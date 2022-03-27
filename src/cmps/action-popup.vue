@@ -1,5 +1,12 @@
 <template>
-    <component v-close class="action-popup" v-if="action" :is="action" :task="task"></component>
+    <component
+        @togglePopup="onTogglePopup"
+        @action="onAction"
+        class="action-popup"
+        v-if="action"
+        :is="action"
+        :task="task"
+    ></component>
 </template>
 
 <script>
@@ -13,7 +20,7 @@ import locationAction from "./location-action.vue"
 import coverAction from "./cover-action.vue"
 
 export default {
-    emits: ['closePopup'],
+    emits: ['togglePopup', 'action'],
     props: {
         action: String,
         task: Object
@@ -33,11 +40,14 @@ export default {
         return {}
     },
     methods: {
-        onClose() {
-            this.$emit('closePopup')
+        onTogglePopup() {
+            this.$emit('togglePopup')
         },
         onAction(action) {
-            this.$emit('onAction', action)
+            this.$emit('action', action)
+        },
+        onActions(actions) {
+            this.$emit('actions', actions)
         }
     },
     computed: {},

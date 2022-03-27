@@ -1,9 +1,14 @@
 <template >
   <!-- TODO: Need to split code into more components -->
-  <div class="task-details-container">
-    <action-popup :action="currOpenAction" :task="task"></action-popup>
+  <div @click.stop="onCloseDetails" class="task-details-container">
+    <action-popup
+      @action="onAction"
+      @actions="onActions"
+      @togglePopup="toggleAction"
+      :action="currOpenAction"
+      :task="task"
+    ></action-popup>
     <section @click.stop v-if="task" class="task-details">
-      <div @click.stop="onCloseDetails" class="clickable-background"></div>
       <div v-if="task.cover" :style="task.cover" class="cover"></div>
       <header class="task-details-header">
         <div class="icon"></div>
@@ -123,6 +128,7 @@
       </main>
       <button @click="onCloseDetails" class="btn close icon"></button>
     </section>
+    <div v-if="currOpenAction" @click.stop="toggleAction" class="clickable-background"></div>
   </div>
 </template>
 
@@ -143,11 +149,9 @@ export default {
     return {
       task: null,
       descEditOpen: false,
-      isActionPopupOpen: false,
-      newDesc: "",
+      newDesc: '',
       localGroupId: null,
-      groupName: "",
-      isActionPopupOpen: false,
+      groupName: '',
       actionCmps: [
         "members-action",
         "label-action",
@@ -208,6 +212,7 @@ export default {
       this.saveTask(this.task)
     },
     async onAction({ cbName, payload = null }) {
+      console.log(cbName)
       await this.$store.dispatch({
         type: cbName,
         taskId: this.task.id,
@@ -259,6 +264,7 @@ export default {
       })
     },
     onCloseDetails() {
+      console.log('closeing')
       const currRoute = this.$route.fullPath
       const route = currRoute.substring(0, currRoute.indexOf("/task"))
       this.$router.push(route)
