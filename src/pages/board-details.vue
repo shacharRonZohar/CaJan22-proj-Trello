@@ -22,7 +22,6 @@
           />
         </Draggable>
         <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-group-btn">
-          <pre>{{shownLabels}}</pre>
           <span>+</span> Add another list
         </button>
         <div v-else class="add-group-container">
