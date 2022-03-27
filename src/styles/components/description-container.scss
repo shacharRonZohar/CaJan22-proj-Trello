@@ -1,5 +1,6 @@
 .description-container {
     .icon {
+        margin-left: 3px;
         @include trello-icon($content: "\e922", $type: lg);
     }
     .icon.close {

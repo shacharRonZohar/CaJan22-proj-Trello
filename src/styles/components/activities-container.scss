@@ -1,5 +1,6 @@
 .activities-container {
     .icon {
+        margin-left: 3px;
         @include trello-icon($content: "\e900", $type: lg);
     }
     .activities-header {

@@ -25,13 +25,16 @@
             <div class="member add icon"></div>
           </div>
           </div>-->
-          <ul v-if="task.labelIds?.length" class="labels-container">
-            <li
-              class="label"
-              v-for="label in task.labelIds"
-              :style="{ backgroundColor: getLabelById(label).color }"
-            >{{ getLabelById(label).title }}</li>
-          </ul>
+          <section class="labels-container task-layout">
+            <small>Labels</small>
+            <ul v-if="task.labelIds?.length" class="labels-list">
+              <li
+                class="label"
+                v-for="label in task.labelIds"
+                :style="{ backgroundColor: getLabelById(label).color }"
+              >{{ getLabelById(label).title }}</li>
+            </ul>
+          </section>
           <div class="description-container">
             <div class="description-header">
               <div class="icon"></div>
@@ -87,7 +90,7 @@
               </div>
             </div>
           </div>
-          <div class="activities-container">
+          <!-- <div class="activities-container">
             <div class="activities-header">
               <div>
                 <div class="icon"></div>
@@ -95,7 +98,7 @@
               </div>
               <button class="btn show">Show details</button>
             </div>
-          </div>
+          </div>-->
         </section>
         <aside class="actions">
           <h3>Add to card</h3>
@@ -140,9 +143,6 @@ export default {
     datesAction,
     coverAction,
     locationAction,
-  },
-  created() {
-    console.log(moment().toNow(1648319551701))
   },
   data() {
     return {
@@ -269,7 +269,6 @@ export default {
       this.descEditOpen = !this.descEditOpen
     },
     setPopupMode(isOpen) {
-      console.log(isOpen)
       this.isActionPopupOpen = isOpen
     },
     getLabelById(id) {

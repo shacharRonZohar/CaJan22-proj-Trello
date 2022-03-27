@@ -45,7 +45,7 @@
         .label:not(.btn) {
             cursor: not-allowed;
             height: 32px;
-            margin: 5px;
+            // margin: 5px;
             border-radius: 3px;
             display: flex;
             justify-content: center;
@@ -118,5 +118,10 @@
             background-size: contain;
             background-repeat: no-repeat;
         }
+    }
+    ul {
+        padding: 0;
+        gap: 5px !important;
+        margin: 0;
     }
 }

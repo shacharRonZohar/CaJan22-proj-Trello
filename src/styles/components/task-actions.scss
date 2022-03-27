@@ -1,6 +1,7 @@
 .actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    margin-top: 6px;
     // grid-template-rows: ;
     // gap: 8px;
     padding: 0 16px 8px 8px;
@@ -16,7 +17,7 @@
         font-size: 12px;
         display: flex;
         padding: 6px 12px;
-        position: relative;
+        // position: relative;
         .clickable-background {
             background-color: none;
             position: fixed;

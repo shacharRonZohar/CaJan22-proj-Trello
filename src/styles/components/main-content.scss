@@ -3,8 +3,18 @@
     flex-direction: column;
     // font-size: 0.9rem;
     .labels-container {
-        flex-direction: row;
-        flex-wrap: wrap;
+        font-weight: 600;
+        color: #5e6c84;
+        font-size: 12px;
+        margin-left: 40px;
+        margin-top: 18px;
+        small {
+            letter-spacing: 1px;
+        }
+        .labels-list {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
     }
 
     > * {
@@ -20,7 +30,7 @@
         }
         &:not(:first-child) {
             margin-top: 29px;
-            margin-left: 6px;
+            // margin-left: 6px;
         }
     }
     @import "./members-container.scss";
