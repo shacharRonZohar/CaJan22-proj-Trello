@@ -2,10 +2,12 @@
   <li
     class="board-preview"
     v-if="board"
-    :style="{ backgroundImage: `url(${img})` }"
     @click="openBoard"
   >
-    <div class="board-title">{{ board.title }}<span /></div>
+    <div class="board-background" :style="{ backgroundImage: `url(${img})` }">
+    <span></span>
+    <div class="board-title">{{board.title}}</div>
+    </div>
   </li>
 </template>
 

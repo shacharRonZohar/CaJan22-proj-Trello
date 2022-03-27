@@ -1,6 +1,19 @@
 <template>
-    <section class="right-side-nav">
-        <header class="flex space-between">
+  <section class="right-side-nav">
+    <header class="flex space-between">
+      <h1>Menu</h1>
+      <div @click="closeMenu">X</div>
+    </header>
+    <hr />
+    <ul class="clean-list">
+      <li @click="openMenu()" class="flex">
+        <div></div>
+        Change background
+      </li>
+    </ul>
+    <change-background-menu :class="isMenuOpen" />
+
+    <!-- <header class="flex space-between">
         <h1>Photos by <span><a target="_blank" href="https://unsplash.com/">Unsplah</a></span></h1>
         <div @click="closeMenu">X</div>
         </header>
@@ -11,40 +24,26 @@
         </form>
         <ul class="clean-list flex">
             <li v-for="result in results" :key="result.id">
-                <!-- <div class="img-result"> -->
                     <img @click="setBackGroundImg(result.urls.full)" :src="result.urls.thumb" alt="">
-                <!-- </div> -->
             </li>
-        </ul>
-    </section>
+        </ul> -->
+  </section>
 </template>
 
 <script>
-import { imgService } from '../services/imgService.js'
-
+import changeBackgroundMenu from "./change-background-menu.vue";
 export default {
-    data() {
-        return {
-            results: null,
-            searchTxt: ''
-        }
+  components: {
+    changeBackgroundMenu,
+  },
+  data() {
+    return {};
+  },
+  async created() {},
+  methods: {
+    closeMenu() {
+      this.$emit("closeMenu");
     },
-    async created() {
-        // const res = await imgService.queryPhotos()
-        // this.results = res.results
-    },
-    methods: {
-        async searchPhotos() {
-            const res = await imgService.queryPhotos(this.searchTxt)
-            this.results = res.results
-        },
-        setBackGroundImg(imgUrl){
-            this.$emit('setBackGroundImg', imgUrl)
-        },
-        closeMenu(){
-            this.$emit('closeMenu')
-        }
-    }
-    
-}
+  },
+};
 </script>
