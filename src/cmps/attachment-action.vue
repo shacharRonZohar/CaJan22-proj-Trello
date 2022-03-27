@@ -1,6 +1,6 @@
 <template >
     <div @click.stop="toggleActionPopup" class="attach btn">
-        <action-popup @click.stop v-if="actionPopupOpen">
+        <!-- <action-popup @click.stop v-if="actionPopupOpen">
             <template #header>
                 <div class="header">
                     <span>Attach from...</span>
@@ -21,9 +21,9 @@
                         </label>
                     </li>
                 </ul>
-                <!-- <button @click="onAttach" class="confirm">Yes</button> -->
             </template>
-        </action-popup>
+        </action-popup>-->
+        <!-- <button @click="onAttach" class="confirm">Yes</button> -->
         <!-- <button @click.stop="toggleActionPopup" class="deny">No</button> -->
         <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
         <div class="icon"></div>
@@ -32,14 +32,14 @@
 </template>
 
 <script>
-import actionPopup from './action-popup.vue'
+// import actionPopup from './action-popup.vue'
 import { imgService } from '../services/imgService.js'
 
 export default {
     // props: [''],
     emits: ['onAction', 'togglePopup'],
     components: {
-        actionPopup
+        // actionPopup
     },
     created() { },
     data() {

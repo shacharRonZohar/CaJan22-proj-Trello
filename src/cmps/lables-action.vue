@@ -1,7 +1,7 @@
 <template >
     <div @click="toggleActionPopup" class="label btn">
-        <action-popup @click.stop v-if="actionPopupOpen">
-            <!-- <template v-if="!createLabelOpen"> -->
+        <!-- <template v-if="!createLabelOpen"> -->
+        <!-- <action-popup @click.stop v-if="actionPopupOpen">
             <template #header>
                 <div class="header">
                     <span v-if="!createLabelOpen">Labels</span>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </template>
-        </action-popup>
+        </action-popup>-->
         <div class="icon"></div>
         <button class="labels">Labels</button>
         <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import actionPopup from './action-popup.vue'
+// import actionPopup from './action-popup.vue'
 
 export default {
     props: {
@@ -66,7 +66,7 @@ export default {
     },
     emits: ['onAction'],
     components: {
-        actionPopup
+        // actionPopup
     },
     created() { },
     data() {

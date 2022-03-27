@@ -1,6 +1,7 @@
 <template >
   <!-- TODO: Need to split code into more components -->
   <div class="task-details-container">
+    <action-popup :action="currOpenAction" :task="task"></action-popup>
     <section @click.stop v-if="task" class="task-details">
       <div @click.stop="onCloseDetails" class="clickable-background"></div>
       <div v-if="task.cover" :style="task.cover" class="cover"></div>
@@ -103,7 +104,13 @@
         <aside class="actions">
           <h3>Add to card</h3>
           <div class="placeholder"></div>
-          <component
+          <action-btn
+            @openActionPopup="toggleAction"
+            v-for="action in actionCmps"
+            :key="action"
+            :action="action"
+          ></action-btn>
+          <!-- <component
             :chosenLabels="task.labelIds"
             @togglePopup="setPopupMode"
             @onAction="onAction"
@@ -111,7 +118,7 @@
             v-for="cmp in actionCmps"
             :is="cmp"
             :class="open"
-          ></component>
+          ></component>-->
         </aside>
       </main>
       <button @click="onCloseDetails" class="btn close icon"></button>
@@ -120,14 +127,8 @@
 </template>
 
 <script>
-import archiveAction from "./archive-action.vue"
-import membersAction from "./members-action.vue"
-import attachmentAction from "./attachment-action.vue"
-import labelAction from "./lables-action.vue"
-import checklistAction from "./checklist-action.vue"
-import datesAction from "./dates-action.vue"
-import locationAction from "./location-action.vue"
-import coverAction from "./cover-action.vue"
+import actionPopup from './action-popup.vue'
+import actionBtn from './action-btn.vue'
 import moment from 'moment'
 
 export default {
@@ -135,14 +136,8 @@ export default {
     groupId: String,
   },
   components: {
-    archiveAction,
-    membersAction,
-    attachmentAction,
-    labelAction,
-    checklistAction,
-    datesAction,
-    coverAction,
-    locationAction,
+    actionPopup,
+    actionBtn
   },
   data() {
     return {
@@ -157,13 +152,13 @@ export default {
         "members-action",
         "label-action",
         "checklist-action",
-        ,
         "dates-action",
         "location-action",
         "attachment-action",
         "cover-action",
         "archive-action",
       ],
+      currOpenAction: ''
       // actionCmps: ['archive-action']
     }
   },
@@ -192,6 +187,9 @@ export default {
     },
   },
   methods: {
+    toggleAction(action) {
+      this.currOpenAction = this.currOpenAction ? '' : action
+    },
     async saveTask(taskToSave) {
       taskToSave = JSON.parse(JSON.stringify(taskToSave))
       return this.$store.dispatch({

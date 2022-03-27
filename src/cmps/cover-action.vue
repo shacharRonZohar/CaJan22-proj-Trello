@@ -1,6 +1,6 @@
 <template >
     <div @click.stop="toggleActionPopup" class="cover-action btn">
-        <action-popup @click.stop v-if="actionPopupOpen">
+        <!-- <action-popup @click.stop v-if="actionPopupOpen">
             <template #header>
                 <div class="header">
                     <span>Cover</span>
@@ -24,7 +24,6 @@
                     <input id="file" type="file" @change.stop="onUploadImg" @click.stop />
                 </label>
                 <span>Photos from Unsplash</span>
-                <!-- {{ unsplashPhotos }} -->
                 <ul
                     class="clean-list imgs-container"
                     v-if="unsplashPhotos && unsplashPhotos.length"
@@ -38,7 +37,8 @@
                     </li>
                 </ul>
             </template>
-        </action-popup>
+        </action-popup>-->
+        <!-- {{ unsplashPhotos }} -->
         <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
         <div class="icon"></div>
         <button class="cover-action">Cover</button>
@@ -46,14 +46,14 @@
 </template>
 
 <script>
-import actionPopup from './action-popup.vue'
+// import actionPopup from './action-popup.vue'
 import { imgService } from '../services/imgService.js'
 
 export default {
     // props: [''],
     emits: ['onAction', 'togglePopup'],
     components: {
-        actionPopup
+        // actionPopup
     },
     async created() {
         const res = await imgService.queryPhotos()
