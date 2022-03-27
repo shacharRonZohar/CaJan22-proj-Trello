@@ -9,7 +9,7 @@
     line-height: 32px;
     .icon {
         @include trello-icon($content: "\e912", $type: lg);
-        margin-top: 4px;
+        margin-top: 5px;
         // margin-top: 7px;
         font-size: 24px;
         margin-left: 3px;
