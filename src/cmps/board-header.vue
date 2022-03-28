@@ -25,7 +25,7 @@
         <div class="board-action">
             <button class="filter-btn btn">
                 <span>
-                    <span class="svg-icon filter"></span> Filter
+                    <span @click="onOpenFilter" class="svg-icon filter"></span> Filter
                 </span>
             </button>
             <button @click="onOpenMenu" class="right-nav-btn btn">
@@ -33,7 +33,7 @@
             </button>
         </div>
     </header>
-    <board-filter-modal></board-filter-modal>
+    <board-filter-modal v-if="isFilterOpen"></board-filter-modal>
 </template>
 
 <script>
@@ -47,14 +47,22 @@ export default {
         board: Object
     },
     emits: ['openMenu'],
+    data() {
+        return {
+            isFilterOpen: false
+        }
+    },
     methods: {
-        onOpenMenu() {
-            this.$emit('openMenu')
-        },
         async onSaveBoardName(ev) {
             this.board.title = ev.target.innerText
             this.$store.dispatch({type: 'saveBoard', boardToSave: this.board})
         },
+        onOpenMenu() {
+            this.$emit('openMenu')
+        },
+        onOpenFilter() {
+            console.log('open filter');
+        }
     },
     created() {
 
