@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import boardModule from './modules/board.module.js'
+import userModule from './modules/user.module.js'
 
 const store = createStore({
     strict: true,
@@ -19,7 +20,8 @@ const store = createStore({
     },
     actions: {},
     modules: {
-        boardModule
+        boardModule,
+        userModule
     }
 })
 

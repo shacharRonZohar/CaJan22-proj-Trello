@@ -8,12 +8,12 @@
                     and reach new productivity peaks.
                     From high rises to the home office,
                     the way your team works is
-                    unique—accomplish it all with Trello.
+                    unique—accomplish it all with Twello.
                 </p>
                 <button class="live-demo-btn btn" @click="logAsGuest">Try live demo</button>
             </div>
             <div class="hero-img-container">
-                <img class="hero-img" src="../assets/imgs/hero.png" alt="">
+                <img class="hero-img" src="../assets/imgs/hero.png" alt />
             </div>
         </div>
     </section>
@@ -23,17 +23,21 @@
 
 export default {
     components: {},
-    created() { },
+    mounted() {
+        if (this.$store.getters.loggedInUser) this.$router.push('/board')
+    },
     data() {
         return {}
     },
     methods: {
         logAsGuest() {
-            console.log('Loggin as guest');
+            console.log('Loggin as guest')
             this.$router.push('/board')
         }
     },
-    computed: {},
+    computed: {
+
+    },
     unmounted() { },
 }
 </script>
