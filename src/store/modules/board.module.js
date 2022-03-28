@@ -1,4 +1,5 @@
 import { boardService } from '../../services/board.service.js'
+import { socketService } from '../../services/socket.service.js'
 
 export default {
     state: {
@@ -54,15 +55,18 @@ export default {
                 console.log(err)
             }
         },
-
-        async saveBoard({ commit }, { boardToSave }) {
+        async saveBoard({ commit }, { boardToSave, isFromSocket = false }) {
             try {
                 const savedBoard = await boardService.save(boardToSave)
                 commit({ type: 'saveBoard', savedBoard })
                 commit({ type: 'setBoard', boardId: boardToSave._id })
+                if (!isFromSocket) socketService.emit('board-updated', savedBoard)
             } catch (err) {
                 console.log(err)
             }
+        },
+        async updateBoard({ commit }, { boardToUpdate }) {
+
         },
         getTaskById({ state }, { taskId, groupId }) {
             const group = state.board.groups.find(group => group.id === groupId)

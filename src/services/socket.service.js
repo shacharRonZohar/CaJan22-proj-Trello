@@ -31,6 +31,8 @@ function createSocketService() {
       else socket.off(eventName, cb)
     },
     emit(eventName, data) {
+      console.log(eventName)
+      console.log(data)
       socket.emit(eventName, data)
     },
     terminate() {
