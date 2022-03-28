@@ -2,6 +2,7 @@
   <!-- TODO: Need to split code into more components -->
   <div v-if="task" @click.stop="onCloseDetails" class="task-details-container">
     <action-popup
+      v-if="currOpenAction"
       @action="onAction"
       @actions="onActions"
       @togglePopup="toggleAction"

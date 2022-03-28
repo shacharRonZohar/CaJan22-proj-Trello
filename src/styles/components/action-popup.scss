@@ -31,11 +31,15 @@
         border-bottom: 1px solid #091e4221;
         font-size: 0.875rem;
         .close-popup {
+            cursor: pointer;
             color: #5e6c84;
             position: absolute;
             right: -4px;
             top: 9px;
             @include trello-icon($content: "\e91c");
+            &:hover {
+                color: #172b4d;
+            }
         }
     }
     .body {
