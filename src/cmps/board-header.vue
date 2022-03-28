@@ -33,10 +33,16 @@
             </button>
         </div>
     </header>
+    <board-filter-modal></board-filter-modal>
 </template>
 
 <script>
+import boardFilterModal from '../cmps/board-filter-modal.vue'
+
 export default {
+    components: {
+        boardFilterModal
+    },
     props: {
         board: Object
     },
