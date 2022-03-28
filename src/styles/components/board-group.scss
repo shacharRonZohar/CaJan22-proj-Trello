@@ -1,6 +1,7 @@
 .board-group {
-    padding: 5px 8px;
-    margin-inline: 5px;
+
+    // padding: 5px 8px;
+    margin: 0 4px;
     border-radius: 3px;
     background-color: $clr3;
     width: 272px;
@@ -8,7 +9,9 @@
     .tasks-container{
         max-height: calc(100vh - 210px);
         overflow-y: auto;
+        scroll-snap-align: center;
         padding: 0 4px;
+        margin: 0 4px;
 
         &::-webkit-scrollbar {
             height: 8px;
@@ -27,12 +30,13 @@
     }
     
     .group-header {
+        padding: 6px 4px 4px 8px;
         display: flex;
         justify-content: space-between;
     }
     
     .group-list{
-        margin-top: 8px;
+        // margin-top: 8px;
     }
 
     .group-menu {
@@ -42,29 +46,29 @@
         border-radius: 3px;
         border: none;
         font-size: em(16px);
+        background-color: inherit;
 
         .dots-icon {
-            font-family: "trellicons";
-            display: flex;
-            justify-content: center;
-            align-content: center;
-
-            &::before {
-                content: "\e952";
-            }
+            @include trello-icon($content: "\e952");
+            color: #6b778c;
         }
-
+        
         &:hover {
             background-color: #091e4214;
             border-radius: 3px;
             cursor: pointer;
+
+            .dots-icon{
+                color: $clr4;
+            }
         }
     }
 
-    h1 {
+    .group-title {
+        margin: 0px;
         padding: 4px 5px 4px 8px;
         overflow: hidden;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
         color: $clr4;
         cursor: pointer;
@@ -78,13 +82,15 @@
             width: 90%;
         }
     }
+
     .add-card-btn {
+        border-radius: 3px;
         color: #5e6c84;
+        margin: 2px 0 8px 8px;
         background-color: inherit;
         border: none;
-        border-radius: 3px;
         width: 225px;
-        padding: 6px;
+        padding: 4px 8px;
         text-align: left;
 
         &:hover {

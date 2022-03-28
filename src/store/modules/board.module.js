@@ -120,7 +120,18 @@ export default {
         async setBackGroundImg({ state, dispatch }, { imgUrl, activity }) {
             try {
                 const boardToSave = JSON.parse(JSON.stringify(state.board))
+                boardToSave.style.color = ''
                 boardToSave.style.imgUrl = imgUrl
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async setBackGroundColor({ state, dispatch }, { color, activity }) {
+            try {
+                const boardToSave = JSON.parse(JSON.stringify(state.board))
+                boardToSave.style.imgUrl = ''
+                boardToSave.style.color = color
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)

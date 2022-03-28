@@ -6,42 +6,40 @@
       <a class="close-menu-icon" @click="closeColorMenu" />
     </header>
     <hr />
-    <!-- <form @submit.prevent="searchPhotos">
-            <input v-model="searchTxt" type="search" />
-            <button>Search</button>
-        </form>
-        <ul class="clean-list flex">
-            <li v-for="result in results" :key="result.id">
-                    <img @click="setBackGroundImg(result.urls.full)" :src="result.urls.thumb" alt="">
-            </li>
-        </ul> -->
+    <ul class="clean-list flex right-menu-colors-list">
+      <li v-for="bgColor in colors" :key="bgColor">
+        <div
+          class="right-menu-colors"
+          @click="setBackGroundColor(bgColor)"
+          :style="{ backgroundColor: bgColor }"
+        >
+        </div>
+      </li>
+    </ul>
   </section>
 </template>
 
 <script>
-import { imgService } from "../services/imgService.js";
 
 export default {
   data() {
     return {
-      results: null,
-      searchTxt: "",
+      colors: ['#0079bf', '#d29034', '#519839', '#b04632', '#89609e', '#cd5a91', '#4bbf6b', '#00aecc', '#838c91']
     };
   },
   async created() {
-    // const res = await imgService.queryPhotos()
-    // this.results = res.results
+    
   },
   methods: {
     async searchPhotos() {
       const res = await imgService.queryPhotos(this.searchTxt);
       this.results = res.results;
     },
-    goBack(){
-        this.$emit("goBack")
+    goBack() {
+      this.$emit("goBack");
     },
-    setBackGroundImg(imgUrl) {
-      this.$emit("setBackGroundImg", imgUrl);
+    setBackGroundColor(color) {
+      this.$emit("setBackGroundColor", color);
     },
     closeColorMenu() {
       this.$emit("closeColorMenu");
