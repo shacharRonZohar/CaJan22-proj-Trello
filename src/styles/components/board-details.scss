@@ -9,6 +9,7 @@
     .main-board {
         height: calc(100vh - 100px);
         overflow-x: auto;
+        // overflow-y: hidden;
         padding: 10px 4px 0px 4px;
 
         &::-webkit-scrollbar {
@@ -29,16 +30,6 @@
         &.show-title{
             .task-label {
                 animation: show-labels 0.45s;
-                // margin: 0 4px 4px 0;
-                // min-width: 40px;
-                // text-shadow: none;
-                // width: auto;
-                // border-radius: 4px;
-                // float: left;
-                // font-size: 12px;
-                // font-weight: 700;
-                // color: #fff;
-                // line-height: 240px;
                 padding-right: 9px; 
                 padding-left: 2px; 
                 height: 16px;

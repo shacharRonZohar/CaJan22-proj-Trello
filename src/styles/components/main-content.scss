@@ -39,6 +39,17 @@
             // margin-left: 6px;
         }
     }
+
+    .checklist-container{
+        .checklist-icon{
+            @include trello-icon($content: "\e91a", $type:lg);
+            color: #42526e;
+        }
+
+    }
+
+
+
     @import "./members-container.scss";
     @import "./description-container.scss";
     @import "./activities-container.scss";

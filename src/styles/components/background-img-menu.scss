@@ -77,12 +77,17 @@
     }
     
     button{
-        background-color: rgba(9,30,66,.0392156862745098);;
+        background-color: rgba(9,30,66,.0392156862745098);
         height: 35px;
         border-radius: 3px;
         padding-bottom: 5px;
         width: 67px;
         font-size: 1rem;
-        border: none;   
+        border: none;
+        
+        &:hover{
+            cursor: pointer;
+            background-color: rgba(9, 30, 66, 0.075);
+        }
     }
 }

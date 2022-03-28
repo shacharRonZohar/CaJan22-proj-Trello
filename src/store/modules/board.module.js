@@ -192,6 +192,15 @@ export default {
             } catch (err) {
                 console.log(err)
             }
+        },
+        async addChecklist({state, dispatch} , {taskId, groupId, payload, activity}){
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = await boardService.addChecklist(board, taskId, groupId, payload ,activity)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
         }
     },
 }
