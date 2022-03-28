@@ -8,12 +8,17 @@
         font-size: 12px;
         margin-left: 40px;
         margin-top: 18px;
+        gap: 7px;
         small {
             letter-spacing: 1px;
         }
         .labels-list {
+            // margin-left: 1px;
             flex-direction: row;
             flex-wrap: wrap;
+            .label {
+                min-width: 44px;
+            }
         }
     }
 

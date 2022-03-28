@@ -1,8 +1,14 @@
 <template >
   <!-- TODO: Need to split code into more components -->
-  <div class="task-details-container">
+  <div @click.stop="onCloseDetails" class="task-details-container">
+    <action-popup
+      @action="onAction"
+      @actions="onActions"
+      @togglePopup="toggleAction"
+      :action="currOpenAction"
+      :task="task"
+    ></action-popup>
     <section @click.stop v-if="task" class="task-details">
-      <div @click.stop="onCloseDetails" class="clickable-background"></div>
       <div v-if="task.cover" :style="task.cover" class="cover"></div>
       <header class="task-details-header">
         <div class="icon"></div>
@@ -40,7 +46,12 @@
               <div class="icon"></div>
               <h3>Description</h3>
             </div>
-            <div @click.stop="toggleDescEdit" v-if="!descEditOpen" class="description task-layout">
+            <div
+              @click.stop="toggleDescEdit"
+              v-if="!descEditOpen"
+              class="description task-layout"
+              :class="isFull"
+            >
               <span>{{ descTxt }}</span>
             </div>
             <form class="description-edit-form task-layout" v-else @submit.prevent="onSaveDesc">
@@ -101,9 +112,15 @@
           </div>-->
         </section>
         <aside class="actions">
-          <h3>Add to card</h3>
+          <h3 class="actions-title">Add to card</h3>
           <div class="placeholder"></div>
-          <component
+          <action-btn
+            @openActionPopup="toggleAction"
+            v-for="action in actionCmps"
+            :key="action"
+            :action="action"
+          ></action-btn>
+          <!-- <component
             :chosenLabels="task.labelIds"
             @togglePopup="setPopupMode"
             @onAction="onAction"
@@ -111,23 +128,18 @@
             v-for="cmp in actionCmps"
             :is="cmp"
             :class="open"
-          ></component>
+          ></component>-->
         </aside>
       </main>
       <button @click="onCloseDetails" class="btn close icon"></button>
     </section>
+    <div v-if="currOpenAction" @click.stop="toggleAction" class="clickable-background"></div>
   </div>
 </template>
 
 <script>
-import archiveAction from "./archive-action.vue"
-import membersAction from "./members-action.vue"
-import attachmentAction from "./attachment-action.vue"
-import labelAction from "./lables-action.vue"
-import checklistAction from "./checklist-action.vue"
-import datesAction from "./dates-action.vue"
-import locationAction from "./location-action.vue"
-import coverAction from "./cover-action.vue"
+import actionPopup from './action-popup.vue'
+import actionBtn from './action-btn.vue'
 import moment from 'moment'
 
 export default {
@@ -135,36 +147,27 @@ export default {
     groupId: String,
   },
   components: {
-    archiveAction,
-    membersAction,
-    attachmentAction,
-    labelAction,
-    checklistAction,
-    datesAction,
-    coverAction,
-    locationAction,
+    actionPopup,
+    actionBtn
   },
   data() {
     return {
       task: null,
       descEditOpen: false,
-      isActionPopupOpen: false,
-      newDesc: "",
+      newDesc: '',
       localGroupId: null,
-      groupName: "",
-      isActionPopupOpen: false,
+      groupName: '',
       actionCmps: [
         "members-action",
         "label-action",
         "checklist-action",
-        ,
         "dates-action",
         "location-action",
         "attachment-action",
         "cover-action",
         "archive-action",
       ],
-      // actionCmps: ['archive-action']
+      currOpenAction: ''
     }
   },
   watch: {
@@ -192,6 +195,10 @@ export default {
     },
   },
   methods: {
+    toggleAction(action) {
+      console.log(action)
+      this.currOpenAction = this.currOpenAction ? '' : action
+    },
     async saveTask(taskToSave) {
       taskToSave = JSON.parse(JSON.stringify(taskToSave))
       return this.$store.dispatch({
@@ -216,6 +223,7 @@ export default {
         payload,
       })
       // Temporary
+      if (cbName === 'archiveTask') return this.onCloseDetails()
       const taskId = this.$route.params.taskId
       this.task = await this.$store.dispatch({
         type: "getTaskById",
@@ -260,6 +268,7 @@ export default {
       })
     },
     onCloseDetails() {
+      console.log('closeing')
       const currRoute = this.$route.fullPath
       const route = currRoute.substring(0, currRoute.indexOf("/task"))
       this.$router.push(route)
@@ -287,6 +296,9 @@ export default {
       return "description" in this.task && this.task.description
         ? this.task.description
         : "Add a more detailed description..."
+    },
+    isFull() {
+      return { 'empty': this.task.description }
     },
     open() {
       return { open: this.isActionPopupOpen }
