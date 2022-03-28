@@ -23,9 +23,9 @@
         </div>
 
         <div class="board-action">
-            <button class="filter-btn btn">
+            <button @click="onOpenFilter" class="filter-btn btn">
                 <span>
-                    <span @click="onOpenFilter" class="svg-icon filter"></span> Filter
+                    <span class="svg-icon filter"></span> Filter
                 </span>
             </button>
             <button @click="onOpenMenu" class="right-nav-btn btn">
@@ -61,13 +61,12 @@ export default {
             this.$emit('openMenu')
         },
         onOpenFilter() {
-            console.log('open filter');
+            this.isFilterOpen = !this.isFilterOpen
         }
     },
     created() {
 
     },
-
 }
 
 </script>

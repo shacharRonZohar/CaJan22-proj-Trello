@@ -73,8 +73,14 @@
             @include trello-icon($content: "\e966");
         }
         .invite-btn {
+            background-color: $clr8;
+            color: $clr2;
+            height: 32px;
             .invite {
                 @include trello-icon($content: "\e951");
+            }
+            &:hover {
+                background-color: $clr9;
             }
         }
     }
