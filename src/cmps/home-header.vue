@@ -1,7 +1,7 @@
 <template>
     <header class="main-header home-header flex space-between align-center">
         <div class="logo flex align-center">
-            <span class="logo-icon"></span> 
+            <span class="logo-icon"></span>
             <span class="logo-txt">Twello</span>
         </div>
 
@@ -10,12 +10,12 @@
                 <ul class="clean-list flex">
                     <li>
                         <button class="login-btn">
-                            <router-link to="/login" class="login-link">Log in</router-link>
+                            <router-link to="/auth/login" class="login-link">Log in</router-link>
                         </button>
                     </li>
                     <li>
                         <button class="signup-btn">
-                            <router-link to="/signup" class="signup-board">Sign up</router-link>
+                            <router-link to="/auth/signup" class="signup-board">Sign up</router-link>
                         </button>
                     </li>
                 </ul>

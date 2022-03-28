@@ -9,8 +9,7 @@
     .main-board {
         height: calc(100vh - 100px);
         overflow-x: auto;
-        // overflow-y: hidden;
-        padding: 10px 4px 0px 4px;
+        padding: 3px 4px 0px 6px;
 
         &::-webkit-scrollbar {
             height: 12px;

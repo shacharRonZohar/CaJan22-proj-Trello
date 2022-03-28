@@ -11,9 +11,10 @@ export default {
   components: {
     headerContainer
   },
-  created() {
-    console.log()
-    this.$store.dispatch('loadBoards')
+  async created() {
+    // console.log()
+    await this.$store.dispatch('loadBoards')
+    this.$store.dispatch('loadUser')
   },
   computed: {
     boards() {

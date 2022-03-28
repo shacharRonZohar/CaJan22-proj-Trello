@@ -34,6 +34,7 @@
 
             <div class="second-actions flex align-center">
                 <div class="search-app-header">
+                    <!-- <span class="search-icon"></span> -->
                     <input
                         class="search-input"
                         v-model="searchTxt"
@@ -44,6 +45,12 @@
                 <div class="mini-search">
                     <span class="search-icon svg-icon"></span>
                 </div>
+                <button class="info btn">
+                    <span class="info-icon"></span>
+                </button>
+                <button class="notifications btn">
+                    <span class="notifications-icon"></span>
+                </button>
                 <div class="profile-app-header flex">
                     <div class="letter">P</div>
                 </div>

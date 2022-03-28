@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import homeHeader from './home-header.vue';
-import loginHeader from './login-header.vue';
-import appHeader from './app-header.vue';
+import homeHeader from './home-header.vue'
+import loginHeader from './login-header.vue'
+import appHeader from './app-header.vue'
 
 export default {
     components: {
@@ -18,7 +18,7 @@ export default {
         headerType() {
             const path = this.$route.fullPath
             if (path === '/') return 'home-header'
-            else if (path === '/login' || path === '/signup') return 'login-header'
+            else if (path === '/auth/login' || path === '/auth/signup') return 'login-header'
             else return 'app-header'
         }
     },
