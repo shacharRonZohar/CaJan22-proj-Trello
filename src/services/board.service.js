@@ -105,14 +105,12 @@ function saveAttachment(board, taskId, groupId, payload, activity) {
 
 async function saveCover(board, taskId, groupId, payload, activity) {
     let cover = {
+        type: payload.type,
         backgroundColor: payload.style
     }
     if (payload.type !== 'color') {
-        cover = {
-            type: payload.type,
-            backgroundImage: `url(${payload.style})`,
-            backgroundColor: await imgService.getImgColor(payload.style)
-        }
+        cover.backgroundImage = `url(${payload.style})`
+        cover.backgroundColor = await imgService.getImgColor(payload.style)
     }
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)

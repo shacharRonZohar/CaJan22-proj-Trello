@@ -1,12 +1,17 @@
 <template>
-    <component
-        @togglePopup="onTogglePopup"
-        @action="onAction"
-        class="action-popup"
-        v-if="action"
-        :is="action"
-        :task="task"
-    ></component>
+    <div class="action-popup">
+        <div class="header">
+            {{ actionTxt }}
+            <div class="icon btn close-popup"></div>
+        </div>
+        <component
+            @togglePopup="onTogglePopup"
+            @action="onAction"
+            v-if="action"
+            :is="action"
+            :task="task"
+        ></component>
+    </div>
 </template>
 
 <script>
@@ -35,7 +40,9 @@ export default {
         coverAction,
         locationAction,
     },
-    created() { },
+    created() {
+        console.log(this.task)
+    },
     data() {
         return {}
     },
@@ -48,9 +55,14 @@ export default {
         },
         onActions(actions) {
             this.$emit('actions', actions)
+        },
+
+    },
+    computed: {
+        actionTxt() {
+            return this.action.substring(0, this.action.indexOf('-'))
         }
     },
-    computed: {},
     unmounted() { },
 }
 </script>
