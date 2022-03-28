@@ -1,6 +1,6 @@
 <template>
-    <section class="user-actions-container">
-        <form class="user-input-form" @submit.prevent.stop="onUserAction">
+    <section class="auth-actions-container">
+        <form class="auth-input-form" @submit.prevent.stop="onUserAction">
             <input
                 v-model="user.username"
                 type="text"
@@ -25,6 +25,7 @@
             />
             <button>{{ currAction }}</button>
         </form>
+        <button @click="onGoogleLogin" class="btn google-login">Login with google</button>
         <button @click="onLogout" class="signout">Logout</button>
     </section>
 </template>
@@ -49,6 +50,9 @@ export default {
         onUserAction() {
             if (this.currAction === 'login') return this.login()
             this.signup()
+        },
+        onGoogleLogin() {
+
         },
         async login() {
             try {
