@@ -5,8 +5,8 @@ export default {
         loggedInUser: ''
     },
     getters: {
-        loggedInUser({ state }) {
-            return state.loggedInUser
+        loggedInUser({ loggedInUser }) {
+            return loggedInUser
         }
     },
     mutations: {

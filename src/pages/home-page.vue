@@ -23,7 +23,9 @@
 
 export default {
     components: {},
-    created() { },
+    mounted() {
+        if (this.$store.getters.loggedInUser) this.$router.push('/board')
+    },
     data() {
         return {}
     },
@@ -33,7 +35,9 @@ export default {
             this.$router.push('/board')
         }
     },
-    computed: {},
+    computed: {
+
+    },
     unmounted() { },
 }
 </script>
