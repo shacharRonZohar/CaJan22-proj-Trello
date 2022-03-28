@@ -1,5 +1,4 @@
 .app-header {
-    // width: 100%;
     height: 45px;
     background-color: $clr9;
     &.trans-header {
@@ -118,16 +117,24 @@
                     display: block;
                 }
             }
+
+            .notifications {
+                width: 32px;
+                height: 32px;
+                border-radius: 3px;
+                .notifications-icon {
+
+                }
+            }
             
             .profile-app-header {
                 border: 1px solid lightgray;
                 border-radius: 50%;
                 justify-content: center;
                 align-items: center;
-                margin: 0 10px;
                 height: 35px;
                 width: 35px;
-                
+                margin-right: 4px;
                 .letter {
                     font-weight: bolder;
                 }

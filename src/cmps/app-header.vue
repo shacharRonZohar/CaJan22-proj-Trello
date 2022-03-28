@@ -44,6 +44,9 @@
                 <div class="mini-search">
                     <span class="search-icon svg-icon"></span>
                 </div>
+                <button class="notifications btn">
+                    <span class="notifications-icon"></span>
+                </button>
                 <div class="profile-app-header flex">
                     <div class="letter">P</div>
                 </div>
