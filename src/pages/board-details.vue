@@ -25,7 +25,7 @@
           <span>+</span> Add another list
         </button>
         <div v-else class="add-group-container">
-          <form @submit.prevent="addGroup">
+          <form @submit.prevent="addGroup" class="add-group-form">
             <textarea v-focus v-model="group.title" resize:none placeholder="Enter list title..." />
             <button class="save-new-list-btn">Add list</button>
             <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span>

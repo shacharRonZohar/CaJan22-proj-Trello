@@ -1,0 +1,35 @@
+.background-menu {
+  transition: transform 0.25s;
+
+  .bg-menu-main{
+    padding-block: 12px
+  }
+  li {
+    cursor: pointer;
+    .bg-menu-imgs{
+      background-size: cover;
+      border-radius: 8px;
+      height: 96px;
+      margin-bottom: 8px;
+      width: 153px;
+      margin: 0 4px;
+
+      &:hover{
+        opacity: .7;
+      }
+    }
+
+    .bg-photos-img {
+      background-image: url(../assets/imgs/rightMenu/photos.jpg);
+    }
+
+    .bg-colors-img {
+      background-image: url(../assets/imgs/rightMenu/colors.jpg);
+    }
+
+    .bg-menu-imgs-title{
+      margin-top: 8px;
+      text-align: center;
+    }
+  }
+}
