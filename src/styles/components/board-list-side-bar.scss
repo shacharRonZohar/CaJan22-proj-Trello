@@ -1,13 +1,12 @@
 .board-list-side-bar {
-    
-    max-width: 272px;
+    width: 272px;
     .router-link-active {
         background-color: #e4f0f6;
         color: #0079bf;
         text-decoration: none;
         padding: 6px 8px 6px 0;
         border-radius: 4px;
-        width: 245px;
+        // width: 245px;
     }
 
     .router-link{
