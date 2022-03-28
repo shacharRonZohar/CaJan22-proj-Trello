@@ -1,8 +1,8 @@
 <template>
-    <div class="action-popup">
+    <div @click.stop class="action-popup">
         <div class="header">
             {{ actionTxt }}
-            <div class="icon btn close-popup"></div>
+            <div @click="onTogglePopup" class="icon btn close-popup"></div>
         </div>
         <component
             @togglePopup="onTogglePopup"

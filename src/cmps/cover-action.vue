@@ -27,22 +27,33 @@
                         <img :src="attachment.url" alt />
                     </li>
                 </ul>-->
-                <label @click.stop for="file" class="computer body">
-                    Computer
-                    <input id="file" type="file" @change.stop="onUploadImg" @click.stop />
-                </label>
+                <button @click.stop for="file" class="btn upload-cover-img">
+                    Upload a cover image
+                    <input
+                        id="file"
+                        type="file"
+                        @change.stop="onUploadImg"
+                        @click.stop
+                    />
+                </button>
+                <small>Tip: Drag an image on to the card to upload it.</small>
+            </div>
+            <div class="unsplash-photos-container">
+                <span>Photos from Unsplash</span>
+                <ul
+                    class="clean-list imgs-container"
+                    v-if="unsplashPhotos && unsplashPhotos.length"
+                >
+                    <li
+                        @click.stop="onToggleCoverImg(photo.urls.full)"
+                        class="img-container"
+                        :class="isChosenImg(photo.urls.full)"
+                        v-for="photo in unsplashPhotos"
+                        :style="{ backgroundImage: `url(${photo.urls.thumb})` }"
+                    ></li>
+                </ul>
             </div>
         </div>
-        <!--<span>Photos from Unsplash</span>
-        <ul class="clean-list imgs-container" v-if="unsplashPhotos && unsplashPhotos.length">
-            <li
-                @click.stop="onToggleCoverImg(photo.urls.full)"
-                class="img-container"
-                v-for="photo in unsplashPhotos"
-            >
-                <img :src="photo.urls.thumb" alt />
-            </li>
-        </ul>-->
         <!-- <div class="chosen" v-if="isChosenColor(photo)"></div> -->
     </div>
 </template>
@@ -57,11 +68,12 @@ export default {
     emits: ['action', 'actions', 'togglePopup'],
     async created() {
         const res = await imgService.queryPhotos()
+        res.results.splice(6, res.results.length)
         this.unsplashPhotos = res.results
     },
     data() {
         return {
-            colors: ['yellow', 'red', 'pink', 'orange', 'green', 'blue', 'lightblue'],
+            colors: ['#0079bf', '#d29034', '#519839', '#b04632', '#89609e', '#cd5a91', '#4bbf6b', '#00aecc', '#838c91'],
             unsplashPhotos: []
         }
     },
@@ -93,11 +105,10 @@ export default {
             this.$emit('togglePopup')
         },
         isChosenColor(color) {
-
             return { 'chosen': this.task.cover?.backgroundColor === color }
         },
         isChosenImg(img) {
-            return this.task.cover?.backgroundImage === `url(${img})`
+            return { 'chosen': this.task.cover?.backgroundImage === `url(${img})` }
         }
     },
     unmounted() { },
