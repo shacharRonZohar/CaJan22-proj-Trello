@@ -11,7 +11,7 @@
           </div>
        </li>
       </ul>
-      <h2>{{ task.title }}</h2>
+      <h2 class="task-preview-title">{{ task.title }}</h2>
       <div class="actions-container flex">
         <a
           v-if="task.description"
