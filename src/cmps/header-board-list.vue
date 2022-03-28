@@ -2,7 +2,9 @@
     <div class="header-board-list">
         <div class="header flex space-between align-center">
             <span class="title">Boards</span>
-            <button class="close-btn btn" @click="onClose">x</button>
+            <button class="close-btn btn" @click="onClose">
+                <a class="close-board-list-icon"></a>
+            </button>
         </div>
         <ul class="board-list clean-list">
             <li class="board flex align-center" @click="goToBoard(board)" v-for="board in boards" :key="board._id">

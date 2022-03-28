@@ -3,7 +3,7 @@
     position: absolute;
     top: 47px;
     left: 277px;
-    padding: 15px 12px;
+    padding: 0px 12px 15px 12px;
     
     
     width: 304px;
@@ -13,11 +13,32 @@
 
     .header {
         justify-content: space-between;
+        justify-items: center;
+        align-items: center;
+        border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+        margin-bottom: 3px;
+        height: 40px;
         .title {
             color: $clr15;
+            font-size: 14px;
+            font-weight: 400;
+            width: 100%;
+            text-align: center;
         }
         .exit-btn {
             background-color: inherit;
+        }
+
+        .close-create-board-icon{
+            @include trello-icon($content: "\e91c", $type: md);
+            font-size: 1rem;
+            color: #687790;
+            font-weight: 600;
+            cursor: pointer;
+
+            &:hover{
+                color: $clr4
+            }
         }
     }
 
@@ -39,6 +60,7 @@
                     object-fit: cover;
                     &:hover {
                         cursor: pointer;
+                        filter: brightness(80%);
                     }
                 }
             }
@@ -50,6 +72,9 @@
                     height: 30px;
                     border-radius: 5px;
                     cursor: pointer;
+                    &:hover{
+                        filter: brightness(80%);
+                    }
                 }
             }
         }
