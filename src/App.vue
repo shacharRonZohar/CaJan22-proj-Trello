@@ -1,6 +1,6 @@
 
 <template class="main-layout">
-  <header-container/>
+  <header-container v-if="isReady" />
   <router-view v-if="isReady" />
   <span v-else>Loading...</span>
 </template>
@@ -12,6 +12,7 @@ export default {
     headerContainer
   },
   created() {
+    console.log()
     this.$store.dispatch('loadBoards')
   },
   computed: {
