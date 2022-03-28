@@ -4,7 +4,7 @@
     v-if="board"
     @click="openBoard"
   >
-    <div class="board-background" :style="{ backgroundImage: `url(${img})` }">
+    <div class="board-background" :style="{ backgroundImage: `url('${img}')`, backgroundColor: `${color}` }">
     <span></span>
     <div class="board-title">{{board.title}}</div>
     </div>
@@ -30,8 +30,18 @@ export default {
   },
   computed: {
     img() {
-      return new URL(`${this.board.style.imgUrl}`, import.meta.url).href;
+      return this.board.style.imgUrl
+        ? new URL(`${this.board.style.imgUrl}`, import.meta.url).href
+        : "";
     },
+    color() {
+      return this.board.style.color
+        ? this.board.style.color
+        : "";
+    },
+    // img() {
+    //   return new URL(`${this.board.style.imgUrl}`, import.meta.url).href;
+    // },
   },
 };
 </script>
