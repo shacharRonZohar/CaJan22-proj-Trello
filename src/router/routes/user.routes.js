@@ -1,17 +1,12 @@
 import userProfile from '../../pages/user-profile.vue'
-import loginLogoutSignup from '../../pages/login-logout-signup.vue'
+import loginSignup from '../../pages/login-signup.vue'
 
 export default [
     // Maybe login and signup are same page
     {
-        path: '/login',
+        path: '/auth/:action',
         name: 'login',
-        component: loginLogoutSignup
-    },
-    {
-        path: '/signup',
-        name: 'signup',
-        component: loginLogoutSignup
+        component: loginSignup
     },
     {
         path: '/user/:username',

@@ -1,10 +1,16 @@
 <template>
     <section class="user-actions-container">
-        <form class="login-form" @submit.prevent.stop="onUserAction">
+        <form class="user-input-form" @submit.prevent.stop="onUserAction">
             <input v-model="user.username" type="text" class="username" placeholder="username" />
             <input v-model="user.password" type="password" class="password" placeholder="password" />
-            <input v-model="user.fullname" type="text" class="fullname" placeholder="fullname" />
-            <button>Login</button>
+            <input
+                v-if="currAction === 'signup'"
+                v-model="user.fullname"
+                type="text"
+                class="fullname"
+                placeholder="fullname"
+            />
+            <button>{{ currAction }}</button>
         </form>
         <button @click="onLogout" class="signout">Logout</button>
     </section>
@@ -19,7 +25,6 @@ export default {
     created() { },
     data() {
         return {
-            currAction: 'login',
             user: {
                 username: '',
                 password: '',
@@ -29,14 +34,8 @@ export default {
     },
     methods: {
         onUserAction() {
-            switch (this.currAction) {
-                case 'login':
-                    return this.login()
-                case 'logout':
-                    return this.logout()
-                case 'signup':
-                    return this.signup()
-            }
+            if (this.currAction === 'login') return this.login()
+            this.signup()
         },
         async login() {
             await authService.login(this.user)
@@ -52,7 +51,11 @@ export default {
             this.$store.dispatch('loadUser')
         }
     },
-    computed: {},
+    computed: {
+        currAction() {
+            return this.$route.params.action
+        }
+    },
     unmounted() { },
 }
 </script>
