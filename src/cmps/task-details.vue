@@ -1,8 +1,14 @@
 <template >
   <!-- TODO: Need to split code into more components -->
-  <div class="task-details-container">
+  <div v-if="task" @click.stop="onCloseDetails" class="task-details-container">
+    <action-popup
+      @action="onAction"
+      @actions="onActions"
+      @togglePopup="toggleAction"
+      :action="currOpenAction"
+      :task="task"
+    ></action-popup>
     <section @click.stop v-if="task" class="task-details">
-      <div @click.stop="onCloseDetails" class="clickable-background"></div>
       <div v-if="task.cover" :style="task.cover" class="cover"></div>
       <header class="task-details-header">
         <div class="icon"></div>
@@ -16,13 +22,13 @@
       </header>
       <main class="main-details">
         <section class="main-content">
-          <!-- <div class="members-container task-layout">
+          <!-- <div class='members-container task-layout'>
           <span>Members:</span>
-          <div class="members">
-            <div class="member">A</div>
-            <div class="member">CB</div>
-            <div class="member">SZ</div>
-            <div class="member add icon"></div>
+          <div class='members'>
+            <div class='member'>A</div>
+            <div class='member'>CB</div>
+            <div class='member'>SZ</div>
+            <div class='member add icon'></div>
           </div>
           </div>-->
           <section class="labels-container task-layout">
@@ -40,7 +46,12 @@
               <div class="icon"></div>
               <h3>Description</h3>
             </div>
-            <div @click.stop="toggleDescEdit" v-if="!descEditOpen" class="description task-layout">
+            <div
+              @click.stop="toggleDescEdit"
+              v-if="!descEditOpen"
+              class="description task-layout"
+              :class="isFull"
+            >
               <span>{{ descTxt }}</span>
             </div>
             <form class="description-edit-form task-layout" v-else @submit.prevent="onSaveDesc">
@@ -54,9 +65,9 @@
                 <button class="save-new-list-btn">Save</button>
                 <button @click.stop="toggleDescEdit" class="icon close"></button>
               </div>
-              <!-- <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span> -->
+              <!-- <span class='close-add-btn' @click='addBtnClicked = !addBtnClicked'>X</span> -->
             </form>
-            <!-- <button class="btn edit">Edit</button> -->
+            <!-- <button class='btn edit'>Edit</button> -->
           </div>
           <div v-if="task.attachments && task.attachments.length" class="attachments-container">
             <div class="attachments-header">
@@ -90,44 +101,45 @@
               </div>
             </div>
           </div>
-          <!-- <div class="activities-container">
-            <div class="activities-header">
+          <!-- <div class='activities-container'>
+            <div class='activities-header'>
               <div>
-                <div class="icon"></div>
+                <div class='icon'></div>
                 <h3>Activity</h3>
               </div>
-              <button class="btn show">Show details</button>
+              <button class='btn show'>Show details</button>
             </div>
           </div>-->
         </section>
         <aside class="actions">
-          <h3>Add to card</h3>
+          <h3 class="actions-title">Add to card</h3>
           <div class="placeholder"></div>
-          <component
-            :chosenLabels="task.labelIds"
-            @togglePopup="setPopupMode"
-            @onAction="onAction"
-            @onActions="onActions"
-            v-for="cmp in actionCmps"
-            :is="cmp"
-            :class="open"
-          ></component>
+          <action-btn
+            @openActionPopup="toggleAction"
+            v-for="action in actionCmps"
+            :key="action"
+            :action="action"
+          ></action-btn>
+          <!-- <component
+            :chosenLabels='task.labelIds'
+            @togglePopup='setPopupMode'
+            @onAction='onAction'
+            @onActions='onActions'
+            v-for='cmp in actionCmps'
+            :is='cmp'
+            :class='open'
+          ></component>-->
         </aside>
       </main>
       <button @click="onCloseDetails" class="btn close icon"></button>
     </section>
+    <div v-if="currOpenAction" @click.stop="toggleAction" class="clickable-background"></div>
   </div>
 </template>
 
 <script>
-import archiveAction from "./archive-action.vue"
-import membersAction from "./members-action.vue"
-import attachmentAction from "./attachment-action.vue"
-import labelAction from "./lables-action.vue"
-import checklistAction from "./checklist-action.vue"
-import datesAction from "./dates-action.vue"
-import locationAction from "./location-action.vue"
-import coverAction from "./cover-action.vue"
+import actionPopup from './action-popup.vue'
+import actionBtn from './action-btn.vue'
 import moment from 'moment'
 
 export default {
@@ -135,36 +147,27 @@ export default {
     groupId: String,
   },
   components: {
-    archiveAction,
-    membersAction,
-    attachmentAction,
-    labelAction,
-    checklistAction,
-    datesAction,
-    coverAction,
-    locationAction,
+    actionPopup,
+    actionBtn
   },
   data() {
     return {
       task: null,
       descEditOpen: false,
-      isActionPopupOpen: false,
-      newDesc: "",
+      newDesc: '',
       localGroupId: null,
-      groupName: "",
-      isActionPopupOpen: false,
+      groupName: '',
       actionCmps: [
-        "members-action",
-        "label-action",
-        "checklist-action",
-        ,
-        "dates-action",
-        "location-action",
-        "attachment-action",
-        "cover-action",
-        "archive-action",
+        'members-action',
+        'label-action',
+        'checklist-action',
+        'dates-action',
+        'attachment-action',
+        'location-action',
+        'cover-action',
+        'archive-action',
       ],
-      // actionCmps: ['archive-action']
+      currOpenAction: ''
     }
   },
   watch: {
@@ -174,13 +177,13 @@ export default {
           if (!this.$route.params?.taskId) return
           const taskId = this.$route.params.taskId
           const group = await this.$store.dispatch({
-            type: "getGroupByTask",
+            type: 'getGroupByTask',
             taskId,
           })
           this.localGroupId = group.id
           this.groupName = group.title
           this.task = await this.$store.dispatch({
-            type: "getTaskById",
+            type: 'getTaskById',
             taskId,
             groupId: this.groupId || this.localGroupId,
           })
@@ -192,10 +195,14 @@ export default {
     },
   },
   methods: {
+    toggleAction(action) {
+      console.log(action)
+      this.currOpenAction = this.currOpenAction ? '' : action
+    },
     async saveTask(taskToSave) {
       taskToSave = JSON.parse(JSON.stringify(taskToSave))
       return this.$store.dispatch({
-        type: "saveTask",
+        type: 'saveTask',
         taskToSave,
         groupId: this.groupId || this.localGroupId,
       })
@@ -216,9 +223,10 @@ export default {
         payload,
       })
       // Temporary
+      if (cbName === 'archiveTask') return this.onCloseDetails()
       const taskId = this.$route.params.taskId
       this.task = await this.$store.dispatch({
-        type: "getTaskById",
+        type: 'getTaskById',
         taskId,
         groupId: this.groupId || this.localGroupId,
       })
@@ -239,7 +247,7 @@ export default {
       })
       const taskId = this.$route.params.taskId
       this.task = await this.$store.dispatch({
-        type: "getTaskById",
+        type: 'getTaskById',
         taskId,
         groupId: this.groupId || this.localGroupId,
       })
@@ -255,13 +263,14 @@ export default {
     },
     onMakeCover(url) {
       this.onAction({
-        cbName: "chooseCover",
-        payload: { type: "img", style: url },
+        cbName: 'chooseCover',
+        payload: { type: 'img', style: url },
       })
     },
     onCloseDetails() {
+      console.log('closeing')
       const currRoute = this.$route.fullPath
-      const route = currRoute.substring(0, currRoute.indexOf("/task"))
+      const route = currRoute.substring(0, currRoute.indexOf('/task'))
       this.$router.push(route)
     },
     toggleDescEdit() {
@@ -284,9 +293,12 @@ export default {
       return this.$route.params.taskId
     },
     descTxt() {
-      return "description" in this.task && this.task.description
+      return 'description' in this.task && this.task.description
         ? this.task.description
-        : "Add a more detailed description..."
+        : 'Add a more detailed description...'
+    },
+    isFull() {
+      return { 'empty': this.task.description }
     },
     open() {
       return { open: this.isActionPopupOpen }

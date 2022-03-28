@@ -15,13 +15,13 @@
 </template>
 
 <script>
-import actionPopup from './action-popup.vue'
+// import actionPopup from './action-popup.vue'
 
 export default {
     // props: [''],
     emits: ['onAction'],
     components: {
-        actionPopup
+        // actionPopup
     },
     created() { },
     data() {

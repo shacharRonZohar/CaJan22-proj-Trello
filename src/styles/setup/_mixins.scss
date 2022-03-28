@@ -152,3 +152,19 @@
   //   content: $content;
   // }
 }
+
+@mixin btn-action() {
+  text-transform: capitalize;
+  border-radius: 3px;
+  height: 32px;
+  max-width: 300px;
+  line-height: 15px;
+  padding: 6px 12px 6px 32px;
+  position: relative;
+  transition-duration: 85ms;
+  transition-property: background-color, border-color, box-shadow;
+  .icon {
+    position: absolute;
+    left: 9px;
+  }
+}
