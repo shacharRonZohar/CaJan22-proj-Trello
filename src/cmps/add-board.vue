@@ -1,13 +1,13 @@
 <template>
     <section class="add-board">
         <div class="header flex">
-            <span class="back-btn" @click="onBack">B</span>
-            <span class="title">Create board</span>
-            <span class="exit-btn" @click="onClose">X</span>
+            <!-- <span class="back-btn" @click="onBack">B</span> -->
+            <h1 class="title">Create board</h1>
+            <a @click="onClose" class="close-create-board-icon"></a>
         </div>
 
         <div class="body">
-            <hr>
+            <!-- <hr> -->
             <div class="bg-panel">
                 <span class="background-title">Background</span>
                 <ul class="img-list clean-list flex">
@@ -45,7 +45,7 @@ export default {
         return {
             boardToAdd: boardService.getEmptyBoard(),
             imgs: null,
-            colors: ['#0079bf', '#d29034', '#519839', '#b04632', '#89609e']
+            colors: ['#0079bf', '#d29034', '#519839', '#b04632', '#89609e'],
         }
     },
     created() {

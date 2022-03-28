@@ -19,6 +19,16 @@
         .close-btn {
             cursor: pointer;
             background-color: inherit;
+
+            .close-board-list-icon{
+                @include trello-icon($content: "\e91c", $type: md);
+                font-size: 1rem;
+                color: #687790;
+                font-weight: 600;
+                &:hover{
+                    color: $clr4
+                }
+            }
         }
     }
     .board-list {
