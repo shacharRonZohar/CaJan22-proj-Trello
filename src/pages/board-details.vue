@@ -1,5 +1,9 @@
 <template>
-  <section v-if="board" class="board-details" :style="{ backgroundImage: `url(${img})` }">
+  <section
+    v-if="board"
+    class="board-details"
+    :style="{ backgroundImage: `url('${img}')`, backgroundColor: `${color}` }"
+  >
     <board-header @openMenu="toggleMenu" :board="board" />
     <main class="main-board" :class="shownLabels">
       <Container
@@ -21,28 +25,44 @@
             @labelClicked="labelClicked"
           />
         </Draggable>
-        <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-group-btn">
+        <button
+          v-if="!addBtnClicked"
+          @click="addBtnClicked = !addBtnClicked"
+          class="add-group-btn"
+        >
           <span>+</span> Add another list
         </button>
         <div v-else class="add-group-container">
           <form @submit.prevent="addGroup" class="add-group-form">
-            <textarea v-focus v-model="group.title" resize:none placeholder="Enter list title..." />
+            <textarea
+              v-focus
+              v-model="group.title"
+              resize:none
+              placeholder="Enter list title..."
+            />
             <button class="save-new-list-btn">Add list</button>
-            <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span>
+            <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked"
+              >X</span
+            >
           </form>
         </div>
       </Container>
       <router-view :groupId="currOpenTaskGroupId" />
-      <right-nav :class="isOpen" @closeMenu="toggleMenu" @setBackGroundImg="setBackGroundImg"></right-nav>
+      <right-nav
+        :class="isOpen"
+        @closeMenu="toggleMenu"
+        @setBackGroundImg="setBackGroundImg"
+        @setBackGroundColor="setBackGroundColor"
+      ></right-nav>
     </main>
   </section>
 </template>
 
 <script>
-import boardGroup from '../cmps/board-group.vue'
-import boardHeader from '../cmps/board-header.vue'
-import rightNav from '../cmps/right-side-nav.vue'
-import { Container, Draggable } from 'vue3-smooth-dnd'
+import boardGroup from "../cmps/board-group.vue";
+import boardHeader from "../cmps/board-header.vue";
+import rightNav from "../cmps/right-side-nav.vue";
+import { Container, Draggable } from "vue3-smooth-dnd";
 
 export default {
   components: {
@@ -50,40 +70,43 @@ export default {
     boardHeader,
     rightNav,
     Container,
-    Draggable
+    Draggable,
   },
   data() {
     return {
       addBtnClicked: false,
       group: {
-        title: ''
+        title: "",
       },
       currOpenTaskGroupId: null,
       showMenuClicked: false,
-      isLabelClicked: false
-    }
+      isLabelClicked: false,
+    };
   },
-  created() {
-  },
+  created() {},
   methods: {
     saveTaskDrop({ ev, groupId }) {
       if (ev.removedIndex !== null) {
-        const board = JSON.parse(JSON.stringify(this.board))
-        const group = board.groups.find(group => group.id === groupId)
-        group.tasks.splice(ev.removedIndex, 1)
-        this.$store.dispatch({ type: 'saveBoard', boardToSave: board })
+        const board = JSON.parse(JSON.stringify(this.board));
+        const group = board.groups.find((group) => group.id === groupId);
+        group.tasks.splice(ev.removedIndex, 1);
+        this.$store.dispatch({ type: "saveBoard", boardToSave: board });
       }
       if (ev.addedIndex !== null) {
         setTimeout(() => {
-          const board = JSON.parse(JSON.stringify(this.board))
-          const group = board.groups.find(group => group.id === groupId)
-          group.tasks.splice(ev.addedIndex, 0, ev.payload)
-          this.$store.dispatch({ type: 'saveBoard', boardToSave: board })
-        }, 0.001)
+          const board = JSON.parse(JSON.stringify(this.board));
+          const group = board.groups.find((group) => group.id === groupId);
+          group.tasks.splice(ev.addedIndex, 0, ev.payload);
+          this.$store.dispatch({ type: "saveBoard", boardToSave: board });
+        }, 0.001);
       }
     },
     async onDrop({ removedIndex, addedIndex }) {
-      this.$store.dispatch({ type: 'saveGroupDrop', fromIdx: removedIndex, toIdx: addedIndex })
+      this.$store.dispatch({
+        type: "saveGroupDrop",
+        fromIdx: removedIndex,
+        toIdx: addedIndex,
+      });
     },
     async saveTask({ groupId, task }) {
       await this.$store.dispatch({
@@ -91,27 +114,27 @@ export default {
         taskToSave: task,
         groupId,
         activity: "Add a new card",
-      })
+      });
     },
     async addGroup() {
-      if (this.group.title.trim() === '') return
+      if (this.group.title.trim() === "") return;
       await this.$store.dispatch({
         type: "saveGroup",
         groupToSave: { title: this.group.title },
         activity: "Add a new group",
-      })
-      this.group.title = ''
-      this.addBtnClicked = !this.addBtnClicked
+      });
+      this.group.title = "";
+      this.addBtnClicked = !this.addBtnClicked;
     },
     async saveGroup(groupToSave) {
       await this.$store.dispatch({
         type: "saveGroup",
         groupToSave,
         activity: "edit a group",
-      })
+      });
     },
     openTaskDetails(groupId) {
-      this.currOpenTaskGroupId = groupId
+      this.currOpenTaskGroupId = groupId;
     },
     async removeGroup(groupId) {
       console.log(this.board);
@@ -119,54 +142,68 @@ export default {
         await this.$store.dispatch({
           type: "removeGroup",
           groupId,
-          activity: "Remove group"
-        })
-      } else return
+          activity: "Remove group",
+        });
+      } else return;
     },
     toggleMenu() {
-      this.showMenuClicked = !this.showMenuClicked
+      this.showMenuClicked = !this.showMenuClicked;
     },
     async setBackGroundImg(imgUrl) {
       await this.$store.dispatch({
         type: "setBackGroundImg",
         imgUrl,
         activity: "Change background image",
-      })
+      });
     },
-    labelClicked(){
-      this.isLabelClicked = !this.isLabelClicked
-    }
+    async setBackGroundColor(color) {
+      await this.$store.dispatch({
+        type: "setBackGroundColor",
+        color,
+        activity: "Change background color",
+      });
+    },
+    labelClicked() {
+      this.isLabelClicked = !this.isLabelClicked;
+    },
   },
   computed: {
     boardId() {
-      return this.$route.params.boardId
+      return this.$route.params.boardId;
     },
     board() {
-      return this.$store.getters.board
+      return this.$store.getters.board;
     },
     img() {
-      return new URL(`${this.board.style.imgUrl}`, import.meta.url).href
+      return this.board.style.imgUrl
+        ? new URL(`${this.board.style.imgUrl}`, import.meta.url).href
+        : "";
+    },
+    color() {
+      return this.board.style.color
+        ? this.board.style.color
+        : "";
     },
     isOpen() {
-      return this.showMenuClicked ? 'open' : ''
+      return this.showMenuClicked ? "open" : "";
     },
     dragClass() {
-      return {}
+      return {};
     },
-    shownLabels(){
-      return this.isLabelClicked? 'show-title' : 'hide-title'
+    shownLabels() {
+      return this.isLabelClicked ? "show-title" : "hide-title";
     },
   },
   watch: {
     boardId: {
       handler() {
-        const { boardId } = this.$route.params
-        this.$store.commit({ type: "setBoard", boardId })
+        const { boardId } = this.$route.params;
+        this.$store.commit({ type: "setBoard", boardId });
       },
       immediate: true,
     },
   },
-}
+};
 </script>
 
 <style>

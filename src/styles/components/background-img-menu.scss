@@ -13,18 +13,31 @@
         cursor: pointer;
         &:hover{
             opacity: .7;
+
+            .right-menu-unsplash-title{
+                visibility: visible;
+            }
         }
     }
 
     .right-menu-unsplash-title{
         position: absolute;
         width: 145px;
-        text-align: center;
+        text-align: left;
         background: #00000080;
         border-radius: 0 0 2px 2px;
         color: #dfe1e6;
         height: 24px;
         bottom: 0;
+        padding: 2px 12px;
+        line-height: 20px;
+        font-size: 14px;
+        text-decoration: underline;
+        z-index: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        visibility: hidden;
     }
     
     .unsplash-imgs-results {

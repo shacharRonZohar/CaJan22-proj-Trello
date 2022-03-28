@@ -15,7 +15,9 @@
                     <div class="right-menu-unsplash-img" 
                     @click="setBackGroundImg(result.urls.full)"
                     :style="{ backgroundImage: `url(${result.urls.thumb})` }">
-                    <div class="right-menu-unsplash-title">title</div>
+                    <a class="right-menu-unsplash-title" target="_blank" :href="result.user.links.html">
+                      {{result.user.first_name}}
+                    </a>
                     </div>
             </li>
         </ul>
@@ -33,8 +35,8 @@ export default {
     }
   },
   async created() {
-      // const res = await imgService.queryPhotos()
-      // this.results = res.results
+      const res = await imgService.queryPhotos()
+      this.results = res.results
   },
   methods: {
       async searchPhotos() {
