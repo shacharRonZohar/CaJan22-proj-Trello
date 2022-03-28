@@ -1,13 +1,12 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service'
 import { imgService } from './imgService.js'
+import { httpService } from './http-service.js'
 
 export const boardService = {
     query,
-    getById,
     save,
     remove,
-    postMany,
     saveTask,
     saveGroup,
     removeGroup,
@@ -21,28 +20,24 @@ export const boardService = {
     getEmptyBoard
 }
 
-const BOARDS_KEY = 'boards_db'
+// const BOARDS_KEY = 'boards_db'
+// _createBoards()
 
-_createBoards()
+const endpoint = 'board'
 
-function query() {
-    return storageService.query(BOARDS_KEY)
-}
 
-function getById(boardId) {
-    return storageService.get(BOARDS_KEY, boardId)
+async function query(filterBy = {}) {
+    return await httpService.get(endpoint, filterBy)
+    // return storageService.query(BOARDS_KEY)
 }
 
 function save(board) {
     return board._id ? _update(board) : _add(board)
 }
 
-function postMany(boards) {
-    return storageService.postMany(BOARDS_KEY, boards)
-}
-
-function remove(boardId) {
-    return storageService.remove(BOARDS_KEY, boardId)
+async function remove(boardId) {
+    return await httpService.remove(`${endpoint}/${boardId}`)
+    // return storageService.remove(BOARDS_KEY, boardId)
 }
 
 function removeGroup(board, groupId, activity) {
@@ -191,8 +186,6 @@ function _getAttachment(payload) {
     const nameStartIdx = payload.lastIndexOf('/') + 1
     const nameEndIdx = payload.lastIndexOf('_')
     const extension = payload.substring(/\.(png|jpg|gif|bmp|jpeg|PNG|JPG|GIF|BMP|JPEG)/.exec(payload).index)
-    // const nameEndIdx =
-
     const name = payload.substring(nameStartIdx, nameEndIdx) + extension
     return {
         id: utilService.makeId('a'),
@@ -201,12 +194,14 @@ function _getAttachment(payload) {
         createdAt: Date.now()
     }
 }
-function _update(board) {
-    return storageService.put(BOARDS_KEY, board)
+async function _update(board) {
+    return await httpService.put(`${endpoint}/${board._id}`, board)
+    // return storageService.put(BOARDS_KEY, board)
 }
 
-function _add(board) {
-    return storageService.post(BOARDS_KEY, board)
+async function _add(board) {
+    return await httpService.post(endpoint, board)
+    // return storageService.post(BOARDS_KEY, board)
 }
 
 function _createBoards() {

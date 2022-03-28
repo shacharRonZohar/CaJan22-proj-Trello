@@ -24,8 +24,9 @@ export default {
     },
     methods: {
         goToBoard(board){
-            console.log(board);
             this.$router.push(`/board/${board._id}`)
+            this.onClose()
+            
         },
         onClose() {
             this.$emit('closeModal')

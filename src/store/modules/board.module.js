@@ -24,7 +24,6 @@ export default {
             state.boards = boards
         },
         saveBoard(state, { savedBoard }) {
-            // Ask adam: Maybe remove complexity
             const idx = state.boards.findIndex(currBoard => {
                 return currBoard._id === savedBoard._id
             })
