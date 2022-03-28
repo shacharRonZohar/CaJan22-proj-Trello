@@ -18,6 +18,14 @@
     }
 
     .task-details {
+        &.cover-open {
+            .actions {
+                .cover-action {
+                    display: none;
+                }
+            }
+        }
+
         display: flex;
         flex-direction: column;
         background-color: #f5f4f7;
@@ -124,11 +132,24 @@
         }
         .cover {
             height: 116px;
-            width: 103.2%;
-            transform: translate(-16px);
+            width: 103.5%;
+            transform: translate(-18px);
             background-position: center;
             background-size: contain;
             background-repeat: no-repeat;
+            .cover-action {
+                @include btn-action;
+                background-color: #00000014;
+                // width: 1px;
+                position: absolute;
+                right: 9px;
+                bottom: 8px;
+                line-height: 20px;
+                text-transform: capitalize;
+                .icon {
+                    @include trello-icon($content: "\e914");
+                }
+            }
         }
     }
     ul {

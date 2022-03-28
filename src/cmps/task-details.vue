@@ -9,8 +9,11 @@
       :action="currOpenAction"
       :task="task"
     ></action-popup>
-    <section @click.stop v-if="task" class="task-details">
-      <div v-if="task.cover" :style="task.cover" class="cover"></div>
+    <section @click.stop v-if="task" class="task-details" :class="
+    { 'cover-open': task.cover }">
+      <div v-if="task.cover" :style="task.cover" class="cover">
+        <action-btn @openActionPopup="toggleAction" :action="'cover-action'"></action-btn>
+      </div>
       <header class="task-details-header">
         <div class="icon"></div>
         <div class="title-container">
