@@ -7,20 +7,30 @@
     </header>
     <hr />
     <main class="bg-menu-main">
-    <ul class="clean-list flex">
-      <li @click="toggleImgMenu">
-        <div class="bg-menu-imgs bg-photos-img" />
-        <div class="bg-menu-imgs-title">photos</div>
+      <ul class="clean-list flex">
+        <li @click="toggleImgMenu">
+          <div class="bg-menu-imgs bg-photos-img" />
+          <div class="bg-menu-imgs-title">photos</div>
         </li>
-      <li @click="toggleColorMenu">
-        <div class="bg-menu-imgs bg-colors-img" />
-        <div class="bg-menu-imgs-title">Colors</div>
-      </li>
-    </ul>
+        <li @click="toggleColorMenu">
+          <div class="bg-menu-imgs bg-colors-img" />
+          <div class="bg-menu-imgs-title">Colors</div>
+        </li>
+      </ul>
     </main>
 
-    <background-img-menu @closeImgMenu="closeImgMenu" @goBack="toggleImgMenu"  @setBackGroundImg="setBackGroundImg" :class="isImgOpen" />
-    <background-color-menu @closeColorMenu="closeColorMenu" @goBack="toggleColorMenu" :class="isColorOpen" />
+    <background-img-menu
+      @closeImgMenu="closeImgMenu"
+      @goBack="toggleImgMenu"
+      @setBackGroundImg="setBackGroundImg"
+      :class="isImgOpen"
+    />
+    <background-color-menu
+      @closeColorMenu="closeColorMenu"
+      @setBackGroundColor="setBackGroundColor"
+      @goBack="toggleColorMenu"
+      :class="isColorOpen"
+    />
   </section>
 </template>
 
@@ -39,8 +49,7 @@ export default {
       showColorClicked: false,
     };
   },
-  async created() {
-  },
+  async created() {},
   methods: {
     toggleImgMenu() {
       this.showImgClicked = !this.showImgClicked;
@@ -59,12 +68,15 @@ export default {
     closeBgMenu() {
       this.$emit("closeBgMenu");
     },
-    goBack(){
-        this.$emit("goBack")
+    goBack() {
+      this.$emit("goBack");
     },
-     setBackGroundImg(imgUrl){
-          this.$emit('setBackGroundImg', imgUrl)
-      },
+    setBackGroundImg(imgUrl) {
+      this.$emit("setBackGroundImg", imgUrl);
+    },
+    setBackGroundColor(color) {
+      this.$emit("setBackGroundColor", color);
+    },
   },
   computed: {
     isImgOpen() {

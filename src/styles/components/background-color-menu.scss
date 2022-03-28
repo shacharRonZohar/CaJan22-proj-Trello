@@ -1,4 +1,27 @@
 .background-color-menu{
     transition: transform 0.35s;
+    overflow-y: hidden;
+
+    .right-menu-colors-list{
+        overflow-y: auto;
+        height: calc(100% - 70px);
+        flex-wrap: wrap;
+        margin-top: 12px;
+    }
+
+    .right-menu-colors {
+        width: 144px;
+        height: 96px;
+        margin-bottom: 8px;
+        margin-inline: 4px;
+        object-fit: cover;
+        float: left;
+        border-radius: 8px;
+        position: relative;
+        cursor: pointer;
+        &:hover{
+            opacity: .7;
+        }
+    }
 
 }

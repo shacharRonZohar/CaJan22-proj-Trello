@@ -7,7 +7,10 @@
     <hr />
     <ul class="clean-list main-menu-list">
       <li @click="toggleMenu" class="flex main-list-item">
-        <div class="board-icon-img" :style="{ backgroundImage: `url(${img})` }"></div>
+        <div
+          class="board-icon-img"
+          :style="{ backgroundImage: `url('${img}')`, backgroundColor: `${color}` }"
+        ></div>
         <span> Change background </span>
       </li>
     </ul>
@@ -15,6 +18,7 @@
       @closeBgMenu="closeBgMenu"
       @goBack="toggleMenu"
       @setBackGroundImg="setBackGroundImg"
+      @setBackGroundColor="setBackGroundColor"
       :class="isOpen"
     />
   </section>
@@ -43,9 +47,12 @@ export default {
       this.showMenuClicked = !this.showMenuClicked;
       this.$emit("closeMenu");
     },
-     setBackGroundImg(imgUrl){
-          this.$emit('setBackGroundImg', imgUrl)
-      },
+    setBackGroundImg(imgUrl) {
+      this.$emit("setBackGroundImg", imgUrl);
+    },
+    setBackGroundColor(color) {
+      this.$emit("setBackGroundColor", color);
+    },
   },
   computed: {
     isOpen() {
@@ -55,7 +62,14 @@ export default {
       return this.$store.getters.board;
     },
     img() {
-      return new URL(`${this.board.style.imgUrl}`, import.meta.url).href;
+      return this.board.style.imgUrl
+        ? new URL(`${this.board.style.imgUrl}`, import.meta.url).href
+        : "";
+    },
+    color() {
+      return this.board.style.color
+        ? this.board.style.color
+        : "";
     },
   },
 };
