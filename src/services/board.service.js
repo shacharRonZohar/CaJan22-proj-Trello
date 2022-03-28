@@ -17,7 +17,8 @@ export const boardService = {
     toggleLabel,
     saveNewLabel,
     removeCover,
-    getEmptyBoard
+    getEmptyBoard,
+    addChecklist
 }
 
 // const BOARDS_KEY = 'boards_db'
@@ -96,6 +97,20 @@ function saveAttachment(board, taskId, groupId, payload, activity) {
     const attachment = _getAttachment(payload)
     'attachments' in task ? task.attachments.unshift(attachment) : task.attachments = [attachment]
     return Promise.resolve(board)
+}
+
+function addChecklist(board, taskId, groupId, payload, activity) {
+    const group = board.groups.find(group => group.id === groupId)
+    const task = group.tasks.find(task => task.id === taskId)
+    const checklistToAdd = {
+        id: utilService.makeId('c'),
+        title: payload,
+        createdAt: Date.now(),
+        items: []
+    }
+    'checklists' in task ? task.checklists.push(checklistToAdd) : task.checklists = [checklistToAdd]
+    console.log(checklistToAdd);
+    // return Promise.resolve(board)
 }
 
 async function saveCover(board, taskId, groupId, payload, activity) {
