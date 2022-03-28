@@ -149,10 +149,7 @@ function getEmptyBoard() {
         'title': '',
         'createdAt': Date.now(),
         'createdBy': {},
-        'style': {
-            'imgUrl': '',
-            'color': ''
-        },
+        'style': {},
         'labels': [
             {
                 'id': 'l101',

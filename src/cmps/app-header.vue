@@ -7,7 +7,7 @@
 
         <div class="board-main-nav flex space-between align-center">
             <div class="actions">
-                <button class="btn wide-s">
+                <button @click="openList" class="btn wide-s">
                     <span>
                         Board
                         <span class="svg-icon expand"></span>
@@ -30,7 +30,7 @@
                 <button @click="onToggleAddBoard" class="btn create-btn">Create</button>
             </div>
             <add-board v-if="createClicked" @addedBoard="onToggleAddBoard"></add-board>
-            <!-- <header-board-list v-if="isShown"></header-board-list> -->
+            <header-board-list v-if="isShown" @closeModal="openList" :boards="boards"></header-board-list>
 
             <div class="second-actions flex align-center">
                 <div class="search-app-header">
@@ -72,7 +72,7 @@ export default {
     },
     methods: {
         openList(listType) {
-
+            this.isShown = !this.isShown
         },
         AppHeaderClicked() {
             this.$router.push('/board')
