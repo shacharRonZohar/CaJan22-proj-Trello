@@ -1,9 +1,11 @@
 <template>
     <div class="header-board-list">
-        <span>Boards</span>
-        <button class="btn" @click="onClose">x</button>
+        <div class="header flex space-between align-center">
+            <span class="title">Boards</span>
+            <button class="close-btn btn" @click="onClose">x</button>
+        </div>
         <ul class="board-list clean-list">
-            <li @click="goToBoard(board)" v-for="board in boards" :key="board._id">
+            <li class="board flex align-center" @click="goToBoard(board)" v-for="board in boards" :key="board._id">
                 <div class="mini-pic" :style="{ backgroundImage: img(board) }"></div>
                 <span>{{ board.title }}</span>
             </li>
@@ -38,20 +40,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.header-board-list {
-    border: 1px solid black;
-    padding: 10px;
-    position: absolute;
-    z-index: 1;
-    top: 50px;
-    background-color: #fff;
-}
-.mini-pic {
-    width: 40px;
-    height: 40px;
-    display: inline-block;
-    background-size: cover;
-}
-</style>
