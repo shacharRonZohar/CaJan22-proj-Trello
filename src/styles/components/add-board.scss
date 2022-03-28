@@ -1,26 +1,96 @@
 .add-board {
-    background-color: #fff;
-    border: 1px solid black;
     z-index: 1;
     position: absolute;
     top: 47px;
     left: 277px;
-    width: 250px;
-    padding: 20px 5px;
-    .img-list {
-        gap: 3px;
-        img {
-            width: 55px;
-            height: 50px;
-            border-radius: 5px;
+    padding: 15px 12px;
+    
+    
+    width: 304px;
+    background-color: $clr2;
+    border-radius: 3px;
+    box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
+
+    .header {
+        justify-content: space-between;
+        .title {
+            color: $clr15;
+        }
+        .exit-btn {
+            background-color: inherit;
         }
     }
-    .color-list {
-        gap: 3px;
-        .color {
-            width: 40px;
-            height: 30px;
-            border-radius: 5px;
+
+    .body {
+        .bg-panel {
+            .background-title {
+                color: #5e6c84;
+                font-size: 12px;
+                font-weight: 700;
+                line-height: 16px;
+            }
+            .img-list {
+                gap: 6px;
+                margin-top: 3px;
+                .img {
+                    height: 40px;
+                    width: 64px;
+                    border-radius: 5px;
+                    object-fit: cover;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+            .color-list {
+                gap: 6px;
+                margin-top: 4px;
+                .color {
+                    width: 40px;
+                    height: 30px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+            }
+        }
+        
+        .input-panel {
+            .input-title {
+                display: block;
+                color: #5e6c84;
+                font-size: 12px;
+                font-weight: 700;
+                margin-top: 16px;
+                .asterisk {
+                    color: #eb5a46;
+                }
+            }
+            input {
+                margin-top: 2px;
+                width: 100%;
+                height: 36px;
+                &:focus {
+                    background-color: $clr2;
+                    color: $clr4;
+                    box-shadow: inset 0 0 0 2px $clr8;
+                    outline: none;
+                    border: none;
+                    border-radius: 3px;            
+                }
+            }
+        }
+        .create-btn {
+            background-color: $clr8;
+            color: $clr2;
+            width: 100%;
+            height: 32px;
+            font-size: 14px;
+            margin-top: 20px;
+            cursor: pointer;
         }
     }
+
 }
+
+
+
