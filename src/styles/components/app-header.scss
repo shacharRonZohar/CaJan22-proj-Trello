@@ -12,6 +12,8 @@
             font-size: large;
             font-weight: 600;
             margin-left: 7px;
+            color: $clr2;
+            letter-spacing: 2px;
         }
         .gif-logo {
             content: url(../assets/imgs/moving-logo.gif);
@@ -71,12 +73,25 @@
                 border-radius: 3px;
                 width: 250px;
                 height: 32px;
+                margin-right: 4px;
+                .search-icon {
+                    display: inline-block;
+                    background-image: url(../assets/icons/search2.svg);
+                    margin-top: 4px;
+                    margin-left: 3px;
+                    width: 20px;
+                    height: 20px;
+                    background-size: contain;
+                }
                 .search-input {
                     border: none;
                     outline: none;
                     height: 100%;
                     width: 100%;
+                    float: right;
                     background-color: transparent;
+                    padding-left: 10px;
+                    // background-color: wheat;
                     &::placeholder {
                         color: $clr2;
                     }
@@ -118,25 +133,54 @@
                 }
             }
 
+            .info {
+                width: 32px;
+                height: 32px;
+                border-radius: 3px;
+                margin-right: 3px;
+                background-color: inherit;
+                .info-icon {
+                    display: block;
+                    background-image: url(../assets/icons/info.svg);
+                    width: 20px;
+                    height: 20px;
+                    background-size: contain;
+                }
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.2);
+                }
+            }
+            
             .notifications {
                 width: 32px;
                 height: 32px;
                 border-radius: 3px;
+                margin-right: 4px;
+                background-color: inherit;
                 .notifications-icon {
-
+                    // filter: brightness(1);
+                    display: block;
+                    background-image: url(../assets/icons/notifications2.svg);
+                    width: 20px;
+                    height: 20px;
+                    background-size: contain;
+                }
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.2);
                 }
             }
             
             .profile-app-header {
-                border: 1px solid lightgray;
+                background-color: #de350b;
                 border-radius: 50%;
                 justify-content: center;
                 align-items: center;
-                height: 35px;
-                width: 35px;
+                height: 32px;
+                width: 32px;
                 margin-right: 4px;
                 .letter {
                     font-weight: bolder;
+                    color: $clr2;
                 }
             }
         }
