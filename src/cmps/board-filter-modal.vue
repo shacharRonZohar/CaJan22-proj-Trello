@@ -1,10 +1,9 @@
 <template>
     <div class="board-filter-modal">
-        <div class="header flex space-between align-center">
+        <div class="header flex align-center">
             <span class="title">Filter</span>
-            <button class="close-btn btn">x</button>
+            <button @click="onCloseFilter" class="close-btn btn"></button>
         </div>
-        <hr>
 
         <div class="body">
             <form>
@@ -22,11 +21,17 @@
 
 <script>
 export default {
+    emits: ['closeModal'],
     data() {
         return {
             filterBy: {
                 txt: ''
             }
+        }
+    },
+    methods: {
+        onCloseFilter() {
+            this.$emit('closeModal')
         }
     }
 }

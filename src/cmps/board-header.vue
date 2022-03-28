@@ -33,7 +33,7 @@
             </button>
         </div>
     </header>
-    <board-filter-modal v-if="isFilterOpen"></board-filter-modal>
+    <board-filter-modal v-if="isFilterOpen" @closeModal="onOpenFilter"></board-filter-modal>
 </template>
 
 <script>
