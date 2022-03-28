@@ -44,17 +44,15 @@ export default {
     methods: {
         onOpenMenu() {
             this.$emit('openMenu')
-        }
-    },
-    created() {
-        console.log(this.board);
-    },
-    methods: {
+        },
         async onSaveBoardName(ev) {
             this.board.title = ev.target.innerText
             this.$store.dispatch({type: 'saveBoard', boardToSave: this.board})
         },
-    }
+    },
+    created() {
+
+    },
 
 }
 

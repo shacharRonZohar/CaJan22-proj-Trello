@@ -1,7 +1,7 @@
 <template>
   <section v-if="task" class="task-preview" @click="openTaskDetails">
-    <div class="task-cover-color" v-if="task.cover?.backgroundColor" :style="{backgroundColor: `${bgColor}`}"></div>
-    <div class="task-cover-img" v-if="task.cover?.backgroundImage" :style="{ backgroundImage: `${img}` }"></div>
+    <div class="task-cover-color" v-if="task.cover?.type === 'color'" :style="{backgroundColor: `${bgColor}`}"></div>
+    <div class="task-cover-img" v-if="task.cover?.type === 'img'" :style="{ backgroundImage: `${img}` }"></div>
     <!-- v-if="task.labelIds?.length" -->
     <main>
       <ul class="flex clean-list" v-if="task.labelIds?.length">
