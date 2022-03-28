@@ -84,12 +84,17 @@
     }
 
     .add-card-btn {
+        .add-card-icon{
+            @include trello-icon($content: "\e901")
+        }
+
         border-radius: 3px;
         color: #5e6c84;
         margin: 2px 0 8px 8px;
         background-color: inherit;
         border: none;
         width: 225px;
+        font-size: 14px;
         padding: 4px 8px;
         text-align: left;
 

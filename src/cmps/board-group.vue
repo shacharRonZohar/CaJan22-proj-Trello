@@ -21,7 +21,10 @@
         </Draggable>
       </Container>
     </div>
-    <button v-if="!addBtnClicked" @click="openAddForm" class="add-card-btn">+ Add a card</button>
+    <button v-if="!addBtnClicked" @click="openAddForm" class="add-card-btn">
+      <a class="add-card-icon" />
+      Add a card
+      </button>
     <div v-else class="add-card-container">
       <form @submit.prevent="saveTask">
         <textarea
@@ -32,7 +35,9 @@
           placeholder="Enter a title for this card..."
         />
         <div>
-          <button class="save-new-card-btn">Add card</button>
+          <button class="save-new-card-btn">
+            Add card
+            </button>
           <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span>
         </div>
       </form>
