@@ -38,7 +38,7 @@
           <button class="save-new-card-btn">
             Add card
             </button>
-          <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span>
+          <a class="close-add-btn" @click="addBtnClicked = !addBtnClicked" />
         </div>
       </form>
     </div>
