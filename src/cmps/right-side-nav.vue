@@ -1,48 +1,61 @@
 <template>
-  <section class="right-side-nav">
+  <section class="right-menu right-side-nav">
     <header class="flex space-between">
       <h1>Menu</h1>
-      <div @click="closeMenu">X</div>
+      <a class="close-menu-icon" @click="closeMainMenu" />
     </header>
     <hr />
-    <ul class="clean-list">
-      <li @click="openMenu()" class="flex">
-        <div></div>
-        Change background
+    <ul class="clean-list main-menu-list">
+      <li @click="toggleMenu" class="flex main-list-item">
+        <div class="board-icon-img" :style="{ backgroundImage: `url(${img})` }"></div>
+        <span> Change background </span>
       </li>
     </ul>
-    <change-background-menu :class="isMenuOpen" />
-
-    <!-- <header class="flex space-between">
-        <h1>Photos by <span><a target="_blank" href="https://unsplash.com/">Unsplah</a></span></h1>
-        <div @click="closeMenu">X</div>
-        </header>
-        <hr />
-        <form @submit.prevent="searchPhotos">
-            <input v-model="searchTxt" type="search" />
-            <button>Search</button>
-        </form>
-        <ul class="clean-list flex">
-            <li v-for="result in results" :key="result.id">
-                    <img @click="setBackGroundImg(result.urls.full)" :src="result.urls.thumb" alt="">
-            </li>
-        </ul> -->
+    <background-menu
+      @closeBgMenu="closeBgMenu"
+      @goBack="toggleMenu"
+      @setBackGroundImg="setBackGroundImg"
+      :class="isOpen"
+    />
   </section>
 </template>
 
 <script>
-import changeBackgroundMenu from "./change-background-menu.vue";
+import backgroundMenu from "./background-menu.vue";
 export default {
   components: {
-    changeBackgroundMenu,
+    backgroundMenu,
   },
   data() {
-    return {};
+    return {
+      showMenuClicked: false,
+    };
   },
   async created() {},
   methods: {
-    closeMenu() {
+    toggleMenu() {
+      this.showMenuClicked = !this.showMenuClicked;
+    },
+    closeMainMenu() {
       this.$emit("closeMenu");
+    },
+    closeBgMenu() {
+      this.showMenuClicked = !this.showMenuClicked;
+      this.$emit("closeMenu");
+    },
+     setBackGroundImg(imgUrl){
+          this.$emit('setBackGroundImg', imgUrl)
+      },
+  },
+  computed: {
+    isOpen() {
+      return this.showMenuClicked ? "open" : "";
+    },
+    board() {
+      return this.$store.getters.board;
+    },
+    img() {
+      return new URL(`${this.board.style.imgUrl}`, import.meta.url).href;
     },
   },
 };

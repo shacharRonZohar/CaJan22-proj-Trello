@@ -1,6 +1,6 @@
 <template >
   <!-- TODO: Need to split code into more components -->
-  <div @click.stop="onCloseDetails" class="task-details-container">
+  <div v-if="task" @click.stop="onCloseDetails" class="task-details-container">
     <action-popup
       @action="onAction"
       @actions="onActions"
@@ -22,13 +22,13 @@
       </header>
       <main class="main-details">
         <section class="main-content">
-          <!-- <div class="members-container task-layout">
+          <!-- <div class='members-container task-layout'>
           <span>Members:</span>
-          <div class="members">
-            <div class="member">A</div>
-            <div class="member">CB</div>
-            <div class="member">SZ</div>
-            <div class="member add icon"></div>
+          <div class='members'>
+            <div class='member'>A</div>
+            <div class='member'>CB</div>
+            <div class='member'>SZ</div>
+            <div class='member add icon'></div>
           </div>
           </div>-->
           <section class="labels-container task-layout">
@@ -65,9 +65,9 @@
                 <button class="save-new-list-btn">Save</button>
                 <button @click.stop="toggleDescEdit" class="icon close"></button>
               </div>
-              <!-- <span class="close-add-btn" @click="addBtnClicked = !addBtnClicked">X</span> -->
+              <!-- <span class='close-add-btn' @click='addBtnClicked = !addBtnClicked'>X</span> -->
             </form>
-            <!-- <button class="btn edit">Edit</button> -->
+            <!-- <button class='btn edit'>Edit</button> -->
           </div>
           <div v-if="task.attachments && task.attachments.length" class="attachments-container">
             <div class="attachments-header">
@@ -101,13 +101,13 @@
               </div>
             </div>
           </div>
-          <!-- <div class="activities-container">
-            <div class="activities-header">
+          <!-- <div class='activities-container'>
+            <div class='activities-header'>
               <div>
-                <div class="icon"></div>
+                <div class='icon'></div>
                 <h3>Activity</h3>
               </div>
-              <button class="btn show">Show details</button>
+              <button class='btn show'>Show details</button>
             </div>
           </div>-->
         </section>
@@ -121,13 +121,13 @@
             :action="action"
           ></action-btn>
           <!-- <component
-            :chosenLabels="task.labelIds"
-            @togglePopup="setPopupMode"
-            @onAction="onAction"
-            @onActions="onActions"
-            v-for="cmp in actionCmps"
-            :is="cmp"
-            :class="open"
+            :chosenLabels='task.labelIds'
+            @togglePopup='setPopupMode'
+            @onAction='onAction'
+            @onActions='onActions'
+            v-for='cmp in actionCmps'
+            :is='cmp'
+            :class='open'
           ></component>-->
         </aside>
       </main>
@@ -158,14 +158,14 @@ export default {
       localGroupId: null,
       groupName: '',
       actionCmps: [
-        "members-action",
-        "label-action",
-        "checklist-action",
-        "dates-action",
-        "location-action",
-        "attachment-action",
-        "cover-action",
-        "archive-action",
+        'members-action',
+        'label-action',
+        'checklist-action',
+        'dates-action',
+        'attachment-action',
+        'location-action',
+        'cover-action',
+        'archive-action',
       ],
       currOpenAction: ''
     }
@@ -177,13 +177,13 @@ export default {
           if (!this.$route.params?.taskId) return
           const taskId = this.$route.params.taskId
           const group = await this.$store.dispatch({
-            type: "getGroupByTask",
+            type: 'getGroupByTask',
             taskId,
           })
           this.localGroupId = group.id
           this.groupName = group.title
           this.task = await this.$store.dispatch({
-            type: "getTaskById",
+            type: 'getTaskById',
             taskId,
             groupId: this.groupId || this.localGroupId,
           })
@@ -202,7 +202,7 @@ export default {
     async saveTask(taskToSave) {
       taskToSave = JSON.parse(JSON.stringify(taskToSave))
       return this.$store.dispatch({
-        type: "saveTask",
+        type: 'saveTask',
         taskToSave,
         groupId: this.groupId || this.localGroupId,
       })
@@ -226,7 +226,7 @@ export default {
       if (cbName === 'archiveTask') return this.onCloseDetails()
       const taskId = this.$route.params.taskId
       this.task = await this.$store.dispatch({
-        type: "getTaskById",
+        type: 'getTaskById',
         taskId,
         groupId: this.groupId || this.localGroupId,
       })
@@ -247,7 +247,7 @@ export default {
       })
       const taskId = this.$route.params.taskId
       this.task = await this.$store.dispatch({
-        type: "getTaskById",
+        type: 'getTaskById',
         taskId,
         groupId: this.groupId || this.localGroupId,
       })
@@ -263,14 +263,14 @@ export default {
     },
     onMakeCover(url) {
       this.onAction({
-        cbName: "chooseCover",
-        payload: { type: "img", style: url },
+        cbName: 'chooseCover',
+        payload: { type: 'img', style: url },
       })
     },
     onCloseDetails() {
       console.log('closeing')
       const currRoute = this.$route.fullPath
-      const route = currRoute.substring(0, currRoute.indexOf("/task"))
+      const route = currRoute.substring(0, currRoute.indexOf('/task'))
       this.$router.push(route)
     },
     toggleDescEdit() {
@@ -293,9 +293,9 @@ export default {
       return this.$route.params.taskId
     },
     descTxt() {
-      return "description" in this.task && this.task.description
+      return 'description' in this.task && this.task.description
         ? this.task.description
-        : "Add a more detailed description..."
+        : 'Add a more detailed description...'
     },
     isFull() {
       return { 'empty': this.task.description }

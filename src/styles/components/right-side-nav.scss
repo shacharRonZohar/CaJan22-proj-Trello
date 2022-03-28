@@ -1,29 +1,30 @@
 .right-side-nav {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: $clr18;
-    width: 339px;
-    padding: 10px;
-    overflow-y: auto;
-    height: 100%;
-    box-shadow: 0 12px 24px -6px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
-    transform: translateX(100%);
-    transition: transform 0.3s;
-    transition-timing-function: ease-in;
-
-    li{
-        cursor: pointer;
+    transition: transform 0.2s;
+    
+    .main-menu-list {
+        margin-top: 12px;
     }
 
-    &.open {
-        transform: translateX(0);
-        // transition: transform .6s;
+    .main-list-item {
+        cursor: pointer;
+        padding: 6px 6px 6px 17px;
+
+        &:hover{
+            background-color: #E2E4E9;
+            border-radius: 3px;
+        }
+
+        .board-icon-img {
+            margin-right: 14px;
+            height: 20px;
+            width: 20px;
+            background-size: cover;
+            background-position: 50%;
+            border-radius: 3px;
+        }
     }
 
     h1 {
-        text-align: left;
+        margin: auto;
     }
-
-   
 }

@@ -1,6 +1,5 @@
 <template >
     <div @click.stop class="label btn">
-        <!-- <template v-if="!createLabelOpen"> -->
         <div class="header">
             <span v-if="!createLabelOpen">Labels</span>
             <button v-else @click="toggleCreateLabel" class="back"></button>

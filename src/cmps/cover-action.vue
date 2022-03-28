@@ -1,34 +1,49 @@
 <template >
     <div @click.stop class="cover-action btn">
-        <div class="header">
+        <!-- <div class="header">
             <span>Cover</span>
             <button class="close-action" @click="toggleActionPopup"></button>
+        </div>-->
+        <div class="body">
+            <div @click.stop="onRemoveCover" v-if="task.cover" class="remove-cover">Remove cover</div>
+            <div class="cover-clrs-container">
+                <span>Colors</span>
+                <ul class="clean-list cover-clrs">
+                    <li
+                        @click="onToggleCoverColor(color)"
+                        class="cover-clr"
+                        v-for="color in colors"
+                        :key="color"
+                        :style="{ backgroundColor: color }"
+                        :class="isChosenColor(color)"
+                    ></li>
+                </ul>
+            </div>
+            <div class="attachments-container">
+                <span>Attachments</span>
+                <!-- TODO: Finish this -->
+                <!-- <ul class="curr-attachments-list clean-list">
+                    <li class="curr-attachment" v-for="attachment in task.attachments">
+                        <img :src="attachment.url" alt />
+                    </li>
+                </ul>-->
+                <label @click.stop for="file" class="computer body">
+                    Computer
+                    <input id="file" type="file" @change.stop="onUploadImg" @click.stop />
+                </label>
+            </div>
         </div>
-        <div @click.stop="onRemoveCover" v-if="chosenColor" class="remove-cover">Remove cover</div>
-        <ul class="clean-list cover-clrs">
-            <li
-                @click="onChooseCoverColor(color)"
-                v-for="color in colors"
-                :key="color"
-                :style="{ backgroundColor: color }"
-            >
-                <div class="chosen" v-if="isChosenColor(color)"></div>
-            </li>
-        </ul>
-        <label @click.stop for="file" class="computer body">
-            Computer
-            <input id="file" type="file" @change.stop="onUploadImg" @click.stop />
-        </label>
-        <span>Photos from Unsplash</span>
+        <!--<span>Photos from Unsplash</span>
         <ul class="clean-list imgs-container" v-if="unsplashPhotos && unsplashPhotos.length">
             <li
-                @click.stop="onChooseCoverImg(photo.urls.full)"
+                @click.stop="onToggleCoverImg(photo.urls.full)"
                 class="img-container"
                 v-for="photo in unsplashPhotos"
             >
                 <img :src="photo.urls.thumb" alt />
             </li>
-        </ul>
+        </ul>-->
+        <!-- <div class="chosen" v-if="isChosenColor(photo)"></div> -->
     </div>
 </template>
 
@@ -47,22 +62,23 @@ export default {
     data() {
         return {
             colors: ['yellow', 'red', 'pink', 'orange', 'green', 'blue', 'lightblue'],
-            chosenColor: '',
             unsplashPhotos: []
         }
     },
     methods: {
-        onChooseCoverColor(color) {
+        onToggleCoverColor(color) {
+            if (this.task?.cover?.backgroundColor === color) return this.onRemoveCover()
             this.$emit('action', { cbName: 'chooseCover', payload: { type: 'color', style: color } })
-            this.chosenColor = color
         },
-        onChooseCoverImg(img) {
+        onToggleCoverImg(img) {
+            // console.log(this.task?.cover?.backgroundImage === `url(${img})`)
+            if (this.task?.cover?.backgroundImage === `url(${img})`) return this.onRemoveCover()
+            console.log(this.task?.cover?.backgroundImage === `url(${img})`)
             this.$emit('action', { cbName: 'chooseCover', payload: { type: 'img', style: img } })
-            // this.$emit('onAction', { cbName: 'uploadAttachment', payload: { type: 'img', style: img } })
         },
         onRemoveCover() {
+            console.log('here')
             this.$emit('action', { cbName: 'removeCover' })
-            this.chosenColor = ''
         },
         async onUploadImg(ev) {
             const img = await imgService.uploadImgFromComp(ev)
@@ -77,7 +93,11 @@ export default {
             this.$emit('togglePopup')
         },
         isChosenColor(color) {
-            return this.chosenColor === color
+
+            return { 'chosen': this.task.cover?.backgroundColor === color }
+        },
+        isChosenImg(img) {
+            return this.task.cover?.backgroundImage === `url(${img})`
         }
     },
     unmounted() { },

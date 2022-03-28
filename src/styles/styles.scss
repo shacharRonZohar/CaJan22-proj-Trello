@@ -8,6 +8,7 @@
 @import "basics/helpers";
 @import "basics/base";
 @import "basics/layout";
+@import "basics/right-side-menu";
 
 // COMPONENTS
 // @import 'components/main-header';
@@ -21,9 +22,11 @@
 @import "components/add-board";
 @import "components/board-list-side-bar";
 @import "components/right-side-nav";
+@import "components/background-menu";
+@import "components/background-img-menu";
+@import "components/background-color-menu";
 @import "components/board-preview";
 @import "components/board-details";
 @import "components/board-group";
 @import "components/task-preview";
 @import "components/task-details.scss";
-@import "components/change-background-menu.scss";
