@@ -1,5 +1,11 @@
 <template>
     <section class="auth-actions-container">
+        {{ Vue3GoogleOauth.isInit }}
+        {{ Vue3GoogleOauth.isAuthorized }}
+        <button
+            @click="onUserGoogleAction"
+            class="google-login"
+        >{{ currAction }} with google</button>
         <div class="auth-form-container">
             <h1 class="title">Log in to Trello</h1>
             <form class="auth-input-form" @submit.prevent.stop="onUserAction">
@@ -7,7 +13,7 @@
                     v-model="user.username"
                     type="text"
                     class="username"
-                    placeholder="username"
+                    placeholder="Enter your email"
                     required
                 />
                 <input
@@ -33,7 +39,8 @@
 
 <script>
 import { authService } from '../services/auth.service.js'
-
+// import Vue3GoogleOatuh
+import { inject } from 'vue'
 export default {
     // props: [''],
     components: {},
@@ -44,7 +51,8 @@ export default {
                 username: '',
                 password: '',
                 fullname: ''
-            }
+            },
+            Vue3GoogleOauth: inject('Vue3GoogleOauth')
         }
     },
     methods: {
@@ -52,8 +60,34 @@ export default {
             if (this.currAction === 'login') return this.login()
             this.signup()
         },
-        onGoogleLogin() {
-
+        onUserGoogleAction() {
+            if (this.currAction === 'login') return this.loginWithGoogle()
+            this.signupWithGoogle()
+        },
+        async loginWithGoogle() {
+            try {
+                const user = await this.$gAuth.signIn()
+                const cred = {
+                    fullname: user.Du.tf,
+                    username: user.Du.tv
+                }
+                if (user) authService.loginWithGoogle(cred)
+                // console.log(user)
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async signupWithGoogle() {
+            try {
+                const user = await this.$gAuth.signIn()
+                const cred = {
+                    fullname: user.Du.tf,
+                    username: user.Du.tv
+                }
+                if (user) authService.signupWithGoogle(cred)
+            } catch (err) {
+                console.log(err)
+            }
         },
         async login() {
             try {
