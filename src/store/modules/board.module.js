@@ -114,6 +114,16 @@ export default {
                 console.log(err)
             }
         },
+        async setTaskDueDate({state, dispatch, commit}, {taskId, groupId, payload, activity}) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = await boardService.saveTaskDueDate(board, taskId, groupId, payload, activity)
+                await dispatch({type: 'saveBoard', boardToSave})
+            } catch (err) {
+                console.log(err)
+            }
+
+        },
         async uploadAttachment({ state, dispatch, commit }, { taskId, groupId, payload, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))

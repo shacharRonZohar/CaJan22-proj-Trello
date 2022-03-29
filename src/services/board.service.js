@@ -3,6 +3,7 @@ import { storageService } from './async-storage.service'
 import { imgService } from './imgService.js'
 import { httpService } from './http-service.js'
 import { userService } from './user-service.js'
+import moment from "moment";
 
 export const boardService = {
     query,
@@ -21,7 +22,8 @@ export const boardService = {
     getEmptyBoard,
     addChecklist,
     addChecklistItem,
-    addMember
+    addMember,
+    saveTaskDueDate
 }
 
 // const BOARDS_KEY = 'boards_db'
@@ -93,6 +95,14 @@ function saveGroup(board, groupToSave, acyivity) {
 function saveGroupDrop(board, fromIdx, toIdx) {
     const group = board.groups.splice(fromIdx, 1)[0]
     board.groups.splice(toIdx, 0, group)
+    return Promise.resolve(board)
+}
+
+function saveTaskDueDate(board, taskId, groupId, payload, activity) {
+    const group = board.groups.find(group => group.id === groupId)
+    const task = group.tasks.find(task => task.id === taskId)
+    const dueDates = _getDueDates(payload)
+    task.dueDate = dueDates
     return Promise.resolve(board)
 }
 
@@ -227,6 +237,19 @@ function getEmptyBoard() {
         ],
         'members': [],
         'groups': [],
+    }
+}
+// moment(strDate).unix(); 
+function _getDueDates(payload) {
+    const startDate = moment(payload[0]).unix()
+    const endDate = moment(payload[1]).unix()
+
+    if (startDate === endDate)  return { endDate }
+    else {
+        return {
+            startDate,
+            endDate
+        }
     }
 }
 
