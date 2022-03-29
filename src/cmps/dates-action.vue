@@ -1,43 +1,53 @@
 <template >
     <div @click.stop class="dates">
-        <pre>{{date}}</pre>
-        <Datepicker v-model="date" inline range autoApply />
+        <!-- <pre>{{ date }}</pre> -->
+        <Datepicker v-model="date" :partialRange="false" inline range autoApply />
+        <div class="start-date">
+            <p>Start date</p>
+            <input v-model="date[0]" type="text" readonly />
+        </div>
+        <div class="due-date">
+            <p>Due date</p>
+            <input v-model="date[1]" type="text" readonly/>
+        </div>
+        <div class="buttons">
+            <button @click="onSave">Save</button>
+            <br />
+            <button>Remove</button>
+        </div>
     </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
-
 export default {
-    emits: ['action'],
-    components: {
-    },
-    created() { },
-    setup() {
-        const date = ref()
-        // new Date(1648446206)
-        onMounted(() => {
-            const startDate = new Date();
-            const endDate = new Date(new Date().setDate(startDate.getDate() + 2));
-            date.value = [startDate, endDate];
-        })
+    // emits: ['action'],
+    data() {
         return {
-            date,
+            date: {
+                value:[]
+            }
         }
     },
     mounted() {
-        console.log(this.date)
+        this.date.value = [new Date(), new Date()];
     },
     methods: {
-        test() {
-            console.log(arguments);
-            console.log(this.date);
+        onSave() {
+            // console.log(this.date);
+            this.$emit('action', {cbName: 'setTaskDueDate', payload: this.date})
         },
         onDates() {
             // this.$emit('onAction', 'lableTask')
         }
     },
-    computed: {},
+    computed: {
+        startDate() {
+            return date.value[0].substring(0, 15)
+        },
+        endDate() {
+            return date.value[1].substring(0, 15)
+        }
+    },
     unmounted() { },
 }
 </script>
