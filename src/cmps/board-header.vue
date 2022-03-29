@@ -12,9 +12,9 @@
             <button class="star-btn btn"></button>
 
             <div class="invited-users flex">
-                <div>A</div>
-                <div>CB</div>
-                <div>SZ</div>
+                <span>A</span>
+                <span>CB</span>
+                <span>SZ</span>
             </div>
 
             <button class="invite-btn btn">

@@ -1,20 +1,20 @@
 <template>
-    <section class="auth-actions-container">
+    <section class="auth-actions-container" :class="currAction">
         <div class="auth-form-container">
-            <h1 class="title">Log in to Trello</h1>
+            <h1 class="title">{{ currActionTxt }} to Twello</h1>
             <form class="auth-input-form" @submit.prevent.stop="onUserAction">
                 <input
                     v-model="user.username"
                     type="text"
                     class="username"
-                    placeholder="username"
+                    placeholder="Enter your email"
                     required
                 />
                 <input
                     v-model="user.password"
                     type="password"
                     class="password"
-                    placeholder="password"
+                    placeholder="Enter your password"
                     required
                 />
                 <input
@@ -22,18 +22,24 @@
                     v-model="user.fullname"
                     type="text"
                     class="fullname"
-                    placeholder="fullname"
+                    placeholder="Enter full name"
                     required
                 />
-                <button>{{ currAction }}</button>
+                <button>{{ currActionTxt }}</button>
             </form>
+            <div class="action-options-seperator">OR</div>
+            <button @click="onUserGoogleAction" class="google-action">
+                <div class="icon"></div>
+                <span>Continue with Google</span>
+            </button>
         </div>
     </section>
 </template>
 
 <script>
 import { authService } from '../services/auth.service.js'
-
+// import Vue3GoogleOatuh
+import { inject } from 'vue'
 export default {
     // props: [''],
     components: {},
@@ -44,7 +50,8 @@ export default {
                 username: '',
                 password: '',
                 fullname: ''
-            }
+            },
+            Vue3GoogleOauth: inject('Vue3GoogleOauth')
         }
     },
     methods: {
@@ -52,8 +59,34 @@ export default {
             if (this.currAction === 'login') return this.login()
             this.signup()
         },
-        onGoogleLogin() {
-
+        onUserGoogleAction() {
+            if (this.currAction === 'login') return this.loginWithGoogle()
+            this.signupWithGoogle()
+        },
+        async loginWithGoogle() {
+            try {
+                const user = await this.$gAuth.signIn()
+                const cred = {
+                    fullname: user.Du.tf,
+                    username: user.Du.tv
+                }
+                if (user) authService.loginWithGoogle(cred)
+                // console.log(user)
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async signupWithGoogle() {
+            try {
+                const user = await this.$gAuth.signIn()
+                const cred = {
+                    fullname: user.Du.tf,
+                    username: user.Du.tv
+                }
+                if (user) authService.signupWithGoogle(cred)
+            } catch (err) {
+                console.log(err)
+            }
         },
         async login() {
             try {
@@ -85,6 +118,9 @@ export default {
     computed: {
         currAction() {
             return this.$route.params.action
+        },
+        currActionTxt() {
+            return this.currAction === 'login' ? 'Log in' : 'Sign up'
         }
     },
     unmounted() { },
