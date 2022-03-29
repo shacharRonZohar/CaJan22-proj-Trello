@@ -51,7 +51,21 @@
     >
       {{ item.title }}
     </div>
-  </div>
+
+    <div class="remove-modal-container">
+    <span class="dots-icon-container">
+    <a class="dots-icon" @click="toggleDeleteMenue" />
+    </span>
+
+    <div class="remove-item-modal" v-if="openDeleteMenu">
+        <div class="remove-item-header">
+            <span>Item actions</span>
+            <a class="close-icon"  @click="toggleDeleteMenue" />
+        </div>
+        <div class="delete-item" @click="removeItem(itemId)">Delete</div>
+    </div>
+    </div>
+    </div>
 
   <div class="add-checklist-item-form" v-if="isAddItemsOpen">
     <input
@@ -87,6 +101,7 @@ export default {
     return {
       checklistItemTitle: "",
       isAddItemsOpen: false,
+      openDeleteMenu: false,
     };
   },
   methods: {
@@ -116,6 +131,9 @@ export default {
       item.title = ev.target.innerText;
       this.$emit("editChecklistItem", item, this.checklist.id);
     },
+    toggleDeleteMenue(){
+        this.openDeleteMenu = !this.openDeleteMenu
+    }
   },
   computed: {
     donePercentage() {

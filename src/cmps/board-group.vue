@@ -2,9 +2,19 @@
   <section v-if="group" class="board-group">
     <div class="group-header">
       <h1 @blur="onSaveTitle" class="group-title" contenteditable spellcheck="false">{{ group.title }}</h1>
-      <button class="group-menu" @click="removeGroup">
+      <button class="group-menu" @click="toggleDeleteMenue">
         <a class="dots-icon" />
       </button>
+
+      <div class="remove-list-modal" v-if="isMenueOpen">
+            <div class="screen-toggle" @click="toggleDeleteMenue"/>
+        <div class="remove-list-header">
+            <span>List actions</span>
+            <a class="close-icon"  @click="toggleDeleteMenue"></a>
+        </div>
+        <div class="delete-item" @click="removeGroup">Archive this list</div>
+      </div>
+
     </div>
     <!-- <Container :group-name="'group1'"></Container> -->
     <div class="tasks-container" v-if="group.tasks?.length">
@@ -65,6 +75,7 @@ export default {
       task: {
         title: ''
       },
+      isMenueOpen: false
     }
   },
   created() { },
@@ -101,6 +112,9 @@ export default {
     },
     labelClicked(){
       this.$emit('labelClicked')
+    },
+    toggleDeleteMenue(){
+      this.isMenueOpen = !this.isMenueOpen
     }
   },
   computed: {},
