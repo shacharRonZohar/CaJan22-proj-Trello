@@ -239,7 +239,7 @@ export default {
                 console.log(err)
             }
         },
-        async editChecklist({ state, dispatch }, { taskId, groupId, payload, activity }){
+        async editChecklist({ state, dispatch }, { taskId, groupId, payload, activity }) {
             try {
                 const boardToSave = JSON.parse(JSON.stringify(state.board))
                 const group = boardToSave.groups.find(group => group.id === groupId)
@@ -251,7 +251,7 @@ export default {
                 console.log(err)
             }
         },
-        async editChecklistItem({ state, dispatch }, { taskId, groupId, payload, activity }){
+        async editChecklistItem({ state, dispatch }, { taskId, groupId, payload, activity }) {
             try {
                 const boardToSave = JSON.parse(JSON.stringify(state.board))
                 const group = boardToSave.groups.find(group => group.id === groupId)
@@ -264,6 +264,15 @@ export default {
                 console.log(err)
             }
         },
-        
+        async addMember({ state, dispatch }, { inviteBy }) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = await boardService.addMember(board, inviteBy)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
     },
 }
