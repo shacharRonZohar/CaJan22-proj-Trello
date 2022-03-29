@@ -17,9 +17,10 @@
                 <span>SZ</span>
             </div>
 
-            <button class="invite-btn btn">
+            <button @click="onToggleInviteModal" class="invite-btn btn">
                 <span class="invite"></span> Invite
             </button>
+            <invite-modal />
         </div>
 
         <div class="board-action">
@@ -38,10 +39,11 @@
 
 <script>
 import boardFilterModal from '../cmps/board-filter-modal.vue'
-
+import inviteModal from '../cmps/invite-modal.vue'
 export default {
     components: {
-        boardFilterModal
+        boardFilterModal,
+        inviteModal
     },
     props: {
         board: Object
@@ -49,19 +51,23 @@ export default {
     emits: ['openMenu'],
     data() {
         return {
-            isFilterOpen: false
+            isFilterOpen: false,
+            inviteModalOpen: false
         }
     },
     methods: {
         async onSaveBoardName(ev) {
             this.board.title = ev.target.innerText
-            this.$store.dispatch({type: 'saveBoard', boardToSave: this.board})
+            this.$store.dispatch({ type: 'saveBoard', boardToSave: this.board })
         },
         onOpenMenu() {
             this.$emit('openMenu')
         },
         onOpenFilter() {
             this.isFilterOpen = !this.isFilterOpen
+        },
+        onToggleInviteModal() {
+            this.inviteModalOpen = !this.inviteModalOpen
         }
     },
     created() {

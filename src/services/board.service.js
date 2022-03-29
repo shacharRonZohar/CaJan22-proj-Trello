@@ -2,6 +2,7 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service'
 import { imgService } from './imgService.js'
 import { httpService } from './http-service.js'
+import { userService } from './user-service.js'
 
 export const boardService = {
     query,
@@ -19,7 +20,8 @@ export const boardService = {
     removeCover,
     getEmptyBoard,
     addChecklist,
-    addChecklistItem
+    addChecklistItem,
+    addMember
 }
 
 // const BOARDS_KEY = 'boards_db'
@@ -169,6 +171,20 @@ function removeCover(board, taskId, groupId, activity) {
     const task = group.tasks.find(task => task.id === taskId)
     delete task.cover
     return Promise.resolve(board)
+}
+
+async function addMember(board, inviteBy) {
+    try {
+        console.log(inviteBy)
+        const user = await userService.getByUsername(inviteBy.txt)
+        console.log(user)
+        if (board.members.includes(user._id)) return Promise.reject('User is already on board')
+        board.members.push(user._id)
+        return Promise.resolve(board)
+    } catch (err) {
+        console.log(err)
+        // throw err
+    }
 }
 
 function getEmptyBoard() {
