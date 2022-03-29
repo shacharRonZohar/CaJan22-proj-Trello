@@ -37,7 +37,13 @@
     v-for="item in checklist.items"
     :key="item.id"
   >
-    <div
+    <checklist-item-preview
+      :item="item"
+      @toggleIsDone="toggleIsDone"
+      @onSaveItemTitle="onSaveItemTitle"
+      @removeItem="removeChecklistItem"
+    />
+    <!-- <div
       class="checklist-checkbox"
       @click="toggleIsDone(checklist.id, item.id)"
     >
@@ -53,19 +59,19 @@
     </div>
 
     <div class="remove-modal-container">
-    <span class="dots-icon-container">
-    <a class="dots-icon" @click="toggleDeleteMenue" />
-    </span>
+      <span class="dots-icon-container">
+        <a class="dots-icon" @click="toggleDeleteMenue" />
+      </span>
 
-    <div class="remove-item-modal" v-if="openDeleteMenu">
+      <div class="remove-item-modal" v-if="openDeleteMenu">
         <div class="remove-item-header">
-            <span>Item actions</span>
-            <a class="close-icon"  @click="toggleDeleteMenue" />
+          <span>Item actions</span>
+          <a class="close-icon" @click="toggleDeleteMenue" />
         </div>
         <div class="delete-item" @click="removeItem(itemId)">Delete</div>
-    </div>
-    </div>
-    </div>
+      </div>
+    </div> -->
+  </div>
 
   <div class="add-checklist-item-form" v-if="isAddItemsOpen">
     <input
@@ -91,17 +97,21 @@
 </template>
 
 <script>
+import checklistItemPreview from "./checklist-item-preview.vue";
 export default {
   props: {
     checklist: Object,
     isAddItemsOpen1: Boolean,
+  },
+  components: {
+    checklistItemPreview,
   },
   created() {},
   data() {
     return {
       checklistItemTitle: "",
       isAddItemsOpen: false,
-      openDeleteMenu: false,
+      // openDeleteMenu: false,
     };
   },
   methods: {
@@ -109,8 +119,8 @@ export default {
       this.$emit("addChecklistItem", checklistId, this.checklistItemTitle);
       this.checklistItemTitle = "";
     },
-    toggleIsDone(checklistId, itemId) {
-      this.$emit("toggleIsDone", checklistId, itemId);
+    toggleIsDone(itemId) {
+      this.$emit("toggleIsDone", this.checklist.id, itemId);
     },
     isItemDone(item) {
       return item.isDone ? "done" : "";
@@ -126,14 +136,17 @@ export default {
       this.checklist.title = ev.target.innerText;
       this.$emit("editChecklist", this.checklist);
     },
-    async onSaveItemTitle(item, ev) {
-      if (!ev.target.innerText) return;
-      item.title = ev.target.innerText;
+    async onSaveItemTitle(item) {
+      // if (!ev.target.innerText) return;
+      // item.title = ev.target.innerText;
       this.$emit("editChecklistItem", item, this.checklist.id);
     },
-    toggleDeleteMenue(){
-        this.openDeleteMenu = !this.openDeleteMenu
-    }
+    removeChecklistItem(itemId){
+       this.$emit("removeChecklistItem", this.checklist.id, itemId);
+    },
+    // toggleDeleteMenue() {
+    //   this.openDeleteMenu = !this.openDeleteMenu;
+    // },
   },
   computed: {
     donePercentage() {

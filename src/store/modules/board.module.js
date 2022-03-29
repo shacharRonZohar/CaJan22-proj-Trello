@@ -282,7 +282,20 @@ export default {
             } catch (err) {
                 console.log(err)
             }
-        }
+        },
+        async removeChecklistItem({ state, dispatch }, { taskId, groupId, payload, activity }) {
+            try {
+                const boardToSave = JSON.parse(JSON.stringify(state.board))
+                const group = boardToSave.groups.find(group => group.id === groupId)
+                const task = group.tasks.find(task => task.id === taskId)
+                const checklist = task.checklists.find(checklist => checklist.id === payload.checklistId)
+                const idx = checklist.items.findIndex(item => item.id === payload.itemId)
+                checklist.items.splice(idx, 1)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+        },
 
     },
 }

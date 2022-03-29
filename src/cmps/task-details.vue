@@ -162,6 +162,7 @@
               @removeChecklist="removeChecklist"
               @editChecklist="editChecklist"
               @editChecklistItem="editChecklistItem"
+              @removeChecklistItem="removeChecklistItem"
             />
             <!-- <div class="checklist-header">
                   <div class="checklist-icon" />
@@ -407,7 +408,13 @@ export default {
         cbName: "editChecklistItem",
         payload: {itemToSave, checklistId},
       });
-    }
+    },
+    removeChecklistItem(checklistId, itemId){
+      this.onAction({
+        cbName: "removeChecklistItem",
+        payload: {checklistId, itemId},
+      });
+    },
   },
   computed: {
     taskId() {
