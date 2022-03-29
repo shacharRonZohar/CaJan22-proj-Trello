@@ -111,15 +111,11 @@ function addChecklist(board, taskId, groupId, payload, activity) {
         items: []
     }
     'checklists' in task ? task.checklists.push(checklistToAdd) : task.checklists = [checklistToAdd]
-<<<<<<< HEAD
-    console.log(checklistToAdd)
-    // return Promise.resolve(board)
-=======
     // console.log(checklistToAdd);
     return Promise.resolve(board)
 }
 
-function addChecklistItem(board, taskId, groupId, payload, activity){
+function addChecklistItem(board, taskId, groupId, payload, activity) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
     const checklist = task.checklists.find(checklist => checklist.id === payload.checklistId)
@@ -131,7 +127,6 @@ function addChecklistItem(board, taskId, groupId, payload, activity){
     }
     checklist.items.push(itemToSave)
     return Promise.resolve(board)
->>>>>>> ed3823edfa5fea3fefc06406d12df69ff2b4de62
 }
 
 async function saveCover(board, taskId, groupId, payload, activity) {
