@@ -8,6 +8,7 @@
     "test:unit": "vitest --environment jsdom"
   },
   "dependencies": {
+    "@vuepic/vue-datepicker": "^3.0.0",
     "axios": "^0.26.1",
     "fast-average-color": "^7.1.0",
     "moment": "^2.29.1",
