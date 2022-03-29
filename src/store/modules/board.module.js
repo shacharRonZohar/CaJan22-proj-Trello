@@ -238,6 +238,32 @@ export default {
             } catch (err) {
                 console.log(err)
             }
-        }
+        },
+        async editChecklist({ state, dispatch }, { taskId, groupId, payload, activity }){
+            try {
+                const boardToSave = JSON.parse(JSON.stringify(state.board))
+                const group = boardToSave.groups.find(group => group.id === groupId)
+                const task = group.tasks.find(task => task.id === taskId)
+                const idx = task.checklists.findIndex(checklist => checklist.id === payload.id)
+                task.checklists.splice(idx, 1, payload)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async editChecklistItem({ state, dispatch }, { taskId, groupId, payload, activity }){
+            try {
+                const boardToSave = JSON.parse(JSON.stringify(state.board))
+                const group = boardToSave.groups.find(group => group.id === groupId)
+                const task = group.tasks.find(task => task.id === taskId)
+                const checklist = task.checklists.find(checklist => checklist.id === payload.checklistId)
+                const idx = checklist.items.findIndex(item => item.id === payload.itemToSave.id)
+                checklist.items.splice(idx, 1, payload.itemToSave)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        
     },
 }

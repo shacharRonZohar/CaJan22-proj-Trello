@@ -150,6 +150,8 @@
               @addChecklistItem="addChecklistItem"
               @toggleIsDone="toggleIsDone"
               @removeChecklist="removeChecklist"
+              @editChecklist="editChecklist"
+              @editChecklistItem="editChecklistItem"
             />
             <!-- <div class="checklist-header">
                   <div class="checklist-icon" />
@@ -382,6 +384,18 @@ export default {
       this.onAction({
         cbName: "removeChecklist",
         payload: checklistId,
+      });
+    },
+    editChecklist(checklistToSave){
+      this.onAction({
+        cbName: "editChecklist",
+        payload: checklistToSave,
+      });
+    },
+    editChecklistItem(itemToSave, checklistId){
+      this.onAction({
+        cbName: "editChecklistItem",
+        payload: {itemToSave, checklistId},
       });
     }
   },

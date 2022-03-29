@@ -2,7 +2,14 @@
   <div class="checklist-header" v-if="checklist">
     <div class="checklist-header-title flex">
       <div class="checklist-icon" />
-      <h3 @blur="onSaveChecklistTitle" class="checklist-title" contenteditable spellcheck="false">{{ checklist.title }}</h3>
+      <h3
+        @blur="onSaveChecklistTitle"
+        class="checklist-title"
+        contenteditable
+        spellcheck="false"
+      >
+        {{ checklist.title }}
+      </h3>
     </div>
     <button class="delete-checklist" @click="removeChecklist(checklist.id)">
       Delete
@@ -10,14 +17,18 @@
   </div>
 
   <div class="progress-bar-container">
-      <div>
-        <span class="progress-percentage">{{donePercentage}}</span>
+    <div>
+      <span class="progress-percentage">{{ donePercentage }}</span>
+    </div>
+    <div class="progress-bar">
+      <div class="background-bar">
+        <div
+          class="front-bar"
+          :class="isComplited"
+          :style="{ width: donePercentage }"
+        />
       </div>
-      <div class="progress-bar">
-        <div class="background-bar">
-            <div class="front-bar" :class="isComplited" :style="{width: donePercentage}"/>
-        </div>
-      </div>
+    </div>
   </div>
 
   <div
@@ -32,7 +43,14 @@
     >
       <a class="checked-icon" />
     </div>
-    <div class="item-title">{{ item.title }}</div>
+    <div
+      @blur="onSaveItemTitle(item, $event)"
+      class="item-title"
+      contenteditable
+      spellcheck="false"
+    >
+      {{ item.title }}
+    </div>
   </div>
 
   <div class="add-checklist-item-form" v-if="isAddItemsOpen">
@@ -88,25 +106,29 @@ export default {
     removeChecklist(checklistId) {
       this.$emit("removeChecklist", checklistId);
     },
-    async onSaveTitle(ev) {
-      if (!ev.target.innerText) return
-      this.checklist.title = ev.target.innerText
-      this.$emit('editChecklist', this.checklist)
+    async onSaveChecklistTitle(ev) {
+      if (!ev.target.innerText) return;
+      this.checklist.title = ev.target.innerText;
+      this.$emit("editChecklist", this.checklist);
+    },
+    async onSaveItemTitle(item, ev) {
+      if (!ev.target.innerText) return;
+      item.title = ev.target.innerText;
+      this.$emit("editChecklistItem", item, this.checklist.id);
     },
   },
-  computed:{
-      donePercentage(){
-         const itemsSum = this.checklist.items.length
-         const itemsDone = this.checklist.items.filter(item => item.isDone)
-         const itemsDoneSum = itemsDone.length
-         const donePercent = Math.floor((itemsDoneSum * 100) / itemsSum) || 0
-         return `${donePercent}%`
-      },
-      isComplited(){
-          return (this.donePercentage === '100%') ? 'done' : ''
-      }
-      
-  }
+  computed: {
+    donePercentage() {
+      const itemsSum = this.checklist.items.length;
+      const itemsDone = this.checklist.items.filter((item) => item.isDone);
+      const itemsDoneSum = itemsDone.length;
+      const donePercent = Math.floor((itemsDoneSum * 100) / itemsSum) || 0;
+      return `${donePercent}%`;
+    },
+    isComplited() {
+      return this.donePercentage === "100%" ? "done" : "";
+    },
+  },
 };
 </script>
 

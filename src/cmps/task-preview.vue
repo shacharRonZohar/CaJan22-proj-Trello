@@ -44,7 +44,7 @@
             {{attachNum}}
           </span>
         </div>
-        <div v-if="task.checklist" class="checklist-preview" :class="isDone">
+        <div v-if="task.checklists" class="checklist-preview" :class="isDone">
           <a class="checklist-icon" title="Checklist items" />
           <span class="checkedSum">
             {{checkedSum}}
@@ -110,18 +110,19 @@ export default {
         return this.$store.getters.labelById(labelId)
       })
     },
-    complitedItems(){
-      return this.checklist.items.filter(item => item.done)
-    },
     checkedSum(){
-      return `${this.complitedItems.length}/${this.checklist.items.length}`
+      return `${this.doneSum}/${this.itemsSum}`
     },
     isDone(){
-      return this.complitedItems.length === this.checklist.items.length? 'done' : ''
+      return this.itemsSum === this.doneSum? 'done' : ''
     },
-    isDone(){
-      return this.complitedItems.length === this.checklist.items.length? 'done' : ''
+    itemsSum(){
+      return this.task.checklists.reduce((acc, checklist) => acc + checklist.items.length, 0)
     },
+    doneSum(){
+      const dones = this.task.checklists.map(checklist => checklist.items.filter(item => item.isDone))
+      return dones.reduce((acc, done) => acc + done.length, 0)
+    }
   },
   unmounted() {},
 };
