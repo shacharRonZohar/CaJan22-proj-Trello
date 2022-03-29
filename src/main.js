@@ -5,9 +5,8 @@ import store from './store'
 import { focusDirective, closeOnBlur } from './directives'
 import gAuthPlugin from 'vue3-google-oauth2'
 import Datepicker from '@vuepic/vue-datepicker'
-import '@vuepic/vue-datepicker/dist/main.css';
+import '@vuepic/vue-datepicker/dist/main.css'
 import './styles/styles.scss'
-
 const gAuthCLientID = '1085095174420-s26dkcaicaiubfjpebgqjpb3dopricv9.apps.googleusercontent.com'
 
 

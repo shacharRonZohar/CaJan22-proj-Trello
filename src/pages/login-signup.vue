@@ -1,13 +1,7 @@
 <template>
-    <section class="auth-actions-container">
-        {{ Vue3GoogleOauth.isInit }}
-        {{ Vue3GoogleOauth.isAuthorized }}
-        <button
-            @click="onUserGoogleAction"
-            class="google-login"
-        >{{ currAction }} with google</button>
+    <section class="auth-actions-container" :class="currAction">
         <div class="auth-form-container">
-            <h1 class="title">Log in to Trello</h1>
+            <h1 class="title">{{ currActionTxt }} to Twello</h1>
             <form class="auth-input-form" @submit.prevent.stop="onUserAction">
                 <input
                     v-model="user.username"
@@ -20,7 +14,7 @@
                     v-model="user.password"
                     type="password"
                     class="password"
-                    placeholder="password"
+                    placeholder="Enter your password"
                     required
                 />
                 <input
@@ -28,11 +22,16 @@
                     v-model="user.fullname"
                     type="text"
                     class="fullname"
-                    placeholder="fullname"
+                    placeholder="Enter full name"
                     required
                 />
-                <button>{{ currAction }}</button>
+                <button>{{ currActionTxt }}</button>
             </form>
+            <div class="action-options-seperator">OR</div>
+            <button @click="onUserGoogleAction" class="google-action">
+                <div class="icon"></div>
+                <span>Continue with Google</span>
+            </button>
         </div>
     </section>
 </template>
@@ -119,6 +118,9 @@ export default {
     computed: {
         currAction() {
             return this.$route.params.action
+        },
+        currActionTxt() {
+            return this.currAction === 'login' ? 'Log in' : 'Sign up'
         }
     },
     unmounted() { },

@@ -193,14 +193,38 @@ export default {
                 console.log(err)
             }
         },
-        async addChecklist({state, dispatch} , {taskId, groupId, payload, activity}){
+        async addChecklist({ state, dispatch }, { taskId, groupId, payload, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
-                const boardToSave = await boardService.addChecklist(board, taskId, groupId, payload ,activity)
+                const boardToSave = await boardService.addChecklist(board, taskId, groupId, payload, activity)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
             }
+        },
+        async addChecklistItem({ state, dispatch }, { taskId, groupId, payload, activity }) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = await boardService.addChecklistItem(board, taskId, groupId, payload, activity)
+                console.log(boardToSave);
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async toggleIsDone({ state, dispatch }, { taskId, groupId, payload, activity }) {
+            try {
+                const boardToSave = JSON.parse(JSON.stringify(state.board))
+                const group = boardToSave.groups.find(group => group.id === groupId)
+                const task = group.tasks.find(task => task.id === taskId)
+                const checklist = task.checklists.find(checklist => checklist.id === payload.checklistId)
+                const item = checklist.items.find(item => item.id === payload.itemId)
+                item.isDone = !item.isDone
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+
         }
     },
 }

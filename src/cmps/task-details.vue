@@ -106,22 +106,32 @@
               </div>
             </div>
           </div>
-
-          <div v-if="task.checklists" class="checklist-container">
-            <ul class="clean-list" v-for="checklist in task.checklists" :key="checklist.id">
-              <li>
-                <div class="checklist-header">
+         
+          <div class="checklist-container" v-for="checklist in task.checklists" :key="checklist.id">
+            <checklist-details 
+            :checklist="checklist" 
+            @addChecklistItem="addChecklistItem"
+            @toggleIsDone="toggleIsDone" />
+                <!-- <div class="checklist-header">
                   <div class="checklist-icon" />
                     <h3>{{checklist.title}}</h3>
-              <!-- <button class="delete-checklist">Delete</button> -->
+                  <button class="delete-checklist">Delete</button>
                   </div>
-                <!-- <span>{{precentage}}</span> -->
-                <!-- <div class="checklist-bar"></div> -->
-              </li>
-            </ul>
 
-
+                <div class="checklist-items" :class="isItemDone(item)" v-for="item in checklist.items" :key="item.id">
+                  <div class="checklist-checkbox" @click="toggleIsDone(checklist.id, item.id)">
+                    <a class="checked-icon" />
+                  </div>
+                  <div class="item-title" >{{item.title}}</div> 
+                </div>
+                <input type="text" v-focus placeholder="Add an item" v-model="checklistItemTitle">
+                <button @click="addChecklistItem(checklist.id)" class="add-button">Add</button><a class="close-checklist-icon"></a> -->
           </div>
+
+
+
+
+
           <!-- <div class='activities-container'>
             <div class='activities-header'>
               <div>
@@ -159,6 +169,7 @@
 </template>
 
 <script>
+import checklistDetails from './checklist-details.vue'
 import actionPopup from './action-popup.vue'
 import actionBtn from './action-btn.vue'
 import moment from 'moment'
@@ -169,7 +180,8 @@ export default {
   },
   components: {
     actionPopup,
-    actionBtn
+    actionBtn,
+    checklistDetails
   },
   data() {
     return {
@@ -307,6 +319,21 @@ export default {
     getTime(date) {
       // console.log(date)
       return moment(+date).fromNow()
+    },
+    addChecklistItem(checklistId, title){
+      this.onAction({
+        cbName: 'addChecklistItem',
+        payload: {checklistId, title}
+      })
+    },
+    toggleIsDone(checklistId, itemId){
+      this.onAction({
+        cbName: 'toggleIsDone',
+        payload: {checklistId, itemId}
+      })
+    },
+    isItemDone(item){
+      return item.isDone? 'done' : ''
     }
   },
   computed: {
@@ -324,6 +351,7 @@ export default {
     open() {
       return { open: this.isActionPopupOpen }
     },
+    
   },
   unmounted() { },
 }
