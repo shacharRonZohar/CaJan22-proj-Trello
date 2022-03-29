@@ -1,8 +1,23 @@
 <template>
   <div class="checklist-header" v-if="checklist">
-    <div class="checklist-icon" />
-    <h3>{{ checklist.title }}</h3>
-    <button class="delete-checklist">Delete</button>
+    <div class="checklist-header-title flex">
+      <div class="checklist-icon" />
+      <h3 @blur="onSaveChecklistTitle" class="checklist-title" contenteditable spellcheck="false">{{ checklist.title }}</h3>
+    </div>
+    <button class="delete-checklist" @click="removeChecklist(checklist.id)">
+      Delete
+    </button>
+  </div>
+
+  <div class="progress-bar-container">
+      <div>
+        <span class="progress-percentage">{{donePercentage}}</span>
+      </div>
+      <div class="progress-bar">
+        <div class="background-bar">
+            <div class="front-bar" :class="isComplited" :style="{width: donePercentage}"/>
+        </div>
+      </div>
   </div>
 
   <div
@@ -20,28 +35,40 @@
     <div class="item-title">{{ item.title }}</div>
   </div>
 
-  <div class="add-checklist-item-form">
-  <input
-    class="add-checklist-item-input"
-    type="text"
-    v-focus
-    placeholder="Add an item"
-    v-model="checklistItemTitle"
-  />
-  <button @click="addChecklistItem(checklist.id)" class="add-button">Add</button
-  ><a class="close-checklist-icon"></a>
+  <div class="add-checklist-item-form" v-if="isAddItemsOpen">
+    <input
+      class="add-checklist-item-input"
+      type="text"
+      v-focus
+      placeholder="Add an item"
+      v-model="checklistItemTitle"
+    />
+    <div class="flex">
+      <button
+        @click="addChecklistItem(checklist.id)"
+        class="add-checklist-item-btn"
+      >
+        Add</button
+      ><a class="close-checklist-icon" @click="toglleAddItems" />
+    </div>
   </div>
 
+  <button class="open-add-item-btn" v-else @click="toglleAddItems">
+    Add an item
+  </button>
 </template>
 
 <script>
 export default {
   props: {
     checklist: Object,
+    isAddItemsOpen1: Boolean,
   },
-  date() {
+  created() {},
+  data() {
     return {
       checklistItemTitle: "",
+      isAddItemsOpen: false,
     };
   },
   methods: {
@@ -55,7 +82,31 @@ export default {
     isItemDone(item) {
       return item.isDone ? "done" : "";
     },
+    toglleAddItems() {
+      this.isAddItemsOpen = !this.isAddItemsOpen;
+    },
+    removeChecklist(checklistId) {
+      this.$emit("removeChecklist", checklistId);
+    },
+    async onSaveTitle(ev) {
+      if (!ev.target.innerText) return
+      this.checklist.title = ev.target.innerText
+      this.$emit('editChecklist', this.checklist)
+    },
   },
+  computed:{
+      donePercentage(){
+         const itemsSum = this.checklist.items.length
+         const itemsDone = this.checklist.items.filter(item => item.isDone)
+         const itemsDoneSum = itemsDone.length
+         const donePercent = Math.floor((itemsDoneSum * 100) / itemsSum) || 0
+         return `${donePercent}%`
+      },
+      isComplited(){
+          return (this.donePercentage === '100%') ? 'done' : ''
+      }
+      
+  }
 };
 </script>
 

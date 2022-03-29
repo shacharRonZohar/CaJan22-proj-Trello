@@ -224,7 +224,18 @@ export default {
             } catch (err) {
                 console.log(err)
             }
-
+        },
+        async removeChecklist({ state, dispatch }, { taskId, groupId, payload, activity }){
+            try {
+                const boardToSave = JSON.parse(JSON.stringify(state.board))
+                const group = boardToSave.groups.find(group => group.id === groupId)
+                const task = group.tasks.find(task => task.id === taskId)
+                const idx = task.checklists.findIndex(checklist => checklist.id === payload)
+                task.checklists.splice(idx, 1)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
         }
     },
 }

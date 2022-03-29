@@ -7,6 +7,7 @@
         <component
             @togglePopup="onTogglePopup"
             @action="onAction"
+            @addChecklist="addChecklist"
             v-if="action"
             :is="action"
             :task="task"
@@ -56,6 +57,9 @@ export default {
         onActions(actions) {
             this.$emit('actions', actions)
         },
+        addChecklist(){
+        this.$emit('addChecklist')
+    }
 
     },
     computed: {

@@ -19,12 +19,13 @@ export default {
     created() { },
     data() {
         return {          
-                title:'checklist',
+                title:'Checklist',
         }
     },
     methods: {
     addChecklist(){
         this.$emit('togglePopup')
+        this.$emit('addChecklist')
         this.$emit('action', {cbName:'addChecklist' , payload: this.title})
     }
     },
