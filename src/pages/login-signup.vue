@@ -1,18 +1,33 @@
 <template>
-    <section class="user-actions-container">
-        <form class="user-input-form" @submit.prevent.stop="onUserAction">
-            <input v-model="user.username" type="text" class="username" placeholder="username" />
-            <input v-model="user.password" type="password" class="password" placeholder="password" />
-            <input
-                v-if="currAction === 'signup'"
-                v-model="user.fullname"
-                type="text"
-                class="fullname"
-                placeholder="fullname"
-            />
-            <button>{{ currAction }}</button>
-        </form>
-        <button @click="onLogout" class="signout">Logout</button>
+    <section class="auth-actions-container">
+        <div class="auth-form-container">
+            <h1 class="title">Log in to Trello</h1>
+            <form class="auth-input-form" @submit.prevent.stop="onUserAction">
+                <input
+                    v-model="user.username"
+                    type="text"
+                    class="username"
+                    placeholder="username"
+                    required
+                />
+                <input
+                    v-model="user.password"
+                    type="password"
+                    class="password"
+                    placeholder="password"
+                    required
+                />
+                <input
+                    v-if="currAction === 'signup'"
+                    v-model="user.fullname"
+                    type="text"
+                    class="fullname"
+                    placeholder="fullname"
+                    required
+                />
+                <button>{{ currAction }}</button>
+            </form>
+        </div>
     </section>
 </template>
 
@@ -37,18 +52,34 @@ export default {
             if (this.currAction === 'login') return this.login()
             this.signup()
         },
+        onGoogleLogin() {
+
+        },
         async login() {
-            await authService.login(this.user)
-            this.$store.dispatch('loadUser')
+            try {
+                await authService.login(this.user)
+                await this.$store.dispatch('loadUser')
+                this.$router.push('/board')
+            } catch (err) {
+                console.log(err)
+            }
         },
         async logout() {
-            await authService.logout()
-            this.$store.dispatch('loadUser')
+            try {
+                await authService.logout()
+                this.$store.dispatch('loadUser')
+            } catch (err) {
+                console.log(err)
+            }
         },
         async signup() {
-            console.log(this.user)
-            await authService.signup(this.user)
-            this.$store.dispatch('loadUser')
+            try {
+                await authService.signup(this.user)
+                this.$store.dispatch('loadUser')
+                this.$router.push('/board')
+            } catch (err) {
+                console.log(err)
+            }
         }
     },
     computed: {

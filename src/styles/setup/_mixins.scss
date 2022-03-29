@@ -136,6 +136,7 @@
 
 @mixin trello-icon($content: "", $type: sm) {
   font-family: "trellicons";
+  color: #42526e;
 
   @if $type == sm {
     font-size: 1rem;

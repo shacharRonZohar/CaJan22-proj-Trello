@@ -41,6 +41,7 @@
               <li
                 class="label"
                 v-for="label in task.labelIds"
+                :key="label"
                 :style="{ backgroundColor: getLabelById(label).color }"
               >{{ getLabelById(label).title }}</li>
             </ul>
@@ -104,6 +105,22 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div v-if="task.checklists" class="checklist-container">
+            <ul class="clean-list" v-for="checklist in task.checklists" :key="checklist.id">
+              <li>
+                <div class="checklist-header">
+                  <div class="checklist-icon" />
+                    <h3>{{checklist.title}}</h3>
+              <!-- <button class="delete-checklist">Delete</button> -->
+                  </div>
+                <!-- <span>{{precentage}}</span> -->
+                <!-- <div class="checklist-bar"></div> -->
+              </li>
+            </ul>
+
+
           </div>
           <!-- <div class='activities-container'>
             <div class='activities-header'>
