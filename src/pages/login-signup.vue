@@ -1,5 +1,5 @@
 <template>
-    <section class="auth-actions-container">
+    <section class="auth-actions-container" :class="currAction">
         <div class="auth-form-container">
             <h1 class="title">{{ currActionTxt }} to Twello</h1>
             <form class="auth-input-form" @submit.prevent.stop="onUserAction">

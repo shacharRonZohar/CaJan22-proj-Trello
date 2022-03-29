@@ -2,8 +2,13 @@
     display: flex;
     justify-content: center;
     .auth-form-container {
+        &.login {
+            height: 53vh;
+        }
+        &.signup {
+            height: 62vh;
+        }
         width: 400px;
-        height: 62vh;
         padding: 25px 40px;
         box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
         .title {
