@@ -1,42 +1,32 @@
 <template >
-    <div @click="toggleActionPopup" class="checklist btn">
-        <!-- <action-popup v-if="actionPopupOpen"> -->
-        <!-- <template #header>
-                <span>Are you sure?</span>
-            </template>
-            <template #body>
-                <button @click="onChecklist" class="confirm">Yes</button>
-                <button class="deny">No</button>
-        </template>-->
-        <!-- </action-popup> -->
-        <div v-if="actionPopupOpen" @click.stop="toggleActionPopup" class="clickable-background"></div>
-        <div class="icon"></div>
-        <button class="checklists">Checklist</button>
-    </div>
+    <section @click.stop class="checklist-container">
+     <form @submit.prevent="addChecklist" class="checklist-form flex">
+         <label>
+             Title
+        <input type="text" class="checklist-title-input" v-focus v-model="title" />
+         </label>
+        <button class="add-checklist-btn">Add</button>       
+     </form>
+    </section>
 </template>
 
 <script>
-// import actionPopup from './action-popup.vue'
 
 export default {
-    // props: [''],
-    emits: ['onAction'],
+    emits: ['action'],
     components: {
-        // actionPopup
     },
     created() { },
     data() {
-        return {
-            actionPopupOpen: false
+        return {          
+                title:'checklist',
         }
     },
     methods: {
-        onChecklist() {
-            // this.$emit('onAction', 'lableTask')
-        },
-        toggleActionPopup() {
-            this.actionPopupOpen = !this.actionPopupOpen
-        }
+    addChecklist(){
+        this.$emit('action', {cbName:'addChecklist' , payload: this.title})
+        this.$emit('togglePopup')
+    }
     },
     computed: {},
     unmounted() { },

@@ -34,10 +34,6 @@
         display: flex;
         justify-content: space-between;
     }
-    
-    .group-list{
-        // margin-top: 8px;
-    }
 
     .group-menu {
         width: 30px;
@@ -93,7 +89,7 @@
         margin: 2px 0 8px 8px;
         background-color: inherit;
         border: none;
-        width: 225px;
+        width: 255px;
         font-size: 14px;
         padding: 4px 8px;
         text-align: left;
@@ -138,8 +134,8 @@
         padding: 6px 12px;
 
         &:hover {
-            background-color: $clr9;
             cursor: pointer;
+            background-color: $clr9;
         }
     }
 }
