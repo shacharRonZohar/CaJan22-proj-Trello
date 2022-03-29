@@ -1,40 +1,33 @@
 <template >
-    <div @click="toggleActionPopup" class="dates btn">
-        <!-- <action-popup v-if="actionPopupOpen"> -->
-        <!-- <template #header>
-                <span>Are you sure?</span>
-            </template>
-            <template #body>
-                <button @click="onDates" class="confirm">Yes</button>
-                <button class="deny">No</button>
-        </template>-->
-        <!-- </action-popup> -->
-        <div class="icon"></div>
-        <button class="datess">Dates</button>
+    <div @click.stop class="dates">
+        <Datepicker v-model="date" inline autoApply />
     </div>
 </template>
 
 <script>
-// import actionPopup from './action-popup.vue'
+import { ref } from 'vue'
 
 export default {
-    // props: [''],
-    emits: ['onAction'],
+    emits: ['action'],
     components: {
-        // actionPopup
     },
     created() { },
-    data() {
+    setup() {
+        const date = ref(new Date())
+
         return {
-            actionPopupOpen: false
+            date,
         }
     },
+    mounted() {
+        console.log(this.date)
+    },
     methods: {
+        test(){
+            console.log(arguments);
+        },
         onDates() {
             // this.$emit('onAction', 'lableTask')
-        },
-        toggleActionPopup() {
-            this.actionPopupOpen = !this.actionPopupOpen
         }
     },
     computed: {},
