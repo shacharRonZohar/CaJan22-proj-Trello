@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { boardService } from '../services/board.service.js'
 
 export default {
     // props: [''],

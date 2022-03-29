@@ -19,8 +19,8 @@
 
             <button @click="onToggleInviteModal" class="invite-btn btn">
                 <span class="invite"></span> Invite
+                <invite-modal v-if="inviteModalOpen" />
             </button>
-            <invite-modal />
         </div>
 
         <div class="board-action">
