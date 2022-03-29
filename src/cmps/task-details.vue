@@ -50,19 +50,29 @@
             <div class='member add icon'></div>
           </div>
           </div>-->
-          <section class="labels-container task-layout">
-            <small>Labels</small>
-            <ul v-if="task.labelIds?.length" class="labels-list">
-              <li
-                class="label"
-                v-for="label in task.labelIds"
-                :key="label"
-                :style="{ backgroundColor: getLabelById(label).color }"
-              >
-                {{ getLabelById(label).title }}
-              </li>
-            </ul>
+          <section>
+            <div v-if="task.labelIds?.length" class="labels-container task-layout">
+              <small>Labels</small>
+              <ul class="labels-list">
+                <li
+                  class="label"
+                  v-for="label in task.labelIds"
+                  :key="label"
+                  :style="{ backgroundColor: getLabelById(label).color }"
+                >
+                  {{ getLabelById(label).title }}
+                </li>
+              </ul>
+            </div>
+            <div v-if="task.dueDate?.endDate" class="due-date-container">
+              <small>Due date</small>
+              <div class="due-date">
+                <input type="checkbox" name="" id="">
+                <span>{{timeString}}</span>
+              </div>
+            </div>
           </section>
+
           <div class="description-container">
             <div class="description-header">
               <div class="icon"></div>
@@ -414,6 +424,9 @@ export default {
     open() {
       return { open: this.isActionPopupOpen };
     },
+    timeString() {
+      return moment.unix(this.task.dueDate.endDate);
+    }
   },
   unmounted() {},
 };
