@@ -51,9 +51,10 @@
                 <button class="notifications btn">
                     <span class="notifications-icon"></span>
                 </button>
-                <div class="profile-app-header flex">
+                <div @click="onToggleProfileModal" class="profile-app-header flex">
                     <div class="letter">P</div>
                 </div>
+                <profile-modal v-if="profileModalOpen" />
             </div>
         </div>
     </header>
@@ -62,11 +63,12 @@
 <script>
 import headerBoardList from './header-board-list.vue'
 import addBoard from './add-board.vue'
-
+import profileModal from './profile-modal.vue'
 export default {
     components: {
         headerBoardList,
-        addBoard
+        addBoard,
+        profileModal
     },
     created() {
     },
@@ -74,7 +76,8 @@ export default {
         return {
             searchTxt: '',
             isShown: false,
-            createClicked: false
+            createClicked: false,
+            profileModalOpen: false
         }
     },
     methods: {
@@ -86,6 +89,9 @@ export default {
         },
         onToggleAddBoard() {
             this.createClicked = !this.createClicked
+        },
+        onToggleProfileModal() {
+            this.profileModalOpen = !this.profileModalOpen
         }
         // async printAverageColor() {
         //     const color = await getAverageColor();
