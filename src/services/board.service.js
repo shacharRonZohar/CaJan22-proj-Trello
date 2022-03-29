@@ -35,6 +35,7 @@ async function query(filterBy = {}) {
 }
 
 function save(board) {
+    console.log(board)
     return board._id ? _update(board) : _add(board)
 }
 

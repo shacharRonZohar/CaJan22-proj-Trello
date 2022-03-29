@@ -12,21 +12,24 @@
                 <span class="background-title">Background</span>
                 <ul class="img-list clean-list flex">
                     <li v-for="img in imgs" :key="img.id">
-                        <img class="img" @click="setBackgroundImg(img)" :src="img.urls.thumb" alt>
+                        <img class="img" @click="setBackgroundImg(img)" :src="img.urls.thumb" alt />
                     </li>
                 </ul>
                 <ul class="color-list clean-list flex">
                     <li v-for="color in colors" :key="color">
-                        <div 
-                        class="color" 
-                        @click="setBackgroundColor(color)" 
-                        :style="{backgroundColor: color}">
-                        </div>
+                        <div
+                            class="color"
+                            @click="setBackgroundColor(color)"
+                            :style="{ backgroundColor: color }"
+                        ></div>
                     </li>
                 </ul>
             </div>
             <div class="input-panel">
-                <span class="input-title">Board title <span class="asterisk">*</span></span>
+                <span class="input-title">
+                    Board title
+                    <span class="asterisk">*</span>
+                </span>
                 <input v-model="boardToAdd.title" type="text" />
             </div>
             <button class="create-btn btn" @click="onCreateBoard">Create</button>
@@ -66,7 +69,11 @@ export default {
         },
         onCreateBoard() {
             if (this.boardToAdd.title.trim() === '') return
-            this.$store.dispatch({type: 'saveBoard', boardToSave: this.boardToAdd})
+            const user = this.$store.getters.loggedInUser
+            this.boardToAdd.createdBy = user
+            this.boardToAdd.members = [user._id]
+            console.log(this.boardToAdd)
+            this.$store.dispatch({ type: 'saveBoard', boardToSave: this.boardToAdd })
             this.$emit('addedBoard')
         },
         onClose() {

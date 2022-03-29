@@ -59,6 +59,7 @@ export default {
         async saveBoard({ commit }, { boardToSave, isFromSocket = false }) {
             try {
                 const savedBoard = await boardService.save(boardToSave)
+                console.log(savedBoard)
                 commit({ type: 'saveBoard', savedBoard })
                 commit({ type: 'setBoard', boardId: boardToSave._id })
                 if (!isFromSocket) socketService.emit('board-updated', savedBoard)
@@ -207,7 +208,7 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.addChecklistItem(board, taskId, groupId, payload, activity)
-                console.log(boardToSave);
+                console.log(boardToSave)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
