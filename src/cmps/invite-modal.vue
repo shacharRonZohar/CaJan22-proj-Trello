@@ -1,5 +1,5 @@
 <template>
-    <section class="invite-modal">
+    <section @click.stop class="invite-modal">
         <div class="header">
             <span>Invite to board</span>
         </div>
