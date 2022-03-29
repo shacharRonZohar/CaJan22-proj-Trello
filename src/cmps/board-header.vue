@@ -19,7 +19,7 @@
 
             <button @click="onToggleInviteModal" class="invite-btn btn">
                 <span class="invite"></span> Invite
-                <invite-modal v-if="inviteModalOpen" />
+                <invite-modal @closePopup="onToggleInviteModal" v-if="inviteModalOpen" />
             </button>
         </div>
 
