@@ -18,6 +18,12 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         z-index: 1;
+        .icon {
+            top: 0;
+            right: 0;
+            position: absolute;
+            @include trello-icon($content: "\e91c");
+        }
     }
     form {
         min-height: 300px;
