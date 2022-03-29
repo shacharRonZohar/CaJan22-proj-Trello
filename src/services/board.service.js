@@ -239,17 +239,15 @@ function getEmptyBoard() {
         'groups': [],
     }
 }
-// moment(strDate).unix(); 
+
 function _getDueDates(payload) {
     const startDate = moment(payload[0]).unix()
     const endDate = moment(payload[1]).unix()
 
     if (startDate === endDate)  return { endDate }
-    else {
-        return {
-            startDate,
-            endDate
-        }
+    return {
+        startDate,
+        endDate
     }
 }
 
