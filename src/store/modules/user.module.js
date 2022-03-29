@@ -15,9 +15,10 @@ export default {
         }
     },
     actions: {
-        loadUser({ commit }) {
+        loadUser({ commit, dispatch }) {
             const user = userService.getLoggedInUser()
             commit({ type: 'setLoggedInUser', user })
+            dispatch('loadBoards')
         }
     },
 }

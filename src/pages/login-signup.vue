@@ -5,7 +5,7 @@
             <form class="auth-input-form" @submit.prevent.stop="onUserAction">
                 <input
                     v-model="user.username"
-                    type="text"
+                    type="email"
                     class="username"
                     placeholder="Enter your email"
                     required

@@ -13,8 +13,7 @@ export default {
   },
   async created() {
     // console.log()
-    await this.$store.dispatch('loadBoards')
-    this.$store.dispatch('loadUser')
+    await this.$store.dispatch('loadUser')
   },
   computed: {
     boards() {

@@ -28,6 +28,7 @@ const endpoint = 'board'
 
 
 async function query(filterBy = {}) {
+    console.log(filterBy)
     return await httpService.get(endpoint, filterBy)
     // return storageService.query(BOARDS_KEY)
 }
@@ -109,7 +110,7 @@ function addChecklist(board, taskId, groupId, payload, activity) {
         items: []
     }
     'checklists' in task ? task.checklists.push(checklistToAdd) : task.checklists = [checklistToAdd]
-    console.log(checklistToAdd);
+    console.log(checklistToAdd)
     // return Promise.resolve(board)
 }
 
