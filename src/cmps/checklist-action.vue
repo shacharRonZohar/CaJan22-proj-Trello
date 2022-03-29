@@ -24,8 +24,8 @@ export default {
     },
     methods: {
     addChecklist(){
-        this.$emit('action', {cbName:'addChecklist' , payload: this.title})
         this.$emit('togglePopup')
+        this.$emit('action', {cbName:'addChecklist' , payload: this.title})
     }
     },
     computed: {},
