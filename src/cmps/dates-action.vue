@@ -1,11 +1,12 @@
 <template >
     <div @click.stop class="dates">
-        <Datepicker v-model="date" inline autoApply />
+        <pre>{{date}}</pre>
+        <Datepicker v-model="date" inline range autoApply />
     </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 export default {
     emits: ['action'],
@@ -13,8 +14,13 @@ export default {
     },
     created() { },
     setup() {
-        const date = ref(new Date())
-
+        const date = ref()
+        // new Date(1648446206)
+        onMounted(() => {
+            const startDate = new Date();
+            const endDate = new Date(new Date().setDate(startDate.getDate() + 2));
+            date.value = [startDate, endDate];
+        })
         return {
             date,
         }
@@ -23,8 +29,9 @@ export default {
         console.log(this.date)
     },
     methods: {
-        test(){
+        test() {
             console.log(arguments);
+            console.log(this.date);
         },
         onDates() {
             // this.$emit('onAction', 'lableTask')
