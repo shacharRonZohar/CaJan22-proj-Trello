@@ -29,11 +29,13 @@ const endpoint = 'board'
 
 
 async function query(filterBy = {}) {
+    console.log(filterBy)
     return await httpService.get(endpoint, filterBy)
     // return storageService.query(BOARDS_KEY)
 }
 
 function save(board) {
+    console.log(board)
     return board._id ? _update(board) : _add(board)
 }
 
@@ -114,7 +116,7 @@ function addChecklist(board, taskId, groupId, payload, activity) {
     return Promise.resolve(board)
 }
 
-function addChecklistItem(board, taskId, groupId, payload, activity){
+function addChecklistItem(board, taskId, groupId, payload, activity) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
     const checklist = task.checklists.find(checklist => checklist.id === payload.checklistId)

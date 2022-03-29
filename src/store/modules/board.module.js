@@ -42,12 +42,13 @@ export default {
         },
     },
     actions: {
-        async loadBoards({ commit }) {
+        async loadBoards({ commit, rootState }) {
             try {
                 commit({ type: 'setIsReady', isReady: false })
                 // The timeout is for testing
                 // setTimeout(async () => {
-                const boards = await boardService.query()
+                console.log(rootState.userModule.loggedInUser)
+                const boards = await boardService.query(rootState.userModule.loggedInUser?._id || '')
                 commit({ type: 'setBoards', boards })
                 commit({ type: 'setIsReady', isReady: true })
                 // }, 3000)
@@ -58,6 +59,7 @@ export default {
         async saveBoard({ commit }, { boardToSave, isFromSocket = false }) {
             try {
                 const savedBoard = await boardService.save(boardToSave)
+                console.log(savedBoard)
                 commit({ type: 'saveBoard', savedBoard })
                 commit({ type: 'setBoard', boardId: boardToSave._id })
                 if (!isFromSocket) socketService.emit('board-updated', savedBoard)
@@ -206,7 +208,7 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.addChecklistItem(board, taskId, groupId, payload, activity)
-                console.log(boardToSave);
+                console.log(boardToSave)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)

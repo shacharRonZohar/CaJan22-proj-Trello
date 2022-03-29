@@ -5,7 +5,7 @@
             <form class="auth-input-form" @submit.prevent.stop="onUserAction">
                 <input
                     v-model="user.username"
-                    type="text"
+                    type="email"
                     class="username"
                     placeholder="Enter your email"
                     required
@@ -70,7 +70,8 @@ export default {
                     fullname: user.Du.tf,
                     username: user.Du.tv
                 }
-                if (user) authService.loginWithGoogle(cred)
+                if (user) await authService.loginWithGoogle(cred)
+                this.$router.push('/board')
                 // console.log(user)
             } catch (err) {
                 console.log(err)
@@ -83,7 +84,8 @@ export default {
                     fullname: user.Du.tf,
                     username: user.Du.tv
                 }
-                if (user) authService.signupWithGoogle(cred)
+                if (user) await authService.signupWithGoogle(cred)
+                this.$router.push('/board')
             } catch (err) {
                 console.log(err)
             }
