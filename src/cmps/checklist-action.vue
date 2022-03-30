@@ -25,6 +25,7 @@ export default {
     },
     methods: {
     addChecklist(){
+        if(this.title.trim() === '') return
         this.$emit('togglePopup')
         this.$emit('addChecklist')
         this.$emit('action', {cbName:'addChecklist' , payload: this.title})

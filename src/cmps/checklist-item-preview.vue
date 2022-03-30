@@ -18,6 +18,7 @@
     </span>
 
     <div class="remove-item-modal" v-if="openDeleteMenu">
+    <div class="screen-toggle" @click="toggleDeleteMenue"/>
       <div class="remove-item-header">
         <span>Item actions</span>
         <a class="close-icon" @click="toggleDeleteMenue" />

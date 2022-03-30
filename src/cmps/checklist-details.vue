@@ -132,7 +132,7 @@ export default {
       this.$emit("removeChecklist", checklistId);
     },
     async onSaveChecklistTitle(ev) {
-      if (!ev.target.innerText) return;
+      if (ev.target.innerText.trim() === '') return;
       this.checklist.title = ev.target.innerText;
       this.$emit("editChecklist", this.checklist);
     },
