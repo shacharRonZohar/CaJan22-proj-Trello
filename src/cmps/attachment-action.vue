@@ -1,12 +1,8 @@
 <template >
     <div @click.stop class="attach btn">
-        <div class="header">
-            <span>Attach from...</span>
-            <!-- <button class="close-action" @click="toggleActionPopup"></button> -->
-        </div>
-        <ul class="clean-list">
+        <ul class="clean-list body">
             <li>
-                <label @click.stop for="file" class="computer body">
+                <label @click.stop for="file" class="computer">
                     Computer
                     <input id="file" type="file" @change.stop="onUploadImg" @click.stop />
                 </label>

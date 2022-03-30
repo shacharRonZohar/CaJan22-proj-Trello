@@ -3,7 +3,7 @@ import { storageService } from './async-storage.service'
 import { imgService } from './imgService.js'
 import { httpService } from './http-service.js'
 import { userService } from './user-service.js'
-import moment from "moment"
+import moment from 'moment'
 
 export const boardService = {
     query,

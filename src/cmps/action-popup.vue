@@ -57,14 +57,16 @@ export default {
         onActions(actions) {
             this.$emit('actions', actions)
         },
-        addChecklist(){
-        this.$emit('addChecklist')
-    }
+        addChecklist() {
+            this.$emit('addChecklist')
+        }
 
     },
     computed: {
         actionTxt() {
-            return this.action.substring(0, this.action.indexOf('-'))
+            let actionTxt = this.action.substring(0, this.action.indexOf('-'))
+            if (actionTxt === 'attachment') return 'Attach From'
+            return actionTxt
         }
     },
     unmounted() { },
