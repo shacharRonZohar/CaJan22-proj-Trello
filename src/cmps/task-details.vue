@@ -434,13 +434,18 @@ export default {
       return { open: this.isActionPopupOpen };
     },
     timeString() {
-      var timeStr = moment.unix(this.task.dueDate.endDate).toLocaleString()
+      var timeStr = moment(this.task.dueDate.endDate).toLocaleString()
       timeStr = timeStr.substring(0, timeStr.length - 9);
       return timeStr;
     },
     taskStatus() {
       if (this.task.dueDate.endDate < Date.now()) return 'overdue'
       return 'progress'
+    },
+    test() {
+      return `end date: ${this.task.dueDate.endDate} , now: ${Date.now()}`
+         
+     
     }
   },
   unmounted() {},
