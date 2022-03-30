@@ -3,7 +3,8 @@
     padding-inline-start: 40px;
     .board-list-title-icon {
         @include trello-icon($content: "\e946", $type: lg);
-        opacity: 0.8;
+        color: #42526e;
+        margin-right: 8px;
     }
 
     span {

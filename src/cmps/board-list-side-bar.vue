@@ -3,19 +3,19 @@
     <ul class="clean-list">
       <li>
         <router-link to="/board">
-          <i class="boards-menu-icon" />
+          <a class="boards-menu-icon" />
           <span>Boards</span>
         </router-link>
       </li>
       <li>
-        <span>
-          <i class="templates-menu-icon" />
+        <span class="list-container">
+          <a class="templates-menu-icon" />
           <span>Templates</span>
         </span>
       </li>
       <li>
-        <span>
-          <i class="Home-menu-icon" />
+        <span class="list-container">
+          <a class="Home-menu-icon" />
           <span>Home</span>
         </span>
       </li>

@@ -259,11 +259,13 @@
                 color: $clr2;
             }
 
-            // &:hover{
-            //     box-shadow: -8px 0 rgba(206, 202, 202, 0.26);
-            // }
+            .l61bd4f{               
+                &:hover{
+                    box-shadow: -8px 0 rgba(206, 202, 202, 0.26);
+                }
+            }
         }
-
+        
         .create-new-label {
             border-radius: 3px;
             line-height: 20px;

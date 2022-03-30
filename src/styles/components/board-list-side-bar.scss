@@ -6,6 +6,10 @@
         text-decoration: none;
         padding: 6px 8px 6px 0;
         border-radius: 4px;
+        .boards-menu-icon {
+            color: #0079bf;
+            padding-left: 5px;
+        }
         // width: 245px;
     }
 
@@ -15,11 +19,18 @@
         margin-bottom: 4px;
         width: 245px;
 
+    }
+    
+    .list-container{
+        padding: 6px 8px 6px 0;
+        // margin-bottom: 4px;
+        display: flex;
         &:hover {
             cursor: pointer;
             background-color: rgba(9, 30, 66, 0.08);
             border-radius: 3px;
         }
+
     }
 
 
@@ -27,31 +38,44 @@
         @include trello-icon($content: "\e90b");
         opacity: 0.8;
         padding-right: 10px;
+        padding-left: 5px;
     }
 
     .templates-menu-icon {
         @include trello-icon($content: "\e96d");
         opacity: 0.8;
         padding-right: 10px;
+        padding-left: 5px;
     }
 
     .Home-menu-icon {
         @include trello-icon($content: "\e938");
         opacity: 0.8;
         padding-right: 10px;
+        padding-left: 5px;
     }
 
     li {
         padding: 6px 8px 6px 0;
-        margin-bottom: 4px;
-        // width: 245px;
-        
+        // margin-bottom: 4px;
+        display: flex;
+        width: 245px;
 
-        &:hover {
-            cursor: pointer;
-            background-color: rgba(9, 30, 66, 0.08);
-            border-radius: 3px;
+        .router-link-active {
+            background-color: #e4f0f6;
+            color: #0079bf;
+            text-decoration: none;
+            padding: 6px 8px 6px 0;
+            border-radius: 4px;
+            width: 100%;
+
         }
+        
+        // &:hover {
+        //     cursor: pointer;
+        //     background-color: rgba(9, 30, 66, 0.08);
+        //     border-radius: 3px;
+        // }
     }
 
     span {

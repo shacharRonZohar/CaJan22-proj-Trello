@@ -25,7 +25,7 @@
 
     ul {
         flex-wrap: wrap;
-        
+
         &:hover {
             filter: brightness(85%);
         }
@@ -44,7 +44,7 @@
         font-size: 12px;
         font-weight: 700;
         color: #fff;
-        line-height: 240px;     
+        line-height: 240px;
     }
 
     .task-preview-title {
@@ -55,8 +55,115 @@
         margin: 0 0 4px;
     }
 
-    .actions-container{
+    .actions-container {
         align-items: center;
+    }
+
+    .date-preview {
+        // padding-bottom: 5px;
+        padding: 2px;
+        padding-left: 4px;
+        margin-bottom: 5px;
+        margin-right: 3px;
+
+        &:hover {
+            background-color: #ebecf0;
+            border-radius: 3px;
+            // .date-icon {
+            //     display: none;
+            // }
+            // .checked-icon {
+            //     @include trello-icon($content: "\e919");
+            //     width: 24px;
+            //     height: 24px;
+            //     padding-right: 3px;
+            //     padding-left: 0px;
+            // }
+        }
+
+        .date-icon {
+            @include trello-icon($content: "\e91b");
+            display: inline;
+            color: #5e6c84;
+            width: 24px;
+            height: 24px;
+            padding-right: 3px;
+        }
+
+        .date {
+            font-size: 12px;
+            padding: 0 4px 0 2px;
+            vertical-align: top;
+            white-space: nowrap;
+        }
+
+        &.overdue {
+            background-color: #ec9488;
+            border-radius: 3px;
+            color: $clr2;
+            margin-bottom: 5px;
+            border-radius: 3px;
+            padding: 2px;
+            padding-left: 4px;
+
+            .date-icon {
+                color: $clr2;
+            }
+
+            &:hover {
+                background-color: #eb5a46;
+                .checked-icon {
+                    color: $clr2;
+                }
+            }
+        }
+
+        &.due-soon {
+            margin-bottom: 5px;
+            background-color: #f2d600;
+            border-radius: 3px;
+            color: #fff;
+            padding: 2px;
+            padding-left: 4px;
+
+            .date-icon {
+                color: $clr2;
+            }
+
+            &:hover {
+                background-color: #d9b51c;
+                .checked-icon {
+                    color: $clr2;
+                }
+            }
+        }
+
+        &.complited {
+            background-color: #61bd4f;
+            border-radius: 3px;
+            color: #fff;
+            margin-bottom: 5px;
+            border-radius: 3px;
+            padding: 2px;
+            padding-left: 4px;
+           
+            .date-icon {
+                display: none;
+            }
+
+            .complited-icon {
+                @include trello-icon($content: "\e91a");
+                color: $clr2;
+                width: 24px;
+                height: 24px;
+                padding-right: 3px;
+            }
+            
+            &:hover {
+                background-color: #519839;
+                
+            }
+        }
     }
 
     .description-icon {
@@ -69,7 +176,7 @@
         height: 24px;
     }
 
-    .attachment-preview{
+    .attachment-preview {
         margin: 0px 0px 4px 0;
         padding: 2px;
 
@@ -81,7 +188,7 @@
             width: 24px;
             height: 24px;
         }
-    
+
         .attach-num {
             font-size: 12px;
             padding: 4px 4px 0 2px;
@@ -90,46 +197,40 @@
         }
     }
 
-
     &:hover {
         background-color: #f4f5f7;
     }
 
-
-    .checklist-preview{
+    .checklist-preview {
         margin: 0px 0px 4px 0;
         padding: 3px;
         min-height: 20px;
 
-        .checklist-icon{
+        .checklist-icon {
             @include trello-icon($content: "\e91a");
-            color: #5e6c84;         
+            color: #5e6c84;
             width: 24px;
             height: 24px;
         }
-    
-        .checkedSum{
+
+        .checkedSum {
             font-size: 12px;
             padding: 1px 4px 0 2px;
             vertical-align: top;
             color: $clr15;
         }
 
-        &.done{
+        &.done {
             background-color: #61bd4f;
             border-radius: 3px;
             color: #fff;
-            .checkedSum, .checklist-icon{
-                color: $clr2
+            .checkedSum,
+            .checklist-icon {
+                color: $clr2;
             }
-            
         }
-    
     }
-
 }
-
-
 
 @keyframes label_text_appear {
     0% {
