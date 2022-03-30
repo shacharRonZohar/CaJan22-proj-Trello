@@ -46,6 +46,20 @@
                     }
                     .mini-status {
                         margin-left: 10px;
+                        border-radius: 3px;
+                        padding: 1px 3px;
+                        &.due-soon {
+                            background-color: #f2d600;
+                        }
+                        &.overDue {
+                            background-color: #ec9488;
+                            color: $clr2;
+                        }
+                        &.task-done {
+                            background-color: #61bd4f;
+                            color: $clr2;
+                            
+                        }
                     }
                 }
             }
