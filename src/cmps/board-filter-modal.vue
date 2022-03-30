@@ -2,7 +2,7 @@
     <div class="board-filter-modal">
         <div class="header flex align-center">
             <span class="title">Filter</span>
-            <button @click="onCloseFilter" class="close-btn btn"></button>
+            <button @click="onCloseFilter" class="close-filter-board-icon"></button>
         </div>
 
         <div class="body">
