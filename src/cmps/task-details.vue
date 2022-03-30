@@ -412,6 +412,12 @@ export default {
         payload: {itemToSave, checklistId},
       });
     },
+    removeChecklistItem(checklistId, itemId){
+      this.onAction({
+        cbName: "removeChecklistItem",
+        payload: {checklistId, itemId},
+      });
+    },
     onToggleTaskStatus(ev) {
       console.log(ev.value);
       if (task.dueDate.endDate < Date.now()) this.taskStatus = 'overdue'
