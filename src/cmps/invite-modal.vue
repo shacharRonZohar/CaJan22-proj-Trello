@@ -6,14 +6,26 @@
         </div>
         <div class="body">
             <form @submit.prevent="onAddMember">
-                <input v-model="inviteBy.txt" type="text" placeholder="Email address or name" />
+                <input
+                    @input="getUsers"
+                    v-model="getBy"
+                    type="text"
+                    placeholder="Email address or name"
+                />
                 <button class="send-invite">Send invitation</button>
             </form>
+            <ul class="user-list clean-list">
+                <li v-for="user in users" class="user-preview">
+                    <div class="icon" :style="{ backgroundImage: `url(${user?.imgUrl})` }"></div>
+                    {{ user.fullname }}
+                </li>
+            </ul>
         </div>
     </section>
 </template>
 
 <script>
+import { userService } from '../services/user-service.js'
 
 export default {
     // props: [''],
@@ -21,9 +33,8 @@ export default {
     created() { },
     data() {
         return {
-            inviteBy: {
-                txt: ''
-            }
+            getBy: '',
+            users: []
         }
     },
     methods: {
@@ -32,6 +43,9 @@ export default {
         },
         onClosePopup() {
             this.$emit('closePopup')
+        },
+        async getUsers() {
+            this.users = await userService.getUsersBy(this.getBy)
         }
     },
     computed: {},
