@@ -54,7 +54,7 @@
                 <div
                     @click="onToggleProfileModal"
                     class="profile-app-header flex"
-                    :style="{ backgroundImage: `url(${loggedInUser.imgUrl})` }"
+                    :style="{ backgroundImage: `url(${loggedInUser?.imgUrl})` }"
                 >
                     <!-- <div :style="{ backgroundImage: `url(${loggedInUser.imgUrl})` }" class="letter"></div> -->
                     <profile-modal :user="loggedInUser" v-if="profileModalOpen" />

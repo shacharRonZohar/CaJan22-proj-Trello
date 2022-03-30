@@ -2,7 +2,7 @@
     <section @click.stop class="profile-modal" @click="onLogout">
         <div class="header">Account</div>
         <div class="user">
-            <div class="profile-icon" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
+            <div class="profile-icon" :style="{ backgroundImage: imgUrl }"></div>
             <div class="details">
                 <span class="fullname">{{ user.fullname }}</span>
                 <small class="username">{{ user.username }}</small>
@@ -34,7 +34,11 @@ export default {
             authService.logout()
         }
     },
-    computed: {},
+    computed: {
+        imgUrl() {
+            return `url(${this.user?.imgUrl})` || ''
+        }
+    },
     unmounted() { },
 }
 </script>
