@@ -44,7 +44,7 @@
             {{attachNum}}
           </span>
         </div>
-        <div v-if="task.checklists" class="checklist-preview" :class="isDone">
+        <div v-if="task.checklists && isItems" class="checklist-preview" :class="isDone">
           <a class="checklist-icon" title="Checklist items" />
           <span class="checkedSum">
             {{checkedSum}}
@@ -122,6 +122,9 @@ export default {
     doneSum(){
       const dones = this.task.checklists.map(checklist => checklist.items.filter(item => item.isDone))
       return dones.reduce((acc, done) => acc + done.length, 0)
+    },
+    isItems(){
+      return this.itemsSum === 0 ? false : true
     }
   },
   unmounted() {},
