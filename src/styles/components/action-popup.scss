@@ -34,8 +34,9 @@
             cursor: pointer;
             color: #5e6c84;
             position: absolute;
-            right: -4px;
-            top: 9px;
+            right: 6px;
+            top: 11px;
+            font-weight: 500;
             @include trello-icon($content: "\e91c");
             &:hover {
                 color: #172b4d;

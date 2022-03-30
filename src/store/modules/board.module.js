@@ -285,6 +285,7 @@ export default {
         },
         async removeChecklistItem({ state, dispatch }, { taskId, groupId, payload, activity }) {
             try {
+                console.log(payload);
                 const boardToSave = JSON.parse(JSON.stringify(state.board))
                 const group = boardToSave.groups.find(group => group.id === groupId)
                 const task = group.tasks.find(task => task.id === taskId)
