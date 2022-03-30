@@ -30,7 +30,7 @@
 
       <h2 class="task-preview-title">{{ task.title }}</h2>
 
-      <div v-if="task.description" class="actions-container flex">
+      <div class="actions-container flex">
 
         <div v-if="task.dueDate" class="date-preview" :class="taskStatus">
           <a class="date-icon"></a>
@@ -39,7 +39,7 @@
           <span class="date">{{ date }}</span>
         </div>
 
-        <div class="description-preview">
+        <div v-if="task.description" class="description-preview">
           <a class="description-icon" title="This card has a description" />
         </div>
 
