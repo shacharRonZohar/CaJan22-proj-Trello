@@ -50,7 +50,7 @@ async function signupWithGoogle(cred) {
 async function logout() {
     try {
         await httpService.post(`${endpoint}/logout`)
-        userService.save(null)
+        sessionStorage.clear()
         return Promise.resolve()
     } catch (err) {
         console.log(err)
