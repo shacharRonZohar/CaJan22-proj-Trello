@@ -2,7 +2,7 @@
     height: 45px;
     background-color: $clr9;
     &.trans-header {
-        background-color: rgba(0, 0, 0, 0.27)
+        background-color: rgba(0, 0, 0, 0.27);
     }
     .logo {
         margin-left: 10px;
@@ -23,7 +23,7 @@
     .board-main-nav {
         width: 100%;
         .actions {
-            >* {
+            > * {
                 font-size: 0.9rem;
                 margin-inline-end: 5px;
                 background-color: inherit;
@@ -32,7 +32,7 @@
                 // cursor: not-allowed;
                 cursor: pointer;
             }
-            >*:hover {
+            > *:hover {
                 background-color: rgba(0, 0, 0, 0.2);
             }
             &:first-child {
@@ -46,12 +46,12 @@
             .create-btn {
                 background-color: rgba(0, 0, 0, 0.2);
                 width: 65px;
-                
+
                 &:hover {
                     background-color: rgba(0, 0, 0, 0.3);
                 }
             }
-            
+
             .wide-s {
                 @include for-mobile-layout {
                     display: none;
@@ -66,7 +66,6 @@
         }
 
         .second-actions {
-
             .search-app-header {
                 border: 1px solid rgba(255, 255, 255, 0.25);
                 background-color: rgba(255, 255, 255, 0.2);
@@ -122,12 +121,12 @@
                     background-image: url(../assets/icons/searchicon.svg);
                     height: 20px;
                 }
-                
+
                 &:hover {
                     background-color: rgba(0, 0, 0, 0.2);
                     // cursor: not-allowed;
                 }
-                
+
                 @include for-mobile-layout {
                     display: block;
                 }
@@ -150,7 +149,7 @@
                     background-color: rgba(0, 0, 0, 0.2);
                 }
             }
-            
+
             .notifications {
                 width: 32px;
                 height: 32px;
@@ -169,18 +168,115 @@
                     background-color: rgba(0, 0, 0, 0.2);
                 }
             }
-            
+
             .profile-app-header {
-                background-color: #de350b;
+                position: relative;
                 border-radius: 50%;
                 justify-content: center;
                 align-items: center;
                 height: 32px;
                 width: 32px;
                 margin-right: 4px;
-                .letter {
-                    font-weight: bolder;
-                    color: $clr2;
+                background-size: contain;
+
+                .profile-modal {
+                    > * {
+                        border-bottom: 1px solid rgba(9, 30, 66, 0.129411764705882);
+                    }
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0 12px;
+                    // bottom: -68px;
+                    top: 42px;
+                    position: absolute;
+                    // bottom: 0;
+                    z-index: 3;
+                    right: 0;
+                    color: #172b4d;
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
+                        "Droid Sans", "Helvetica Neue", sans-serif;
+                    font-size: 14px;
+                    line-height: 20px;
+                    font-weight: 400;
+                    background-color: #ffffff;
+                    border-radius: 3px;
+                    box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
+                    box-sizing: border-box;
+                    outline: 0;
+                    overflow: hidden;
+                }
+                .header {
+                    text-align: center;
+                    line-height: 40px;
+                    font-weight: 400;
+                    display: block;
+                    width: 280px;
+                    color: #5e6c84;
+                    border-bottom: 1px solid rgba(9, 30, 66, 0.129411764705882);
+                    margin-bottom: 8px;
+                }
+                .profile-icon {
+                    height: 40px;
+                    width: 40px;
+                    background-size: contain;
+                    border-radius: 50%;
+                    margin-top: 4px;
+                    // line-height: 40px;
+                }
+                .user {
+                    display: flex;
+                    padding-bottom: 20px;
+                }
+                .details {
+                    display: flex;
+                    flex-direction: column;
+                    margin-left: 10px;
+                    span {
+                        margin-top: 4px;
+                    }
+                    .fullname {
+                        // font-size: 0.8rem;
+                        // letter-spacing: 0.9px;
+                        // word-spacing: -2px;
+                    }
+                    small {
+                        color: #b3bac5;
+                    }
+                }
+                .profile-btns {
+                    // color: black;
+                    display: flex;
+                    flex-direction: column;
+                    padding-bottom: 18px;
+                    padding-top: 18px;
+                    > * {
+                        border: none;
+                        background: #fff;
+                        border-radius: 0;
+                        box-shadow: none;
+                        color: #172b4d;
+                        display: block;
+                        height: 100%;
+                        padding: 6px 12px;
+                        text-align: left;
+                        text-decoration: none;
+                        line-height: 20px;
+                        width: 100%;
+                    }
+                }
+                .logout {
+                    border: none;
+                    background: #fff;
+                    border-radius: 0;
+                    box-shadow: none;
+                    color: #172b4d;
+                    display: block;
+                    height: 100%;
+                    padding: 6px 12px;
+                    text-align: left;
+                    text-decoration: none;
+                    line-height: 20px;
+                    width: 100%;
                 }
             }
         }
