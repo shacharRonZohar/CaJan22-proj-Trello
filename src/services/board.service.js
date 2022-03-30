@@ -191,6 +191,7 @@ function removeCover(board, taskId, groupId, activity) {
     return Promise.resolve(board)
 }
 function addMember(board, user) {
+    if (!board?.members?.length) board.members = []
     if (board.members.some(currUser => currUser.username === user.username)) return Promise.reject('User is already on board')
     board.members.push(user)
     return Promise.resolve(board)
