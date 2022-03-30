@@ -15,15 +15,29 @@
             color: $clr15;
             text-align: center;
         }
-        .close-btn {
-            position: absolute;
-            right: 10px;
+        // .close-btn {
+        //     position: absolute;
+        //     right: 10px;
+        //     background-color: inherit;
+        //     background-image: url(../assets/icons/closemodal.svg);
+        //     display: inline-block;
+        //     height: 14px;
+        //     background-repeat: no-repeat;
+        //     cursor: pointer;
+        // }
+        .close-filter-board-icon {
+            @include trello-icon($content: "\e91c", $type: md);
+            font-size: 1rem;
+            color: #687790;
+            font-weight: 600;
             background-color: inherit;
-            background-image: url(../assets/icons/closemodal.svg);
-            display: inline-block;
-            height: 14px;
-            background-repeat: no-repeat;
+            border: none;
+            position: absolute;
+            right: 0;
             cursor: pointer;
+            &:hover{
+                color: $clr4
+            }
         }
         border-bottom: 1px solid #dfe2e7;
     }

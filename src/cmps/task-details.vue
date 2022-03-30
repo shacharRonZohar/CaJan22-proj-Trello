@@ -410,7 +410,8 @@ export default {
     taskStatus() {
       if (this.task.dueDate.endDate < Date.now()) return 'overdue'
       else if (this.isTaskDone) return 'complete'
-      return 'due soon'
+      else if ((Math.abs(this.task.dueDate.endDate - Date.now()) / (60 * 60 * 1000)) < 24 ) return 'due soon'
+      return ''
     },
     statusColor() {
       return {

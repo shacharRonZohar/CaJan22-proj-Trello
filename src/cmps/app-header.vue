@@ -51,10 +51,14 @@
                 <button class="notifications btn">
                     <span class="notifications-icon"></span>
                 </button>
-                <div @click="onToggleProfileModal" class="profile-app-header flex">
-                    <div class="letter">P</div>
+                <div
+                    @click="onToggleProfileModal"
+                    class="profile-app-header flex"
+                    :style="{ backgroundImage: `url(${loggedInUser?.imgUrl})` }"
+                >
+                    <!-- <div :style="{ backgroundImage: `url(${loggedInUser.imgUrl})` }" class="letter"></div> -->
+                    <profile-modal :user="loggedInUser" v-if="profileModalOpen" />
                 </div>
-                <profile-modal v-if="profileModalOpen" />
             </div>
         </div>
     </header>
@@ -107,6 +111,9 @@ export default {
         },
         currBoard() {
             return this.$store.getters.board
+        },
+        loggedInUser() {
+            return this.$store.getters.loggedInUser
         }
     },
     unmounted() { },
