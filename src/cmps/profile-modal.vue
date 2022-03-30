@@ -30,8 +30,9 @@ export default {
         return {}
     },
     methods: {
-        onLogout() {
-            authService.logout()
+        async onLogout() {
+            await authService.logout()
+            this.$router.push('/')
         }
     },
     computed: {

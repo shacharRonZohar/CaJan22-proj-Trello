@@ -22,6 +22,21 @@
     > *:not(:first-child) {
         margin-top: 10px;
     }
+    .create-label-header-container {
+        position: absolute;
+        top: -45px;
+        left: 101px;
+        background-color: white;
+        font-size: 0.875rem;
+        font-weight: 400;
+        .back {
+            @include trello-icon($content: "\e90a");
+            border: none;
+            background-color: transparent;
+            position: absolute;
+            right: 148px;
+        }
+    }
     .header {
         height: 41px;
         text-transform: capitalize;
@@ -84,6 +99,10 @@
         display: block;
         width: 100%;
         text-align: start;
+        color: #5e6c84;
+        font-size: 12px;
+        margin-top: 10px;
+        font-weight: 700;
         input {
             position: absolute;
             left: 0;

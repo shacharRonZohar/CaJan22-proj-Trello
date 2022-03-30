@@ -23,9 +23,7 @@
 
 export default {
     components: {},
-    mounted() {
-        if (this.$store.getters.loggedInUser) this.$router.push('/board')
-    },
+
     data() {
         return {}
     },
