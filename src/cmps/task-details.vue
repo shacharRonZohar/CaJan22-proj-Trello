@@ -164,6 +164,7 @@
               @removeChecklist="removeChecklist"
               @editChecklist="editChecklist"
               @editChecklistItem="editChecklistItem"
+              @removeChecklistItem="removeChecklistItem"
             />
             <!-- <div class="checklist-header">
                   <div class="checklist-icon" />
