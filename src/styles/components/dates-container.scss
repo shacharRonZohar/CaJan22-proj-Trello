@@ -1,0 +1,31 @@
+.dates-container {
+    overflow-y: auto;
+    .dp__flex_display {
+        justify-content: center;
+    }
+    .start-date {
+    }
+    .save-btn {
+        width: 90%;
+        background-color: $clr8;
+        color: $clr2;
+        margin: 10px 0;
+        height: 30px;
+        font-size: 15px;
+        cursor: pointer;
+        &:hover {
+            background-color: $clr9;
+        }
+    }
+    input {
+        background-color: #fafbfc;
+        box-shadow: inset 0 0 0 2px #dfe1e6;
+        width: 100px;
+        border: none;
+        border-radius: 3px;
+        line-height: 25px;
+    }
+    p {
+        margin: 5px;
+    }
+}
