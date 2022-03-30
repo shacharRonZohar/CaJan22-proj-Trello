@@ -4,14 +4,16 @@
         <div class="start-date">
             <p>Start date</p>
             <input v-model="date[0]" type="text" readonly />
+            <!-- <span>{{startDate}}</span> -->
         </div>
         <div class="due-date">
             <p>Due date</p>
             <input v-model="date[1]" type="text" readonly/>
+            <!-- <span>{{endDate}}</span> -->
         </div>
         <div class="buttons">
             <button class="save-btn btn" @click="onSave">Save</button>
-            <button class="save-btn btn" @click="onSave">Remove</button>
+            <button class="save-btn btn" @click="onRemove">Remove</button>
             <!-- <button>Remove</button> -->
         </div>
     </div>
@@ -19,7 +21,7 @@
 
 <script>
 export default {
-    emits: ['action'],
+    emits: ['action', 'togglePopup'],
     data() {
         return {
             date: {
@@ -34,7 +36,12 @@ export default {
         onSave() {
             // console.log(this.date);
             this.$emit('action', {cbName: 'setTaskDueDate', payload: this.date})
+            this.$emit('togglePopup')
         },
+        onRemove() {
+            this.$emit('action', {cbName: 'removeTaskDueDate'})
+            this.$emit('togglePopup')
+        }
     },
     computed: {
         startDate() {
