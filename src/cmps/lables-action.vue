@@ -1,24 +1,24 @@
 <template >
     <div @click.stop class="label btn">
         <div class="header">
-            <span v-if="!createLabelOpen">Labels</span>
+            <span class="labels-title" v-if="!createLabelOpen">Labels</span>
             <button v-else @click="toggleCreateLabel" class="back"></button>
             <span v-if="createLabelOpen">Create label</span>
             <!-- <button class="close-action" @click="toggleActionPopup"></button> -->
         </div>
-        <div class="body">
+        <div class="body label-list-container">
             <ul v-if="!createLabelOpen" class="clean-list">
                 <li
                     @click="onLabel(label.id)"
-                    class="label"
+                    class="label-list-item flex"
                     v-for="label in labels"
                     :key="label"
                     :style="{ backgroundColor: label.color }"
                 >
                     {{ label.title }}
-                    <div class="icon" v-if="isChosen(label.id)"></div>
+                    <a class="selected-icon" v-if="isChosen(label.id)"></a>
                 </li>
-                <button class="btn" @click="toggleCreateLabel">Add new label</button>
+                <button class="btn create-new-label" @click="toggleCreateLabel">Create a new label</button>
             </ul>
             <div v-else class="create-label-container">
                 <label for>
@@ -33,10 +33,10 @@
                         class="clr-opt"
                         :style="{ backgroundColor: clr }"
                     >
-                        <div class="icon" v-if="newLabel.color === clr"></div>
+                        <div class="selected-icon" v-if="newLabel.color === clr"></div>
                     </li>
                 </ul>
-                <button @click="saveNewLabel" class="create btn">Create</button>
+                <button @click="saveNewLabel" class="create-label-btn btn">Create</button>
             </div>
         </div>
     </div>
@@ -47,17 +47,18 @@
 
 export default {
     props: {
-        chosenLabels: Array
+        task: Object
     },
     emits: ['action'],
     components: {
         // actionPopup
     },
-    created() { },
+    created() {
+     },
     data() {
         return {
             createLabelOpen: false,
-            clrOpts: ['red', 'yellow'],
+            clrOpts: ['#61bd4f', '#f2d600', '#ff9f1a', '#eb5a46', '#c377e0', '#0079bf', '#00c2e0', '#51e898', '#ff78cb', '#344563'],
             newLabel: {
                 title: '',
                 color: 'red'
@@ -82,8 +83,8 @@ export default {
             this.createLabelOpen = !this.createLabelOpen
         },
         isChosen(label) {
-            if (!this.chosenLabels) return false
-            return this.chosenLabels.includes(label)
+            if (!this.task.labelIds) return false
+            return this.task.labelIds.includes(label)
         }
     },
     computed: {
@@ -95,3 +96,7 @@ export default {
     unmounted() { },
 }
 </script>
+
+<style>
+
+</style>
