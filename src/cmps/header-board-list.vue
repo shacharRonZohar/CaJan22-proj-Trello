@@ -7,7 +7,12 @@
             </button>
         </div>
         <ul class="board-list clean-list">
-            <li class="board flex align-center" @click="goToBoard(board)" v-for="board in boards" :key="board._id">
+            <li
+                class="board flex align-center"
+                @click="goToBoard(board)"
+                v-for="board in boards"
+                :key="board._id"
+            >
                 <div class="mini-pic" :style="{ backgroundImage: img(board) }"></div>
                 <span>{{ board.title }}</span>
             </li>
@@ -22,10 +27,10 @@ export default {
     },
     emits: ['closeModal'],
     created() {
-        console.log(this.boards);
+        // console.log(this.boards);
     },
     methods: {
-        goToBoard(board){
+        goToBoard(board) {
             this.$router.push(`/board/${board._id}`)
             this.onClose()
         },

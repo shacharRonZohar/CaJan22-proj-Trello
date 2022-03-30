@@ -3,7 +3,7 @@ import { storageService } from './async-storage.service'
 import { imgService } from './imgService.js'
 import { httpService } from './http-service.js'
 import { userService } from './user-service.js'
-import moment from "moment";
+import moment from "moment"
 
 export const boardService = {
     query,
@@ -33,13 +33,13 @@ const endpoint = 'board'
 
 
 async function query(filterBy = {}) {
-    console.log(filterBy)
+    // console.log(filterBy)
     return await httpService.get(endpoint, filterBy)
     // return storageService.query(BOARDS_KEY)
 }
 
 function save(board) {
-    console.log(board)
+    // console.log(board)
     return board._id ? _update(board) : _add(board)
 }
 
@@ -188,8 +188,8 @@ async function addMember(board, inviteBy) {
         console.log(inviteBy)
         const user = await userService.getByUsername(inviteBy.txt)
         console.log(user)
-        if (board.members.includes(user._id)) return Promise.reject('User is already on board')
-        board.members.push(user._id)
+        if (board.members.some(currUser => currUser.username === user.username)) return Promise.reject('User is already on board')
+        board.members.push(user)
         return Promise.resolve(board)
     } catch (err) {
         console.log(err)
@@ -243,9 +243,9 @@ function getEmptyBoard() {
 function _getDueDates(payload) {
     const startDate = moment(payload[0]).unix() * 1000
     const endDate = moment(payload[1]).unix() * 1000
-    console.log(startDate);
-    console.log(endDate);
-    if (startDate === endDate)  return { endDate }
+    console.log(startDate)
+    console.log(endDate)
+    if (startDate === endDate) return { endDate }
     return {
         startDate,
         endDate

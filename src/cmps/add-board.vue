@@ -72,7 +72,7 @@ export default {
             const user = this.$store.getters.loggedInUser
             this.boardToAdd.createdBy = user
             this.boardToAdd.members = [user]
-            console.log(this.boardToAdd)
+            // console.log(this.boardToAdd)
             this.$store.dispatch({ type: 'saveBoard', boardToSave: this.boardToAdd })
             this.$emit('addedBoard')
         },

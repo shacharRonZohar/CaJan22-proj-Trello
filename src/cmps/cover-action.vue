@@ -85,11 +85,11 @@ export default {
         onToggleCoverImg(img) {
             // console.log(this.task?.cover?.backgroundImage === `url(${img})`)
             if (this.task?.cover?.backgroundImage === `url(${img})`) return this.onRemoveCover()
-            console.log(this.task?.cover?.backgroundImage === `url(${img})`)
+            // console.log(this.task?.cover?.backgroundImage === `url(${img})`)
             this.$emit('action', { cbName: 'chooseCover', payload: { type: 'img', style: img } })
         },
         onRemoveCover() {
-            console.log('here')
+            // console.log('here')
             this.$emit('action', { cbName: 'removeCover' })
         },
         async onUploadImg(ev) {

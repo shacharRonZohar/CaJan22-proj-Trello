@@ -47,7 +47,7 @@ export default {
                 commit({ type: 'setIsReady', isReady: false })
                 // The timeout is for testing
                 // setTimeout(async () => {
-                console.log(rootState.userModule.loggedInUser)
+                // console.log(rootState.userModule.loggedInUser)
                 const boards = await boardService.query({ user: rootState.userModule.loggedInUser })
                 commit({ type: 'setBoards', boards })
                 commit({ type: 'setIsReady', isReady: true })
@@ -114,11 +114,11 @@ export default {
                 console.log(err)
             }
         },
-        async setTaskDueDate({state, dispatch, commit}, {taskId, groupId, payload, activity}) {
+        async setTaskDueDate({ state, dispatch, commit }, { taskId, groupId, payload, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.saveTaskDueDate(board, taskId, groupId, payload, activity)
-                await dispatch({type: 'saveBoard', boardToSave})
+                await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
             }
@@ -278,6 +278,7 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.addMember(board, inviteBy)
+                console.log(boardToSave)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
@@ -285,7 +286,7 @@ export default {
         },
         async removeChecklistItem({ state, dispatch }, { taskId, groupId, payload, activity }) {
             try {
-                console.log(payload);
+                console.log(payload)
                 const boardToSave = JSON.parse(JSON.stringify(state.board))
                 const group = boardToSave.groups.find(group => group.id === groupId)
                 const task = group.tasks.find(task => task.id === taskId)

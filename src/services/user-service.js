@@ -2,7 +2,7 @@ import { storageService } from './storage.service.js'
 import { httpService } from './http-service.js'
 
 const USER_KEY = 'userLocDB'
-const endpoint = 'user'
+const endpoint = 'user/member'
 
 export const userService = {
     save,

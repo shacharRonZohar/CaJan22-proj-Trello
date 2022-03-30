@@ -10,29 +10,14 @@
       :action="currOpenAction"
       :task="task"
     ></action-popup>
-    <section
-      @click.stop
-      v-if="task"
-      class="task-details"
-      :class="{ 'cover-open': task.cover }"
-    >
+    <section @click.stop v-if="task" class="task-details" :class="{ 'cover-open': task.cover }">
       <div v-if="task.cover" :style="task.cover" class="cover">
-        <action-btn
-          @openActionPopup="toggleAction"
-          :action="'cover-action'"
-        ></action-btn>
+        <action-btn @openActionPopup="toggleAction" :action="'cover-action'"></action-btn>
       </div>
       <header class="task-details-header">
         <div class="icon"></div>
         <div class="title-container">
-          <h2
-            @blur="onSaveTitle"
-            class="title"
-            contenteditable
-            spellcheck="false"
-          >
-            {{ task.title }}
-          </h2>
+          <h2 @blur="onSaveTitle" class="title" contenteditable spellcheck="false">{{ task.title }}</h2>
           <div class="group-txt">
             in list:
             <span>{{ groupName }}</span>
@@ -58,21 +43,19 @@
                 v-for="label in task.labelIds"
                 :key="label"
                 :style="{ backgroundColor: getLabelById(label).color }"
-              >
-                {{ getLabelById(label).title }}
-              </li>
+              >{{ getLabelById(label).title }}</li>
             </ul>
           </section>
 
           <div v-if="task.dueDate?.endDate" class="due-date-container">
-              <small>Due date</small>
-              <div class="date-display flex align-center">
-                <input @click="onToggleTaskStatus" type="checkbox" name="" id="">
-                <div class="due-date">
-                  <span class="date">{{timeString}}</span>
-                  <span class="mini-status">{{taskStatus}}</span>
-                </div>
+            <small>Due date</small>
+            <div class="date-display flex align-center">
+              <input @click="onToggleTaskStatus" type="checkbox" name id />
+              <div class="due-date">
+                <span class="date">{{ timeString }}</span>
+                <span class="mini-status">{{ taskStatus }}</span>
               </div>
+            </div>
           </div>
 
           <div class="description-container">
@@ -88,11 +71,7 @@
             >
               <span>{{ descTxt }}</span>
             </div>
-            <form
-              class="description-edit-form task-layout"
-              v-else
-              @submit.prevent="onSaveDesc"
-            >
+            <form class="description-edit-form task-layout" v-else @submit.prevent="onSaveDesc">
               <textarea
                 v-focus
                 class="description-edit"
@@ -101,19 +80,13 @@
               ></textarea>
               <div class="desc-actions">
                 <button class="save-new-list-btn">Save</button>
-                <button
-                  @click.stop="toggleDescEdit"
-                  class="icon close"
-                ></button>
+                <button @click.stop="toggleDescEdit" class="icon close"></button>
               </div>
               <!-- <span class='close-add-btn' @click='addBtnClicked = !addBtnClicked'>X</span> -->
             </form>
             <!-- <button class='btn edit'>Edit</button> -->
           </div>
-          <div
-            v-if="task.attachments && task.attachments.length"
-            class="attachments-container"
-          >
+          <div v-if="task.attachments && task.attachments.length" class="attachments-container">
             <div class="attachments-header">
               <div class="icon"></div>
               <h3>Attachments</h3>
@@ -133,29 +106,20 @@
                 </span>
                 <div class="attachment-actions">
                   <span>Added {{ getTime(attachment.createdAt) }} -</span>
-                  <small
-                    class="attacment-delete"
-                    @click="onRemoveAttachment(attachment.id)"
-                    >Delete</small
-                  >
+                  <small class="attacment-delete" @click="onRemoveAttachment(attachment.id)">Delete</small>
                   <div class="attacment-make-cover">
                     <a class="make-cover-icon" />
                     <span
                       class="attacment-cover-title"
                       @click="onMakeCover(attachment.url)"
-                      >Make cover</span
-                    >
+                    >Make cover</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div
-            class="checklist-container"
-            v-for="checklist in task.checklists"
-            :key="checklist.id"
-          >
+          <div class="checklist-container" v-for="checklist in task.checklists" :key="checklist.id">
             <checklist-details
               :checklist="checklist"
               :isAddItemsOpen1="isAddItemsOpen"
@@ -179,7 +143,7 @@
                   <div class="item-title" >{{item.title}}</div> 
                 </div>
                 <input type="text" v-focus placeholder="Add an item" v-model="checklistItemTitle">
-                <button @click="addChecklistItem(checklist.id)" class="add-button">Add</button><a class="close-checklist-icon"></a> -->
+            <button @click="addChecklistItem(checklist.id)" class="add-button">Add</button><a class="close-checklist-icon"></a>-->
           </div>
 
           <!-- <div class='activities-container'>
@@ -214,19 +178,15 @@
       </main>
       <button @click="onCloseDetails" class="btn close icon"></button>
     </section>
-    <div
-      v-if="currOpenAction"
-      @click.stop="toggleAction"
-      class="clickable-background"
-    ></div>
+    <div v-if="currOpenAction" @click.stop="toggleAction" class="clickable-background"></div>
   </div>
 </template>
 
 <script>
-import checklistDetails from "./checklist-details.vue";
-import actionPopup from "./action-popup.vue";
-import actionBtn from "./action-btn.vue";
-import moment from "moment";
+import checklistDetails from "./checklist-details.vue"
+import actionPopup from "./action-popup.vue"
+import actionBtn from "./action-btn.vue"
+import moment from "moment"
 
 export default {
   props: {
@@ -257,27 +217,27 @@ export default {
       currOpenAction: "",
       isAddItemsOpen: false,
       taskStatus: ''
-    };
+    }
   },
   watch: {
     taskId: {
       async handler() {
         try {
-          if (!this.$route.params?.taskId) return;
-          const taskId = this.$route.params.taskId;
+          if (!this.$route.params?.taskId) return
+          const taskId = this.$route.params.taskId
           const group = await this.$store.dispatch({
             type: "getGroupByTask",
             taskId,
-          });
-          this.localGroupId = group.id;
-          this.groupName = group.title;
+          })
+          this.localGroupId = group.id
+          this.groupName = group.title
           this.task = await this.$store.dispatch({
             type: "getTaskById",
             taskId,
             groupId: this.groupId || this.localGroupId,
-          });
+          })
         } catch (err) {
-          console.log(err);
+          console.log(err)
         }
       },
       immediate: true,
@@ -285,24 +245,24 @@ export default {
   },
   methods: {
     toggleAction(action) {
-      console.log(action);
-      this.currOpenAction = this.currOpenAction ? "" : action;
+      // console.log(action);
+      this.currOpenAction = this.currOpenAction ? "" : action
     },
     async saveTask(taskToSave) {
-      taskToSave = JSON.parse(JSON.stringify(taskToSave));
+      taskToSave = JSON.parse(JSON.stringify(taskToSave))
       return this.$store.dispatch({
         type: "saveTask",
         taskToSave,
         groupId: this.groupId || this.localGroupId,
-      });
+      })
     },
     async onRemoveAttachment(attachmentId) {
       const idx = this.task.attachments.findIndex(
         (attachment) => attachment.id === attachmentId
-      );
-      this.task.attachments.splice(idx, 1);
-      if (this.task.cover) delete this.task.cover;
-      this.saveTask(this.task);
+      )
+      this.task.attachments.splice(idx, 1)
+      if (this.task.cover) delete this.task.cover
+      this.saveTask(this.task)
     },
     async onAction({ cbName, payload = null }) {
       await this.$store.dispatch({
@@ -310,15 +270,15 @@ export default {
         taskId: this.task.id,
         groupId: this.localGroupId,
         payload,
-      });
+      })
       // Temporary
-      if (cbName === "archiveTask") return this.onCloseDetails();
-      const taskId = this.$route.params.taskId;
+      if (cbName === "archiveTask") return this.onCloseDetails()
+      const taskId = this.$route.params.taskId
       this.task = await this.$store.dispatch({
         type: "getTaskById",
         taskId,
         groupId: this.groupId || this.localGroupId,
-      });
+      })
     },
     async onActions(actions) {
       // Plaster
@@ -327,122 +287,122 @@ export default {
         taskId: this.task.id,
         groupId: this.localGroupId,
         payload: actions[0].payload,
-      });
+      })
       await this.$store.dispatch({
         type: actions[1].cbName,
         taskId: this.task.id,
         groupId: this.localGroupId,
         payload: actions[1].payload,
-      });
-      const taskId = this.$route.params.taskId;
+      })
+      const taskId = this.$route.params.taskId
       this.task = await this.$store.dispatch({
         type: "getTaskById",
         taskId,
         groupId: this.groupId || this.localGroupId,
-      });
+      })
     },
     async onSaveTitle(ev) {
-      this.task.title = ev.target.innerText;
-      await this.saveTask(this.task);
+      this.task.title = ev.target.innerText
+      await this.saveTask(this.task)
     },
     async onSaveDesc() {
-      this.task.description = this.newDesc;
-      await this.saveTask(this.task);
-      this.toggleDescEdit();
+      this.task.description = this.newDesc
+      await this.saveTask(this.task)
+      this.toggleDescEdit()
     },
     onMakeCover(url) {
       this.onAction({
         cbName: "chooseCover",
         payload: { type: "img", style: url },
-      });
+      })
     },
     onCloseDetails() {
-      console.log("closeing");
-      const currRoute = this.$route.fullPath;
-      const route = currRoute.substring(0, currRoute.indexOf("/task"));
-      this.$router.push(route);
+      // console.log("closeing")
+      const currRoute = this.$route.fullPath
+      const route = currRoute.substring(0, currRoute.indexOf("/task"))
+      this.$router.push(route)
     },
     toggleDescEdit() {
-      this.newDesc = this.task.description;
-      this.descEditOpen = !this.descEditOpen;
+      this.newDesc = this.task.description
+      this.descEditOpen = !this.descEditOpen
     },
     setPopupMode(isOpen) {
-      this.isActionPopupOpen = isOpen;
+      this.isActionPopupOpen = isOpen
     },
     getLabelById(id) {
-      return this.$store.getters.labelById(id);
+      return this.$store.getters.labelById(id)
     },
     getTime(date) {
       // console.log(date)
-      return moment(+date).fromNow();
+      return moment(+date).fromNow()
     },
     addChecklistItem(checklistId, title) {
       this.onAction({
         cbName: "addChecklistItem",
         payload: { checklistId, title },
-      });
+      })
     },
     toggleIsDone(checklistId, itemId) {
       this.onAction({
         cbName: "toggleIsDone",
         payload: { checklistId, itemId },
-      });
+      })
     },
     isItemDone(item) {
-      return item.isDone ? "done" : "";
+      return item.isDone ? "done" : ""
     },
     addChecklist() {
       // this.isAddItemsOpen = !this.isAddItemsOpen
     },
-    removeChecklist(checklistId){
+    removeChecklist(checklistId) {
       this.onAction({
         cbName: "removeChecklist",
         payload: checklistId,
-      });
+      })
     },
-    editChecklist(checklistToSave){
+    editChecklist(checklistToSave) {
       this.onAction({
         cbName: "editChecklist",
         payload: checklistToSave,
-      });
+      })
     },
-    editChecklistItem(itemToSave, checklistId){
+    editChecklistItem(itemToSave, checklistId) {
       this.onAction({
         cbName: "editChecklistItem",
-        payload: {itemToSave, checklistId},
-      });
+        payload: { itemToSave, checklistId },
+      })
     },
-    removeChecklistItem(checklistId, itemId){
+    removeChecklistItem(checklistId, itemId) {
       this.onAction({
         cbName: "removeChecklistItem",
-        payload: {checklistId, itemId},
-      });
+        payload: { checklistId, itemId },
+      })
     },
     onToggleTaskStatus(ev) {
-      console.log(ev.value);
+      console.log(ev.value)
       if (task.dueDate.endDate < Date.now()) this.taskStatus = 'overdue'
       else this.taskStatus = 'progress'
     }
   },
   computed: {
     taskId() {
-      return this.$route.params.taskId;
+      return this.$route.params.taskId
     },
     descTxt() {
       return "description" in this.task && this.task.description
         ? this.task.description
-        : "Add a more detailed description...";
+        : "Add a more detailed description..."
     },
     isFull() {
-      return { empty: this.task.description };
+      return { empty: this.task.description }
     },
     open() {
-      return { open: this.isActionPopupOpen };
+      return { open: this.isActionPopupOpen }
     },
     timeString() {
       var timeStr = moment(this.task.dueDate.endDate).toLocaleString()
-      timeStr = timeStr.substring(0, timeStr.length - 9);
-      return timeStr;
+      timeStr = timeStr.substring(0, timeStr.length - 9)
+      return timeStr
     },
     taskStatus() {
       if (this.task.dueDate.endDate < Date.now()) return 'overdue'
@@ -450,10 +410,10 @@ export default {
     },
     test() {
       return `end date: ${this.task.dueDate.endDate} , now: ${Date.now()}`
-         
-     
+
+
     }
   },
-  unmounted() {},
-};
+  unmounted() { },
+}
 </script>
