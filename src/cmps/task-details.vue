@@ -50,10 +50,10 @@
           <div v-if="task.dueDate?.endDate" class="due-date-container">
             <small>Due date</small>
             <div class="date-display flex align-center">
-              <input @click="onToggleTaskStatus" type="checkbox" name id />
+              <input @click="toggleTaskDone" type="checkbox" name id />
               <div class="due-date">
                 <span class="date">{{ timeString }}</span>
-                <span class="mini-status">{{ taskStatus }}</span>
+                <span :class="statusColor" class="mini-status">{{ taskStatus }}</span>
               </div>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default {
       ],
       currOpenAction: "",
       isAddItemsOpen: false,
-      taskStatus: ''
+      isTaskDone: false
     }
   },
   watch: {
@@ -378,10 +378,13 @@ export default {
         payload: { checklistId, itemId },
       })
     },
-    onToggleTaskStatus(ev) {
-      console.log(ev.value)
-      if (task.dueDate.endDate < Date.now()) this.taskStatus = 'overdue'
-      else this.taskStatus = 'progress'
+    // onToggleTaskStatus(ev) {
+    //   console.log(ev.value)
+    //   if (task.dueDate.endDate < Date.now()) this.taskStatus = 'overdue'
+    //   else this.taskStatus = 'progress'
+    // },
+    toggleTaskDone() {
+      this.isTaskDone = !this.isTaskDone
     }
   },
   computed: {
@@ -406,12 +409,15 @@ export default {
     },
     taskStatus() {
       if (this.task.dueDate.endDate < Date.now()) return 'overdue'
-      return 'progress'
+      else if (this.isTaskDone) return 'complete'
+      return 'due soon'
     },
-    test() {
-      return `end date: ${this.task.dueDate.endDate} , now: ${Date.now()}`
-
-
+    statusColor() {
+      return {
+        overDue: this.task.dueDate.endDate < Date.now(),
+        'due-soon': (Math.abs(this.task.dueDate.endDate - Date.now()) / (60 * 60 * 1000)) < 24,
+        'task-done': this.isTaskDone
+      }
     }
   },
   unmounted() { },
