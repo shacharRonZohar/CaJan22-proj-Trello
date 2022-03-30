@@ -2,8 +2,10 @@
     <div @click.stop class="label btn">
         <div class="header">
             <span class="labels-title" v-if="!createLabelOpen">Labels</span>
-            <button v-else @click="toggleCreateLabel" class="back"></button>
-            <span v-if="createLabelOpen">Create label</span>
+            <div v-else class="create-label-header-container">
+                <button @click="toggleCreateLabel" class="back"></button>
+                <span>Create label</span>
+            </div>
             <!-- <button class="close-action" @click="toggleActionPopup"></button> -->
         </div>
         <div class="body label-list-container">
@@ -54,7 +56,7 @@ export default {
         // actionPopup
     },
     created() {
-     },
+    },
     data() {
         return {
             createLabelOpen: false,
@@ -98,5 +100,4 @@ export default {
 </script>
 
 <style>
-
 </style>
