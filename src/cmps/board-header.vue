@@ -12,9 +12,11 @@
             <button class="star-btn btn"></button>
 
             <div class="invited-users flex">
-                <span>A</span>
-                <span>CB</span>
-                <span>SZ</span>
+                <span
+                    v-for="member in board.members"
+                    :key="member._id"
+                    :style="{ backgroundImage: `url(${member.imgUrl})` }"
+                ></span>
             </div>
 
             <button @click="onToggleInviteModal" class="invite-btn btn">
