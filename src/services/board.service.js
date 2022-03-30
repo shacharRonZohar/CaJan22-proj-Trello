@@ -241,9 +241,10 @@ function getEmptyBoard() {
 }
 
 function _getDueDates(payload) {
-    const startDate = moment(payload[0]).unix()
-    const endDate = moment(payload[1]).unix()
-
+    const startDate = moment(payload[0]).unix() * 1000
+    const endDate = moment(payload[1]).unix() * 1000
+    console.log(startDate);
+    console.log(endDate);
     if (startDate === endDate)  return { endDate }
     return {
         startDate,
