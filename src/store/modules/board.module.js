@@ -122,15 +122,15 @@ export default {
             } catch (err) {
                 console.log(err)
             }
-            
+
         },
-        async removeTaskDueDate({state, dispatch, commit}, {taskId, groupId}) {
+        async removeTaskDueDate({ state, dispatch, commit }, { taskId, groupId }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.removeTaskDueDate(board, taskId, groupId)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
-                console.log(err);
+                console.log(err)
             }
         },
         async uploadAttachment({ state, dispatch, commit }, { taskId, groupId, payload, activity }) {
@@ -283,10 +283,10 @@ export default {
                 console.log(err)
             }
         },
-        async addMember({ state, dispatch }, { inviteBy }) {
+        async addMember({ state, dispatch }, { user }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
-                const boardToSave = await boardService.addMember(board, inviteBy)
+                const boardToSave = await boardService.addMember(board, user)
                 console.log(boardToSave)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {

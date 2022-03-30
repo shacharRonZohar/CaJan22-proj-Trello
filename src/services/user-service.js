@@ -2,12 +2,13 @@ import { storageService } from './storage.service.js'
 import { httpService } from './http-service.js'
 
 const USER_KEY = 'userLocDB'
-const endpoint = 'user/member'
+const endpoint = 'user'
 
 export const userService = {
     save,
     getLoggedInUser,
-    getByUsername
+    getByUsername,
+    getUsersBy
 }
 
 function save(user) {
@@ -19,5 +20,9 @@ function getLoggedInUser() {
 }
 
 async function getByUsername(username) {
-    return await httpService.get(`${endpoint}/${username}`)
+    return await httpService.get(`${endpoint}/member/${username}`)
+}
+
+async function getUsersBy(getByTxt) {
+    return await httpService.get(`${endpoint}/by/${getByTxt}`)
 }

@@ -66,4 +66,50 @@
             box-shadow: inset 0 0 0 2px #0079bf;
         }
     }
+    .user-list {
+        margin: 4px;
+        max-height: 188px;
+        overflow-y: auto;
+        padding: 4px;
+        width: calc(100% - 8px);
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+        position: absolute;
+        color: black;
+        top: 92px;
+        left: 0;
+        &::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+            padding-right: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #091e421e;
+            padding-right: 5px;
+        }
+
+        &::-webkit-scrollbar-track {
+            border-radius: 10px;
+            padding-right: 5px;
+            background-color: hsla(0, 0%, 100%, 0.35);
+        }
+        .user-preview {
+            display: flex;
+            padding: 4px 8px;
+            align-items: center;
+            gap: 10px;
+
+            .icon {
+                height: 32px;
+                width: 32px;
+                line-height: 32px;
+                background-size: contain;
+                border-radius: 50%;
+            }
+        }
+        // background-color: white;
+    }
 }

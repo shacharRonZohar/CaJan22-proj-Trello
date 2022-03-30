@@ -190,19 +190,11 @@ function removeCover(board, taskId, groupId, activity) {
     delete task.cover
     return Promise.resolve(board)
 }
-
-async function addMember(board, inviteBy) {
-    try {
-        console.log(inviteBy)
-        const user = await userService.getByUsername(inviteBy.txt)
-        console.log(user)
-        if (board.members.some(currUser => currUser.username === user.username)) return Promise.reject('User is already on board')
-        board.members.push(user)
-        return Promise.resolve(board)
-    } catch (err) {
-        console.log(err)
-        // throw err
-    }
+function addMember(board, user) {
+    if (!board?.members?.length) board.members = []
+    if (board.members.some(currUser => currUser.username === user.username)) return Promise.reject('User is already on board')
+    board.members.push(user)
+    return Promise.resolve(board)
 }
 
 function getEmptyBoard() {
@@ -253,10 +245,11 @@ function _getDueDates(payload) {
     const endDate = moment(payload[1]).unix() * 1000
     console.log(startDate)
     console.log(endDate)
-    if (startDate === endDate) return { endDate }
+    if (startDate === endDate) return { endDate, isDone: false }
     return {
         startDate,
-        endDate
+        endDate,
+        isDone: false
     }
 }
 
