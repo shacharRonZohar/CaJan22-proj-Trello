@@ -11,7 +11,7 @@
         </div>
         <div class="buttons">
             <button class="save-btn btn" @click="onSave">Save</button>
-            <br />
+            <button class="save-btn btn" @click="onSave">Remove</button>
             <!-- <button>Remove</button> -->
         </div>
     </div>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-    // emits: ['action'],
+    emits: ['action'],
     data() {
         return {
             date: {
@@ -35,9 +35,6 @@ export default {
             // console.log(this.date);
             this.$emit('action', {cbName: 'setTaskDueDate', payload: this.date})
         },
-        onDates() {
-            // this.$emit('onAction', 'lableTask')
-        }
     },
     computed: {
         startDate() {

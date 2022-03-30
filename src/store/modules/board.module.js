@@ -48,7 +48,7 @@ export default {
                 // The timeout is for testing
                 // setTimeout(async () => {
                 console.log(rootState.userModule.loggedInUser)
-                const boards = await boardService.query(rootState.userModule.loggedInUser?._id || '')
+                const boards = await boardService.query({ user: rootState.userModule.loggedInUser })
                 commit({ type: 'setBoards', boards })
                 commit({ type: 'setIsReady', isReady: true })
                 // }, 3000)
