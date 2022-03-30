@@ -80,9 +80,11 @@ export default {
         async signupWithGoogle() {
             try {
                 const user = await this.$gAuth.signIn()
+                console.log(user)
                 const cred = {
                     fullname: user.Du.tf,
-                    username: user.Du.tv
+                    username: user.Du.tv,
+                    imgUrl: user.Du.eN
                 }
                 if (user) await authService.signupWithGoogle(cred)
                 this.$router.push('/board')
