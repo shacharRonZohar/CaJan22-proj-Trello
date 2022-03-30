@@ -253,10 +253,11 @@ function _getDueDates(payload) {
     const endDate = moment(payload[1]).unix() * 1000
     console.log(startDate)
     console.log(endDate)
-    if (startDate === endDate) return { endDate }
+    if (startDate === endDate) return { endDate, isDone: false }
     return {
         startDate,
-        endDate
+        endDate,
+        isDone: false
     }
 }
 
