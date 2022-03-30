@@ -3,7 +3,7 @@
     padding-left: 10px;
     flex-wrap: wrap;
     button {
-        background-color: #00000014;;
+        background-color: #00000014;
         padding-right: 10px;
         padding-left: 10px;
         &:hover {
@@ -13,7 +13,7 @@
     }
     .board-nav {
         flex-wrap: wrap;
-        >* {
+        > * {
             margin-inline-end: 5px;
             font-size: 0.9rem;
             cursor: pointer;
@@ -62,7 +62,8 @@
             }
         }
         .invited-users {
-            >* {
+            > * {
+                background-size: contain;
                 border: 1px solid rgb(161, 161, 161);
                 border-radius: 50%;
                 font-weight: bolder;
@@ -75,7 +76,7 @@
                 position: relative;
                 background-color: #e3e6dd;
                 &:hover {
-                    background-color: lighten( #e3e6dd, 7% );
+                    background-color: lighten(#e3e6dd, 7%);
                 }
             }
         }
@@ -96,10 +97,10 @@
             }
         }
     }
-    
+
     .board-action {
         // flex-wrap: wrap;
-        >* {
+        > * {
             margin-inline-start: 5px;
             cursor: pointer;
             font-size: 0.9rem;
