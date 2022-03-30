@@ -71,7 +71,7 @@ export default {
             if (this.boardToAdd.title.trim() === '') return
             const user = this.$store.getters.loggedInUser
             this.boardToAdd.createdBy = user
-            this.boardToAdd.members = [user._id]
+            this.boardToAdd.members = [user]
             console.log(this.boardToAdd)
             this.$store.dispatch({ type: 'saveBoard', boardToSave: this.boardToAdd })
             this.$emit('addedBoard')
