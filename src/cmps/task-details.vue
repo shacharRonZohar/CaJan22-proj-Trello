@@ -50,9 +50,9 @@
             <div class='member add icon'></div>
           </div>
           </div>-->
-          <section class="labels-container task-layout">
+          <section v-if="task.labelIds?.length" class="labels-container task-layout">
             <small>Labels</small>
-            <ul v-if="task.labelIds?.length" class="labels-list">
+            <ul class="labels-list">
               <li
                 class="label"
                 v-for="label in task.labelIds"
@@ -63,6 +63,18 @@
               </li>
             </ul>
           </section>
+
+          <div v-if="task.dueDate?.endDate" class="due-date-container">
+              <small>Due date</small>
+              <div class="date-display flex align-center">
+                <input @click="onToggleTaskStatus" type="checkbox" name="" id="">
+                <div class="due-date">
+                  <span class="date">{{timeString}}</span>
+                  <span class="mini-status">{{taskStatus}}</span>
+                </div>
+              </div>
+          </div>
+
           <div class="description-container">
             <div class="description-header">
               <div class="icon"></div>
@@ -152,6 +164,7 @@
               @removeChecklist="removeChecklist"
               @editChecklist="editChecklist"
               @editChecklistItem="editChecklistItem"
+              @removeChecklistItem="removeChecklistItem"
             />
             <!-- <div class="checklist-header">
                   <div class="checklist-icon" />
@@ -243,6 +256,7 @@ export default {
       ],
       currOpenAction: "",
       isAddItemsOpen: false,
+      taskStatus: ''
     };
   },
   watch: {
@@ -397,6 +411,17 @@ export default {
         cbName: "editChecklistItem",
         payload: {itemToSave, checklistId},
       });
+    },
+    removeChecklistItem(checklistId, itemId){
+      this.onAction({
+        cbName: "removeChecklistItem",
+        payload: {checklistId, itemId},
+      });
+    },
+    onToggleTaskStatus(ev) {
+      console.log(ev.value);
+      if (task.dueDate.endDate < Date.now()) this.taskStatus = 'overdue'
+      else this.taskStatus = 'progress'
     }
   },
   computed: {
@@ -414,6 +439,20 @@ export default {
     open() {
       return { open: this.isActionPopupOpen };
     },
+    timeString() {
+      var timeStr = moment(this.task.dueDate.endDate).toLocaleString()
+      timeStr = timeStr.substring(0, timeStr.length - 9);
+      return timeStr;
+    },
+    taskStatus() {
+      if (this.task.dueDate.endDate < Date.now()) return 'overdue'
+      return 'progress'
+    },
+    test() {
+      return `end date: ${this.task.dueDate.endDate} , now: ${Date.now()}`
+         
+     
+    }
   },
   unmounted() {},
 };
