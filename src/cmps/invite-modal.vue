@@ -14,8 +14,8 @@
                 />
                 <button class="send-invite">Send invitation</button>
             </form>
-            <ul class="user-list clean-list">
-                <li v-for="user in users" class="user-preview">
+            <ul v-if="users?.length" class="user-list clean-list">
+                <li @click="onAddMember(user)" v-for="user in users" class="user-preview">
                     <div class="icon" :style="{ backgroundImage: `url(${user?.imgUrl})` }"></div>
                     {{ user.fullname }}
                 </li>
@@ -38,8 +38,9 @@ export default {
         }
     },
     methods: {
-        onAddMember() {
-            this.$store.dispatch({ type: 'addMember', inviteBy: this.inviteBy })
+        onAddMember(user) {
+            console.log(user)
+            this.$store.dispatch({ type: 'addMember', user })
         },
         onClosePopup() {
             this.$emit('closePopup')
