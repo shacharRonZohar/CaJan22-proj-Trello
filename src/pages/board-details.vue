@@ -2,7 +2,7 @@
   <section
     v-if="board"
     class="board-details"
-    :style="{ backgroundImage: `url('${img}')`, backgroundColor: `${color}` }"
+    :style="{ backgroundImage: `url(${img})`, backgroundColor: `${color}` }"
   >
     <board-header @openMenu="toggleMenu" :board="board" />
     <main class="main-board" :class="shownLabels">
@@ -52,7 +52,7 @@
 import boardGroup from "../cmps/board-group.vue"
 import boardHeader from "../cmps/board-header.vue"
 import rightNav from "../cmps/right-side-nav.vue"
-import { socketService } from '../services/socket.service.js'
+import { socketService } from "../services/socket.service.js"
 import { Container, Draggable } from "vue3-smooth-dnd"
 
 export default {
@@ -128,11 +128,11 @@ export default {
       this.currOpenTaskGroupId = groupId
     },
     async removeGroup(groupId) {
-        await this.$store.dispatch({
-          type: "removeGroup",
-          groupId,
-          activity: "Remove group",
-        })
+      await this.$store.dispatch({
+        type: "removeGroup",
+        groupId,
+        activity: "Remove group",
+      })
     },
     toggleMenu() {
       this.showMenuClicked = !this.showMenuClicked
@@ -154,7 +154,7 @@ export default {
     labelClicked() {
       this.isLabelClicked = !this.isLabelClicked
     },
-    async dateChecked(taskId, groupId){
+    async dateChecked(taskId, groupId) {
       await this.$store.dispatch({
         type: "toggleTaskDone",
         taskId,
@@ -171,9 +171,7 @@ export default {
       return this.$store.getters.board
     },
     img() {
-      return this.board.style.imgUrl
-        ? new URL(`${this.board.style.imgUrl}`, import.meta.url).href
-        : ""
+      return this.board.style?.imgUrl || ''
     },
     color() {
       return this.board.style.color

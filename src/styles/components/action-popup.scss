@@ -84,6 +84,12 @@
             margin-bottom: 4px;
         }
     }
+    .attach{
+        li{
+            cursor: pointer;
+        }
+
+    }
     .attachments-container {
         margin-top: 19px;
     }
@@ -95,14 +101,15 @@
         word-spacing: 1px;
     }
     .computer {
-        font-size: 1.5em;
-        display: block;
-        width: 100%;
-        text-align: start;
-        color: #5e6c84;
-        font-size: 12px;
-        margin-top: 10px;
-        font-weight: 700;
+        cursor: pointer;
+        margin: 0 -12px;
+        padding: 6px 12px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        span{
+            cursor: pointer;
+        }
         input {
             position: absolute;
             left: 0;
@@ -110,6 +117,7 @@
             pointer-events: auto;
             width: 100%;
             opacity: 0;
+            cursor: pointer;
         }
         &:hover {
             background-color: #f5f6f8;

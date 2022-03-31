@@ -2,19 +2,19 @@
 <template class="main-layout" >
   <header-container v-if="isReady" />
   <router-view v-if="isReady" />
-  <div v-else class="loading-container">
-    <span class="loading-gif"></span>
-  </div>
+  <loading-gif />
 </template>
 
 <script>
 import headerContainer from './cmps/header-container.vue'
+import loadingGif from './pages/loading-gif.vue'
+
 export default {
   components: {
-    headerContainer
+    headerContainer,
+    loadingGif
   },
   async created() {
-    // console.log()
     await this.$store.dispatch('loadUser')
   },
   computed: {

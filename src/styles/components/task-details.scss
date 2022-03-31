@@ -9,7 +9,7 @@
     overflow-x: hidden;
     background-color: #000000a3;
     .clickable-background {
-        height: 123%;
+        height: 100%;
         position: absolute;
         top: 0;
         z-index: 2;
@@ -33,7 +33,7 @@
         top: 0;
         left: 50%;
         width: 96.7%;
-        min-height: 92vh;
+        min-height: 86vh;
         transform: translateX(-51.3%);
         border-radius: 2px;
         z-index: 2;
