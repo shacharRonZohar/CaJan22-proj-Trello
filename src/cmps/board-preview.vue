@@ -30,9 +30,7 @@ export default {
   computed: {
     img() {
       // console.log(this.board.style.imgUrl)
-      return this.board.style.imgUrl
-        ? new URL(`${this.board.style.imgUrl}`, import.meta.url).href
-        : ""
+      return this.board.style?.imgUrl || ''
     },
     color() {
       return this.board.style.color

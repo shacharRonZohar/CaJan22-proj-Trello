@@ -38,8 +38,7 @@ export default {
             this.$emit('closeModal')
         },
         img(board) {
-            const url = new URL(`${board.style.imgUrl}`, import.meta.url).href
-            return `url(${url})`
+            return `url(${board.style?.imgUrl || ''})`
         },
     },
     computed: {

@@ -11,7 +11,7 @@
           class="board-icon-img"
           :style="{ backgroundImage: `url('${img}')`, backgroundColor: `${color}` }"
         ></div>
-        <span> Change background </span>
+        <span>Change background</span>
       </li>
     </ul>
     <background-menu
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import backgroundMenu from "./background-menu.vue";
+import backgroundMenu from "./background-menu.vue"
 export default {
   components: {
     backgroundMenu,
@@ -33,44 +33,42 @@ export default {
   data() {
     return {
       showMenuClicked: false,
-    };
+    }
   },
-  async created() {},
+  async created() { },
   methods: {
     toggleMenu() {
-      this.showMenuClicked = !this.showMenuClicked;
+      this.showMenuClicked = !this.showMenuClicked
     },
     closeMainMenu() {
-      this.$emit("closeMenu");
+      this.$emit("closeMenu")
     },
     closeBgMenu() {
-      this.showMenuClicked = !this.showMenuClicked;
-      this.$emit("closeMenu");
+      this.showMenuClicked = !this.showMenuClicked
+      this.$emit("closeMenu")
     },
     setBackGroundImg(imgUrl) {
-      this.$emit("setBackGroundImg", imgUrl);
+      this.$emit("setBackGroundImg", imgUrl)
     },
     setBackGroundColor(color) {
-      this.$emit("setBackGroundColor", color);
+      this.$emit("setBackGroundColor", color)
     },
   },
   computed: {
     isOpen() {
-      return this.showMenuClicked ? "open" : "";
+      return this.showMenuClicked ? "open" : ""
     },
     board() {
-      return this.$store.getters.board;
+      return this.$store.getters.board
     },
     img() {
-      return this.board.style.imgUrl
-        ? new URL(`${this.board.style.imgUrl}`, import.meta.url).href
-        : "";
+      return this.board.style?.imgUrl || ''
     },
     color() {
       return this.board.style.color
         ? this.board.style.color
-        : "";
+        : ""
     },
   },
-};
+}
 </script>

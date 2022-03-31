@@ -3,7 +3,7 @@
         <ul class="clean-list body">
             <li>
                 <label @click.stop for="file" class="computer">
-                    Computer
+                    <span>Computer</span>
                     <input id="file" type="file" @change.stop="onUploadImg" @click.stop />
                 </label>
             </li>
