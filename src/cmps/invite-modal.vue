@@ -15,9 +15,10 @@
                 <button class="send-invite">Send invitation</button>
             </form>
             <ul v-if="users?.length" class="user-list clean-list">
-                <li @click="onAddMember(user)" v-for="user in users" class="user-preview">
+                <li @click="onSetMember(user)" v-for="user in users" class="user-preview">
                     <div class="icon" :style="{ backgroundImage: `url(${user?.imgUrl})` }"></div>
                     {{ user.fullname }}
+                    <div class="check-icon" v-if="isChosen(user)"></div>
                 </li>
             </ul>
         </div>
@@ -34,22 +35,29 @@ export default {
     data() {
         return {
             getBy: '',
-            users: []
+            users: [],
+            chosenUser: {}
         }
     },
     methods: {
-        onAddMember(user) {
-            console.log(user)
-            this.$store.dispatch({ type: 'addMember', user })
+        onSetMember(user) {
+            this.chosenUser = user
+        },
+        onAddMember() {
+            this.$store.dispatch({ type: 'addMember', user: this.chosenUser })
         },
         onClosePopup() {
             this.$emit('closePopup')
         },
         async getUsers() {
             this.users = await userService.getUsersBy(this.getBy)
+        },
+        isChosen(user) {
+            return this.chosenUser._id === user._id
         }
     },
-    computed: {},
+    computed: {
+    },
     unmounted() { },
 }
 </script>
