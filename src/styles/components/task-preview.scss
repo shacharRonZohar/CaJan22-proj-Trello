@@ -61,10 +61,11 @@
         flex-wrap: wrap;
         justify-self: flex-end;
     }
-
+    
     .first-actions{
         display: flex;
         align-self: flex-start;
+        // align-items: flex-end;
     }
 
     .date-preview {
