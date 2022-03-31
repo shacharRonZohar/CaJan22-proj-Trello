@@ -1,6 +1,7 @@
 <template >
   <!-- TODO: Need to split code into more components -->
   <div v-if="task" @click.stop="onCloseDetails" class="task-details-container">
+    <div v-if="task.members">{{ task.members }}</div>
     <action-popup
       v-if="currOpenAction"
       @action="onAction"
@@ -51,7 +52,7 @@
             <small>Due date</small>
             <div :class="checkboxDone" class="date-display flex align-center">
               <!-- <input @click="toggleTaskDone" type="checkbox" name id /> -->
-              <div @click="toggleTaskDone(task.id)"  class="dueDate-checkbox">
+              <div @click="toggleTaskDone(task.id)" class="dueDate-checkbox">
                 <span class="checked-icon"></span>
               </div>
               <div class="due-date">
@@ -382,7 +383,7 @@ export default {
     },
     toggleTaskDone(taskId) {
       // this.isTaskDone = !this.isTaskDone
-      console.log(taskId);
+      console.log(taskId)
       this.onAction({
         cbName: "toggleTaskDone",
         payload: { taskId },
@@ -423,7 +424,7 @@ export default {
       }
     },
     checkboxDone() {
-      return {done: this.task.dueDate.isDone}
+      return { done: this.task.dueDate.isDone }
     }
   },
   unmounted() { },
