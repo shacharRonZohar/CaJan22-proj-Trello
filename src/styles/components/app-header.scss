@@ -180,6 +180,7 @@
                 background-size: contain;
                 cursor: pointer;
                 .profile-modal {
+                    cursor: default;
                     > * {
                         border-bottom: 1px solid rgba(9, 30, 66, 0.129411764705882);
                     }
@@ -250,6 +251,7 @@
                     padding-bottom: 18px;
                     padding-top: 18px;
                     > * {
+                        cursor: not-allowed;
                         border: none;
                         background: #fff;
                         border-radius: 0;
@@ -273,10 +275,15 @@
                     display: block;
                     height: 100%;
                     padding: 6px 12px;
+                    margin-block: 6px;
                     text-align: left;
                     text-decoration: none;
                     line-height: 20px;
                     width: 100%;
+                    &:hover{
+                        background: rgba(9, 30, 66, 0.04);
+                        cursor: pointer;
+                    }
                 }
             }
         }
