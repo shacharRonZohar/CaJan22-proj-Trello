@@ -402,7 +402,10 @@
             padding: 4px 8px;
             align-items: center;
             gap: 10px;
-
+            cursor: pointer;
+            &.hover,&:hover{
+                background-color: #091e420a;
+            }
             .icon {
                 height: 32px;
                 width: 32px;
