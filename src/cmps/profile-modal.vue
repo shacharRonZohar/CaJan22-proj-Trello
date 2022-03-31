@@ -1,6 +1,9 @@
 <template>
-    <section @click.stop class="profile-modal" @click="onLogout">
-        <div class="header">Account</div>
+    <section @click.stop class="profile-modal">
+        <div class="header">
+            <span>Account</span>
+            <span @click="onClose" class="close-profile-modal"></span>
+        </div>
         <div class="user">
             <div class="profile-icon" :style="{ backgroundImage: imgUrl }"></div>
             <div class="details">
@@ -18,21 +21,20 @@
 </template>
 
 <script>
-// import appHeader from './components/app-header.vue'
 import { authService } from '../services/auth.service.js'
+
 export default {
     props: {
         user: Object
     },
-    components: {},
-    created() { },
-    data() {
-        return {}
-    },
+    emits: ['closeModal'],
     methods: {
         async onLogout() {
             await authService.logout()
             this.$router.push('/')
+        },
+        onClose() {
+            this.$emit('closeModal')
         }
     },
     computed: {
@@ -40,6 +42,5 @@ export default {
             return `url(${this.user?.imgUrl})` || ''
         }
     },
-    unmounted() { },
 }
 </script>

@@ -59,7 +59,7 @@
                     :style="{ backgroundImage: `url(${loggedInUser?.imgUrl})` }"
                 >
                     <!-- <div :style="{ backgroundImage: `url(${loggedInUser.imgUrl})` }" class="letter"></div> -->
-                    <profile-modal :user="loggedInUser" v-if="profileModalOpen" />
+                    <profile-modal @closeModal="onToggleProfileModal" :user="loggedInUser" v-if="profileModalOpen" />
                 </div>
             </div>
         </div>

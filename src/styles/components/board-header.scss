@@ -1,5 +1,7 @@
 .board-header {
-    height: 45px;
+    // height: 45px;
+    padding-top: 6px;
+    padding-bottom: 7px;
     padding-left: 10px;
     flex-wrap: wrap;
     button {
@@ -8,7 +10,6 @@
         padding-left: 10px;
         &:hover {
             background-color: #00000029;
-            // cursor: not-allowed;
         }
     }
     .board-nav {
@@ -61,6 +62,10 @@
                 border-radius: 3px;
             }
         }
+        .star-btn {
+            @include trello-icon($content: "\e966");
+            margin-left: 5px;
+        }
         .invited-users {
             > * {
                 background-size: contain;
@@ -80,10 +85,6 @@
                 }
             }
         }
-        .star-btn {
-            @include trello-icon($content: "\e966");
-            margin-left: 5px;
-        }
         .invite-btn {
             background-color: $clr8;
             color: $clr2;
@@ -100,7 +101,7 @@
     }
 
     .board-action {
-        // flex-wrap: wrap;
+        flex-wrap: wrap;
         > * {
             margin-inline-start: 5px;
             cursor: pointer;
