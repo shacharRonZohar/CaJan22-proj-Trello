@@ -133,6 +133,15 @@ export default {
                 console.log(err)
             }
         },
+        async toggleTaskDone({state, dispatch, commit}, {taskId, groupId, payload}) {
+            try {
+                const board = JSON.parse(JSON.stringify(state.board))
+                const boardToSave = await boardService.toggleTaskDone(board, taskId, groupId, payload)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err);
+            }
+        },
         async uploadAttachment({ state, dispatch, commit }, { taskId, groupId, payload, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))

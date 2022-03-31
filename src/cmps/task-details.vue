@@ -410,8 +410,8 @@ export default {
       return timeStr
     },
     taskStatus() {
-      if (this.task.dueDate.endDate < Date.now()) return 'overdue'
-      else if (this.isTaskDone) return 'complete'
+      if (this.task.dueDate.isDone) return 'complete'
+      else if (this.task.dueDate.endDate < Date.now()) return 'overdue'
       else if ((Math.abs(this.task.dueDate.endDate - Date.now()) / (60 * 60 * 1000)) < 24) return 'due soon'
       return ''
     },
@@ -419,7 +419,7 @@ export default {
       return {
         overDue: this.task.dueDate.endDate < Date.now(),
         'due-soon': (Math.abs(this.task.dueDate.endDate - Date.now()) / (60 * 60 * 1000)) < 24,
-        'task-done': this.isTaskDone
+        'task-done': this.task.dueDate.isDone
       }
     }
   },
