@@ -57,6 +57,14 @@
 
     .actions-container {
         align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        justify-self: flex-end;
+    }
+
+    .first-actions{
+        display: flex;
+        align-self: flex-start;
     }
 
     .date-preview {
@@ -65,7 +73,6 @@
         padding-left: 4px;
         margin-bottom: 5px;
         margin-right: 3px;
-        margin: 0 4px 4px 0;
 
         &:hover {
             background-color: #ebecf0;
@@ -93,7 +100,7 @@
 
         .date {
             font-size: 12px;
-            padding: 0 2px 0 2px;
+            padding: 0 4px 0 2px;
             vertical-align: top;
             white-space: nowrap;
         }
@@ -150,8 +157,7 @@
             .date-icon {
                 color: $clr2;
             }
-           
-            
+                       
             &:hover {
                 background-color: #519839;
 
@@ -236,6 +242,19 @@
             .checklist-icon {
                 color: $clr2;
             }
+        }
+    }
+
+    .members-preview {
+        margin-left: auto;
+
+        > * {
+            background-size: contain;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            margin: 0 0 4px 4px;
+            // position: relative;
         }
     }
 }

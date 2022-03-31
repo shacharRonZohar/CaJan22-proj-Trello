@@ -1,7 +1,7 @@
 .right-menu {
     overflow-x: hidden;
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 52px;
     right: 0;
     background-color: $clr18;
     width: 339px;
