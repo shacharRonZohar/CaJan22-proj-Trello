@@ -1,18 +1,28 @@
 .members-container {
+    font-size: rem(12px);
+    font-weight: 600;
+    color: #5e6c84;
     .members {
-        font-size: rem(12px);
+        // font-size: 12px;
         .member {
             height: 32px;
             width: 32px;
             border-radius: 50%;
-            background-color: red;
+            // background-color: red;
+            background-size: cover;
             color: white;
-            margin-right: -3px;
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
             &.add {
-                @include trello-icon($content: "\e901", $type: lg);
+                background-color: #091e420a;
+                color: #42526e;
+                font-weight: 400;
+                @include trello-icon($content: "\e901", $type: sm);
+                &:hover {
+                    background-color: #091e4214;
+                }
             }
         }
     }
