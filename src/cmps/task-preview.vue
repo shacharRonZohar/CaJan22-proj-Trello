@@ -32,7 +32,7 @@
 
       <div class="actions-container flex">
 
-        <div v-if="task.dueDate" class="date-preview" :class="taskStatus">
+        <div v-if="task.dueDate" class="date-preview" :class="taskStatus" @click.stop="dateChecked">
           <a class="date-icon"></a>
           <a class="checked-icon"></a>
           <a class="complited-icon"></a>
@@ -103,6 +103,10 @@ export default {
     labelClicked() {
       this.$emit("labelClicked");
     },
+    dateChecked(){
+      this.task.dueDate.isDone = !this.task.dueDate.isDone
+      this.$emit("dateChecked", this.task.id);
+    }
   },
   computed: {
     attachNum() {
@@ -153,7 +157,7 @@ export default {
     },
     taskStatus() {
       if (this.task.dueDate.endDate < Date.now()) return "overdue";
-      // else if (this.isTaskDone) return 'complete'
+      else if (this.task.dueDate.isDone) return 'complited'
       else if (
         Math.abs(this.task.dueDate.endDate - Date.now()) / (60 * 60 * 1000) <
         24

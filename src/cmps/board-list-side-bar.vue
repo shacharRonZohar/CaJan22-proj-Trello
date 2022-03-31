@@ -14,10 +14,10 @@
         </span>
       </li>
       <li>
-        <span class="list-container">
+        <router-link to="/" class="list-container">
           <a class="Home-menu-icon" />
           <span>Home</span>
-        </span>
+        </router-link>
       </li>
     </ul>
   </section>

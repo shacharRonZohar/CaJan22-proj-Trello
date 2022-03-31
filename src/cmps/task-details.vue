@@ -50,7 +50,10 @@
           <div v-if="task.dueDate?.endDate" class="due-date-container">
             <small>Due date</small>
             <div class="date-display flex align-center">
-              <input @click="toggleTaskDone" type="checkbox" name id />
+              <!-- <input @click="toggleTaskDone" type="checkbox" name id /> -->
+              <div @click="toggleTaskDone(task.id)" class="dueDate-checkbox">
+                <span class="checked-icon">d</span>
+              </div>
               <div class="due-date">
                 <span class="date">{{ timeString }}</span>
                 <span :class="statusColor" class="mini-status">{{ taskStatus }}</span>
@@ -216,7 +219,6 @@ export default {
       ],
       currOpenAction: "",
       isAddItemsOpen: false,
-      isTaskDone: false
     }
   },
   watch: {
@@ -378,13 +380,13 @@ export default {
         payload: { checklistId, itemId },
       })
     },
-    // onToggleTaskStatus(ev) {
-    //   console.log(ev.value)
-    //   if (task.dueDate.endDate < Date.now()) this.taskStatus = 'overdue'
-    //   else this.taskStatus = 'progress'
-    // },
-    toggleTaskDone() {
-      this.isTaskDone = !this.isTaskDone
+    toggleTaskDone(taskId) {
+      // this.isTaskDone = !this.isTaskDone
+      console.log(taskId);
+      this.onAction({
+        cbName: "toggleTaskDone",
+        payload: { taskId },
+      })
     }
   },
   computed: {
@@ -408,16 +410,16 @@ export default {
       return timeStr
     },
     taskStatus() {
-      if (this.task.dueDate.endDate < Date.now()) return 'overdue'
-      else if (this.isTaskDone) return 'complete'
-      else if ((Math.abs(this.task.dueDate.endDate - Date.now()) / (60 * 60 * 1000)) < 24 ) return 'due soon'
+      if (this.task.dueDate.isDone) return 'complete'
+      else if (this.task.dueDate.endDate < Date.now()) return 'overdue'
+      else if ((Math.abs(this.task.dueDate.endDate - Date.now()) / (60 * 60 * 1000)) < 24) return 'due soon'
       return ''
     },
     statusColor() {
       return {
         overDue: this.task.dueDate.endDate < Date.now(),
         'due-soon': (Math.abs(this.task.dueDate.endDate - Date.now()) / (60 * 60 * 1000)) < 24,
-        'task-done': this.isTaskDone
+        'task-done': this.task.dueDate.isDone
       }
     }
   },
