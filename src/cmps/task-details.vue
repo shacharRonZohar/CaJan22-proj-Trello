@@ -1,7 +1,7 @@
 <template >
   <!-- TODO: Need to split code into more components -->
   <div v-if="task" @click.stop="onCloseDetails" class="task-details-container">
-    <div v-if="task.members">{{ task.members }}</div>
+    <!-- <div v-if="task.members">{{ task.members }}</div> -->
     <action-popup
       v-if="currOpenAction"
       @action="onAction"

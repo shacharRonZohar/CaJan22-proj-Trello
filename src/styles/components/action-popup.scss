@@ -396,6 +396,28 @@
             text-align: left;
         }
     }
+    .members-action{
+        .user-preview {
+            display: flex;
+            padding: 4px 8px;
+            align-items: center;
+            gap: 10px;
+
+            .icon {
+                height: 32px;
+                width: 32px;
+                line-height: 32px;
+                background-size: contain;
+                border-radius: 50%;
+            }
+        }
+        .check-icon {
+            @include trello-icon($content: "\e916");
+            color: black;
+            position: absolute;
+            right: 12px;
+        }
+    }
     // .clr-opt {
     //     width: 20px;
     //     height: 20px;
