@@ -31,8 +31,14 @@
       <h2 class="task-preview-title">{{ task.title }}</h2>
 
       <div class="actions-container flex">
+        <div class="first-actions">
 
-        <div v-if="task.dueDate" class="date-preview" :class="taskStatus" @click.stop="dateChecked">
+        <div
+          v-if="task.dueDate"
+          class="date-preview"
+          :class="taskStatus"
+          @click.stop="dateChecked"
+        >
           <a class="date-icon"></a>
           <a class="checked-icon"></a>
           <a class="complited-icon"></a>
@@ -60,6 +66,17 @@
             {{ checkedSum }}
           </span>
         </div>
+        </div>
+
+        <div class="members-preview flex" v-if="task.members?.length">
+          <span
+            v-for="member in task.members"
+            :key="member._id"
+            :style="{ backgroundImage: `url(${member.imgUrl})` }"
+            :title="member.fullname"
+          ></span>
+        </div>
+
       </div>
     </main>
   </section>
@@ -103,10 +120,9 @@ export default {
     labelClicked() {
       this.$emit("labelClicked");
     },
-    dateChecked(){
-      this.task.dueDate.isDone = !this.task.dueDate.isDone
+    dateChecked() {
       this.$emit("dateChecked", this.task.id);
-    }
+    },
   },
   computed: {
     attachNum() {
@@ -156,12 +172,13 @@ export default {
       return this.task.dueDate.startDate ? `${startDate}-${endDate}` : endDate;
     },
     taskStatus() {
-      if (this.task.dueDate.endDate < Date.now()) return "overdue";
-      else if (this.task.dueDate.isDone) return 'complited'
+      if (this.task.dueDate.isDone) return "complited";
+      else if (this.task.dueDate.endDate < Date.now()) return "overdue";
       else if (
         Math.abs(this.task.dueDate.endDate - Date.now()) / (60 * 60 * 1000) <
         24
-      )return "due-soon";
+      )
+        return "due-soon";
       return "";
     },
   },

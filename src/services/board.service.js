@@ -210,7 +210,7 @@ function addMember(board, user) {
 function addMemberToTask(board, taskId, groupId, payload) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
-    if (task.members.includes(payload)) return Promise.reject('Member is already on task')
+    if (task.members?.includes(payload)) return Promise.reject('Member is already on task')
     task?.members?.length ? task.members.push(payload) : task.members = [payload]
     console.log(board)
     return Promise.resolve(board)
