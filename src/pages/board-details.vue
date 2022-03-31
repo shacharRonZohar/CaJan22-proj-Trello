@@ -23,6 +23,7 @@
             @openTaskDetails="openTaskDetails"
             @removeGroup="removeGroup"
             @labelClicked="labelClicked"
+            @dateChecked="dateChecked"
           />
         </Draggable>
         <button v-if="!addBtnClicked" @click="addBtnClicked = !addBtnClicked" class="add-group-btn">
@@ -153,6 +154,14 @@ export default {
     labelClicked() {
       this.isLabelClicked = !this.isLabelClicked
     },
+    async dateChecked(taskId, groupId){
+      await this.$store.dispatch({
+        type: "toggleTaskDone",
+        taskId,
+        groupId,
+        payload: taskId,
+      })
+    }
   },
   computed: {
     boardId() {

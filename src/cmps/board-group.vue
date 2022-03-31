@@ -27,9 +27,9 @@
         class="clean-list group-list"
       >
         <Draggable v-for="task in group.tasks" :key="task.id">
-          <task-preview @openTaskDetails="openTaskDetails" @labelClicked="labelClicked" :task="task" />
+          <task-preview @openTaskDetails="openTaskDetails" @labelClicked="labelClicked" :task="task" @dateChecked="dateChecked"/>
         </Draggable>
-      </Container>
+      </Container>      
     </div>
     <button v-if="!addBtnClicked" @click="openAddForm" class="add-card-btn">
       <a class="add-card-icon" />
@@ -115,6 +115,9 @@ export default {
     },
     toggleDeleteMenue(){
       this.isMenueOpen = !this.isMenueOpen
+    },
+     dateChecked(taskId){
+      this.$emit("dateChecked", taskId, this.group.id);
     }
   },
   computed: {},
