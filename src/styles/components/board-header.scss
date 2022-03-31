@@ -65,6 +65,10 @@
         .star-btn {
             @include trello-icon($content: "\e966");
             margin-left: 5px;
+            &.starred {
+                @include trello-icon($content: "\e967");
+                color: #f2d600;
+            }
         }
         .invited-users {
             > * {

@@ -13,18 +13,8 @@
     <!-- v-if="task.labelIds?.length" -->
     <main>
       <ul class="flex clean-list" v-if="task.labelIds?.length">
-        <li
-          :title="title"
-          @click.stop="labelClicked"
-          v-for="label in labels"
-          :key="label"
-        >
-          <div
-            class="task-label"
-            :style="{ backgroundColor: `${label.color}` }"
-          >
-            {{ label.title }}
-          </div>
+        <li :title="label.title" @click.stop="labelClicked" v-for="label in labels" :key="label">
+          <div class="task-label" :style="{ backgroundColor: `${label.color}` }">{{ label.title }}</div>
         </li>
       </ul>
 
@@ -32,40 +22,31 @@
 
       <div class="actions-container flex">
         <div class="first-actions">
+          <div
+            v-if="task.dueDate"
+            class="date-preview"
+            :class="taskStatus"
+            @click.stop="dateChecked"
+          >
+            <a class="date-icon"></a>
+            <a class="checked-icon"></a>
+            <a class="complited-icon"></a>
+            <span class="date">{{ date }}</span>
+          </div>
 
-        <div
-          v-if="task.dueDate"
-          class="date-preview"
-          :class="taskStatus"
-          @click.stop="dateChecked"
-        >
-          <a class="date-icon"></a>
-          <a class="checked-icon"></a>
-          <a class="complited-icon"></a>
-          <span class="date">{{ date }}</span>
-        </div>
+          <div v-if="task.description" class="description-preview">
+            <a class="description-icon" title="This card has a description" />
+          </div>
 
-        <div v-if="task.description" class="description-preview">
-          <a class="description-icon" title="This card has a description" />
-        </div>
+          <div v-if="task.attachments?.length" class="attachment-preview">
+            <a class="attachments-icon" title="attachments" />
+            <span class="attach-num">{{ attachNum }}</span>
+          </div>
 
-        <div v-if="task.attachments?.length" class="attachment-preview">
-          <a class="attachments-icon" title="attachments" />
-          <span class="attach-num">
-            {{ attachNum }}
-          </span>
-        </div>
-
-        <div
-          v-if="task.checklists && isItems"
-          class="checklist-preview"
-          :class="isDone"
-        >
-          <a class="checklist-icon" title="Checklist items" />
-          <span class="checkedSum">
-            {{ checkedSum }}
-          </span>
-        </div>
+          <div v-if="task.checklists && isItems" class="checklist-preview" :class="isDone">
+            <a class="checklist-icon" title="Checklist items" />
+            <span class="checkedSum">{{ checkedSum }}</span>
+          </div>
         </div>
 
         <div class="members-preview flex" v-if="task.members?.length">
@@ -76,7 +57,6 @@
             :title="member.fullname"
           ></span>
         </div>
-
       </div>
     </main>
   </section>
@@ -109,80 +89,80 @@ export default {
           },
         ],
       },
-    };
+    }
   },
-  created() {},
+  created() { },
   methods: {
     openTaskDetails() {
-      this.$router.push(this.$route.fullPath + "/task/" + this.task.id);
-      this.$emit("openTaskDetails");
+      this.$router.push(this.$route.fullPath + "/task/" + this.task.id)
+      this.$emit("openTaskDetails")
     },
     labelClicked() {
-      this.$emit("labelClicked");
+      this.$emit("labelClicked")
     },
     dateChecked() {
-      this.$emit("dateChecked", this.task.id);
+      this.$emit("dateChecked", this.task.id)
     },
   },
   computed: {
     attachNum() {
-      return this.task.attachments?.length;
+      return this.task.attachments?.length
     },
     img() {
-      return this.task.cover.backgroundImage;
+      return this.task.cover.backgroundImage
     },
     bgColor() {
-      return this.task.cover.backgroundColor;
+      return this.task.cover.backgroundColor
     },
     labels() {
       return this.task.labelIds.map((labelId) => {
-        return this.$store.getters.labelById(labelId);
-      });
+        return this.$store.getters.labelById(labelId)
+      })
     },
     checkedSum() {
-      return `${this.doneSum}/${this.itemsSum}`;
+      return `${this.doneSum}/${this.itemsSum}`
     },
     isDone() {
-      return this.itemsSum === this.doneSum ? "done" : "";
+      return this.itemsSum === this.doneSum ? "done" : ""
     },
     itemsSum() {
       return this.task.checklists.reduce(
         (acc, checklist) => acc + checklist.items.length,
         0
-      );
+      )
     },
     doneSum() {
       const dones = this.task.checklists.map((checklist) =>
         checklist.items.filter((item) => item.isDone)
-      );
-      return dones.reduce((acc, done) => acc + done.length, 0);
+      )
+      return dones.reduce((acc, done) => acc + done.length, 0)
     },
     isItems() {
-      return this.itemsSum === 0 ? false : true;
+      return this.itemsSum === 0 ? false : true
     },
     date() {
-      const starTime = new Date(this.task.dueDate.startDate);
-      const endTime = new Date(this.task.dueDate.endDate);
+      const starTime = new Date(this.task.dueDate.startDate)
+      const endTime = new Date(this.task.dueDate.endDate)
       const startDate = `${starTime.toLocaleString("en", {
         month: "short",
-      })} ${starTime.getDate()}`;
+      })} ${starTime.getDate()}`
       const endDate = `${endTime.toLocaleString("en", {
         month: "short",
-      })} ${endTime.getDate()}`;
-      return this.task.dueDate.startDate ? `${startDate}-${endDate}` : endDate;
+      })} ${endTime.getDate()}`
+      return this.task.dueDate.startDate ? `${startDate}-${endDate}` : endDate
     },
     taskStatus() {
-      if (this.task.dueDate.isDone) return "complited";
-      else if (this.task.dueDate.endDate < Date.now()) return "overdue";
+      if (this.task.dueDate.isDone) return "complited"
+      else if (this.task.dueDate.endDate < Date.now()) return "overdue"
       else if (
         Math.abs(this.task.dueDate.endDate - Date.now()) / (60 * 60 * 1000) <
         24
       )
-        return "due-soon";
-      return "";
+        return "due-soon"
+      return ""
     },
   },
-};
+}
 </script>
 
 <style>
