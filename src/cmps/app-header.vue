@@ -32,9 +32,11 @@
             <add-board v-if="createClicked" @addedBoard="onToggleAddBoard"></add-board>
             <header-board-list v-if="isShown" @closeModal="openList" :boards="boards"></header-board-list>
 
-            <div class="second-actions flex align-center">
+            <div class="second-actions flex">
                 <div class="search-app-header">
                     <!-- <span class="search-icon"></span> -->
+                    <img class="search-icon" src="../assets/icons/search-icon.png" alt="">
+                    <img class="search-icon-b" src="../assets/icons/search-black.png" alt="">
                     <input
                         class="search-input"
                         v-model="searchTxt"
