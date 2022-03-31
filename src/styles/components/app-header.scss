@@ -232,6 +232,18 @@
                     color: #5e6c84;
                     border-bottom: 1px solid rgba(9, 30, 66, 0.129411764705882);
                     margin-bottom: 8px;
+                    .close-profile-modal {
+                        @include trello-icon($content: "\e91c", $type: md);
+                        font-size: 1rem;
+                        color: #687790;
+                        font-weight: 600;
+                        cursor: pointer;
+                        position: absolute;
+                        right: 10px;
+                        &:hover{
+                            color: $clr4
+                        }
+                    }
                 }
                 .profile-icon {
                     height: 40px;
@@ -243,7 +255,7 @@
                 }
                 .user {
                     display: flex;
-                    padding-bottom: 20px;
+                    padding-bottom: 12px;
                 }
                 .details {
                     display: flex;
@@ -265,8 +277,7 @@
                     // color: black;
                     display: flex;
                     flex-direction: column;
-                    padding-bottom: 18px;
-                    padding-top: 18px;
+                    padding: 6px 0;
                     > * {
                         cursor: not-allowed;
                         border: none;
@@ -276,7 +287,7 @@
                         color: #172b4d;
                         display: block;
                         height: 100%;
-                        padding: 6px 12px;
+                        padding: 5px 0;
                         text-align: left;
                         text-decoration: none;
                         line-height: 20px;
@@ -291,7 +302,7 @@
                     color: #172b4d;
                     display: block;
                     height: 100%;
-                    padding: 6px 12px;
+                    padding: 6px 0;
                     margin-block: 6px;
                     text-align: left;
                     text-decoration: none;
