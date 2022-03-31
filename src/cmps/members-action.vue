@@ -1,30 +1,38 @@
 <template >
-    <div @click="toggleActionPopup"></div>
+    <div @click.stop class="members-action">
+        <input type="text" v-model="filterBy" />
+        <ul class="members-list clean-list">
+            <li
+                v-for="member in filteredMembers"
+                class="user-preview"
+                @click="onAddMember(member)"
+            >{{ member.fullname }}</li>
+        </ul>
+    </div>
 </template>
 
 <script>
-// import actionPopup from './action-popup.vue'
 export default {
-    // props: [''],
-    emits: ['onAction'],
+    emits: ['action'],
     components: {
         // actionPopup
     },
     created() { },
     data() {
         return {
-            actionPopupOpen: false
+            filterBy: ''
         }
     },
     methods: {
-        onArchive() {
-            this.$emit('onAction', 'membersAction')
+        onAddMember(member) {
+            this.$emit('action', { cbName: 'addMemberToTask', payload: member })
         },
-        toggleActionPopup() {
-            this.actionPopupOpen = !this.actionPopupOpen
+    },
+    computed: {
+        filteredMembers() {
+            return this.$store.getters.filteredMembers(this.filterBy)
         }
     },
-    computed: {},
     unmounted() { },
 }
 </script>

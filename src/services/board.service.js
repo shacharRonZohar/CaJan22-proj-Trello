@@ -26,6 +26,7 @@ export const boardService = {
     saveTaskDueDate,
     removeTaskDueDate,
     toggleTaskDone,
+    addMemberToTask
 }
 
 // const BOARDS_KEY = 'boards_db'
@@ -198,6 +199,7 @@ function removeCover(board, taskId, groupId, activity) {
     delete task.cover
     return Promise.resolve(board)
 }
+
 function addMember(board, user) {
     if (!board?.members?.length) board.members = []
     if (board.members.some(currUser => currUser.username === user.username)) return Promise.reject('User is already on board')
@@ -205,6 +207,14 @@ function addMember(board, user) {
     return Promise.resolve(board)
 }
 
+function addMemberToTask(board, taskId, groupId, payload) {
+    const group = board.groups.find(group => group.id === groupId)
+    const task = group.tasks.find(task => task.id === taskId)
+    if (task.members.includes(payload)) return Promise.reject('Member is already on task')
+    task?.members?.length ? task.members.push(payload) : task.members = [payload]
+    console.log(board)
+    return Promise.resolve(board)
+}
 function getEmptyBoard() {
     return {
         'title': '',
