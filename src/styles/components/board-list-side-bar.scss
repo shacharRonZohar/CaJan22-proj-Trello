@@ -1,24 +1,15 @@
 .board-list-side-bar {
+    display: none;
+    @media (min-width:680px){
+        display: block;
+    }
+
     width: 272px;
-    // .router-link-active {
-    //     background-color: #e4f0f6;
-    //     color: #0079bf;
-    //     padding: 6px 8px 6px 0;
-    //     border-radius: 4px;
-    //     .boards-menu-icon {
-    //         color: #0079bf;
-    //         padding-left: 5px;
-    //     }
-    // }
 
     .router-link{
         display: flex;
         padding: 6px 8px 6px 0;
         margin-bottom: 4px;
-        &>*{
-            text-decoration: none;
-            color: $clr4;
-        }
     }
     
     .list-container{
@@ -26,18 +17,13 @@
         color: $clr4;
         width: 245px;
         padding: 6px 8px 6px 0;
-        // margin-bottom: 4px;
         display: flex;
         &:hover {
             cursor: pointer;
             background-color: rgba(9, 30, 66, 0.08);
             border-radius: 3px;
         }
-
-      
-
     }
-
 
     .boards-menu-icon {
         @include trello-icon($content: "\e90b");
@@ -74,18 +60,18 @@
             border-radius: 4px;
             width: 100%;
 
-        }
+            .boards-menu-icon, .templates-menu-icon, .Home-menu-icon{
+                color: #0079bf;
+            }
         
-        // &:hover {
-        //     cursor: pointer;
-        //     background-color: rgba(9, 30, 66, 0.08);
-        //     border-radius: 3px;
-        // }
+
+        }
+
     }
 
     span {
         font-size: 14px;
-        font-weight: 800;
+        font-weight: 700;
         line-height: 20px;
     }
 }
