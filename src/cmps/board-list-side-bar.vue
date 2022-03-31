@@ -8,10 +8,10 @@
         </router-link>
       </li>
       <li>
-        <span class="list-container">
+        <div class="list-container">
           <a class="templates-menu-icon" />
           <span>Templates</span>
-        </span>
+        </div>
       </li>
       <li>
         <router-link to="/" class="list-container">

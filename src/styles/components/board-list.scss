@@ -1,4 +1,7 @@
 .board-list-container {
+    @media (max-width: 850px){
+        padding-inline-start: 20px;
+    }  
     flex-grow: 1;
     padding-inline-start: 40px;
     .board-list-title-icon {

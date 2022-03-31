@@ -1,7 +1,12 @@
-.board-app{  
+.board-app{
+    @media (max-width: 850px){
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 95%;
+    }  
     display: flex;
     align-items: flex-start;
-    width: 90%;
+    width: 88%;
     margin: auto;
     margin-top: 45px;
     height: 90vh;
