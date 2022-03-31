@@ -36,7 +36,6 @@
                         @click.stop
                     />
                 </button>
-                <small>Tip: Drag an image on to the card to upload it.</small>
             </div>
             <div class="unsplash-photos-container">
                 <span>Photos from Unsplash</span>

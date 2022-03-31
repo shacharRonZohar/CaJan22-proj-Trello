@@ -1,8 +1,10 @@
 
-<template class="main-layout">
+<template class="main-layout" >
   <header-container v-if="isReady" />
   <router-view v-if="isReady" />
-  <span v-else>Loading...</span>
+  <div v-else class="loading-container">
+    <span class="loading-gif"></span>
+  </div>
 </template>
 
 <script>
@@ -21,6 +23,11 @@ export default {
     },
     isReady() {
       return this.$store.getters.isReady
+    },
+    isReadyClass() {
+      return {
+        'loading-layout': this.isReady
+      }
     }
   }
 }

@@ -44,13 +44,13 @@ export default {
     actions: {
         async loadBoards({ commit, rootState }) {
             try {
-                commit({ type: 'setIsReady', isReady: false })
+
                 // The timeout is for testing
                 // setTimeout(async () => {
                 // console.log(rootState.userModule.loggedInUser)
                 const boards = await boardService.query({ user: rootState.userModule.loggedInUser })
                 commit({ type: 'setBoards', boards })
-                commit({ type: 'setIsReady', isReady: true })
+
                 // }, 3000)
             } catch (err) {
                 console.log(err)

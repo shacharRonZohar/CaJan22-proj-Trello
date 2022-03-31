@@ -15,10 +15,15 @@ export default {
         }
     },
     actions: {
-        loadUser({ commit, dispatch }) {
-            const user = userService.getLoggedInUser()
-            commit({ type: 'setLoggedInUser', user })
-            dispatch('loadBoards')
+        async loadUser({ commit, dispatch }) {
+            commit({ type: 'setIsReady', isReady: false })
+            // For demo
+            setTimeout(async () => {
+                const user = userService.getLoggedInUser()
+                commit({ type: 'setLoggedInUser', user })
+                await dispatch('loadBoards')
+                commit({ type: 'setIsReady', isReady: true })
+            }, 1000)
         }
     },
 }

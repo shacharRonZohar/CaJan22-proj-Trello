@@ -69,16 +69,16 @@
         &:hover {
             background-color: #ebecf0;
             border-radius: 3px;
-            // .date-icon {
-            //     display: none;
-            // }
-            // .checked-icon {
-            //     @include trello-icon($content: "\e919");
-            //     width: 24px;
-            //     height: 24px;
-            //     padding-right: 3px;
-            //     padding-left: 0px;
-            // }
+            .date-icon {
+                display: none;
+            }
+            .checked-icon {
+                @include trello-icon($content: "\e919");
+                width: 24px;
+                height: 24px;
+                padding-right: 3px;
+                padding-left: 0px;
+            }
         }
 
         .date-icon {
@@ -146,21 +146,28 @@
             border-radius: 3px;
             padding: 2px;
             padding-left: 4px;
-           
             .date-icon {
-                display: none;
-            }
-
-            .complited-icon {
-                @include trello-icon($content: "\e91a");
                 color: $clr2;
-                width: 24px;
-                height: 24px;
-                padding-right: 3px;
             }
+           
             
             &:hover {
                 background-color: #519839;
+
+                .date-icon {
+                    display: none;
+                }
+                .checked-icon {
+                    display: none;
+                }
+    
+                .complited-icon {
+                    @include trello-icon($content: "\e91a");
+                    color: $clr2;
+                    width: 24px;
+                    height: 24px;
+                    padding-right: 3px;
+                }
                 
             }
         }
