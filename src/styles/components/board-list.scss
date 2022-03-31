@@ -10,6 +10,12 @@
         margin-right: 8px;
     }
 
+    .board-list-strred-icon{
+        @include trello-icon($content: "\e966", $type: lg);
+        color: #42526e;
+        margin-right: 8px;
+    }
+
     span {
         font-size: 16px;
         font-weight: 700;

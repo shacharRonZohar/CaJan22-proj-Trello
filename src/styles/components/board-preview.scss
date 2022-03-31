@@ -7,6 +7,59 @@
     position: relative;
     cursor: pointer;
 
+    .star-container {
+        justify-content: flex-end;
+        right: -4px;
+        align-items: center;
+
+        &.starred {
+            .unstarred-icon {
+                visibility: hidden;
+            }
+
+            .starred-icon {
+                @include trello-icon($content: "\e967");
+                color: #f2d600;
+                z-index: 2;
+                margin-right: 4px;
+                width: 18px;
+                height: 18px;
+
+                &:hover {
+                    transition: font-size 0.3s;
+                    font-size: 18px;                   
+                }
+            }
+        }
+    }
+
+    .unstarred-icon {
+        @include trello-icon($content: "\e966");
+        color: $clr2;
+        z-index: 2;
+        margin-right: 4px;
+        width: 18px;
+        height: 18px;
+        visibility: hidden;
+    }
+
+    &:hover {
+        .unstarred-icon {
+            @include trello-icon($content: "\e966");
+            color: $clr2;
+            z-index: 2;
+            margin-right: 6px;
+            font-size: 14px;
+            width: 18px;
+            visibility: visible;
+
+            &:hover {
+                transition: font-size 0.3s;
+                font-size: 16px;
+            }
+        }
+    }
+
     .board-background {
         border-radius: 3px;
         background-size: cover;
@@ -23,7 +76,7 @@
             background-color: #00000040;
             opacity: 0;
 
-            transition: opacity .4s;
+            transition: opacity 0.4s;
         }
 
         &:hover {

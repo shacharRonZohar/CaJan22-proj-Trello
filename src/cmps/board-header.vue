@@ -9,7 +9,7 @@
 
             <div class="board-name flex" @blur="onSaveBoardName" contenteditable>{{ board.title }}</div>
 
-            <button class="star-btn btn"></button>
+            <button class="star-btn btn" />
 
             <div class="invited-users flex">
                 <span

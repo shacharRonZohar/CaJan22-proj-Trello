@@ -26,7 +26,8 @@ export const boardService = {
     saveTaskDueDate,
     removeTaskDueDate,
     toggleTaskDone,
-    addMemberToTask
+    addMemberToTask,
+    starredBoardToggle
 }
 
 // const BOARDS_KEY = 'boards_db'
@@ -215,6 +216,17 @@ function addMemberToTask(board, taskId, groupId, payload) {
     console.log(board)
     return Promise.resolve(board)
 }
+
+function starredBoardToggle(board, userId){
+    if (board.starredBy?.length){
+        const idx = board.starredBy.findIndex(id => id === userId)
+        if (idx === -1) board.starredBy.push(userId)
+        else board.starredBy.splice(idx, 1)
+    }
+    else board.starredBy = [userId]
+    return Promise.resolve(board)
+}
+
 function getEmptyBoard() {
     return {
         'title': '',

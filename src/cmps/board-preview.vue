@@ -6,6 +6,12 @@
     >
       <span></span>
       <div class="board-title">{{ board.title }}</div>
+
+      <div class="flex star-container" :class="isStared">
+      <a class="unstarred-icon" @click.stop="starredToggle" />
+      <a class="starred-icon" @click.stop="starredToggle"/>
+      </div>
+
     </div>
   </li>
 </template>
@@ -19,12 +25,20 @@ export default {
   },
   components: {},
   data() {
-    return {}
+    return {
+
+    }
   },
   created() { },
   methods: {
     openBoard() {
       this.$router.push('/board/' + this.board._id)
+    },
+    async starredToggle(){
+      await this.$store.dispatch({
+        type: 'starredBoardToggle',
+        board: this.board
+      })
     }
   },
   computed: {
@@ -37,9 +51,10 @@ export default {
         ? this.board.style.color
         : ""
     },
-    // img() {
-    //   return new URL(`${this.board.style.imgUrl}`, import.meta.url).href;
-    // },
+    isStared(){
+      const user = this.$store.getters.loggedInUser
+      return this.board.starredBy?.includes(user._id)? 'starred' : ''
+    }
   },
 }
 </script>

@@ -24,6 +24,13 @@ export default {
             return JSON.parse(JSON.stringify(board.members.filter(member => {
                 return regex.test(member.username) || regex.test(member.fullname)
             })))
+        },
+        starredBoards(state, getters, rootState) {
+            return JSON.parse(JSON.stringify(state.boards
+                .filter(board => {
+                    return board.starredBy?.includes(rootState.userModule.loggedInUser._id)
+                })
+            ))
         }
     },
     mutations: {
@@ -326,6 +333,15 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.addMemberToTask(board, taskId, groupId, payload)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async starredBoardToggle({ dispatch, rootState }, { board }) {
+            try {
+                const userId = rootState.userModule.loggedInUser._id
+                const boardToSave = await boardService.starredBoardToggle(board, userId)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
