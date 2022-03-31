@@ -49,10 +49,10 @@
 
           <div v-if="task.dueDate?.endDate" class="due-date-container">
             <small>Due date</small>
-            <div class="date-display flex align-center">
+            <div :class="checkboxDone" class="date-display flex align-center">
               <!-- <input @click="toggleTaskDone" type="checkbox" name id /> -->
-              <div @click="toggleTaskDone(task.id)" class="dueDate-checkbox">
-                <span class="checked-icon">d</span>
+              <div @click="toggleTaskDone(task.id)"  class="dueDate-checkbox">
+                <span class="checked-icon"></span>
               </div>
               <div class="due-date">
                 <span class="date">{{ timeString }}</span>
@@ -421,6 +421,9 @@ export default {
         'due-soon': (Math.abs(this.task.dueDate.endDate - Date.now()) / (60 * 60 * 1000)) < 24,
         'task-done': this.task.dueDate.isDone
       }
+    },
+    checkboxDone() {
+      return {done: this.task.dueDate.isDone}
     }
   },
   unmounted() { },
