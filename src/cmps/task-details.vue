@@ -27,41 +27,46 @@
       </header>
       <main class="main-details">
         <section class="main-content">
-          <!-- <div class='members-container task-layout'>
-          <span>Members:</span>
-          <div class='members'>
-            <div class='member'>A</div>
-            <div class='member'>CB</div>
-            <div class='member'>SZ</div>
-            <div class='member add icon'></div>
-          </div>
-          </div>-->
-          <section v-if="task.labelIds?.length" class="labels-container task-layout">
-            <small>Labels</small>
-            <ul class="labels-list">
-              <li
-                class="label"
-                v-for="label in task.labelIds"
-                :key="label"
-                :style="{ backgroundColor: getLabelById(label).color }"
-              >{{ getLabelById(label).title }}</li>
-            </ul>
-          </section>
+          <div class="top-actions-container task-layout">
+            <div class="members-container task-layout">
+              <span>Members:</span>
+              <ul class="members">
+                <li
+                  class="member"
+                  v-for="member in task.members"
+                  :style="{ backgroundImage: `url(${member.imgUrl})` }"
+                ></li>
+                <!-- <div class="member">CB</div>
+                <div class="member">SZ</div>-->
+                <div class="member add icon"></div>
+              </ul>
+            </div>
+            <section v-if="task.labelIds?.length" class="labels-container">
+              <small>Labels</small>
+              <ul class="labels-list">
+                <li
+                  class="label"
+                  v-for="label in task.labelIds"
+                  :key="label"
+                  :style="{ backgroundColor: getLabelById(label).color }"
+                >{{ getLabelById(label).title }}</li>
+              </ul>
+            </section>
 
-          <div v-if="task.dueDate?.endDate" class="due-date-container">
-            <small>Due date</small>
-            <div :class="checkboxDone" class="date-display flex align-center">
-              <!-- <input @click="toggleTaskDone" type="checkbox" name id /> -->
-              <div @click="toggleTaskDone(task.id)" class="dueDate-checkbox">
-                <span class="checked-icon"></span>
-              </div>
-              <div class="due-date">
-                <span class="date">{{ timeString }}</span>
-                <span :class="statusColor" class="mini-status">{{ taskStatus }}</span>
+            <div v-if="task.dueDate?.endDate" class="due-date-container">
+              <small>Due date</small>
+              <div :class="checkboxDone" class="date-display flex align-center">
+                <!-- <input @click="toggleTaskDone" type="checkbox" name id /> -->
+                <div @click="toggleTaskDone(task.id)" class="dueDate-checkbox">
+                  <span class="checked-icon"></span>
+                </div>
+                <div class="due-date">
+                  <span class="date">{{ timeString }}</span>
+                  <span :class="statusColor" class="mini-status">{{ taskStatus }}</span>
+                </div>
               </div>
             </div>
           </div>
-
           <div class="description-container">
             <div class="description-header">
               <div class="icon"></div>

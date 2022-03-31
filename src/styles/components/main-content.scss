@@ -2,19 +2,34 @@
     display: flex;
     flex-direction: column;
     // font-size: 0.9rem;
+    .top-actions-container {
+        // display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        gap: 4px;
+        column-gap: 17px !important;
+        > * {
+            display: flex;
+            // flex-direction: column;
+            > * {
+                display: flex;
+                flex-direction: row;
+            }
+        }
         .labels-container {
             gap: 5px;
             font-weight: 600;
             color: #5e6c84;
             font-size: 12px;
-            margin-left: 40px;
-            margin-top: 18px;
+            // margin-left: 40px;
+            // margin-top: 18px;
             // gap: 7px;
             small {
                 letter-spacing: 1px;
             }
             .labels-list {
                 // margin-left: 1px;
+                display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
                 .label {
@@ -22,7 +37,7 @@
                 }
             }
         }
-        
+
         .due-date-container {
             gap: 5px;
             font-weight: 600;
@@ -47,24 +62,23 @@
                     transition: all 0.2s ease-in-out;
                     white-space: nowrap;
                     width: 16px;
-    
+
                     &:hover {
                         background-color: #ebecf0;
                         box-shadow: inset 0 0 0 2px #dfe1e6;
                     }
-
                 }
                 &.done {
                     .dueDate-checkbox {
                         background-color: #0079bf;
                         box-shadow: inset 0 0 0 2px #0079bf;
-    
+
                         &:hover {
                             background-color: #5ba4cf;
                             box-shadow: inset 0 0 0 2px #5ba4cf;
                         }
                     }
-    
+
                     .checked-icon {
                         position: absolute;
                         right: 1px;
@@ -97,13 +111,12 @@
                         &.task-done {
                             background-color: #61bd4f;
                             color: $clr2;
-                            
                         }
                     }
                 }
             }
         }
-    
+    }
 
     > * {
         margin-top: 13px;
@@ -123,7 +136,7 @@
     }
 
     .checklist-container {
-        .screen-toggle{
+        .screen-toggle {
             position: fixed;
             top: 0;
             left: 0;
@@ -330,23 +343,22 @@
                     color: #5e6c84;
                     height: 40px;
 
-                    span{
+                    span {
                         padding-top: 10px;
                     }
 
-                    .close-icon{
+                    .close-icon {
                         float: right;
                         font-weight: 600;
-                        @include trello-icon($content: "\e91c")
+                        @include trello-icon($content: "\e91c");
                     }
-
                 }
-                .delete-item{
+                .delete-item {
                     width: 100%;
                     padding: 6px 12px;
                     margin-bottom: 8px;
 
-                    &:hover{
+                    &:hover {
                         background-color: rgba(9, 30, 66, 0.08);
                     }
                 }
