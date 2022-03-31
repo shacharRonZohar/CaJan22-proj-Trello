@@ -1,6 +1,6 @@
 <template >
     <div @click.stop class="members-action">
-        <input type="text" v-model="filterBy" />
+        <input type="text" v-model="filterBy" placeholder="Search members" />
         <ul class="members-list clean-list">
             <li
                 v-for="member in filteredMembers"

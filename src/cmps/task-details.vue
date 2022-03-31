@@ -28,8 +28,8 @@
       <main class="main-details">
         <section class="main-content">
           <div class="top-actions-container task-layout">
-            <div class="members-container task-layout">
-              <span>Members:</span>
+            <div class="members-container">
+              <small>Members:</small>
               <ul class="members">
                 <li
                   class="member"
@@ -38,7 +38,7 @@
                 ></li>
                 <!-- <div class="member">CB</div>
                 <div class="member">SZ</div>-->
-                <div class="member add icon"></div>
+                <li @click.stop="toggleAction('members-action')" class="member add icon"></li>
               </ul>
             </div>
             <section v-if="task.labelIds?.length" class="labels-container">
