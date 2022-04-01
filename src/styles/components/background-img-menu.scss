@@ -2,6 +2,11 @@
     transition: transform 0.3s;
     margin-bottom: 12px;
     overflow-y: hidden;
+    
+    &.right-menu {
+        top: 0px;
+        overflow-y: hidden;
+      }
 
     .right-menu-unsplash-img {
         width: 145px;
@@ -45,6 +50,21 @@
         overflow-y: auto;
         flex-wrap: wrap;
         gap: 10px;
+
+        &::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #091e421e;
+        }
+    
+        &::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: hsla(0,0%,100%,.35);
+        }
     }
     
     a {

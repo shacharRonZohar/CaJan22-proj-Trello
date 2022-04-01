@@ -6,12 +6,37 @@
     </header>
     <hr />
     <ul class="clean-list main-menu-list">
-      <li @click="toggleMenu" class="flex main-list-item">
+       <li class="flex main-list-item">
+        <div
+          class="board-icon"
+        >
+        <a class="about-board-icon" />
+        </div>
+        <span>About this board</span>
+      </li>
+      <li @click="toggleMenu" class="flex background-list-item">
         <div
           class="board-icon-img"
           :style="{ backgroundImage: `url('${img}')`, backgroundColor: `${color}` }"
         ></div>
         <span>Change background</span>
+      </li>
+        <li class="flex main-list-item">
+        <div
+          class="board-icon"
+        >
+        <a class="dashboard-icon" />
+        </div>
+        <span>Dashboard</span>
+      </li>
+      <hr />
+       <li class="flex activity-list-item">
+        <div
+          class="board-icon"
+        >
+        <a class="activity-board-icon" />
+        </div>
+        <span class="board-activity-title">Activity</span>
       </li>
     </ul>
     <background-menu
