@@ -6,11 +6,9 @@
     </header>
     <hr />
     <ul class="clean-list main-menu-list">
-       <li class="flex main-list-item">
-        <div
-          class="board-icon"
-        >
-        <a class="about-board-icon" />
+      <li class="flex main-list-item">
+        <div class="board-icon">
+          <a class="about-board-icon" />
         </div>
         <span>About this board</span>
       </li>
@@ -21,22 +19,21 @@
         ></div>
         <span>Change background</span>
       </li>
-        <li class="flex main-list-item">
-        <div
-          class="board-icon"
-        >
-        <a class="dashboard-icon" />
+      <li class="flex main-list-item">
+        <div class="board-icon">
+          <a class="dashboard-icon" />
         </div>
         <span>Dashboard</span>
       </li>
       <hr />
-       <li class="flex activity-list-item">
-        <div
-          class="board-icon"
-        >
-        <a class="activity-board-icon" />
+      <li class="flex activity-list-item">
+        <div class="board-icon">
+          <a class="activity-board-icon" />
         </div>
         <span class="board-activity-title">Activity</span>
+        <ul>
+          <li v-for="activity in board.activities" :key="activity.id">{{ getActivityTxt(activity) }}</li>
+        </ul>
       </li>
     </ul>
     <background-menu
@@ -60,7 +57,6 @@ export default {
       showMenuClicked: false,
     }
   },
-  async created() { },
   methods: {
     toggleMenu() {
       this.showMenuClicked = !this.showMenuClicked
@@ -78,6 +74,11 @@ export default {
     setBackGroundColor(color) {
       this.$emit("setBackGroundColor", color)
     },
+    getActivityTxt(activity) {
+      let txt = `${activity.user.fullname} ${activity.type} `
+      if (activity.type === 'renamed') return txt += 'this board'
+      return txt += `${activity.itemName} ${activity.type === 'added' ? 'to' : 'from'} ${activity.containerName}`
+    }
   },
   computed: {
     isOpen() {

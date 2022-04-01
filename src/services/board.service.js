@@ -61,21 +61,20 @@ function removeGroup(board, groupId, activity) {
     return board
 }
 
-function saveTask(board, taskToSave, activity, groupId) {
+async function saveTask(board, taskToSave, groupId) {
     const group = board.groups.find(group => group.id === groupId)
     if (!taskToSave.id) {
         taskToSave.id = utilService.makeId('t')
         taskToSave.createdAt = Date.now()
         group.tasks.push(taskToSave)
         // { type, itemName, containerName = '', ids = { boardId: '', groupId: '', taskId: '' }, }
-        activityService.add({ type: 'added', itemName: taskToSave.title, containerName: group.title, ids: { boardId: board._id, groupId, taskId: taskToSave.id } })
     } else {
         console.log('Im here updating!')
         const idx = group.tasks.findIndex(task => task.id === taskToSave.id)
         if (idx === -1) return Promise.reject('Couldnt find task to edit')
         group.tasks.splice(idx, 1, taskToSave)
     }
-    return Promise.resolve(board)
+    return Promise.resolve({ board, groupTitle: group.title })
 }
 
 function archiveTask(board, taskId, groupId, activity) {
