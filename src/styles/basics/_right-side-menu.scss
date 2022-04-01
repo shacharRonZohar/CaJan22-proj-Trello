@@ -13,6 +13,21 @@
     // transition: transform 0.3s;
     transition-timing-function: ease-in;
 
+    &::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: #091e421e;
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: hsla(0,0%,100%,.35);
+    }
+
     header{
         margin-top: 5px;
         margin-bottom: 14px;

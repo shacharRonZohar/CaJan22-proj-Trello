@@ -2,11 +2,31 @@
     transition: transform 0.35s;
     overflow-y: hidden;
 
+    &.right-menu {
+        top: 0px;
+        overflow-y: hidden;
+      }
+
     .right-menu-colors-list{
         overflow-y: auto;
         height: calc(100% - 70px);
         flex-wrap: wrap;
         margin-top: 12px;
+
+        &::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #091e421e;
+        }
+    
+        &::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: hsla(0,0%,100%,.35);
+        }
     }
 
     .right-menu-colors {
