@@ -164,10 +164,13 @@
               <button class="btn show">Show details</button>
             </div>
             <ul class="activities-list">
-              <li
-                v-for="activity in taskActivities"
-                class="activity-item"
-              >{{ getActivityTxt(activity) }}</li>
+              <li v-for="activity in taskActivities" class="activity-item">
+                <div
+                  class="user-icon"
+                  :style="{ backgroundImage: `url(${activity.user?.imgUrl})` }"
+                ></div>
+                <span>{{ getActivityTxt(activity) }}</span>
+              </li>
             </ul>
           </div>
         </section>
