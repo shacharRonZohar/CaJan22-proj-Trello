@@ -26,7 +26,10 @@ function _createActivity({ type, itemName, containerName = '', ids = { boardId: 
 }
 
 async function add(payload) {
-    return await httpService.post(endpoint, _createActivity(payload))
+    console.log('from addActivity in activity-service: ', payload)
+    const activity = _createActivity(payload)
+    payload.board.activities?.length ? payload.board.activities.push(activity) : payload.board.activities = [activity]
+    return Promise.resolve(payload.board)
     // const activity = _createActivity(payload)
     // board.activities ? board.activities.push(activity) : board.activities = [activity]
 }

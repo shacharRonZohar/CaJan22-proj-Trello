@@ -75,7 +75,7 @@ export default {
       this.$emit("setBackGroundColor", color)
     },
     getActivityTxt(activity) {
-      let txt = `${activity.user.fullname} ${activity.type} `
+      let txt = `${activity.user?.fullname} ${activity.type} `
       if (activity.type === 'renamed') return txt += 'this board'
       return txt += `${activity.itemName} ${activity.type === 'added' ? 'to' : 'from'} ${activity.containerName}`
     }

@@ -89,11 +89,12 @@ export default {
         async saveTask({ state, dispatch, commit }, { taskToSave, groupId, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
-                const boardToSave = await boardService.saveTask(board, taskToSave, groupId)
-                await dispatch({ type: 'saveBoard', boardToSave: boardToSave.board })
-                await activityService.add({ type: 'added', itemName: taskToSave.title, containerName: boardToSave.groupTitle, ids: { boardId: board._id, groupId, taskId: taskToSave.id } })
-                await dispatch({ type: 'loadBoards' })
-                commit({ type: 'setBoard', boardId: boardToSave.board._id })
+                let boardToSave = await boardService.saveTask(board, taskToSave, groupId)
+                console.log(boardToSave)
+                boardToSave = await activityService.add({ board: boardToSave.board, type: 'added', itemName: taskToSave.title, containerName: boardToSave.groupTitle, ids: { boardId: board._id, groupId, taskId: taskToSave.id } })
+                await dispatch({ type: 'saveBoard', boardToSave })
+                // await dispatch({ type: 'loadBoards' })
+                // commit({ type: 'setBoard', boardId: boardToSave.board._id })
             } catch (err) {
                 console.log(err)
             }
