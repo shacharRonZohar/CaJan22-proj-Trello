@@ -1,12 +1,18 @@
 .background-menu {
   transition: transform 0.25s;
 
-  .bg-menu-main{
-    padding-block: 12px
+  &.right-menu {
+      top: 0px;
+      overflow-y: hidden;
+    }
+
+
+  .bg-menu-main {
+    padding-block: 12px;
   }
   li {
     cursor: pointer;
-    .bg-menu-imgs{
+    .bg-menu-imgs {
       background-size: cover;
       border-radius: 8px;
       height: 96px;
@@ -14,8 +20,8 @@
       width: 153px;
       margin: 0 4px;
 
-      &:hover{
-        opacity: .7;
+      &:hover {
+        opacity: 0.7;
       }
     }
 
@@ -27,7 +33,7 @@
       background-image: url(../assets/imgs/rightMenu/colors.jpg);
     }
 
-    .bg-menu-imgs-title{
+    .bg-menu-imgs-title {
       margin-top: 8px;
       text-align: center;
     }

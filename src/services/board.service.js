@@ -3,6 +3,8 @@ import { storageService } from './async-storage.service'
 import { imgService } from './imgService.js'
 import { httpService } from './http-service.js'
 import { userService } from './user-service.js'
+import { activityService } from './activity.service.js'
+
 import moment from 'moment'
 
 export const boardService = {
@@ -26,7 +28,8 @@ export const boardService = {
     saveTaskDueDate,
     removeTaskDueDate,
     toggleTaskDone,
-    addMemberToTask
+    addMemberToTask,
+    starredBoardToggle
 }
 
 // const BOARDS_KEY = 'boards_db'
@@ -58,19 +61,20 @@ function removeGroup(board, groupId, activity) {
     return board
 }
 
-function saveTask(board, taskToSave, activity, groupId) {
+async function saveTask(board, taskToSave, groupId) {
     const group = board.groups.find(group => group.id === groupId)
     if (!taskToSave.id) {
         taskToSave.id = utilService.makeId('t')
         taskToSave.createdAt = Date.now()
         group.tasks.push(taskToSave)
+        // { type, itemName, containerName = '', ids = { boardId: '', groupId: '', taskId: '' }, }
     } else {
         console.log('Im here updating!')
         const idx = group.tasks.findIndex(task => task.id === taskToSave.id)
         if (idx === -1) return Promise.reject('Couldnt find task to edit')
         group.tasks.splice(idx, 1, taskToSave)
     }
-    return Promise.resolve(board)
+    return Promise.resolve({ board, groupTitle: group.title })
 }
 
 function archiveTask(board, taskId, groupId, activity) {
@@ -215,6 +219,17 @@ function addMemberToTask(board, taskId, groupId, payload) {
     console.log(board)
     return Promise.resolve(board)
 }
+
+function starredBoardToggle(board, userId) {
+    if (board.starredBy?.length) {
+        const idx = board.starredBy.findIndex(id => id === userId)
+        if (idx === -1) board.starredBy.push(userId)
+        else board.starredBy.splice(idx, 1)
+    }
+    else board.starredBy = [userId]
+    return Promise.resolve(board)
+}
+
 function getEmptyBoard() {
     return {
         'title': '',

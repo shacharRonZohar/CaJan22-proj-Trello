@@ -9,7 +9,7 @@
 
             <div class="board-name flex" @blur="onSaveBoardName" contenteditable>{{ board.title }}</div>
 
-            <button class="star-btn btn"></button>
+            <button class="star-btn btn" @click="onToggleBoardStar" :class="isStarred" />
 
             <div class="invited-users flex">
                 <span
@@ -42,6 +42,7 @@
 <script>
 import boardFilterModal from '../cmps/board-filter-modal.vue'
 import inviteModal from '../cmps/invite-modal.vue'
+
 export default {
     components: {
         boardFilterModal,
@@ -70,11 +71,17 @@ export default {
         },
         onToggleInviteModal() {
             this.inviteModalOpen = !this.inviteModalOpen
+        },
+        onToggleBoardStar() {
+            this.$store.dispatch({ type: 'starredBoardToggle', board: this.board })
         }
     },
-    created() {
-
-    },
+    computed: {
+        isStarred() {
+            const user = this.$store.getters.loggedInUser
+            return { 'starred': this.board.starredBy?.includes(user._id) }
+        }
+    }
 }
 
 </script>

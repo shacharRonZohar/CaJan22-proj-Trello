@@ -1,16 +1,36 @@
 .right-side-nav {
     transition: transform 0.2s;
-    
+
     .main-menu-list {
         margin-top: 12px;
+    }
+
+    .background-list-item{
+        cursor: pointer;
+        padding: 8px 6px 12px 17px;
+
+        .board-icon-img {
+            margin-right: 14px;
+            height: 20px;
+            width: 20px;
+            background-size: cover;
+            background-position: 50%;
+            border-radius: 3px;
+        }
+
+        &:hover {
+            background-color: #e2e4e9;
+            border-radius: 3px;
+        }
+
     }
 
     .main-list-item {
         cursor: pointer;
         padding: 6px 6px 6px 17px;
 
-        &:hover{
-            background-color: #E2E4E9;
+        &:hover {
+            background-color: #e2e4e9;
             border-radius: 3px;
         }
 
@@ -22,9 +42,55 @@
             background-position: 50%;
             border-radius: 3px;
         }
+
+        .board-icon {
+            margin-right: 13px;
+            margin-left: -2px;
+        }
+
+        .about-board-icon {
+            @include trello-icon($content: "\e90b", $type: lg);
+            margin-right: 1px;
+            height: 20px;
+            width: 20px;
+        }
+
+        .dashboard-icon{
+            @include trello-icon($content: "\e938", $type: lg);
+            margin-right: 1px;
+            height: 20px;
+            width: 20px;
+        }
+
+    }
+    
+    .activity-list-item {
+        padding: 6px 6px 6px 17px;
+
+        .board-icon {
+            margin-right: 13px;
+            margin-left: -2px;
+        }
+        
+        .board-activity-title {
+            font-weight: 700;
+        }
+        .activity-board-icon {
+            @include trello-icon($content: "\e900", $type: md);
+            margin-right: 1px;
+        }
     }
 
     h1 {
         margin: auto;
+    }
+
+    hr {
+        background-color: #091e4221;
+        border: 0;
+        height: 1px;
+        margin: 16px 0;
+        padding: 0;
+        width: 100%;
     }
 }

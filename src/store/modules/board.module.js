@@ -1,3 +1,4 @@
+import { activityService } from '../../services/activity.service.js'
 import { boardService } from '../../services/board.service.js'
 import { socketService } from '../../services/socket.service.js'
 
@@ -24,6 +25,13 @@ export default {
             return JSON.parse(JSON.stringify(board.members.filter(member => {
                 return regex.test(member.username) || regex.test(member.fullname)
             })))
+        },
+        starredBoards(state, getters, rootState) {
+            return JSON.parse(JSON.stringify(state.boards
+                .filter(board => {
+                    return board.starredBy?.includes(rootState.userModule.loggedInUser._id)
+                })
+            ))
         }
     },
     mutations: {
@@ -50,14 +58,8 @@ export default {
     actions: {
         async loadBoards({ commit, rootState }) {
             try {
-
-                // The timeout is for testing
-                // setTimeout(async () => {
-                // console.log(rootState.userModule.loggedInUser)
                 const boards = await boardService.query({ user: rootState.userModule.loggedInUser })
                 commit({ type: 'setBoards', boards })
-
-                // }, 3000)
             } catch (err) {
                 console.log(err)
             }
@@ -87,8 +89,11 @@ export default {
         async saveTask({ state, dispatch, commit }, { taskToSave, groupId, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
-                const boardToSave = await boardService.saveTask(board, taskToSave, activity, groupId)
-                await dispatch({ type: 'saveBoard', boardToSave })
+                const boardToSave = await boardService.saveTask(board, taskToSave, groupId)
+                await dispatch({ type: 'saveBoard', boardToSave: boardToSave.board })
+                await activityService.add({ type: 'added', itemName: taskToSave.title, containerName: boardToSave.groupTitle, ids: { boardId: board._id, groupId, taskId: taskToSave.id } })
+                await dispatch({ type: 'loadBoards' })
+                commit({ type: 'setBoard', boardId: boardToSave.board._id })
             } catch (err) {
                 console.log(err)
             }
@@ -326,6 +331,15 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.addMemberToTask(board, taskId, groupId, payload)
+                await dispatch({ type: 'saveBoard', boardToSave })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async starredBoardToggle({ dispatch, rootState }, { board }) {
+            try {
+                const userId = rootState.userModule.loggedInUser._id
+                const boardToSave = await boardService.starredBoardToggle(board, userId)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
