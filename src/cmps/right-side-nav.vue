@@ -77,7 +77,7 @@ export default {
       this.$emit("setBackGroundColor", color)
     },
     getActivityTxt(activity) {
-      return activityService.getActivityTxt(activity)
+      return activityService.getActivityTxt(activity, 'board')
     },
   },
   computed: {

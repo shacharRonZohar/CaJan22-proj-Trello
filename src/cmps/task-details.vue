@@ -402,7 +402,7 @@ export default {
       })
     },
     getActivityTxt(activity) {
-      return activityService.getActivityTxt(activity)
+      return activityService.getActivityTxt(activity, 'card')
     }
   },
   computed: {
@@ -442,7 +442,6 @@ export default {
       return { done: this.task.dueDate.isDone }
     },
     taskActivities() {
-      console.log(this.$route.params.taskId)
       return this.$store.getters.activitiesByTask(this.$route.params.taskId)
     }
   },
