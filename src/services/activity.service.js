@@ -30,7 +30,7 @@ function _createActivity({ type, itemName, containerName = '', ids = { boardId: 
 function add(payload) {
     console.log('from addActivity in activity-service: ', payload)
     const activity = _createActivity(payload)
-    payload.board.activities?.length ? payload.board.activities.push(activity) : payload.board.activities = [activity]
+    payload.board.activities?.length ? payload.board.activities.unshift(activity) : payload.board.activities = [activity]
     return Promise.resolve(payload.board)
     // const activity = _createActivity(payload)
     // board.activities ? board.activities.push(activity) : board.activities = [activity]

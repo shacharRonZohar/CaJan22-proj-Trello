@@ -309,8 +309,8 @@ export default {
         async addMember({ state, dispatch }, { user }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
-                const boardToSave = await boardService.addMember(board, user)
-                boardToSave = await activityService.add({ board: boardToSave.board, type: 'added', itemName: user.fullname, containerName: 'this board' })
+                let boardToSave = await boardService.addMember(board, user)
+                boardToSave = await activityService.add({ board: boardToSave, type: 'added', itemName: user.fullname, containerName: 'this board' })
                 console.log(boardToSave)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
