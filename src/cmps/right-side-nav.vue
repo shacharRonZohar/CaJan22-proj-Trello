@@ -33,7 +33,7 @@
         <span class="board-activity-title">Activity</span>
         <ul>
           <li v-for="activity in board.activities" :key="activity.id">
-            <div class="icon" :Style="{ backgroundImage: `url(${activity.user.imgUrl})` }"></div>
+            <div class="icon" :Style="{ backgroundImage: `url(${activity.user?.imgUrl})` }"></div>
             <span>{{ getActivityTxt(activity) }}</span>
           </li>
         </ul>

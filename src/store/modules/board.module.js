@@ -80,9 +80,6 @@ export default {
                 console.log(err)
             }
         },
-        async updateBoard({ commit }, { boardToUpdate }) {
-
-        },
         getTaskById({ state }, { taskId, groupId }) {
             const group = state.board.groups.find(group => group.id === groupId)
             let task = group.tasks.find(task => task.id === taskId)
@@ -95,7 +92,6 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 let boardToSave = await boardService.saveTask(board, taskToSave, groupId)
-                console.log(boardToSave)
                 boardToSave = await activityService.add({ board: boardToSave.board, type: 'added', itemName: taskToSave.title, containerName: boardToSave.groupTitle, ids: { boardId: board._id, groupId, taskId: taskToSave.id } })
                 await dispatch({ type: 'saveBoard', boardToSave })
                 // await dispatch({ type: 'loadBoards' })
@@ -135,6 +131,7 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.saveTaskDueDate(board, taskId, groupId, payload, activity)
+                boardToSave = await activityService.add({ board: boardToSave.board, type: 'added', itemName: boardToSave.taskTitle, containerName: boardToSave.groupTitle, ids: { boardId: board._id, groupId, taskId } })
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
@@ -313,6 +310,7 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.addMember(board, user)
+                boardToSave = await activityService.add({ board: boardToSave.board, type: 'added', itemName: user.fullname, containerName: 'this board' })
                 console.log(boardToSave)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
