@@ -48,6 +48,8 @@
 
 <script>
 import backgroundMenu from "./background-menu.vue"
+import { activityService } from '../services/activity.service.js'
+
 export default {
   components: {
     backgroundMenu,
@@ -75,10 +77,8 @@ export default {
       this.$emit("setBackGroundColor", color)
     },
     getActivityTxt(activity) {
-      let txt = `${activity.user?.fullname} ${activity.type} `
-      if (activity.type === 'renamed') return txt += 'this board'
-      return txt += `${activity.itemName} ${activity.type === 'added' ? 'to' : 'from'} ${activity.containerName}`
-    }
+      return activityService.getActivityTxt(activity)
+    },
   },
   computed: {
     isOpen() {

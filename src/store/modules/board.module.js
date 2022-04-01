@@ -32,6 +32,11 @@ export default {
                     return board.starredBy?.includes(rootState.userModule.loggedInUser._id)
                 })
             ))
+        },
+        activitiesByTask: (state) => (taskId) => {
+            return JSON.parse(JSON.stringify(state.board.activities.filter(activity => {
+                return activity.ids.taskId === taskId
+            })))
         }
     },
     mutations: {

@@ -155,15 +155,21 @@
             <button @click="addChecklistItem(checklist.id)" class="add-button">Add</button><a class="close-checklist-icon"></a>-->
           </div>
 
-          <!-- <div class='activities-container'>
-            <div class='activities-header'>
+          <div class="activities-container">
+            <div class="activities-header">
               <div>
-                <div class='icon'></div>
+                <div class="icon"></div>
                 <h3>Activity</h3>
               </div>
-              <button class='btn show'>Show details</button>
+              <button class="btn show">Show details</button>
             </div>
-          </div>-->
+            <ul class="activities-list">
+              <li
+                v-for="activity in taskActivities"
+                class="activity-item"
+              >{{ getActivityTxt(activity) }}</li>
+            </ul>
+          </div>
         </section>
         <aside class="actions">
           <h3 class="actions-title">Add to card</h3>
@@ -195,6 +201,7 @@
 import checklistDetails from "./checklist-details.vue"
 import actionPopup from "./action-popup.vue"
 import actionBtn from "./action-btn.vue"
+import { activityService } from '../services/activity.service.js'
 import moment from "moment"
 
 export default {
@@ -393,6 +400,9 @@ export default {
         cbName: "toggleTaskDone",
         payload: { taskId },
       })
+    },
+    getActivityTxt(activity) {
+      return activityService.getActivityTxt(activity)
     }
   },
   computed: {
@@ -430,6 +440,10 @@ export default {
     },
     checkboxDone() {
       return { done: this.task.dueDate.isDone }
+    },
+    taskActivities() {
+      console.log(this.$route.params.taskId)
+      return this.$store.getters.activitiesByTask(this.$route.params.taskId)
     }
   },
   unmounted() { },
