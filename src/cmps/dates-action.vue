@@ -1,21 +1,21 @@
 <template >
     <div @click.stop class="dates-container">
         <Datepicker v-model="date" :partialRange="false" inline range autoApply />
-        <div class="start-date">
-            <p class="lable">Start date</p>
-            <!-- <input v-model="date[0]" type="text" readonly /> -->
-            <p class="date">{{startDate}}</p>
-        </div>
-        <!-- <pre>{{date}}</pre> -->
-        <div class="due-date">
-            <p class="lable">Due date</p>
-            <!-- <input v-model="date[1]" type="text" readonly/> -->
-            <p class="date">{{endDate}}</p>
+        <div class="flex">
+            <div class="start-date">
+                <p class="lable">Start date</p>
+                <!-- <input v-model="date[0]" type="text" readonly /> -->
+                <p class="date">{{startDate}}</p>
+            </div>
+            <div class="due-date">
+                <p class="lable">Due date</p>
+                <!-- <input v-model="date[1]" type="text" readonly/> -->
+                <p class="date">{{endDate}}</p>
+            </div>
         </div>
         <div class="buttons">
             <button class="dates-btn btn" @click="onSave">Save</button>
             <button class="dates-btn btn" @click="onRemove">Remove</button>
-            <!-- <button>Remove</button> -->
         </div>
     </div>
 </template>
