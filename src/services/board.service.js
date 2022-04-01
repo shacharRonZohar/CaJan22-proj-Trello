@@ -110,7 +110,7 @@ function saveTaskDueDate(board, taskId, groupId, payload, activity) {
     const task = group.tasks.find(task => task.id === taskId)
     const dueDates = _getDueDates(payload)
     task.dueDate = dueDates
-    return Promise.resolve(board)
+    return Promise.resolve({ board, groupTitle: group.title, taskTitle: task.title })
 }
 
 function removeTaskDueDate(board, taskId, groupId) {
