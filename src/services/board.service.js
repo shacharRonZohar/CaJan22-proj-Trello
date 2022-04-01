@@ -3,6 +3,8 @@ import { storageService } from './async-storage.service'
 import { imgService } from './imgService.js'
 import { httpService } from './http-service.js'
 import { userService } from './user-service.js'
+import { activityService } from './activity.service.js'
+
 import moment from 'moment'
 
 export const boardService = {
@@ -65,6 +67,8 @@ function saveTask(board, taskToSave, activity, groupId) {
         taskToSave.id = utilService.makeId('t')
         taskToSave.createdAt = Date.now()
         group.tasks.push(taskToSave)
+        // { type, itemName, containerName = '', ids = { boardId: '', groupId: '', taskId: '' }, }
+        activityService.add({ type: 'added', itemName: taskToSave.title, containerName: group.title, ids: { boardId: board._id, groupId, taskId: taskToSave.id } })
     } else {
         console.log('Im here updating!')
         const idx = group.tasks.findIndex(task => task.id === taskToSave.id)
@@ -217,8 +221,8 @@ function addMemberToTask(board, taskId, groupId, payload) {
     return Promise.resolve(board)
 }
 
-function starredBoardToggle(board, userId){
-    if (board.starredBy?.length){
+function starredBoardToggle(board, userId) {
+    if (board.starredBy?.length) {
         const idx = board.starredBy.findIndex(id => id === userId)
         if (idx === -1) board.starredBy.push(userId)
         else board.starredBy.splice(idx, 1)
