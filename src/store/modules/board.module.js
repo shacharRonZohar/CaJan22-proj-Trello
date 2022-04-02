@@ -127,7 +127,6 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.saveTaskDueDate(board, taskId, groupId, payload, activity)
-                boardToSave = await activityService.add({ board: boardToSave.board, type: 'added', itemName: boardToSave.taskTitle, containerName: boardToSave.groupTitle, ids: { boardId: board._id, groupId, taskId } })
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)

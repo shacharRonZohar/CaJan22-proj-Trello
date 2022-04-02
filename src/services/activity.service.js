@@ -44,5 +44,5 @@ function getActivityTxt(activity, entity, itemTitle) {
     if (activity.type === 'renamed') return txt += `this ${entity}`
     // if () return txt += `this ${entity}`
     return txt += `${itemTitle === activity.itemName ? `this ${entity}` : activity.itemName} 
-    ${activity.type === 'added' ? 'to' : 'from'} ${activity.containerName}`
+    ${activity.type === 'added' ? 'to' : 'from'} ${activity.containerName === itemTitle ? `this ${entity}` : activity.containerName}`
 }

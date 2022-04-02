@@ -107,12 +107,13 @@ function saveGroupDrop(board, fromIdx, toIdx) {
     return Promise.resolve(board)
 }
 
-function saveTaskDueDate(board, taskId, groupId, payload, activity) {
+async function saveTaskDueDate(board, taskId, groupId, payload, activity) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
     const dueDates = _getDueDates(payload)
     task.dueDate = dueDates
-    return Promise.resolve({ board, groupTitle: group.title, taskTitle: task.title })
+    board = await activityService.add({ board, type: 'added', itemName: 'due date', containerName: task.title, ids: { groupId, taskId } })
+    return Promise.resolve(board)
 }
 
 function removeTaskDueDate(board, taskId, groupId) {
