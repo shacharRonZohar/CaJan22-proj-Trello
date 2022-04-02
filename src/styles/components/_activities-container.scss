@@ -3,13 +3,38 @@
         margin-left: 3px;
         @include trello-icon($content: "\e900", $type: lg);
     }
+    .details {
+        display: flex;
+        flex-direction: column;
+    }
+    .activity-item {
+        gap: 12px;
+        display: flex;
+        align-items: center;
+        .username {
+            font-weight: bold;
+        }
+    }
+    .user-icon {
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+        background-size: cover;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
     .activities-header {
         justify-content: space-between;
         div {
+            gap: 12px;
             display: flex;
-            gap: 6px;
+            // gap: 6px;
         }
         .show {
+            background-color: #091e420a;
             height: 32px;
             &:hover {
                 background-color: $clr19;
