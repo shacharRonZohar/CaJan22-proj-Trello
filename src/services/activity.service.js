@@ -40,7 +40,7 @@ function add(payload) {
 
 function getActivityTxt(activity, entity, itemTitle) {
     // console.log(activity)
-    let txt = `${activity.user?.fullname} ${activity.type} `
+    let txt = ` ${activity.type} `
     if (activity.type === 'renamed') return txt += `this ${entity}`
     // if () return txt += `this ${entity}`
     return txt += `${itemTitle === activity.itemName ? `this ${entity}` : activity.itemName} 
