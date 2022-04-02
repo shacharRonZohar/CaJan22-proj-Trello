@@ -205,7 +205,6 @@ export default {
         },
         async toggleLabel({ state, dispatch }, { taskId, groupId, payload, activity }) {
             try {
-                console.log(taskId, groupId, payload)
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.toggleLabel(board, taskId, groupId, payload, activity)
                 await dispatch({ type: 'saveBoard', boardToSave })
