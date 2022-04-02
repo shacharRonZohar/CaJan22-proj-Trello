@@ -161,15 +161,21 @@
                 <div class="icon"></div>
                 <h3>Activity</h3>
               </div>
-              <button class="btn show">Show details</button>
+              <button @click="toggleActivities" class="btn show">{{ showBtnTxt }} details</button>
             </div>
-            <ul class="activities-list">
+            <ul v-if="isActivitiesOpen" class="activities-list clean-list">
               <li v-for="activity in taskActivities" class="activity-item">
                 <div
                   class="user-icon"
                   :style="{ backgroundImage: `url(${activity.user?.imgUrl})` }"
                 ></div>
-                <span>{{ getActivityTxt(activity) }}</span>
+                <div class="details">
+                  <span>
+                    <span class="username">{{ activity.user.fullname }}</span>
+                    {{ getActivityTxt(activity) }}
+                  </span>
+                  <small class="date">{{ getTime(activity.createdAt) }}</small>
+                </div>
               </li>
             </ul>
           </div>
@@ -235,6 +241,7 @@ export default {
       ],
       currOpenAction: "",
       isAddItemsOpen: false,
+      isActivitiesOpen: false
     }
   },
   watch: {
@@ -262,6 +269,9 @@ export default {
     },
   },
   methods: {
+    toggleActivities() {
+      this.isActivitiesOpen = !this.isActivitiesOpen
+    },
     toggleAction(action) {
       // console.log(action);
       this.currOpenAction = this.currOpenAction ? "" : action
@@ -446,6 +456,9 @@ export default {
     },
     taskActivities() {
       return this.$store.getters.activitiesByTask(this.$route.params.taskId)
+    },
+    showBtnTxt() {
+      return this.isActivitiesOpen ? 'Hide' : 'Show'
     }
   },
   unmounted() { },
