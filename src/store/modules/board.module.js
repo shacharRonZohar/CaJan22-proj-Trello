@@ -72,7 +72,6 @@ export default {
         async saveBoard({ commit }, { boardToSave, isFromSocket = false }) {
             try {
                 const savedBoard = await boardService.save(boardToSave)
-                console.log(savedBoard)
                 commit({ type: 'saveBoard', savedBoard })
                 commit({ type: 'setBoard', boardId: boardToSave._id })
                 if (!isFromSocket) socketService.emit('board-updated', savedBoard)
@@ -91,18 +90,16 @@ export default {
         async saveTask({ state, dispatch, commit }, { taskToSave, groupId, activity }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
-                let boardToSave = await boardService.saveTask(board, taskToSave, groupId)
+                const boardToSave = await boardService.saveTask(board, taskToSave, groupId)
                 await dispatch({ type: 'saveBoard', boardToSave })
-                // await dispatch({ type: 'loadBoards' })
-                // commit({ type: 'setBoard', boardId: boardToSave.board._id })
             } catch (err) {
                 console.log(err)
             }
         },
-        async saveGroup({ state, dispatch }, { groupToSave, activity }) {
+        async saveGroup({ state, dispatch }, { groupToSave }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
-                const boardToSave = boardService.saveGroup(board, groupToSave)
+                const boardToSave = await boardService.saveGroup(board, groupToSave)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)

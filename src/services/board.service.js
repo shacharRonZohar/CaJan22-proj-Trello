@@ -67,7 +67,7 @@ async function saveTask(board, taskToSave, groupId) {
         taskToSave.id = utilService.makeId('t')
         taskToSave.createdAt = Date.now()
         group.tasks.push(taskToSave)
-        await activityService.add({ board, type: 'added', itemName: taskToSave.title, containerName: group.title, ids: { groupId, taskId: taskToSave.id } })
+        board = await activityService.add({ board, type: 'added', itemName: taskToSave.title, containerName: group.title, ids: { groupId, taskId: taskToSave.id } })
         // { type, itemName, containerName = '', ids = { boardId: '', groupId: '', taskId: '' }, }
     } else {
         console.log('Im here updating!')
@@ -86,12 +86,13 @@ function archiveTask(board, taskId, groupId, activity) {
     return Promise.resolve(board)
 }
 
-function saveGroup(board, groupToSave, acyivity) {
+async function saveGroup(board, groupToSave) {
     if (!groupToSave.id) {
         groupToSave.id = utilService.makeId('g')
         // groupToSave.createdAt = Date.now()
         groupToSave.tasks = []
         board.groups.push(groupToSave)
+        board = await activityService.add({ board, type: 'added', itemName: groupToSave.title, containerName: 'this board' })
     } else {
         const idx = board.groups.findIndex(group => group.id === groupToSave.id)
         if (idx === -1) return Promise.reject('Couldnt find group to edit')
