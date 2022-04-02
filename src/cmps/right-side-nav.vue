@@ -19,7 +19,7 @@
         ></div>
         <span>Change background</span>
       </li>
-      <li class="flex main-list-item">
+      <li class="flex main-list-item" @click="openDashboard">
         <div class="board-icon">
           <a class="dashboard-icon" />
         </div>
@@ -82,6 +82,10 @@ export default {
     getActivityTxt(activity) {
       return activityService.getActivityTxt(activity, 'board')
     },
+    openDashboard(){
+      this.closeMainMenu();
+      this.$router.push('/board/' + this.board._id + '/dashboard')
+    }
   },
   computed: {
     isOpen() {

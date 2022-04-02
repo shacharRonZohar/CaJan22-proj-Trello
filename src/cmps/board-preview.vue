@@ -47,7 +47,7 @@ export default {
       return this.board.style?.imgUrl || ''
     },
     color() {
-      return this.board.style.color
+      return this.board.style?.color
         ? this.board.style.color
         : ""
     },
