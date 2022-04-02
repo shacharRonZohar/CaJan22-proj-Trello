@@ -1,6 +1,8 @@
 .app-header {
-    height: 45px;
     background-color: $clr9;
+    height: 45px;
+    min-width: 350px;
+    gap: 25px;
     &.trans-header {
         background-color: rgba(0, 0, 0, 0.27);
     }
@@ -23,6 +25,7 @@
     .board-main-nav {
         width: 100%;
         .actions {
+            // flex-wrap: nowrap;
             > * {
                 font-size: 0.9rem;
                 margin-inline-end: 5px;
@@ -35,9 +38,9 @@
             > *:hover {
                 background-color: rgba(0, 0, 0, 0.2);
             }
-            &:first-child {
-                margin-left: 25px;
-            }
+            // &:first-child {
+            //     margin-left: 25px;
+            // }
 
             .expand {
                 background-image: url(../assets/icons/expandMore.svg);
@@ -61,6 +64,11 @@
                 display: none;
                 @include for-mobile-layout {
                     display: inline-block;
+                }
+            }
+            .xnarrow-s {
+                @include for-ex-narrow-layout {
+                    display: none;
                 }
             }
         }
