@@ -1,3 +1,9 @@
+#app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .board-app{
     @media (max-width: 850px){
         margin-left: 10px;
