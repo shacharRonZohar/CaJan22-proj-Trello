@@ -27,7 +27,7 @@
                     </span>
                 </button>
 
-                <button @click="onToggleAddBoard" class="btn create-btn">Create</button>
+                <button @click="onToggleAddBoard" class="btn create-btn xnarrow-s">Create</button>
             </div>
             <add-board v-if="createClicked" @addedBoard="onToggleAddBoard"></add-board>
             <header-board-list v-if="isShown" @closeModal="openList" :boards="boards"></header-board-list>
