@@ -92,7 +92,6 @@ export default {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
                 let boardToSave = await boardService.saveTask(board, taskToSave, groupId)
-                boardToSave = await activityService.add({ board: boardToSave.board, type: 'added', itemName: taskToSave.title, containerName: boardToSave.groupTitle, ids: { boardId: board._id, groupId, taskId: taskToSave.id } })
                 await dispatch({ type: 'saveBoard', boardToSave })
                 // await dispatch({ type: 'loadBoards' })
                 // commit({ type: 'setBoard', boardId: boardToSave.board._id })
@@ -309,9 +308,7 @@ export default {
         async addMember({ state, dispatch }, { user }) {
             try {
                 const board = JSON.parse(JSON.stringify(state.board))
-                let boardToSave = await boardService.addMember(board, user)
-                boardToSave = await activityService.add({ board: boardToSave, type: 'added', itemName: user.fullname, containerName: 'this board' })
-                console.log(boardToSave)
+                const boardToSave = await boardService.addMember(board, user)
                 await dispatch({ type: 'saveBoard', boardToSave })
             } catch (err) {
                 console.log(err)
@@ -319,7 +316,6 @@ export default {
         },
         async removeChecklistItem({ state, dispatch }, { taskId, groupId, payload, activity }) {
             try {
-                console.log(payload)
                 const boardToSave = JSON.parse(JSON.stringify(state.board))
                 const group = boardToSave.groups.find(group => group.id === groupId)
                 const task = group.tasks.find(task => task.id === taskId)

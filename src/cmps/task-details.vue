@@ -405,7 +405,7 @@ export default {
       })
     },
     getActivityTxt(activity) {
-      return activityService.getActivityTxt(activity, 'card')
+      return activityService.getActivityTxt(activity, 'card', this.task.title)
     }
   },
   computed: {

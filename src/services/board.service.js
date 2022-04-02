@@ -67,6 +67,7 @@ async function saveTask(board, taskToSave, groupId) {
         taskToSave.id = utilService.makeId('t')
         taskToSave.createdAt = Date.now()
         group.tasks.push(taskToSave)
+        await activityService.add({ board, type: 'added', itemName: taskToSave.title, containerName: group.title, ids: { groupId, taskId: taskToSave.id } })
         // { type, itemName, containerName = '', ids = { boardId: '', groupId: '', taskId: '' }, }
     } else {
         console.log('Im here updating!')
@@ -74,7 +75,7 @@ async function saveTask(board, taskToSave, groupId) {
         if (idx === -1) return Promise.reject('Couldnt find task to edit')
         group.tasks.splice(idx, 1, taskToSave)
     }
-    return Promise.resolve({ board, groupTitle: group.title })
+    return Promise.resolve(board)
 }
 
 function archiveTask(board, taskId, groupId, activity) {
@@ -204,19 +205,20 @@ function removeCover(board, taskId, groupId, activity) {
     return Promise.resolve(board)
 }
 
-function addMember(board, user) {
+async function addMember(board, user) {
     if (!board?.members?.length) board.members = []
     if (board.members.some(currUser => currUser.username === user.username)) return Promise.reject('User is already on board')
     board.members.push(user)
+    board = await activityService.add({ board, type: 'added', itemName: user.fullname, containerName: 'this board' })
     return Promise.resolve(board)
 }
 
-function addMemberToTask(board, taskId, groupId, payload) {
+async function addMemberToTask(board, taskId, groupId, payload) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
     if (task.members?.includes(payload)) return Promise.reject('Member is already on task')
     task?.members?.length ? task.members.push(payload) : task.members = [payload]
-    console.log(board)
+    board = await activityService.add({ board, type: 'added', itemName: payload.fullname, containerName: 'this card', ids: { groupId, taskId } })
     return Promise.resolve(board)
 }
 
