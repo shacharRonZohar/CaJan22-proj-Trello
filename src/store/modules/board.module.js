@@ -305,6 +305,7 @@ export default {
                 const board = JSON.parse(JSON.stringify(state.board))
                 const boardToSave = await boardService.addMember(board, user)
                 await dispatch({ type: 'saveBoard', boardToSave })
+                socketService.emit('boards-updated')
             } catch (err) {
                 console.log(err)
             }

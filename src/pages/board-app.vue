@@ -9,12 +9,16 @@
 import boardList from "../cmps/board-list.vue"
 import boardListSideBar from "../cmps/board-list-side-bar.vue"
 import { authService } from '../services/auth.service.js'
+import { socketService } from '../services/socket.service'
 export default {
   components: {
     boardList,
     boardListSideBar,
   },
   async created() {
+    socketService.on('boards-updated', () => {
+      this.$store.dispatch('loadBoards')
+    })
     let user = this.$store.getters.loggedInUser
     console.log(user)
     if (!user) {
