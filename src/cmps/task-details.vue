@@ -28,7 +28,7 @@
       <main class="main-details">
         <section class="main-content">
           <div class="top-actions-container task-layout">
-            <div class="members-container">
+            <div v-if="task.members?.length" class="members-container">
               <small>Members:</small>
               <ul class="members">
                 <li
@@ -405,7 +405,7 @@ export default {
       })
     },
     getActivityTxt(activity) {
-      return activityService.getActivityTxt(activity, 'card')
+      return activityService.getActivityTxt(activity, 'card', this.task.title)
     }
   },
   computed: {

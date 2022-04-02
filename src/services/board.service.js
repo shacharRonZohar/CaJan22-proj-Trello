@@ -67,6 +67,7 @@ async function saveTask(board, taskToSave, groupId) {
         taskToSave.id = utilService.makeId('t')
         taskToSave.createdAt = Date.now()
         group.tasks.push(taskToSave)
+        board = await activityService.add({ board, type: 'added', itemName: taskToSave.title, containerName: group.title, ids: { groupId, taskId: taskToSave.id } })
         // { type, itemName, containerName = '', ids = { boardId: '', groupId: '', taskId: '' }, }
     } else {
         console.log('Im here updating!')
@@ -74,7 +75,7 @@ async function saveTask(board, taskToSave, groupId) {
         if (idx === -1) return Promise.reject('Couldnt find task to edit')
         group.tasks.splice(idx, 1, taskToSave)
     }
-    return Promise.resolve({ board, groupTitle: group.title })
+    return Promise.resolve(board)
 }
 
 function archiveTask(board, taskId, groupId, activity) {
@@ -85,12 +86,13 @@ function archiveTask(board, taskId, groupId, activity) {
     return Promise.resolve(board)
 }
 
-function saveGroup(board, groupToSave, acyivity) {
+async function saveGroup(board, groupToSave) {
     if (!groupToSave.id) {
         groupToSave.id = utilService.makeId('g')
         // groupToSave.createdAt = Date.now()
         groupToSave.tasks = []
         board.groups.push(groupToSave)
+        board = await activityService.add({ board, type: 'added', itemName: groupToSave.title, containerName: 'this board' })
     } else {
         const idx = board.groups.findIndex(group => group.id === groupToSave.id)
         if (idx === -1) return Promise.reject('Couldnt find group to edit')
@@ -105,12 +107,13 @@ function saveGroupDrop(board, fromIdx, toIdx) {
     return Promise.resolve(board)
 }
 
-function saveTaskDueDate(board, taskId, groupId, payload, activity) {
+async function saveTaskDueDate(board, taskId, groupId, payload, activity) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
     const dueDates = _getDueDates(payload)
     task.dueDate = dueDates
-    return Promise.resolve({ board, groupTitle: group.title, taskTitle: task.title })
+    board = await activityService.add({ board, type: 'added', itemName: 'due date', containerName: task.title, ids: { groupId, taskId } })
+    return Promise.resolve(board)
 }
 
 function removeTaskDueDate(board, taskId, groupId) {
@@ -204,19 +207,20 @@ function removeCover(board, taskId, groupId, activity) {
     return Promise.resolve(board)
 }
 
-function addMember(board, user) {
+async function addMember(board, user) {
     if (!board?.members?.length) board.members = []
     if (board.members.some(currUser => currUser.username === user.username)) return Promise.reject('User is already on board')
     board.members.push(user)
+    board = await activityService.add({ board, type: 'added', itemName: user.fullname, containerName: 'this board' })
     return Promise.resolve(board)
 }
 
-function addMemberToTask(board, taskId, groupId, payload) {
+async function addMemberToTask(board, taskId, groupId, payload) {
     const group = board.groups.find(group => group.id === groupId)
     const task = group.tasks.find(task => task.id === taskId)
     if (task.members?.includes(payload)) return Promise.reject('Member is already on task')
     task?.members?.length ? task.members.push(payload) : task.members = [payload]
-    console.log(board)
+    board = await activityService.add({ board, type: 'added', itemName: payload.fullname, containerName: 'this card', ids: { groupId, taskId } })
     return Promise.resolve(board)
 }
 

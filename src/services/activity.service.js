@@ -28,20 +28,21 @@ function _createActivity({ type, itemName, containerName = '', ids = { boardId: 
 }
 
 function add(payload) {
-    console.log('from addActivity in activity-service: ', payload)
+    console.log(payload)
+    // console.log('from addActivity in activity-service: ', payload)
     const activity = _createActivity(payload)
     payload.board.activities?.length ? payload.board.activities.unshift(activity) : payload.board.activities = [activity]
+    console.log(payload.board)
     return Promise.resolve(payload.board)
     // const activity = _createActivity(payload)
     // board.activities ? board.activities.push(activity) : board.activities = [activity]
 }
 
-function getActivityTxt(activity, entity) {
+function getActivityTxt(activity, entity, itemTitle) {
+    // console.log(activity)
     let txt = `${activity.user?.fullname} ${activity.type} `
     if (activity.type === 'renamed') return txt += `this ${entity}`
     // if () return txt += `this ${entity}`
-    return txt += `${activity.type === 'added' && entity === 'card' ?
-        `this ${entity}` :
-        activity.itemName} 
-    ${activity.type === 'added' ? 'to' : 'from'} ${activity.containerName}`
+    return txt += `${itemTitle === activity.itemName ? `this ${entity}` : activity.itemName} 
+    ${activity.type === 'added' ? 'to' : 'from'} ${activity.containerName === itemTitle ? `this ${entity}` : activity.containerName}`
 }
