@@ -299,7 +299,6 @@ export default {
         groupId: this.localGroupId,
         payload,
       })
-      // Temporary
       if (cbName === "archiveTask") return this.onCloseDetails()
       const taskId = this.$route.params.taskId
       this.task = await this.$store.dispatch({

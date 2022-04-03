@@ -21,6 +21,7 @@
         white-space: nowrap;
         z-index: 1;
         .icon {
+            cursor: pointer;
             top: 0;
             right: 0;
             position: absolute;
@@ -104,13 +105,18 @@
             padding: 4px 8px;
             align-items: center;
             gap: 10px;
-
+            cursor: pointer;
             .icon {
                 height: 32px;
                 width: 32px;
                 line-height: 32px;
-                background-size: contain;
+                // background-size: contain;
                 border-radius: 50%;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            &:hover {
+                background-color: rgba(9, 30, 66, 0.0392156862745098);
             }
         }
         .check-icon {

@@ -3,6 +3,9 @@
         margin-left: 3px;
         @include trello-icon($content: "\e900", $type: lg);
     }
+    .activities-list {
+        flex-direction: column;
+    }
     .details {
         display: flex;
         flex-direction: column;
