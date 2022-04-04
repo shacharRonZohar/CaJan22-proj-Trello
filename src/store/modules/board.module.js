@@ -37,13 +37,6 @@ export default {
             return JSON.parse(JSON.stringify(state.board.activities.filter(activity => {
                 return activity.ids.taskId === taskId
             })))
-        },
-        boardByName: ({ boards }) => (boardName) => {
-            const boardId = boards.find(board => {
-                return boardName.toLowerCase().includes(board.title.toLowerCase()) ||
-                    board.title.toLowerCase().includes(boardName.toLowerCase())
-            })._id
-            return boardId
         }
     },
     mutations: {
@@ -347,6 +340,13 @@ export default {
             } catch (err) {
                 console.log(err)
             }
+        },
+        boardIdByName({ state }, { query }) {
+            const boardId = state.boards.find(board => {
+                return query.toLowerCase().includes(board.title.toLowerCase()) ||
+                    board.title.toLowerCase().includes(query.toLowerCase())
+            })?._id
+            return boardId
         }
 
     },

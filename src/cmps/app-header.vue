@@ -33,7 +33,7 @@
             <header-board-list v-if="isShown" @closeModal="openList" :boards="boards"></header-board-list>
 
             <div class="second-actions flex">
-                <button @click="startSr" class="sr">SR</button>
+                <router-link to="/listening" class="btn btn-sr">SR</router-link>
                 <div class="search-app-header">
                     <!-- <span class="search-icon"></span> -->
                     <img class="search-icon" src="../assets/icons/search-icon.png" alt />
@@ -103,41 +103,6 @@ export default {
         },
         onToggleProfileModal() {
             this.profileModalOpen = !this.profileModalOpen
-        },
-        startSr() {
-            const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition
-            const sr = new Recognition()
-            sr.continuous = true
-            // this.sr.interimResults = true
-            sr.lang = 'he-IL'
-            // sr.lang
-            sr.onstart = () => {
-                console.log('sr started')
-            }
-            sr.onend = () => {
-                console.log('sr stopped')
-            }
-            console.log(sr)
-            sr.onresult = (ev) => {
-                const results = ev.results
-                for (let result in results) {
-                    for (let key in results[result]) {
-                        const transcript = results[result][key]?.transcript
-                        if (typeof transcript === 'string' &&
-                            transcript.includes('תיכנס') &&
-                            transcript.includes('ל')) {
-                            console.log('match!')
-                            const query = transcript.substring(transcript.indexOf('ל') + 1).trim()
-                            // console.log(query)
-                            console.log(query)
-                            const boardId = this.$store.getters.boardByName(query)
-                            this.$router.push(`/board/${boardId}`)
-                            sr.stop()
-                        }
-                    }
-                }
-            }
-            sr.start()
         }
         // async printAverageColor() {
         //     const color = await getAverageColor();
