@@ -1,5 +1,5 @@
 <template>
-    <section @click.stop class="invite-modal">
+    <section v-close="onClosePopup" @click.stop class="invite-modal">
         <div class="header">
             <span>Invite to board</span>
             <div @click="onClosePopup" class="icon"></div>
