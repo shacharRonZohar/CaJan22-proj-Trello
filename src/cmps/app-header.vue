@@ -33,10 +33,11 @@
             <header-board-list v-if="isShown" @closeModal="openList" :boards="boards"></header-board-list>
 
             <div class="second-actions flex">
+                <button @click="startSr" class="sr">SR</button>
                 <div class="search-app-header">
                     <!-- <span class="search-icon"></span> -->
-                    <img class="search-icon" src="../assets/icons/search-icon.png" alt="">
-                    <img class="search-icon-b" src="../assets/icons/search-black.png" alt="">
+                    <img class="search-icon" src="../assets/icons/search-icon.png" alt />
+                    <img class="search-icon-b" src="../assets/icons/search-black.png" alt />
                     <input
                         class="search-input"
                         v-model="searchTxt"
@@ -59,7 +60,11 @@
                     :style="{ backgroundImage: `url(${loggedInUser?.imgUrl})` }"
                 >
                     <!-- <div :style="{ backgroundImage: `url(${loggedInUser.imgUrl})` }" class="letter"></div> -->
-                    <profile-modal @closeModal="onToggleProfileModal" :user="loggedInUser" v-if="profileModalOpen" />
+                    <profile-modal
+                        @closeModal="onToggleProfileModal"
+                        :user="loggedInUser"
+                        v-if="profileModalOpen"
+                    />
                 </div>
             </div>
         </div>
@@ -98,6 +103,39 @@ export default {
         },
         onToggleProfileModal() {
             this.profileModalOpen = !this.profileModalOpen
+        },
+        startSr() {
+            const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition
+            const sr = new Recognition()
+            sr.continuous = true
+            // this.sr.interimResults = true
+            sr.lang = 'he-IL'
+            sr.onstart = () => {
+                console.log('sr started')
+            }
+            sr.onend = () => {
+                console.log('sr stopped')
+            }
+            console.log(sr)
+            sr.onresult = (ev) => {
+                const results = ev.results
+                for (let result in results) {
+                    for (let key in results[result]) {
+                        const transcript = results[result][key]?.transcript
+                        if (typeof transcript === 'string' &&
+                            transcript.includes('תיכנס') &&
+                            transcript.includes('ל')) {
+                            console.log('match!')
+                            const query = transcript.substring(transcript.indexOf('ל') + 1).trim()
+                            // console.log(query)
+                            const boardId = this.$store.getters.boardByName(query)
+                            this.$router.push(`/board/${boardId}`)
+                            sr.stop()
+                        }
+                    }
+                }
+            }
+            sr.start()
         }
         // async printAverageColor() {
         //     const color = await getAverageColor();

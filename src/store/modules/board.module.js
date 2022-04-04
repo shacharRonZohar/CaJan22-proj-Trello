@@ -37,6 +37,16 @@ export default {
             return JSON.parse(JSON.stringify(state.board.activities.filter(activity => {
                 return activity.ids.taskId === taskId
             })))
+        },
+        boardByName: ({ boards }) => (boardName) => {
+            // console.log(boards)
+            console.log('boardName', boardName.toLowerCase())
+            const boardId = boards.find(board => {
+                console.log(board.title.toLowerCase())
+                return boardName.toLowerCase().includes(board.title.toLowerCase()) || board.title.toLowerCase().includes(boardName.toLowerCase())
+            })._id
+            console.log(boardId)
+            return boardId
         }
     },
     mutations: {
