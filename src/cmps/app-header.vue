@@ -110,6 +110,7 @@ export default {
             sr.continuous = true
             // this.sr.interimResults = true
             sr.lang = 'he-IL'
+            // sr.lang
             sr.onstart = () => {
                 console.log('sr started')
             }
@@ -128,6 +129,7 @@ export default {
                             console.log('match!')
                             const query = transcript.substring(transcript.indexOf('ל') + 1).trim()
                             // console.log(query)
+                            console.log(query)
                             const boardId = this.$store.getters.boardByName(query)
                             this.$router.push(`/board/${boardId}`)
                             sr.stop()
