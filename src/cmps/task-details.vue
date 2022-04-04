@@ -188,6 +188,7 @@
             v-for="action in actionCmps"
             :key="action"
             :action="action"
+            v-openOnMouse
           ></action-btn>
           <!-- <component
             :chosenLabels='task.labelIds'
@@ -202,7 +203,7 @@
       </main>
       <button @click="onCloseDetails" class="btn close icon"></button>
     </section>
-    <div v-if="currOpenAction" @click.stop="toggleAction" class="clickable-background"></div>
+    <!-- <div v-if="currOpenAction" @click.stop="toggleAction" class="clickable-background"></div> -->
   </div>
 </template>
 
@@ -274,6 +275,7 @@ export default {
     },
     toggleAction(action) {
       // console.log(action);
+      console.log(action)
       this.currOpenAction = this.currOpenAction ? "" : action
     },
     async saveTask(taskToSave) {

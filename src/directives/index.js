@@ -7,7 +7,7 @@ export const focusDirective = {
 export const clickOutside = {
   mounted(el, { value }, x) {
     el.clickOutside = ({ clientX, clientY }) => {
-      var { left, top, width, height } = el.getBoundingClientRect()
+      const { left, top, width, height } = el.getBoundingClientRect()
       if (
         !(
           clientX > left &&
@@ -21,6 +21,23 @@ export const clickOutside = {
       } else {
         console.log('inside')
       }
+    }
+    setTimeout(() => {
+      document.addEventListener('click', el.clickOutside)
+    }, 0)
+  },
+  unmounted(el) {
+    document.removeEventListener('click', el.clickOutside)
+  },
+}
+
+export const setPosAsMouse = {
+  mounted(el, { value }, x) {
+    el.click = ({ clientX, clientY }) => {
+      console.log(clientX)
+      console.log(clientY)
+
+
     }
     setTimeout(() => {
       document.addEventListener('click', el.clickOutside)

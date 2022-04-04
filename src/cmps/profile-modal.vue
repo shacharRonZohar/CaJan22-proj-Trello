@@ -1,5 +1,5 @@
 <template>
-    <section @click.stop class="profile-modal">
+    <section v-close="onClose" @click.stop class="profile-modal">
         <div class="header">
             <span>Account</span>
             <span @click="onClose" class="close-profile-modal"></span>
