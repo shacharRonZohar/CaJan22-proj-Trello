@@ -24,7 +24,7 @@
         <div class="first-actions">
           <div
             v-if="task.dueDate"
-            class="date-preview"
+            class="date-preview flex"
             :class="taskStatus"
             @click.stop="dateChecked"
           >
@@ -43,7 +43,7 @@
             <span class="attach-num">{{ attachNum }}</span>
           </div>
 
-          <div v-if="task.checklists && isItems" class="checklist-preview" :class="isDone">
+          <div v-if="task.checklists && isItems" class="checklist-preview flex" :class="isDone">
             <a class="checklist-icon" title="Checklist items" />
             <span class="checkedSum">{{ checkedSum }}</span>
           </div>

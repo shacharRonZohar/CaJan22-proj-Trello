@@ -138,7 +138,8 @@
 
     .add-card-btn {
         .add-card-icon{
-            @include trello-icon($content: "\e901")
+            @include trello-icon($content: "\e901");
+            color: #6b778c;
         }
 
         border-radius: 3px;
