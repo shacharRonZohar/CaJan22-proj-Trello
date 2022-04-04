@@ -31,7 +31,7 @@ export default {
   data() {
     return {
         results: null,
-        searchTxt: ''
+        searchTxt: 'vacation'
     }
   },
   async created() {

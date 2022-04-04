@@ -14,7 +14,7 @@ export const imgService = {
     getImgColor
 }
 
-async function queryPhotos(request = 'nature') {
+async function queryPhotos(request = 'vacation') {
     try {
         const res = await api.search.getPhotos({ query: request, orientation: "landscape" })
         return res.response
