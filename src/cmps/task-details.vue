@@ -188,7 +188,6 @@
             v-for="action in actionCmps"
             :key="action"
             :action="action"
-            v-openOnMouse
           ></action-btn>
           <!-- <component
             :chosenLabels='task.labelIds'
