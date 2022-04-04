@@ -1,8 +1,8 @@
 <template>
-    <div @click.stop class="action-popup">
+    <div v-close="onTogglePopup" class="action-popup">
         <div class="header">
             {{ actionTxt }}
-            <div @click="onTogglePopup" class="icon btn close-popup"></div>
+            <div @click.stop="onTogglePopup" class="icon btn close-popup"></div>
         </div>
         <component
             @togglePopup="onTogglePopup"
@@ -49,6 +49,7 @@ export default {
     },
     methods: {
         onTogglePopup() {
+            console.log('here')
             this.$emit('togglePopup')
         },
         onAction(action) {

@@ -4,21 +4,48 @@ export const focusDirective = {
   },
 }
 
-export const closeOnBlur = {
-  bind: function (el, { expression }, { context }) {
+export const clickOutside = {
+  mounted(el, { value }, x) {
     el.clickOutside = ({ clientX, clientY }) => {
-      var { left, top, width, height } = el.getBoundingCLientRect()
-      if (!(clientX > left && clientX < left + width && clientY > top && clientY < top + height)) {
-        context[expression]()
+      const { left, top, width, height } = el.getBoundingClientRect()
+      if (
+        !(
+          clientX > left &&
+          clientX < left + width &&
+          clientY > top &&
+          clientY < top + height
+        )
+      ) {
+        value()
+        console.log('outside')
+      } else {
+        console.log('inside')
       }
     }
     setTimeout(() => {
       document.addEventListener('click', el.clickOutside)
     }, 0)
   },
-  unbind: (el) => {
+  unmounted(el) {
     document.removeEventListener('click', el.clickOutside)
-  }
+  },
+}
+
+export const setPosAsMouse = {
+  mounted(el, { value }, x) {
+    el.click = ({ clientX, clientY }) => {
+      console.log(clientX)
+      console.log(clientY)
+
+
+    }
+    setTimeout(() => {
+      document.addEventListener('click', el.clickOutside)
+    }, 0)
+  },
+  unmounted(el) {
+    document.removeEventListener('click', el.clickOutside)
+  },
 }
 // export const rainbowDirective = {
 //   mounted(el) {
@@ -47,13 +74,4 @@ export const closeOnBlur = {
 //   var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b // per ITU-R BT.709
 
 //   return luma < 100
-// }
-
-// function _getRandomColor() {
-//   const letters = '0123456789ABCDEF'
-//   let color = '#'
-//   for (let i = 0; i < 6; i++) {
-//     color += letters[Math.floor(Math.random() * 16)]
-//   }
-//   return color
 // }

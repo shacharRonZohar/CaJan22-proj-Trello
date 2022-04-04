@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import app from './app.vue'
 import router from './router'
 import store from './store'
-import { focusDirective, closeOnBlur } from './directives'
+import { focusDirective, clickOutside } from './directives'
 import gAuthPlugin from 'vue3-google-oauth2'
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -19,6 +19,6 @@ createApp(app)
         prompt: 'consent'
     })
     .directive('focus', focusDirective)
-    .directive('close', closeOnBlur)
+    .directive('close', clickOutside)
     .component('Datepicker', Datepicker)
     .mount('#app')

@@ -48,7 +48,7 @@ export default {
                 return currBoard._id === savedBoard._id
             })
             if (idx !== -1) state.boards.splice(idx, 1, savedBoard)
-            else state.boards.unshift(savedBoard)
+            else state.boards.push(savedBoard)
         },
         setBoard(state, { boardId }) {
             const board = state.boards.find(currBoard => currBoard._id === boardId)
