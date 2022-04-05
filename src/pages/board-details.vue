@@ -195,7 +195,7 @@ export default {
         socketService.setup()
         socketService.emit('watch-board', boardId)
         socketService.on('board-update', board => {
-          this.$store.dispatch({ type: 'saveBoardFromSocket', boardToSave: board })
+          this.$store.dispatch({ type: 'saveBoardFromSocket', board })
         })
         this.$store.commit({ type: "setBoard", boardId })
       },
