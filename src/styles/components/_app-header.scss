@@ -81,7 +81,8 @@
                 width: 250px;
                 height: 32px;
                 margin-right: 4px;
-                .search-icon, .search-icon-b {
+                .search-icon,
+                .search-icon-b {
                     display: inline-block;
                     // background-image: url(../assets/icons/search2.svg);
                     margin-top: 6px;
@@ -91,7 +92,7 @@
                     // background-size: contain;
                 }
                 .search-icon-b {
-                    display: none;                  
+                    display: none;
                 }
                 .search-input {
                     border: none;
@@ -115,7 +116,7 @@
 
                     //     .search-icon-b {
                     //         display: inline-block;
-                    //         background-color: #fff;                 
+                    //         background-color: #fff;
                     //     }
 
                     //     .search-icon{
@@ -246,9 +247,9 @@
                         color: #687790;
                         font-weight: 600;
                         cursor: pointer;
-            
-                        &:hover{
-                            color: $clr4
+
+                        &:hover {
+                            color: $clr4;
                         }
                     }
                 }
@@ -323,7 +324,7 @@
             }
         }
     }
+    .btn-sr {
+        display: none;
+    }
 }
-// input:placeholder-shown + .placeholder::after {
-//     content: "placeholder";
-//   }
